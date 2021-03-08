@@ -11,7 +11,11 @@ before_install:
   - npm install  hexo-deployer-git --save
 
 install:
-    - mv ./ blog
+    - mv dollarser.github.io/sourcce blog
+    - mv dollarser.github.io/themes blog
+    - mv dollarser.github.io/_config.yml blog
+    - mv dollarser.github.io/README.md blog
+    - ls blog
     - hexo g
     - hexo d
 #    - npm install
