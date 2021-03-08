@@ -5,17 +5,18 @@ node_js:
 before_install:
   - npm install -g hexo-cli
   - hexo init blog
-  - npm i hexo-generator-json-content --save
-  - npm install  hexo-deployer-git --save
+
 
 install:
     - ls
+    - ls blog
     - mv sourcce blog
     - mv themes blog
     - mv _config.yml blog
     - mv README.md blog
-    - ls blog
     - cd blog
+    - npm i hexo-generator-json-content --save
+    - npm install  hexo-deployer-git --save
     - npm un hexo-renderer-marked --save
     - npm i hexo-renderer-markdown-it --save
     - hexo g
