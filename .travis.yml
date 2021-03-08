@@ -25,8 +25,18 @@ install:
     - npm i hexo-renderer-markdown-it --save
     # 生成配置
     - hexo g
+    - ls public
 #    - hexo d
 #    - npm install
 #    - bower install
 #script:
 #    - ember test --server
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: blog/public
+  keep-history: true
+  on:
+    branch: master
+    target_branch: gh-pages
