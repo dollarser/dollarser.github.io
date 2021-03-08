@@ -9,17 +9,18 @@ before_install:
 
 install:
     - ls
-
     - ls blog
     # 删除文件
     - rm -r blog/source blog/themes blog/_config.yml
     # copy文件
-    - mv source blog
-    - mv themes blog
-    - mv _config.yml blog
+    - cp source blog
+    - cp themes blog
+    - cp _config.yml blog
 
     # 安装依赖
     - cd blog
+    - npm ls --depth 0
+    
     - npm i hexo-generator-json-content --save
     - npm install  hexo-deployer-git --save
     # - npm un hexo-renderer-marked --save
