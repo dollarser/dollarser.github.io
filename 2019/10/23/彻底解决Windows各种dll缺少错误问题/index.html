@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://blog.ahulearn.com">
   <title>解决Windows各种dll缺失报错 | 遗世独立</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。 简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。 另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每个">
+  <meta name="description" content="动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。  简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。 另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决Windows各种dll缺失报错">
 <meta property="og:url" content="http://blog.ahulearn.com/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="遗世独立">
-<meta property="og:description" content="动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。 简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。 另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每个">
+<meta property="og:description" content="动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。  简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。 另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-10-23T02:14:27.000Z">
-<meta property="article:modified_time" content="2021-03-08T13:46:22.848Z">
+<meta property="article:modified_time" content="2021-03-08T13:56:17.896Z">
 <meta property="article:author" content="神火不知灭">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="踩坑记录">
@@ -201,7 +201,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ol>
-<li>动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。<ul>
+<li>动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。
+<ul>
 <li>简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。</li>
 <li>另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每个软件都要用，而且这些操作可能还比较危险，直接交给软件实现也存在一些风险。所以系统自带了很多动态链接库文件，编程人员需要使用相关功能，直接调用系统的链接文件即可。</li>
 </ul>
@@ -212,10 +213,10 @@
 <li>于是就会出现很多软件运行时提示缺少dll文件的情况，因为软件使用的dll文件，系统中并不一定有，或者对应的dll版本不一样。</li>
 </ol>
 <span id="more"></span>
-
 <hr>
 <ol start="3">
-<li>下面正式说明解决方案了，切忌不要提醒缺什么dll文件，就下载什么dll。<ul>
+<li>下面正式说明解决方案了，切忌不要提醒缺什么dll文件，就下载什么dll。
+<ul>
 <li>首先版本选择就很复杂，全靠运气，其次软件运行可能缺的不止这一个dll文件，而每次运行它只能发现一个报错一次，一次次运行然后一个个下肯定不现实。</li>
 <li>微软的动态链接库全部包含在一个叫<strong>Microsoft Visual C++ 20xx Redistributable</strong>的软件包中，正常来讲一个软件安装的时候应该要检查电脑中是否已经安装了该软件，版本是否满足自己的需求，不满足应该给用户发出警告的。</li>
 <li>但是事实是很少有软件这么做，都是直接安装，缺少文件只能在运行时出错才发现。</li>
@@ -224,7 +225,8 @@
 </ol>
 <hr>
 <ol start="4">
-<li>可以自己下载软件包安装，软件<a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/vs/older-downloads/">下载地址</a> <a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/vs/older-downloads/">https://visualstudio.microsoft.com/zh-hans/vs/older-downloads/</a>.   在该页面下，选择<strong>可再发行组件和生成工具</strong>，提供2010,2012,2013,2019四个版本，其中2019是包含2015和2017。<ul>
+<li>可以自己下载软件包安装，软件<a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/vs/older-downloads/">下载地址</a> <a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/vs/older-downloads/">https://visualstudio.microsoft.com/zh-hans/vs/older-downloads/</a>.   在该页面下，选择<strong>可再发行组件和生成工具</strong>，提供2010,2012,2013,2019四个版本，其中2019是包含2015和2017。
+<ul>
 <li>推荐一劳永逸的全部安装，能省去不少麻烦，如果不想全装，可以根据dll缺失的具体报错信息下载对应版本。</li>
 <li>错误信息中dll文件的数字 120 140 160理论上分别对应2013版，2015版，2017版，不排除有些偏差。</li>
 <li>x86是32位的，x64是64位的。建议全部安装，毕竟现在依然有电脑也运行着一些32位的软件。</li>
@@ -232,7 +234,7 @@
 </li>
 </ol>
 <hr>
-<p><sub>Over</sub><sup>‘</sup></p>
+<p><sub>Over</sub><sup>'</sup></p>
 
       
 
