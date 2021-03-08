@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Typora配合hexo编写文章 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="图像插入设置 主要涉及Typora的两个参数设置 图片根目录设置 既告诉Typora哪个文件夹作为网站的根目录   图片复制路径 既图片插入时，自动复制图片到指定路径，如此上传至空间，才能生成正确的url       设置图像根目录 以hexo根目录下的source文件夹为例  该文件夹中的内容会上传至web根目录，因此此文件相当于网站的根目录  而文章所在目录为source文件夹下的_post文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typora配合hexo编写文章">
+<meta property="og:url" content="http://example.com/2020/03/13/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="图像插入设置 主要涉及Typora的两个参数设置 图片根目录设置 既告诉Typora哪个文件夹作为网站的根目录   图片复制路径 既图片插入时，自动复制图片到指定路径，如此上传至空间，才能生成正确的url       设置图像根目录 以hexo根目录下的source文件夹为例  该文件夹中的内容会上传至web根目录，因此此文件相当于网站的根目录  而文章所在目录为source文件夹下的_post文">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/typera_setting2.JPG">
+<meta property="article:published_time" content="2020-03-13T12:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-08T13:10:14.323Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="入门实践">
+<meta property="article:tag" content="配置相关">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/typera_setting2.JPG">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Typora配合hexo编写文章" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/13/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/" class="article-date">
+  <time class="dt-published" datetime="2020-03-13T12:00:00.000Z" itemprop="datePublished">2020-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Typora配合hexo编写文章
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="图像插入设置"><a href="#图像插入设置" class="headerlink" title="图像插入设置"></a>图像插入设置</h3><ul>
+<li>主要涉及Typora的两个参数设置<ul>
+<li>图片根目录设置<ul>
+<li>既告诉Typora哪个文件夹作为网站的根目录</li>
+</ul>
+</li>
+<li>图片复制路径<ul>
+<li>既图片插入时，自动复制图片到指定路径，如此上传至空间，才能生成正确的url</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>设置图像根目录<ul>
+<li><p>以hexo根目录下的source文件夹为例</p>
+</li>
+<li><p>该文件夹中的内容会上传至web根目录，因此此文件相当于网站的根目录</p>
+</li>
+<li><p>而文章所在目录为source文件夹下的_post文件夹, 根目录在文章的上级目录</p>
+</li>
+<li><p>因此设置图片根目录为<code>..</code></p>
+</li>
+<li><p>既在标题栏添加此内容：<code>typora-root-url: ..</code></p>
+</li>
+<li><p><img src="/img/typera_setting2.JPG" alt="typera_setting2"></p>
+</li>
+<li><p>设置图片目录</p>
+<ul>
+<li>设置source文件夹下的img文件夹，为图片所在文件夹</li>
+<li>因为img在source文件夹下，既在文章的上级目录下的img文件夹下</li>
+<li>因此设置图片目录为<code>..\img</code></li>
+</ul>
+<ul>
+<li>既在标题连添加此内容：<code>typora-copy-images-to: ..\img</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>注意事项：<strong>以上设置只能采用相对路径</strong></li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li>Typora换行Enter键自动添加一个空行，Shift+Enter普通换行。</li>
+</ul>
+<h3 id="hexo-设置"><a href="#hexo-设置" class="headerlink" title="hexo 设置"></a>hexo 设置</h3><ul>
+<li><p>无需进行设置</p>
+<ul>
+<li>说明一下hexo的目录结构</li>
+<li>hexo根目录下需要关注的有以下几个文件：<ul>
+<li>source/<ul>
+<li>资源文件夹，用来存储生成页面的资源文件，图片文章等</li>
+</ul>
+</li>
+<li>themes/<ul>
+<li>主题文件夹，也就是网站皮肤，每个主题也有一个source/文件夹，作用同根目录的source/文件夹</li>
+</ul>
+</li>
+<li>public/<ul>
+<li>根据source/文件夹生成的最终会上传至服务器的文件</li>
+</ul>
+</li>
+<li>_config.yml<ul>
+<li>hexo配置文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/13/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/" data-id="ckm0lqu81000a4vt9hhgmh4dj" data-title="Typora配合hexo编写文章" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" rel="tag">入门实践</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/" rel="tag">配置相关</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/28/%E6%95%B0%E6%8D%AE%E6%B5%81%E9%87%8F%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          移动数据流量请求头分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/18/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">特权指令、访管指令、陷入指令、广义指令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS/" rel="tag">CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cv/" rel="tag">cv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" rel="tag">入门实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%BD%91/" rel="tag">计网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/" rel="tag">论文翻译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/" rel="tag">配置相关</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/CS/" style="font-size: 13.33px;">CS</a> <a href="/tags/cv/" style="font-size: 10px;">cv</a> <a href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" style="font-size: 13.33px;">入门实践</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.33px;">学习笔记</a> <a href="/tags/%E8%AE%A1%E7%BD%91/" style="font-size: 13.33px;">计网</a> <a href="/tags/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/" style="font-size: 16.67px;">论文翻译</a> <a href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 13.33px;">踩坑记录</a> <a href="/tags/%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/" style="font-size: 10px;">配置相关</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 20px;">随笔</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/27/Designing%20Network%20Design%20Spaces/">Designing Network Design Spaces</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/03/Large-Scale%20Image%20Retrieval%20with%20Attentive%20Deep%20Local%20Features/">Large-Scale Image Retrieval with Attentive Deep Local Features</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/02/Unifying%20Deep%20Local%20and%20Global%20Features%20for%20Image%20Search/">Unifying Deep Local and Global Features for Image Search</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/28/%E6%95%B0%E6%8D%AE%E6%B5%81%E9%87%8F%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%88%86%E6%9E%90/">移动数据流量请求头分析</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/13/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/">Typora配合hexo编写文章</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

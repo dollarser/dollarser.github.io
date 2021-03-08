@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>IPV4地址划分详解 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.  概述：早期网络分配是只能以网段为单位进行(可能是出于路由简单的目的，网段类似电话号区号)。类比到电话4位区号，7位座机号，共11位。当电话呼叫时，线路进行转接的时候只需看区号就可以直接把电话接到某个地区，地区再看座机号接到具体某一户。这样一来转接过程各自分工让电话接通变得更加简单。网络通信也是类似，ip地址总共32位（二进制），但是网络号（区号）和主机号（座机号）不像11位电话那样始终固定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPV4地址划分详解">
+<meta property="og:url" content="http://example.com/2020/01/17/IPV4%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.  概述：早期网络分配是只能以网段为单位进行(可能是出于路由简单的目的，网段类似电话号区号)。类比到电话4位区号，7位座机号，共11位。当电话呼叫时，线路进行转接的时候只需看区号就可以直接把电话接到某个地区，地区再看座机号接到具体某一户。这样一来转接过程各自分工让电话接通变得更加简单。网络通信也是类似，ip地址总共32位（二进制），但是网络号（区号）和主机号（座机号）不像11位电话那样始终固定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-17T20:04:43.000Z">
+<meta property="article:modified_time" content="2021-03-08T13:10:14.323Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计网">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-IPV4地址划分详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/01/17/IPV4%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2020-01-17T20:04:43.000Z" itemprop="datePublished">2020-01-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      IPV4地址划分详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-概述："><a href="#1-概述：" class="headerlink" title="1.  概述："></a>1.  概述：</h2><p>早期网络分配是只能以网段为单位进行(可能是出于路由简单的目的，网段类似电话号区号)。类比到电话4位区号，7位座机号，共11位。当电话呼叫时，线路进行转接的时候只需看区号就可以直接把电话接到某个地区，地区再看座机号接到具体某一户。这样一来转接过程各自分工让电话接通变得更加简单。网络通信也是类似，ip地址总共32位（二进制），但是网络号（区号）和主机号（座机号）不像11位电话那样始终固定为4位7位。</p>
+<p>ip的划分稍微复杂一点，其划分原则为：ip地址中若第一位为0，则网络号8位，主机号24位，被称为A类地址。若第一位为1第二位为0，则网络号16位，主机号16位，被称为B类地址。若第一二位为1第三位为0，则网络号24位，主机号8位，被称为C类地址。早期网络并非个人使用，而是科研机构军工学校企业等使用，故ip的分配也是以网络号为单位，而不是以单个ip为单位来售卖。类比到电话就是，直接区号分配给你，而不是分配手机号。机构的用户多就购买一个A类网段，约可以连16M(2^24，主机号24位)台电脑，人少就购买B类网段，约可以连64k(2^16)台电脑，更少则购买C类网段，约可以连256(2^8)台电脑。分配到网段后，该网端的ip供机构自由分配给机构内的电脑，且网络运营商只负责将发往该网段的数据转发给该机构。至于该数据是属于哪台主机，由机构自己负责路由。</p>
+<hr>
+<h2 id="2-网络划分细节："><a href="#2-网络划分细节：" class="headerlink" title="2. 网络划分细节："></a>2. 网络划分细节：</h2><p><strong>1.  A类地址：</strong></p>
+<p>1.0.0.0－126.255.255.255<br>(<strong>0</strong>0000001 00000000 00000000 00000000 ~ <strong>0</strong>1111110 11111111 11111111 11111111）</p>
+<p>ip地址第一位为0，前8位为网络号，标识网段，后24位为主机号，标识主机。<br>这里可以看到ip地址第一位为0的网段中，A类地址缺少了两个网段，这两个网段分别是：<br>(1) 0.0.0.0－0.255.255.255，即<br>(<strong>0</strong>0000000 00000000 00000000 00000000 ~ <strong>0</strong>0000000 11111111 11111111 11111111)<br>该网段前八位网络号全0表示本网络。其中后24位主机号全0的ip表示本主机。所以0.0.0.0表示本网络上的本主机，也就是指本机自己，一般用于路由器指定默认路由端口。网络号(前八位)全0的其他地址似乎没有用处，按道理应该指本网络的其他主机，但实测并非如此。</p>
+<p>(2) 127.0.0.0－127.255.255.255，即<br>(<strong>0</strong>1111111 00000000 00000000 00000000 ~ <strong>0</strong>1111111 11111111 11111111 11111111)<br>127网络为保留地址，作为环路自检地址，也就是指本机自身，一般用于测试tcp/ip工作栈是否正常。目的地址以127开头的环回地址不会出现在网络上，只能在主机内部，人话也就是只能自己发给自己，用于测试自身软硬件配置是否正常。</p>
+<p>另外A类地址中还有一段私有地址和一段保留地址：<br>  （1）A类私有地址(同时也是保留地址)：<br>    10.0.0.0－10.255.255.255</p>
+<p>  （2）A类保留地址：<br>    100.64.0.0－100.127.255.255</p>
+<p>关于私有地址和保留地址下面会详细介绍, ABC各类地址都会留一段作为私有地址。</p>
+<span id="more"></span>
+
+<hr>
+<p><strong>2. B类地址：</strong></p>
+<p>128.0.0.0－191.255.255.255<br>(<strong>10</strong>000000 00000000 00000000 00000000 ~ <strong>10</strong>111111 11111111 11111111 11111111)<br>ip地址前两位为10，前16位为网络号，标识网段，后16位为主机号，标识主机。</p>
+<p>B类私有地址(同时也是保留地址)<br>    172.16.0.0－172.31.255.255</p>
+<p>B类一段已指定用途、稍微特殊点的地址（但可无视此特殊性）<br>    169.254.0.0－169.254.255.255，用于使用DHCP协议的主机，当出现某种错误导致无法分配地址时，就自动随机生成一个在此范围地址。</p>
+<p><strong>3. C类地址：</strong></p>
+<p>192.0.0.0 - 223.255.255.255<br>(<strong>110</strong>00000 00000000 00000000 00000000 ~ <strong>110</strong>11111 11111111 11111111 11111111)<br>ip地址前三位为110，前24位为网络号，后8位为主机号。<br>C类私有地址(同时也是保留地址)<br>    192.168.0.0－192.168.255.255</p>
+<hr>
+<p>前三类是网络划分的重点，后面两类使用较少。</p>
+<p><strong>4. D类地址：</strong></p>
+<p>组播(多播)地址，ip前四位为 1110 ，224.0.0.0～239.255.255.255<br>(<strong>1110</strong>0000 00000000 00000000 00000000 ~ <strong>1110</strong>1111 11111111 11111111 11111111)<br>组播地址前4位固定位<strong>1110</strong>，可变化的有28位，故组播地址有2^28个。  </p>
+<p>硬件(MAC)组播：即把多播ip地址转为硬件组播MAC地址交付给局域网内的组播组成员。以太网硬件组播地址范围是01:00:5E:00:00:00 ~ 01:00:5E:7F:FF:FF(十六进制)</p>
+<p>前25位为0000 0001 : 0000 0000 : 0101 1110 : 0<br>后23位可供分配地址0000000 : 00000000 : 00000000到1111111 : 11111111 : 11111111。硬件组播MAC地址后23位直接映射ip组播地址的后23位，故组播ip地址和硬件MAC地址不是一一映射(D类ip地址可变位有28位)。因此主机收到数据链路层的组播数据报，需要由ip层进行过滤可能不属于本主机的数据报。例如主机在收听组播频道224.0.64.32，但在数据链路层由于ip地址224.128.64.32对应的组播MAC地址相同，因此也可能会收到224.128.64.32的数据报，需要在网络层根据ip过滤。</p>
+<p><strong>5. E类地址：</strong></p>
+<p>ip地址前四位为1111,地址保留至今，未使用。<br>(<strong>1111</strong>0000 00000000 00000000 00000000 - <strong>1111</strong>1111 11111111 11111111 11111111)<br>网络号全1:主机号全1,即255.255.255.255表示受限(有限/本地)广播。<br>一般用于当主机还不知道自己的ip或者子网掩码时，使用此地址进行广播通信，请求DHCP分配地址。</p>
+<p>DHCP请求过程：<br>  1）广播DHCP服务器发现报文<br>  2）DHCP服务器应答，广播 DHCP提供报文<br>  3）主机接受DHCP服务器给的配置，广播DHCP请求报文 （广播的目的表明自己接受了谁的DHCP应答，存在多个DHCP服务器时，其他服务器可以得知自己提供的ip并没有被采纳）<br>  4）DHCP服务器广播DHCP确认信息。</p>
+<p><strong>6. 私有地址：</strong></p>
+<p>私有地址只能用于局域网，不用于广域网，即不能直接用于和Internet通信。通信需要通过网关利用nat协议将私有地址转为公网地址，私有地址目的是用于保护内部网络，是出于网络安全考虑的。该概念ipv6依然保留，私有网络方便个人建立自己的个人网络，无需向网络供应商申请ip，就可以对内部提供各种服务。当不想和Internet连接，只希望内部访问时使用私有地址。</p>
+<p><strong>其实和保留地址基本相同</strong></p>
+<p>7. 保留地址：包括所有私有地址，同时又增加100网段下的一段地址，保留地址的目的应该出于缓解ipv4地址紧缺。由于保留地址(包括私有地址)不会出现在Internet上，这些地址不用来标识Internet上唯一的主机，而能用来标识本地网络上的唯一一台主机。因此可用于和本地的主机通信。当这台主机不需要和Internet通信时，就可以分配保留地址(私网地址)。这一设定，使得同一个保留地址，所有人都能使用，可极大的缓解ipv4地址紧缺。</p>
+<p>而且事实上用保留地址的主机也可以通过一定方式和Internet通信，当需要与Internet上的主机通信时，通过网关的nat协议将保留地址转为公网地址即可。保留地址类似老大老二这种称呼，虽然每家都有老大老二，但在自己家老大老二能标识唯一一个人，而且这个称呼只在自己家用。家里面就户主有名字，当老大老二想和外人交流时，就把内容告诉户主，户主去交流，同时户主收到别人告诉自己的信息，会判断是否是给老大老二的，如果是就转告给老大老二，当然这个判断并不难实现，但并非单纯网络层能解决，此处不在细谈。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/01/17/IPV4%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86%E8%AF%A6%E8%A7%A3/" data-id="ckm0lqu7t00034vt9gt5o7qhu" data-title="IPV4地址划分详解" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%BD%91/" rel="tag">计网</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/01/17/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          浅谈对计算机的理解--外设
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">解决Windows各种dll缺失报错</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS/" rel="tag">CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cv/" rel="tag">cv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" rel="tag">入门实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%BD%91/" rel="tag">计网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/" rel="tag">论文翻译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/" rel="tag">配置相关</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/CS/" style="font-size: 13.33px;">CS</a> <a href="/tags/cv/" style="font-size: 10px;">cv</a> <a href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" style="font-size: 13.33px;">入门实践</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.33px;">学习笔记</a> <a href="/tags/%E8%AE%A1%E7%BD%91/" style="font-size: 13.33px;">计网</a> <a href="/tags/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/" style="font-size: 16.67px;">论文翻译</a> <a href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 13.33px;">踩坑记录</a> <a href="/tags/%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/" style="font-size: 10px;">配置相关</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 20px;">随笔</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/27/Designing%20Network%20Design%20Spaces/">Designing Network Design Spaces</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/03/Large-Scale%20Image%20Retrieval%20with%20Attentive%20Deep%20Local%20Features/">Large-Scale Image Retrieval with Attentive Deep Local Features</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/02/Unifying%20Deep%20Local%20and%20Global%20Features%20for%20Image%20Search/">Unifying Deep Local and Global Features for Image Search</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/28/%E6%95%B0%E6%8D%AE%E6%B5%81%E9%87%8F%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%88%86%E6%9E%90/">移动数据流量请求头分析</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/13/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/">Typora配合hexo编写文章</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
