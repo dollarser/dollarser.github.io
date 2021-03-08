@@ -5,20 +5,21 @@ node_js:
 before_install:
   - npm install -g hexo-cli
   - hexo init blog
-  - npm un hexo-renderer-marked --save
-  - npm i hexo-renderer-markdown-it --save
   - npm i hexo-generator-json-content --save
   - npm install  hexo-deployer-git --save
 
 install:
     - ls
-    - mv dollarser.github.io/sourcce blog
-    - mv dollarser.github.io/themes blog
-    - mv dollarser.github.io/_config.yml blog
-    - mv dollarser.github.io/README.md blog
+    - mv sourcce blog
+    - mv themes blog
+    - mv _config.yml blog
+    - mv README.md blog
     - ls blog
+    - cd blog
+    - npm un hexo-renderer-marked --save
+    - npm i hexo-renderer-markdown-it --save
     - hexo g
-    - hexo d
+#    - hexo d
 #    - npm install
 #    - bower install
 #script:
