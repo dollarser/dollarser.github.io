@@ -28,11 +28,11 @@ install:
     # - npm i urix --save
     # - npm i urix --save
     
-    # - npm i hexo-generator-json-content --save
+    - npm i hexo-generator-json-content --save
+    - npm un hexo-renderer-marked --save
+    - npm i hexo-renderer-markdown-it --save
     # - npm install  hexo-deployer-git --save
-    # - npm un hexo-renderer-marked --save
-    # - npm i hexo-renderer-markdown-it --save
-    - npm ls --depth
+    - npm ls --depth 0
     # 生成配置
     - hexo clean
     - hexo g --debug
