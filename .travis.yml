@@ -1,15 +1,20 @@
 language: node_js
 node_js:
-  - 7
+  - 12.18.4
 
 before_install:
-  - npm i -g npm@version-number
+  - npm install -g hexo-cli
+  - hexo init blog
+  - npm un hexo-renderer-marked --save
+  - npm i hexo-renderer-markdown-it --save
+  - npm i hexo-generator-json-content --save
+  - npm install  hexo-deployer-git --save
 
 install:
-    - mkdir travis-phantomjs
-    - export PATH=$PWD/travis-phantomjs:$PATH
-    - npm install -g bower
-    - npm install
-    - bower install
-script:
-    - ember test --server
+    - mv ./ blog
+    - hexo g
+    - hexo d
+#    - npm install
+#    - bower install
+#script:
+#    - ember test --server
