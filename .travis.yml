@@ -29,8 +29,8 @@ install:
 #    - hexo d
 #    - npm install
 #    - bower install
-#script:
-#    - ember test --server
+script:
+  - ls
 deploy:
   provider: pages
   skip_cleanup: true
