@@ -4,29 +4,39 @@ node_js:
 
 before_install:
   - npm install -g hexo-cli
-  - hexo init
+  - hexo init blog
 
 
 install:
     - ls
+
+    - ls blog
+    # 删除文件
+    - rm -r blog/source blog/themes blog/_config.yml
+    # copy文件
+    - mv source blog
+    - mv themes blog
+    - mv _config.yml blog
+
+    # 安装依赖
+    - cd blog
     - npm i hexo-generator-json-content --save
     - npm install  hexo-deployer-git --save
-    - npm un hexo-renderer-marked --save
-    - npm i hexo-renderer-markdown-it --save
+    # - npm un hexo-renderer-marked --save
+    # - npm i hexo-renderer-markdown-it --save
     # 生成配置
     - hexo clean
     - hexo g
     - ls -lha public
-#    - hexo d
-#    - npm install
-#    - bower install
+    # - hexo d
+
 script:
   - ls
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: public
+  local_dir: blog/public
   keep-history: true
   on:
     branch: md
