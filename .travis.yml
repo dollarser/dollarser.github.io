@@ -24,6 +24,7 @@ install:
     - npm un hexo-renderer-marked --save
     - npm i hexo-renderer-markdown-it --save
     # 生成配置
+    - hexo clean
     - hexo g
     - ls public
 #    - hexo d
@@ -39,4 +40,4 @@ deploy:
   keep-history: true
   on:
     branch: md
-    target_branch: master
+    target_branch: gh-pages
