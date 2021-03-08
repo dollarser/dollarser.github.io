@@ -11,9 +11,9 @@ install:
     - ls
     - ls blog
     # 删除文件
-    - rm -r blog/sourcce blog/themes blog/_config.yml
+    - rm -r blog/source blog/themes blog/_config.yml
     # copy文件
-    - mv sourcce blog
+    - mv source blog
     - mv themes blog
     - mv _config.yml blog
     - mv README.md blog
