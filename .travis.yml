@@ -25,6 +25,7 @@ install:
     - npm install  hexo-deployer-git --save
     # - npm un hexo-renderer-marked --save
     # - npm i hexo-renderer-markdown-it --save
+    - npm ls --depth 0
     # 生成配置
     - hexo clean
     - hexo g
