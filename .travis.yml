@@ -1,6 +1,8 @@
 language: node_js
 node_js:
-  - 14.16.0
+  - 12.18.4
+nvm:
+  - 3.6.3
 
 before_install:
   - npm install -g hexo-cli
