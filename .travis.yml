@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 7
+
+before_install:
+  - npm i -g npm@version-number
+
+install:
+    - mkdir travis-phantomjs
+    - export PATH=$PWD/travis-phantomjs:$PATH
+    - npm install -g bower
+    - npm install
+    - bower install
+script:
+    - ember test --server
