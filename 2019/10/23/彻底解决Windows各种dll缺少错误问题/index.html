@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   
   
-  <title>解决Windows各种dll缺失报错 | Hexo</title>
+  <title>解决Windows各种dll缺失报错 | 遗世独立</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。 简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。 另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决Windows各种dll缺失报错">
-<meta property="og:url" content="http://example.com/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://blog.ahulearn.com/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="遗世独立">
 <meta property="og:description" content="动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。 简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。 另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每个">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale">
 <meta property="article:published_time" content="2019-10-23T02:14:27.000Z">
-<meta property="article:modified_time" content="2021-03-08T13:10:14.323Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2021-03-08T13:41:40.821Z">
+<meta property="article:author" content="神火不知灭">
 <meta property="article:tag" content="随笔">
 <meta property="article:tag" content="踩坑记录">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="遗世独立" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -48,8 +48,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">遗世独立</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">憧憬是距离理解最遥远的感情</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -65,10 +69,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.ahulearn.com"></form>
       </div>
     </div>
   </div>
@@ -134,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/" data-id="ckm0lqu8v001a4vt98z5s6u18" data-title="解决Windows各种dll缺失报错" class="article-share-link">Share</a>
+      <a data-url="http://blog.ahulearn.com/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/" data-id="ckm0mv9rx000c5jrv6fmeeodz" data-title="解决Windows各种dll缺失报错" class="article-share-link">Teilen</a>
       
       
       
@@ -147,7 +151,7 @@
 <nav id="article-nav">
   
     <a href="/2020/01/17/IPV4%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86%E8%AF%A6%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
           IPV4地址划分详解
@@ -157,7 +161,7 @@
   
   
     <a href="/2019/10/14/hexo%E9%81%BF%E5%9D%91%E5%B0%8F%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">hexo避坑小结</div>
     </a>
   
@@ -195,7 +199,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
     </div>
@@ -205,7 +209,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
@@ -242,7 +246,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2021 John Doe<br>
+      &copy; 2021 神火不知灭<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

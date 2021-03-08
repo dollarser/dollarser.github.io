@@ -4,22 +4,22 @@
   <meta charset="utf-8">
   
   
-  <title>特权指令、访管指令、陷入指令、广义指令 | Hexo</title>
+  <title>特权指令、访管指令、陷入指令、广义指令 | 遗世独立</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="对操作系统、计算机组成原理入门具有一定指导意义，对计算机考研知识理解具有一定辅助作用，对工作中的实际应用可能基本没用。  特权指令  ○ 从指令系统（指令集）角度定义，在指令系统中拥有用于管理硬件和整个系统安全的指令，让程序随意使用具有极高危险性。不得在用户态（目态）执行，只能在核心态（管态）执行，用户态程序如果运行特权指令将发生异常，并切换到管态由操作系统接管cpu。所以用户程序不得使用特权指令">
 <meta property="og:type" content="article">
 <meta property="og:title" content="特权指令、访管指令、陷入指令、广义指令">
-<meta property="og:url" content="http://example.com/2020/01/18/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://blog.ahulearn.com/2020/01/18/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="遗世独立">
 <meta property="og:description" content="对操作系统、计算机组成原理入门具有一定指导意义，对计算机考研知识理解具有一定辅助作用，对工作中的实际应用可能基本没用。  特权指令  ○ 从指令系统（指令集）角度定义，在指令系统中拥有用于管理硬件和整个系统安全的指令，让程序随意使用具有极高危险性。不得在用户态（目态）执行，只能在核心态（管态）执行，用户态程序如果运行特权指令将发生异常，并切换到管态由操作系统接管cpu。所以用户程序不得使用特权指令">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale">
 <meta property="article:published_time" content="2020-01-18T20:38:31.000Z">
-<meta property="article:modified_time" content="2021-03-08T13:10:14.323Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2021-03-08T13:41:40.821Z">
+<meta property="article:author" content="神火不知灭">
 <meta property="article:tag" content="CS">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="遗世独立" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -47,8 +47,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">遗世独立</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">憧憬是距离理解最遥远的感情</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -64,10 +68,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.ahulearn.com"></form>
       </div>
     </div>
   </div>
@@ -133,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/01/18/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/" data-id="ckm0lqu90001f4vt9egs64kpw" data-title="特权指令、访管指令、陷入指令、广义指令" class="article-share-link">Share</a>
+      <a data-url="http://blog.ahulearn.com/2020/01/18/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/" data-id="ckm0mv9s4000k5jrvcet55s77" data-title="特权指令、访管指令、陷入指令、广义指令" class="article-share-link">Teilen</a>
       
       
       
@@ -146,7 +150,7 @@
 <nav id="article-nav">
   
     <a href="/2020/03/13/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
           Typora配合hexo编写文章
@@ -156,7 +160,7 @@
   
   
     <a href="/2020/01/17/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">浅谈对计算机的理解--外设</div>
     </a>
   
@@ -194,7 +198,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
     </div>
@@ -204,7 +208,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
@@ -241,7 +245,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2021 John Doe<br>
+      &copy; 2021 神火不知灭<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
