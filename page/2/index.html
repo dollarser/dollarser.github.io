@@ -179,6 +179,116 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-hexo避坑小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/14/hexo%E9%81%BF%E5%9D%91%E5%B0%8F%E7%BB%93/">hexo避坑小结</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/14/hexo%E9%81%BF%E5%9D%91%E5%B0%8F%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2019-10-14T01:41:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简单记录一下搭建过程">简单记录一下搭建过程</h2>
+<ul>
+<li>启动（可能需要安装python）
+<ul>
+<li><code>hexo init / hexo init &lt;dir&gt;</code> 此为hexo初始化，后加目录名则创建文件夹，将博客搭建环境部署在此文件夹下；否则将环境部署在当前文件夹下，故如果初始化不加文件夹，请手动创建一个文件夹后，在该文件夹下执行此命令。</li>
+</ul>
+</li>
+<li>远程部署
+<ul>
+<li>安装hexo-deployer-git，此为将hexo部署到github的插件，安装时若报错，提示缺eslint，则直接安装eslint即可，'npm install  hexo-deployer-git --save',另外可能是hexo-deployer-git没有创建软链接，手动创建即可：'sudo ln -s /usr/local/&lt;nodejs安装目录&gt;/lib/node_modules/hexo-deployer-git /usr/bin/hexo-deployer-git'.</li>
+</ul>
+</li>
+<li>标签
+<ul>
+<li>注意hexo配置文件中每个':'后都有一个空格' '，不要忘记，其次标签'tags:'多标签不可在用','隔开的形式，而是分行来写，各行之前均有一个' - '。例如</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line"> - 随笔</span><br><span class="line"> - 踩坑记录</span><br></pre></td></tr></table></figure>
+<ul>
+<li>目录分析
+<ul>
+<li>source 下是资源文件，其中的文件会直接上传到服务器根目录,创建如两个文件移动到该文件夹。</li>
+<li>创建文件 CNAME （全部大写）此为域名解析文件，如果不想绑定自己的域名那就不要创建，文件内容填写自己的域名，例如：'<a href="http://blog.ahulearn.com">blog.ahulearn.com</a>'。</li>
+<li>创建 <a target="_blank" rel="noopener" href="http://README.md">README.md</a>，移动到source文件夹下,同时在根目录配置文件_config.yml下添加内容skip_render: &quot;<a target="_blank" rel="noopener" href="http://README.md">README.md</a>&quot;。</li>
+<li>主题目录下同有source和source-src也会上传到根目录，应将和当前使用主题相关的资源比如图片等放入此文件夹。</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">入门实践</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">踩坑记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/14/hexo%E9%81%BF%E5%9D%91%E5%B0%8F%E7%BB%93/">文章页 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-MathJax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -308,7 +418,7 @@
 使用&gt; 来标识</p>
 </blockquote>
 <p>或者使用ESC 下方的`来标识,块内引用三个点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这是块级引用</span><br><span class="line">这是块级引用</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这是块级引用</span><br><span class="line">这是块级引用</span><br></pre></td></tr></table></figure>
 <pre><code>使用四个空格来表示块级引用
 效果同上方
 </code></pre>
@@ -603,6 +713,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CVPR2020</a>
               </li>
             
             <div class="clearfix"></div>
