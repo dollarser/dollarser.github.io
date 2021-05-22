@@ -45,5 +45,5 @@ deploy:
   local_dir: blog/public
   keep-history: true
   on:
-    branch: md
+    branch: master
     target_branch: gh-pages
