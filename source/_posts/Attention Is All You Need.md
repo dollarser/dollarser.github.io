@@ -85,8 +85,6 @@ Attention(Q, K, V) = softmax \left(\frac{QK^T}{\sqrt{d_k}}\right)V
 $$
 
 
-
-
 最常用的两个注意函数是加性注意力(additive attention)[2]和点积（多重复制）注意力。点积注意力与我们的算法相同，[我们]除了比例因子$\frac{1}{\sqrt{d_k}}$。加性注意力(additive attention)利用一个具有单个隐层的前馈网络来计算相容函数。虽然两者在理论复杂度上相似，但由于可以使用高度优化的矩阵乘法码来实现，因此在实践中，点积关注速度更快，空间效率更高。
 
 而对于较小的$d_k$值，这两种机制表现相似，对于$d_k$值，加法注意优于点积注意[3]。我们怀疑对于较大的 $d_k$ 值，点积在数量级上增长很大，将softmax函数推到梯度非常小的区域^4。为了抵消这种影响，我们用$\frac{1}{\sqrt{d_k}}$缩放点积。
@@ -96,8 +94,6 @@ $$
 取代使用 $d_{model}$ 维的键、值和查询执行单一注意函数，我们发现，使用不同的线性投影将查询、键和值线性投影h次，分别投影到 $d_k$、$d_k$ 和 $d_v$ 维是有益的。在查询、键和值的每个投影版本上，我们并行执行注意函数，产生 $d_v$ 维输出值。它们被连接起来并再次投影，从而得到最终值，如图2所示。
 
 多头部注意使得模型能够在不同位置，连带地关注来自不同表示子空间的信息。单注意头，平均值会抑制这一点。
-
-
 $$
 \begin{aligned}
 \operatorname{MultiHead}(Q, K, V) &=\text { Concat }\left(\text { head }_{1}, \ldots, \text { head }_{\mathrm{h}}\right) W^{O} \\
@@ -105,8 +101,6 @@ $$
 \text { where head }_{\mathrm{i}} &=\text { Attention }\left(Q W_{i}^{Q}, K W_{i}^{K}, V W_{i}^{V}\right)
 \end{aligned}
 $$
-
-
 其中投影为参数矩阵  $
 W_{i}^{Q} \in \mathbb{R}^{d_{\text {model }} \times d_{k}}, W_{i}^{K} \in \mathbb{R}^{d_{\text {model }} \times d_{k}}, W_{i}^{V} \in \mathbb{R}^{d_{\text {model }} \times d_{v}}, W^{O} \in \mathbb{R}^{ {hd_v} \times d_{\text{model}} }
 $  
