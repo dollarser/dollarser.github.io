@@ -179,6 +179,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-彻底解决Windows各种dll缺少错误问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/">解决Windows各种dll缺失报错</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2019-10-23T02:14:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。
+<ul>
+<li>简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。</li>
+<li>另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每个软件都要用，而且这些操作可能还比较危险，直接交给软件实现也存在一些风险。所以系统自带了很多动态链接库文件，编程人员需要使用相关功能，直接调用系统的链接文件即可。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li>于是就会出现很多软件运行时提示缺少dll文件的情况，因为软件使用的dll文件，系统中并不一定有，或者对应的dll版本不一样。</li>
+</ol>
+        
+          <a class="article-more-a" href="/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/#more">查看全文 >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">踩坑记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/23/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/">文章页 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hexo避坑小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -713,6 +804,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">NeurIPS 2017</a>
               </li>
              
               <li class="article-tag-list-item">
