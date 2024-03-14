@@ -91,6 +91,7 @@ jobs:
       # 设置环境变量
       env: 
         GITHUB_REPO: github.com/dollarser/dollarser.github.io
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       # 将编译后的博客文件推送到指定仓库
       run: |
@@ -99,12 +100,15 @@ jobs:
 
         git config --global user.email "dollarser@126.com"
         git config --global user.name "dollarser"
+        # 默认分支名
+        git config --global init.defaultBranch "master"
         
         # Make changes to files
         git commit -am "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
         echo ${{ secrets.ACCESS_KEY }}
 
-        echo https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
+        echo https://$GITHUB_ACTOR@github.com/$GITHUB_REPOSITORY
+        
         git push --force --quiet https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY master:gh-pages
 
         # git push --force --quiet "https://${{ secrets.ACCESS_TOKEN }}@$GITHUB_REPO" master:gh-pages
