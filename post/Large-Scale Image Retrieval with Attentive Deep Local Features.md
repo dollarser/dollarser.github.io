@@ -90,9 +90,9 @@ $$L=-y^* \cdot log(\frac{exp(y)}{1^T exp(y)})$$
 
 $$\frac{\partial L}{\partial\theta}=\frac{\partial L}{\partial y}\sum_n \frac{\partial y}{\partial\alpha_n}\frac{\partial \alpha_n}{\partial\theta}=\frac{\partial L}{\partial y}\sum_n Wf_n \frac{\partial \alpha_n}{\partial\theta}$$
 
-式中反向传播的输出分数 $\alpha_n==\alpha(f_n;\theta)$相对于$\theta$与标准多层感知器相同。
+式中反向传播的输出分数 $\alpha_n==\alpha(f_n;\theta)$ 相对于$\theta$与标准多层感知器相同。
 
-我们将$\alpha(\cdot )$限制为非负，以防止它学习负权重。score函数使用2层CNN设计，顶部使用softplus[9]激活（限制为非负）。为了简单起见，我们采用了尺寸为1 x 1的卷积滤波器，这在实践中效果良好。一旦注意力模型被训练出来，就可以用来评估模型所提取特征的相关性。
+我们将 $\alpha(\cdot )$ 限制为非负，以防止它学习负权重。score函数使用2层CNN设计，顶部使用softplus[9]激活（限制为非负）。为了简单起见，我们采用了尺寸为1 x 1的卷积滤波器，这在实践中效果良好。一旦注意力模型被训练出来，就可以用来评估模型所提取特征的相关性。
 
 ##### 4.2.2 训练注意力
 
