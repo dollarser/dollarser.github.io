@@ -78,7 +78,6 @@ jobs:
 
     - name: 生成文件
       run: |
-        ls --depth 0
         hexo clean
         hexo generate
         ls -lha ./
