@@ -36,10 +36,10 @@ jobs:
     runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
 
     steps:
-    - name: 切换分支
+    - name: 选择分支分支
       uses: actions/checkout@v4
       with:
-        ref: md
+        ref: master
 
     - name: Setup node
       # 设置 node.js 环境
@@ -91,11 +91,10 @@ jobs:
       # 设置环境变量
       env: 
         GITHUB_REPO: github.com/dollarser/dollarser.github.io
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
 
       # 将编译后的博客文件推送到指定仓库
       run: |
-        pwd
         cd blog/public && git init && git add .
 
         git config --global user.email "dollarser@126.com"
@@ -105,11 +104,5 @@ jobs:
         
         # Make changes to files
         git commit -am "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
-        echo ${{ secrets.ACCESS_KEY }}
-
-        echo https://$GITHUB_ACTOR@github.com/$GITHUB_REPOSITORY
-        
         git push --force --quiet https://$GITHUB_ACTOR:${{ secrets.MY_TOKEN }}@github.com/$GITHUB_REPOSITORY master:gh-pages
-
-        # git push --force --quiet "https://${{ secrets.ACCESS_TOKEN }}@$GITHUB_REPO" master:gh-pages
         # git push --force --quiet "https://dollarser:${{ secrets.GITEE_ACCESS_TOKEN }}@$GITEE_REPO" master:gh-pages
