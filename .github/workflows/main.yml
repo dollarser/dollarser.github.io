@@ -36,8 +36,10 @@ jobs:
     runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
 
     steps:
-    - name: Checkout codes
-      uses: actions/checkout@v2
+    - name: 切换分支
+      uses: actions/checkout@v4
+      with:
+        ref: md
 
     - name: Setup node
       # 设置 node.js 环境
@@ -71,19 +73,19 @@ jobs:
         
     - name: 安装依赖
       run: |
-        cd blog
         npm ls --depth 0
         npm i hexo-generator-json-content --save
         npm un hexo-renderer-marked --save
         npm i hexo-renderer-markdown-it --save
+      working-directory: ./blog
 
     - name: 生成文件
       run: |
-        ls -lha ./
         # hexo clean
         hexo generate
-        ls -lha ./
         pwd
+      # 设置工作路径
+      working-directory: ./blog
 
     - name: 部署博客
       # 设置环境变量
@@ -93,7 +95,7 @@ jobs:
       # 将编译后的博客文件推送到指定仓库
       run: |
         pwd
-        cd ./public && git init && git add .
+        cd blog/public && git init && git add .
         git config user.name "dollarser"
         git config user.email "dollarser@126.com"
 
