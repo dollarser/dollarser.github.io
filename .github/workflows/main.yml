@@ -75,16 +75,15 @@ jobs:
         npm i hexo-generator-json-content --save
         npm un hexo-renderer-marked --save
         npm i hexo-renderer-markdown-it --save
-        npm ls --depth 0
 
-    - name: Generate files
-      # 编译 markdown 文件
+    - name: 生成文件
       run: |
+        ls --depth 0
         hexo clean
         hexo generate
-        ls -lha public
+        ls -lha ./
 
-    - name: Deploy hexo blog
+    - name: 部署博客
       # 设置环境变量
       env: 
         GITHUB_REPO: github.com/dollarser/dollarser.github.io
