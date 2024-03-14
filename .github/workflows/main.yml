@@ -78,7 +78,7 @@ jobs:
 
     - name: 生成文件
       run: |
-        hexo clean
+        # hexo clean
         hexo generate
         ls -lha ./
 
