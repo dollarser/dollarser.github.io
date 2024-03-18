@@ -11,8 +11,6 @@ typora-copy-images-to: ..\img\spring
 
 
 
-
-
 ## 1. Spring
 
 官网：https://spring.io/projects/spring-framework/
@@ -26,6 +24,10 @@ typora-copy-images-to: ..\img\spring
 ​	依赖注入（di）---- >Dependency Injection
 
 ​	面向切面编程（AOP）---->Aspect Oriented Programming
+
+
+
+<!--more-->
 
 
 
@@ -1558,7 +1560,7 @@ public class Client {
 
 代码对应 spring-08-proxy-demo02
 
-![静态代理](C:\Users\Admin\OneDrive\markdown笔记\JAVA\assets\10.2_0.png)
+![静态代理](../img/spring/10.2_0.png)
 
 + 抽象角色
 
@@ -1830,7 +1832,7 @@ AOP可以说是OOP（Object-Oriented Programing，面向对象编程）的补充
 
 而AOP技术则恰恰相反，它利用一种称为“横切”的技术，剖解开封装的对象内部，并将那些影响了多个类的公共行为封装到一个可重用模块，并将其名为 “Aspect”，即方面。所谓“方面”，简单地说，就是将那些与业务无关，却为业务模块所共同调用的逻辑或责任封装起来，便于减少系统的重复代码，降低 模块间的耦合度，并有利于未来的可操作性和可维护性。AOP代表的是一个横向的关系，如果说“对象”是一个空心的圆柱体，其中封装的是对象的属性和行为； 那么面向方面编程的方法，就仿佛一把利刃，将这些空心圆柱体剖开，以获得其内部的消息。而剖开的切面，也就是所谓的“方面”了。然后它又以巧夺天功的妙手将这些剖开的切面复原，不留痕迹。
 
-![图片](C:\Users\Admin\OneDrive\markdown笔记\JAVA\assets\11.2_0.jpg)
+![图片](../img/spring/11.2_0.jpg)
 
 ### 11.2 AOP在Spring中的作用
 
@@ -1848,13 +1850,13 @@ AOP可以说是OOP（Object-Oriented Programing，面向对象编程）的补充
 | Proxy（代理）       | 指生成的代理对象。                                           |
 | Aspect（切面）      | 切入点和通知的结合。                                         |
 
-![图片](C:\Users\Admin\OneDrive\markdown笔记\JAVA\assets\11.2_1.jpg)
+![图片](../img/spring/11.2_1.jpg)
 
 
 
 SpringAOP中，通过Advice定义横切逻辑，Spring中支持5种类型的Advice:
 
-![图片](C:\Users\Admin\OneDrive\markdown笔记\JAVA\assets\11.2_2.jpg)
+![图片](../img/spring/11.2_2.jpg)
 
 即 Aop 在 不改变原有代码的情况下 , 去增加新的功能 .
 
@@ -2205,7 +2207,7 @@ aop:aspectj-autoproxy：说明
 
 连接数据库：右侧边栏：Database打开数据库栏；+号点Data Source; 选择MySQL
 
-![image-20210419192943451](C:\Users\Admin\OneDrive\markdown笔记\JAVA\assets\12.1_0.png)
+![image-20210419192943451](../img/spring/12.1_0.png)
 
 1. 编写实体类 User.java
 

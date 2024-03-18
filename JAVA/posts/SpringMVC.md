@@ -1,6 +1,6 @@
 ---
 title: SpringMVC
-date: 2022-06-23 13:00:00
+date: 2023-06-23 13:00:00
 tags:
  - CS
  - SpringMVC
@@ -42,6 +42,8 @@ SpringMVC: SSM框架整合！
 
 
 MVC：模型（dao, service）, 视图（jsp），控制器（Servlet）
+
+<!--more-->
 
 ## 1. 什么是SpringMVC
 
@@ -245,7 +247,7 @@ ${msg}
 
 ### 2.1、概述
 
-![图片](/JAVA/assets/springmvc/2.1_0.png)
+![图片](../img/springmvc/2.1_0.png)
 
 Spring MVC是Spring Framework的一部分，是基于Java实现MVC的轻量级Web框架。
 
@@ -278,7 +280,7 @@ DispatcherServlet的作用是将请求分发到不同的处理器。从Spring 2.
 
 ​	Spring MVC框架像许多其他MVC框架一样, **以请求为驱动** , **围绕一个中心Servlet分派请求及提供其他功能**，**DispatcherServlet是一个实际的Servlet (它继承自HttpServlet 基类)**。
 
-![图片](/JAVA/assets/springmvc/2.2_0.png)
+![图片](../img/springmvc/2.2_0.png)
 
 SpringMVC的原理如下图所示：
 
