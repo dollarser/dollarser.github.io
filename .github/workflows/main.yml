@@ -71,11 +71,18 @@ jobs:
         cp -r _config.yml blog
         cp -r source blog
         # 将md文档备份, 供用户下载
+        cp -r img blog/source
         cp -r posts blog/source
         # 用于生成html
         mv posts blog/source/_posts
-        cp -r img blog/source
-        
+    
+    - name: JAVA文章
+      # 复制到对应目录
+      run: |
+        cp -r JAVA/img/* blog/source/img
+        cp -r JAVA/posts/* blog/source/posts
+        cp -r JAVA/posts/* blog/source/_posts
+      
     - name: 安装依赖
       run: |
         npm ls --depth 0
