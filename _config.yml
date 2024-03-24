@@ -149,6 +149,10 @@ markdown:
     - markdown-it-footnote
     - markdown-it-sub
     - markdown-it-sup
+    # 开启公式
+    - name: '@renbaoshuo/markdown-it-katex'
+      options:
+        skipDelimitersCheck: true
   anchors:
     level: 2
     collisionSuffix: 'v'
