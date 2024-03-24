@@ -56,7 +56,7 @@ typora-copy-images-to: ..\img\transformer
 
 Transformer遵循这个整体架构，使用堆叠的自注意和逐点，编码器和解码器使用全连接层连接，分别如图1的左半部分和右半部分所示。
 
-![1706](..\img\transformer\1706.jpg)
+![1706](/img/transformer/1706.jpg)
 
 ### 3.1 编码器和解码器堆叠
 
