@@ -87,8 +87,11 @@ jobs:
       run: |
         npm ls --depth 0
         npm i hexo-generator-json-content --save
+        # 使用新的渲染器
         npm un hexo-renderer-marked --save
         npm i hexo-renderer-markdown-it --save
+        # 数学公式支持
+        npm install katex @renbaoshuo/markdown-it-katex
       working-directory: ./blog
 
     - name: 生成文件
