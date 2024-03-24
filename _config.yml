@@ -152,7 +152,7 @@ markdown:
     # 开启公式
     - name: '@renbaoshuo/markdown-it-katex'
       options:
-        skipDelimitersCheck: true
+        skipDelimitersCheck: false
   anchors:
     level: 2
     collisionSuffix: 'v'
