@@ -82,6 +82,13 @@ jobs:
         cp -r JAVA/img/* blog/source/img
         cp -r JAVA/posts/* blog/source/posts
         cp -r JAVA/posts/* blog/source/_posts
+
+    - name: Python文章
+      # 复制到对应目录
+      run: |
+        cp -r Python/img/* blog/source/img
+        cp -r Python/posts/* blog/source/posts
+        cp -r Python/posts/* blog/source/_posts
       
     - name: 安装依赖
       run: |

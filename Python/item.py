@@ -1,5 +1,5 @@
-
 from typing import List
+
 
 def robot_navigation(grid: List[List[int]], k: int) -> bool:
     rows, cols = len(grid), len(grid[0])

@@ -5,7 +5,7 @@ tags:
  - PyTorch
  - 深度学习
 typora-root-url: ..
-typora-copy-images-to: ../img/pytorch
+typora-copy-images-to: ./img/pytorch
 ---
 
 # 优化器算法

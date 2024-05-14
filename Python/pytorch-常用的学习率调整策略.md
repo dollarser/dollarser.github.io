@@ -5,7 +5,7 @@ tags:
  - PyTorch
  - 深度学习
 typora-root-url: ..
-typora-copy-images-to: ../img/pytorch
+typora-copy-images-to: ./img/pytorch
 ---
 
 
@@ -92,8 +92,6 @@ for epoch in range(100):
 
 
 
-​	
-
 ## 2. MultiStepLR
 
 MultiStepLR同样也是一个非常常见的学习率调整策略，它会在每个milestone时，将此前学习率乘以gamma。
@@ -136,7 +134,7 @@ CyclicLR的参数要更多一些，它的曲线看起来就像是不断的上坡
 scheduler=lr_scheduler.CyclicLR(optimizer,base_lr=0.1,max_lr=0.2,step_size_up=30,step_size_down=10)
 ```
 
-![img](/img/pytorch/v2-66190f7dde49c5af7de382351a0f083f_1440w.webp)
+![img](./img/pytorch/v2-66190f7dde49c5af7de382351a0f083f_1440w.webp)
 
 ## 6. OneCycleLR
 
@@ -178,7 +176,7 @@ LambdaLR其实没有固定的学习率曲线，名字中的lambda指的是可以
 scheduler=lr_scheduler.LambdaLR(optimizer,lr_lambda=lambda epoch:0.9**epoch)
 ```
 
-![img](/img/pytorch/v2-456e15503cdc3635c865d9866a138441_1440w.webp)
+![img](./img/pytorch/v2-456e15503cdc3635c865d9866a138441_1440w.webp)
 
 ## 10.SequentialLR
 
