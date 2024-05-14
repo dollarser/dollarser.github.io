@@ -12,11 +12,13 @@ typora-copy-images-to: ..\img\transformer
   Transformer 注意力就是您所需要的
  ---
 
+
+
+[TOC]
+
 会议： NeurIPS 2017
 
 论文地址：https://arxiv.org/abs/1706.03762
-
-[TOC]
 
 ## 摘要
 
