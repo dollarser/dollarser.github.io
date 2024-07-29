@@ -1,5 +1,5 @@
 # 博客部署CI/CD
-name: blog deploy
+name: blog_deploy
 
 # 触发条件：在 push 到 master, md 分支后触发
 on:
