@@ -66,8 +66,10 @@ $\epsilon$|\epslion|$\zeta$|\zeta
    +举例： `\lim_{x\to 0}`显示为$\lim_{x\to 0}$
 + 积分：`\int`
    + 举例：`\int_0^\infty{f(x)dx}`显示为$\int_0^\infty{f(x)dx}$
+
 #### 分式和根式
-+ 分式（fractions）:`frac{公式1}{公式2}`显示为$frac{公式1}{公式2}$
+
++ 分式（fractions）:`\frac{公式1}{公式2}`显示为$\frac{公式1}{公式2}$
 + 根式：`\sqrt[x]{y+2}`显示为$\sqrt[x]{y+2}$
 #### 特殊函数
 + `\函数名`
