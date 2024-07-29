@@ -20,7 +20,9 @@ typora-copy-images-to: ../img/python
 
 **gRPC**：谷歌开源的一套RPC框架，基于http2.0，采用protocol buffer的语法(检查proto)，通过proto语法可以定义好要调用的方法、和参数以及响应格式，可以很方便地完成远程方法调用，而且非常利于扩展和更新参数。
 
-![在这里插入图片描述](/img/python/grpc_struct.jpg)
+![grpc框架](/img/python/grpc_struct.jpg)
+
+<!--more-->
 
 ## 环境配置
 
