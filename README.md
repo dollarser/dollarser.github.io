@@ -3,7 +3,7 @@
 
 [TOC]
 
-[![Build Status](https://travis-ci.com/dollarser/dollarser.github.io.svg?branch=md)](https://travis-ci.com/dollarser/dollarser.github.io)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dollarser/dollarser.github.io/blog deploy)
 
 ## 学习测试中
 

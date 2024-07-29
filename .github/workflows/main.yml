@@ -1,6 +1,7 @@
-name: 博客自动部署 CI/CD
+# 博客部署CI/CD
+name: blog deploy
 
-# 触发条件：在 push 到 md 分支后触发
+# 触发条件：在 push 到 master, md 分支后触发
 on:
   push:
     branches: 
@@ -41,7 +42,7 @@ jobs:
       with:
         ref: master
 
-    - name: Setup node
+    - name: 安装 nodejs
       # 设置 node.js 环境
       uses: actions/setup-node@v1
       with:
@@ -70,35 +71,48 @@ jobs:
         cp -r themes blog
         cp -r _config.yml blog
         cp -r source blog
-        # 将md文档备份, 供用户下载
-        cp -r img blog/source
+
+    - name: 未分类文章
+      # 复制到对应目录
+      run: |
+        # 将markdown文档备份, 供用户下载
         cp -r posts blog/source
+        cp -r img blog/source
         # 用于生成html
         mv posts blog/source/_posts
-    
+
+    - name: Paper
+      # 复制到对应目录
+      run: |
+        cp -r paper/posts/* blog/source/posts
+        cp -r paper/img/* blog/source/img
+        cp -r paper/posts/* blog/source/_posts
+
     - name: JAVA文章
       # 复制到对应目录
       run: |
-        cp -r JAVA/img/* blog/source/img
         cp -r JAVA/posts/* blog/source/posts
+        cp -r JAVA/img/* blog/source/img
         cp -r JAVA/posts/* blog/source/_posts
 
     - name: Python文章
       # 复制到对应目录
       run: |
-        cp -r Python/img/* blog/source/img
         cp -r Python/posts/* blog/source/posts
+        cp -r Python/img/* blog/source/img
         cp -r Python/posts/* blog/source/_posts
       
     - name: 安装依赖
       run: |
         npm ls --depth 0
         npm i hexo-generator-json-content --save
-        # 使用新的渲染器
+        # 删除默认的渲染器
         npm un hexo-renderer-marked --save
+        # 安装新的渲染器
         npm i hexo-renderer-markdown-it --save
         # 数学公式支持
         npm install katex @renbaoshuo/markdown-it-katex
+      # 指定命令执行的工作路径
       working-directory: ./blog
 
     - name: 生成文件
@@ -106,7 +120,7 @@ jobs:
         # hexo clean
         hexo generate
         pwd
-      # 设置工作路径
+      # 指定命令执行的工作路径
       working-directory: ./blog
 
     - name: 部署博客

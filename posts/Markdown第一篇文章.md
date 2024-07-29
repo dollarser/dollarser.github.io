@@ -6,7 +6,7 @@ tags:
 	- 学习笔记
 
 ---
-@[TOC](markdown语法练习)
+[TOC]
 
 # 介绍
 

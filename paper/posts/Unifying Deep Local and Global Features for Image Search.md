@@ -7,7 +7,7 @@ tags:
  - cv
  - AI
 typora-root-url: ..
-typora-copy-images-to: ..\img
+typora-copy-images-to: ..\img\vision-locallization
 
 ---
 
@@ -33,9 +33,7 @@ typora-copy-images-to: ..\img
 
 如今，大多数依赖于这两种特性的系统都需要使用不同的模型分别提取每种特性。这是不可取的，因为它可能导致高内存使用率和增加延迟，例如，如果两个模型都需要使用专用和有限的硬件（如gpu）运行。此外，在许多情况下，对两者执行类似类型的计算，导致冗余处理和不必要的复杂性。
 
-
-
-![1593687410536](C:\Users\admin\git\blog\source\img\1593687410536.png)
+![视觉定位总图](/img/vision-locallization/1593687410536.png)
 
 图1. 我们提出的**DELG(Deep Local and Global features) **模型（左）联合提取了深层的局部和全局特征。全局特征可用于检索系统的第一阶段，以便有效地选择最相似的图像（底部）。然后，可以使用局部特征对上面的结果重新排序，从而提高检索结果的精度（右上角）。统一模型利用卷积神经网络诱导的层次图像表示来学习局部和全局表示，结合全局特征池和注意局部特征检测的最新进展。
 
