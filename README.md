@@ -3,7 +3,7 @@
 
 [TOC]
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dollarser/dollarser.github.io/blog deploy)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dollarser/dollarser.github.io/main.yml?branch=master)
 
 ## 学习测试中
 

@@ -5,8 +5,8 @@ tags:
  - CS
  - python
 
-typora-root-url: .
-typora-copy-images-to: \img
+typora-root-url: ..
+typora-copy-images-to: ..\img\python
 
 ---
 
@@ -62,17 +62,19 @@ conda分为anaconda和miniconda。anaconda是包含一些常用包的版本，mi
 
 打开cmd命令行，输入`python`
 
-![image-20210805160322930](D:\OneDrive\jupyter\images\image-20210805160322930.png)
+![image-20210805160322930](/img/python/image-20210805160322930.png)
+
+
 
 如果你是Windows10,可能会跳转到Win10应用商店，因为Win10中有一个python下载程序。
 可以通过 `where python`查看python程序
 
-![image-20210805160005211](D:\OneDrive\jupyter\images\image-20210805160005211.png)
+![image-20210805160005211](/img/python/image-20210805160005211.png)
 
 下方这个`C:\sun_app\Anaconda\python.exe`才是我们安装的python解释器，
 如果想运行这个程序，cmd命令行中输入`C:\sun_app\Anaconda\python.exe`即可，`.exe`后缀可以省略。
 
-![image-20210805160533737](D:\OneDrive\jupyter\images\image-20210805160533737.png)
+![image-20210805160533737](/img/python/image-20210805160533737.png)
 
 此时进入python命令行中，可以输入简单的python语句执行：
 
@@ -96,15 +98,8 @@ print(a+b)
 
 在命令行中，只能执行一些简单命令。如果代码很长，可以将代码写入一个 `.py`后缀的文件中。通过 `python xxx.py` 执行。
 
-
-```python
-
-```
-
-![image-20210805165404778](D:\OneDrive\jupyter\images\image-20210805165404778.png)
+![image-20210805165404778](/img/python/image-20210805165404778.png)
 
 
 
-
-
-![image-20210805163940858](/images/image-20210805163940858.png)
+![image-20210805163940858](/img/python/image-20210805163940858.png)
