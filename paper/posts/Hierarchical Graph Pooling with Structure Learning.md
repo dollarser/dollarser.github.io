@@ -1,6 +1,7 @@
 ---
 title:  Hierarchical Graph Pooling with Structure Learning
 date: 2024-8-5 11:34:00
+toc: true
 tags:
  - 论文翻译
  - GCN

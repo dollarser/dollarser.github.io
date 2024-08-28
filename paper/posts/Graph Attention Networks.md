@@ -1,6 +1,7 @@
 ---
 title: Graph Attention Networks
 date: 2024-08-21 17:21:00
+toc: true
 tags:
  - GAN
  - ICLR 2018

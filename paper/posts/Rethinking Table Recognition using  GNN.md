@@ -1,6 +1,7 @@
 ---
 title: Rethinking Table Recognitionusing Graph Neural Networks
 date: 2024-08-27 17:38:00
+toc: true
 tags:
  - GNN
  - ICDAR 2019

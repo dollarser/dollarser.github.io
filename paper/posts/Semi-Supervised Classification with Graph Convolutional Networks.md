@@ -1,6 +1,7 @@
 ---
 title: Semi-Supervised Classification with Graph Convolutional Networks
 date: 2024-08-21 16:41:00
+toc: true
 tags:
  - GCN
  - ICLR 2017

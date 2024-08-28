@@ -116,7 +116,7 @@ deploy:
 # yillia主题参数
 jsonContent:
   meta: false
-  pages: false
+  pages: true
   posts:
     title: true
     date: true
@@ -140,11 +140,11 @@ markdown:
     xhtmlOut: false
     breaks: false
     linkify: true
-# 设置英文双引号单引号的转换为什么字符格式
+    # 设置英文双引号单引号的转换为什么字符格式
     typographer: false
     quotes: '“”‘’'
   plugins:
-# 开启上下标和脚注
+    # 开启上下标和脚注
     - markdown-it-ins
     - markdown-it-footnote
     - markdown-it-sub
@@ -156,7 +156,7 @@ markdown:
   anchors:
     level: 2
     collisionSuffix: 'v'
-# 设置文章标题前缀
+    # 设置文章标题前缀
     permalink: false
     permalinkClass: header-anchor
     permalinkSymbol:  ❏

@@ -1,6 +1,7 @@
 ---
 title: Path Aggregation Network for Instance Segmentation
 date: 2024-07-29 11:49:00
+toc: true
 tags:
  - CS
  - CVPR 2018
