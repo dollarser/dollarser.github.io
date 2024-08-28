@@ -43,7 +43,7 @@ excerpt_link: '查看全文'
 # show_all_link: '文章页'
 show_all_link: '文章页'
 # 关闭公式，使用了其他插件
-mathjax: false
+mathjax: true
 # 是否在新窗口打开链接
 open_in_new: true
 
