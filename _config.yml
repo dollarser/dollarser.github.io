@@ -116,13 +116,13 @@ deploy:
 # yillia主题参数
 jsonContent:
   meta: false
-  pages: true
+  pages: false
   posts:
     title: true
     date: true
     path: true
     text: false
-    raw: false
+    raw: true
     content: false
     slug: false
     updated: false
