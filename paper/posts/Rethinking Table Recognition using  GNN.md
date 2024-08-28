@@ -29,7 +29,7 @@ github: https://github.com/shahrukhqasim/TIES-2.0
 
 **关键词：表格识别；结构分析；图神经网络；文档模型；图形模型；数据集 **
 
-
+<!--more-->
 
 ## I. 前言
 
