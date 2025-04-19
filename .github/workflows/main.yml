@@ -50,7 +50,7 @@ jobs:
 
     - name: 设置包下载缓存
       # 设置包缓存目录，避免每次下载
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
