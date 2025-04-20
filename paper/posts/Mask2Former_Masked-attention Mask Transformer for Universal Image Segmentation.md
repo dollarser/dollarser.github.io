@@ -1,4 +1,15 @@
-# Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation
+---
+title: Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation
+date: 2024-12-5 11:00:00
+toc: true
+tags:
+ - 论文翻译
+ - Mask2Former
+ - AI
+ - Segmentation
+typora-root-url: ..
+typora-copy-images-to: ..\img\mask2former
+---
 
 
 
