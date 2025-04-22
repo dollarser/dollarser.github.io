@@ -64,14 +64,14 @@ MVC：模型（dao, service）, 视图（jsp），控制器（Servlet）
 
 **最典型的MVC就是JSP + servlet + javabean的模式。**
 
-![图片](../img/springmvc/1.1_0.png)
+![图片](/img/springmvc/1.1_0.png)
 
 ### 1.2、Model1时代
 
 - 在web早期的开发中，通常采用的都是Model1。
 - Model1中，主要分为两层，视图层和模型层。
 
-![图片](../img/springmvc/1.1_1.png)
+![图片](/img/springmvc/1.1_1.png)
 
 ### 1.3、Model2时代
 
@@ -79,7 +79,7 @@ Model2把一个项目分成三部分，包括**视图、控制、模型。**
 
 
 
-![图片](../img/springmvc/1.1_2.png)
+![图片](/img/springmvc/1.1_2.png)
 
 1. 用户发请求
 2. Servlet接收请求数据，并调用对应的业务逻辑方法
@@ -247,7 +247,7 @@ ${msg}
 
 ### 2.1、概述
 
-![图片](../img/springmvc/2.1_0.png)
+![图片](/img/springmvc/2.1_0.png)
 
 Spring MVC是Spring Framework的一部分，是基于Java实现MVC的轻量级Web框架。
 
@@ -280,17 +280,17 @@ DispatcherServlet的作用是将请求分发到不同的处理器。从Spring 2.
 
 ​	Spring MVC框架像许多其他MVC框架一样, **以请求为驱动** , **围绕一个中心Servlet分派请求及提供其他功能**，**DispatcherServlet是一个实际的Servlet (它继承自HttpServlet 基类)**。
 
-![图片](../img/springmvc/2.2_0.png)
+![图片](/img/springmvc/2.2_0.png)
 
 SpringMVC的原理如下图所示：
 
 ​	当发起请求时被前置的控制器拦截到请求，根据请求参数生成代理请求，找到请求对应的实际控制器，控制器处理请求，创建数据模型，访问数据库，将模型响应给中心控制器，控制器使用模型与视图渲染视图结果，将结果返回给中心控制器，再将结果返回给请求者。
 
-![图片](../img/springmvc/2.2_1.png)
+![图片](/img/springmvc/2.2_1.png)
 
 ### 2.3、SpringMVC执行原理
 
-![图片](../img/springmvc/2.3_0.png)
+![图片](/img/springmvc/2.3_0.png)
 
 
 
@@ -517,7 +517,7 @@ ${msg}
 
 解决方法1：File->Project Structure->Project Settings->Artifacts->选择tomcat打包的的模块->右侧Output Layout->WEB-INF->新建lib文件夹，点击+号添加依赖
 
-![image-20210429144658180](../img/springmvc/image-20210429144658180.png)
+![image-20210429144658180](/img/springmvc/image-20210429144658180.png)
 
 解决方法2：参考地址：[(2条消息) idea中的Maven项目没有lib的解决方案_佐月儿-CSDN博客_idea 没有lib](https://blog.csdn.net/CSDN_zuoyueer/article/details/103270227) 
 

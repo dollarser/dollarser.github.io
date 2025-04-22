@@ -21,6 +21,8 @@ tags:
 - PyQt 的 GUI 依赖于 Qt，而 Qt 在安卓上的支持有限。
 - Kivy 和 BeeWare 提供了更轻量级的解决方案，更适合移动设备。
 
+<!--more-->
+
 ------
 
 ### 2. **通过 PySide/Qt for Android**

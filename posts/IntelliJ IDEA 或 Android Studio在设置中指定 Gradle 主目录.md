@@ -10,6 +10,8 @@ tags:
 
 在**IntelliJ IDEA** 和**Android Studio** 中，可以通过以下步骤指定 Gradle 主目录（Gradle Home Directory）。这个设置允许你使用手动安装的 Gradle 版本，而不是依赖 IDE 自动下载的版本。
 
+<!--more-->
+
 ------
 
 ### **步骤 1：打开设置窗口**

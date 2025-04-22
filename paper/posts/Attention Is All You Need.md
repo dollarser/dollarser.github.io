@@ -3,7 +3,7 @@ title: Attention Is All You Need
 date: 2021-05-21 10:35:00
 toc: true
 tags:
- - CS
+ - NLP
  - transformer
  - NeurIPS 2017
 typora-root-url: ..

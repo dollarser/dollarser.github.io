@@ -133,7 +133,7 @@ typora-copy-images-to: ..\img\springboot
 
 ### 分布式
 
-![在这里插入图片描述](../img/springboot/2021020500434620.png)
+![在这里插入图片描述](/img/springboot/2021020500434620.png)
 
 
 
@@ -156,7 +156,7 @@ typora-copy-images-to: ..\img\springboot
 
 - SpringBoot + SpringCloud
 
-![在这里插入图片描述](../img/springboot/20210205004523307.png)
+![在这里插入图片描述](/img/springboot/20210205004523307.png)
 
 ### 云原生
 
@@ -182,7 +182,7 @@ typora-copy-images-to: ..\img\springboot
 
 ### 官网文档架构
 
-![image-20210623150038557](../img/springboot/image-20210623150038557.png)
+![image-20210623150038557](/img/springboot/image-20210623150038557.png)
 
 权限信息
 
