@@ -12,19 +12,21 @@ typora-copy-images-to: ..\img\ocr
 
 [TOC]
 
-名称：Real-time Scene Text Detection with Differentiable Binarization
+名称：DBNet: Real-time Scene Text Detection with Differentiable Binarization
 
 论文：https://arxiv.org/abs/1911.08947
 
 会议：AAAI2020
-
- 
 
 V2：Real-Time Scene Text Detection with Differentiable Binarization and Adaptive Scale Fusion
 
 V2：https://arxiv.org/abs/2202.10304
 
 顶刊：TPAMI 2022
+
+---
+
+
 
 DBNet（Differentiable Binarization Network）是一种用于文本检测的深度学习模型，特别适用于自然场景中的文本检测任务。它在处理弯曲、倾斜或复杂背景中的文本时表现出色。DBNet 的核心创新点是引入了 **可微分二值化（Differentiable Binarization, DB）** 模块，使得模型能够在训练过程中直接优化分割掩码的二值化效果。
 
