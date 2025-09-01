@@ -1,3 +1,12 @@
+---
+title: python编程规范
+date: 2025-08-28 12:00:00
+tags:
+ - cs
+typora-root-url: ..
+typora-copy-images-to: ../img/python
+---
+
 Python 作为一门强调“可读性”和“简洁性”的语言，拥有非常完善的**代码规范与最佳实践体系**。遵循主流规范不仅能提升代码质量，还能增强团队协作效率。
 
 以下是目前 Python 主流的**编码规范、风格指南和工程实践**，涵盖语法、命名、结构、文档、测试等多个方面。
@@ -9,6 +18,8 @@ Python 作为一门强调“可读性”和“简洁性”的语言，拥有非�
 > 📚 官方文档：[PEP 8 -- Style Guide for Python Code](https://pep8.org/)
 
 这是 Python 官方推荐的**代码风格标准**，几乎所有 Python 项目都以此为基础。
+
+<!--more-->
 
 ### 1. 缩进
 - 使用 **4 个空格**缩进（不要用 Tab）

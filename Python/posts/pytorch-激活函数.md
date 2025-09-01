@@ -20,7 +20,7 @@ typora-copy-images-to: ../img/pytorch
 
 ---
 
-
+<!--more-->
 
 ## 1. Sigmoid 函数
 

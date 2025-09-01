@@ -1,8 +1,18 @@
+---
+title: VS Code 常用快捷键
+date: 2025-08-27 12:00:00
+tags:
+ - CS
+typora-root-url: ..
+typora-copy-images-to: ..\img
+---
 Visual Studio Code（VS Code）是开发者广泛使用的轻量级但功能强大的代码编辑器。掌握其**常用快捷键**可以极大提升编码效率。
 
 以下整理了 **Windows / Linux** 和 **macOS** 两大平台的常用快捷键（括号内为 macOS 键位）：
 
 ---
+
+<!--more-->
 
 ## 🚀 一、通用导航与编辑
 
