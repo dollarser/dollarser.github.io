@@ -1,17 +1,25 @@
 ---
-title: CRNN
+title: CRNN: An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition
 date: 2025-04-16 19:00:00
 tags:
  - PyTorch
  - 深度学习
  - CRNN
 typora-root-url: ..
-typora-copy-images-to: ../img/pytorch
+typora-copy-images-to: ../img/ocr
 ---
 
-
-
 # CRNN详解
+
+名称：An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition
+
+论文：https://arxiv.org/abs/1507.05717
+
+会议：ICDAR 2015
+
+github: https://github.com/meijieru/crnn.pytorch
+
+
 
 ## 一、网络结构
 
