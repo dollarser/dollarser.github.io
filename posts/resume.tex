@@ -1,0 +1,172 @@
+% !TEX program = xelatex
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{xeCJK}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\usepackage{graphicx}  % 需要插入图片
+\usepackage{wrapfig}  % 文字环绕图片
+\usepackage{tikz}  % 照片浮于文本之上
+\usetikzlibrary{calc}  
+
+
+\usepackage{enumitem}  % 加载自定义表格相关宏包itemize
+\setlist[itemize]{itemsep=-2pt, topsep=4pt} % 全局统一设置自定义表格间距
+
+% 字体设置
+\setCJKmainfont{Noto Serif CJK SC}
+\setmainfont{Times New Roman}
+
+% 格式定义
+\usepackage{titlesec,xcolor}
+\titleformat{\section}[block]
+    {\large\bfseries\color{blue!70!black}}
+    {\thesection}
+    {1em}{}
+    [\vspace{-0.5em}]
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+
+
+% 条目格式
+\renewcommand{\labelitemi}{•}
+\pagestyle{empty}
+
+% 超链接样式
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+    linkcolor=black
+}
+
+\setlength{\parindent}{0pt} % 取消首行缩进
+
+% 以上都是加载宏和文档设置
+
+% 简历正式开始
+\begin{document}
+
+
+% \begin{figure}[h]  % h H 当前位置
+%     \hfill  % 填充剩余空间‌ [t]父级元素顶部
+%     \begin{minipage}[t]{0.1\textwidth}
+%         \includegraphics[width=\linewidth]{照片.png}
+%     \end{minipage}
+%     % 标题
+%     \begin{minipage}[t]{0.3\textwidth}
+%         % \caption{标题}
+%     \end{minipage}
+% \end{figure}
+
+
+% \begin{wrapfigure}{r}{0.15\textwidth}
+%     \centering
+%     \includegraphics[width=0.15\textwidth]{照片.png}
+%     % \caption{标题}
+%     \label{fig:wrap}
+% \end{wrapfigure}
+
+
+% 将图片放置在页面右上角，不影响文字排版
+\begin{tikzpicture}[remember picture, overlay]
+\node[anchor=north east, xshift=-1cm, yshift=-1cm] 
+    at (current page.north east)
+    {\includegraphics[width=0.2\textwidth]{photo.png}};
+\end{tikzpicture}
+
+
+
+% 个人信息 简历头
+\begin{center}
+% \\表示换行 [2pt]表示行间距
+{\LARGE \textbf{孙令章}}  \\[2pt]
+{\large 高级图像算法工程师} \\[4pt]
+
+ % lll 表示三列，都是左对齐，@{\hspace{2em}}间距
+\begin{tabular}{l@{\hspace{2em}}ll}
+性别：男 & 年龄：29岁 & 求职意向:社招 \\ \hline
+手机：\href{tel:13556048925}{13556048925} & 微信：slzhang0 & 邮箱：\href{mailto:lzsun20@fudan.edu.cn}{lzsun20@fudan.edu.cn} 
+\end{tabular}
+\end{center}
+
+
+
+% \vspace{0.5em}  % 添加空行
+
+% 简历正文内容
+% 教育背景
+\section*{教育背景}
+\vspace{0.5em} % 自定义底部距离 pt em cm
+
+\textbf{复旦大学} \quad 计算机科学与技术 \quad 硕士研究生 \hfill 2021.09 -- 2023.06
+% leftmargin自动左对齐, topsep顶部不留空间，itemsep=-2pt缩小间距
+\begin{itemize}[leftmargin=*,topsep=4pt,itemsep=-2pt]
+    \item 校级一等奖学金（2021, 2022）
+    \item 华为校企合作项目 + 与南科大、浙大联合研究（计算机视觉/多模态）
+\end{itemize}
+
+\textbf{安徽大学} \quad 机械设计制造及其自动化 \quad 本科 \hfill 2015.09 -- 2019.06
+
+% 工作经历
+\section*{工作经历}
+\vspace{0.5em} % 自定义底部距离 pt em cm
+
+\textbf{上海帮图信息科技有限公司} \quad 高级图像算法工程师 \hfill 2024.05 -- 至今
+\begin{itemize}[leftmargin=*]
+    \item 主导智能审图算法研发，结合传统几何算法与深度学习（检测/分割/分类）
+    \item 针对高分辨率图纸设计滑动窗口+半监督+图学习方法，实现毫米级识图精度
+    \item 构件与属性多模态识别准确率 >95\%，推动公司技术转型
+\end{itemize}
+\vspace{0.5em} % 自定义底部距离 pt em cm
+\textbf{上海鸭嘴兽网络科技有限公司} \quad 后端/算法工程师 \hfill 2023.06 -- 2023.12
+\begin{itemize}[leftmargin=*]
+    \item 负责车管司管系统OCR模块，准确率提升7\%，速度提升30\%
+    \item 人工审核时间减少40\%，增强数据合规性
+\end{itemize}
+
+\vspace{0.5em} % 自定义底部距离 pt em cm
+
+\textbf{中兴通讯上海研发中心} \quad 算法工程师（实习） \hfill 2022.07 -- 2022.09
+\begin{itemize}[leftmargin=*,topsep=0pt]
+    \item 参与6G数字孪生项目，负责虚拟场景搭建，室内外场景3维建模。提出点云优化方案，实现三维场景的压缩与平滑，提高仿真效率，点云规模缩小42倍。
+\end{itemize}
+
+
+% 科研项目
+\section*{科研项目}
+\vspace{0.5em} % 自定义底部距离 pt em cm
+
+\textbf{光电一体化智能安防系统研发} \hfill 2020.09 -- 2021.04
+\begin{itemize}[leftmargin=*,topsep=4pt]
+    \item 提出毫米波雷达+图像空间注意力融合方法
+    \item 论文：\textit{WRDI: A Multimodal Dataset of mmWave Radar Data and Image}, IEEE Big Data 2021
+\end{itemize}
+\vspace{0.5em} % 自定义底部距离 pt em cm
+
+\textbf{基于3D地图的大场景视觉定位} \hfill 2021.08 -- 2022.04
+\begin{itemize}[leftmargin=*,topsep=4pt]
+    \item 采用风格迁移+多尺度特征融合，性能提升37.4\%
+    \item 优化10+算子，推理时间从135ms降至19.3ms
+\end{itemize}
+
+% 技能专长
+\section*{技能与专长}
+\vspace{0.5em} % 自定义底部距离 pt em cm
+
+\begin{itemize}[leftmargin=*,topsep=4pt]
+    \item \textbf{算法方向}: 目标检测/分割、OCR、多模态融合、Diffusion Models
+    \item \textbf{框架工具}: PyTorch, OpenCV, MMDetection, Docker
+    \item \textbf{编程语言}: Python, C++, Java
+\end{itemize}
+
+% 奖项荣誉
+\section*{奖项与荣誉}
+\vspace{0.5em} % 自定义底部距离 pt em cm
+
+\begin{itemize}[leftmargin=*,topsep=4pt]
+    \item 2025 公司技术突破奖
+    \item 2024 企业技术突破奖
+    \item 2021-2022 校级一等奖学金（复旦大学）
+\end{itemize}
+
+\end{document}
