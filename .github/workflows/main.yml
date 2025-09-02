@@ -103,18 +103,18 @@ jobs:
         cp -r Python/posts/* blog/source/_posts
 
     - name: Work文章
-      # 复制到对应目录
+      # 复制到对应目, 判断目录是否存在，中括号需要空格
       run: |
-        if [-d Work/posts]; then cp -r Work/posts/* blog/source/posts; echo "文件复制成功"; else echo "文件不存在"; fi
-        if [-d Work/img]; then cp -r Work/img/* blog/source/img; echo "文件复制成功"; else echo "文件不存在"; fi
-        if [-d Work/posts]; then cp -r Work/posts/* blog/source/_posts; echo "文件复制成功"; else echo "文件不存在"; fi
+        if [ -d Work/posts ]; then cp -r Work/posts/* blog/source/posts; echo "文件复制成功"; else echo "文件不存在"; fi
+        if [ -d Work/img ]; then cp -r Work/img/* blog/source/img; echo "文件复制成功"; else echo "文件不存在"; fi
+        if [ -d Work/posts ]; then cp -r Work/posts/* blog/source/_posts; echo "文件复制成功"; else echo "文件不存在"; fi
 
     - name: Examination文章
       # 复制到对应目录
       run: |
-        if [-d Examination/posts]; then cp -r Examination/posts/* blog/source/posts; echo "文件复制成功"; else echo "文件不存在"; fi
-        if [-d Examination/img]; then cp -r Examination/img/* blog/source/img; echo "文件复制成功"; else echo "文件不存在"; fi
-        if [-d Examination/posts]; then cp -r Examination/posts/* blog/source/_posts; echo "文件复制成功"; else echo "文件不存在"; fi
+        if [ -d Examination/posts ]; then cp -r Examination/posts/* blog/source/posts; echo "文件复制成功"; else echo "文件不存在"; fi
+        if [ -d Examination/img ]; then cp -r Examination/img/* blog/source/img; echo "文件复制成功"; else echo "文件不存在"; fi
+        if [ -d Examination/posts ]; then cp -r Examination/posts/* blog/source/_posts; echo "文件复制成功"; else echo "文件不存在"; fi
       
     - name: 安装依赖
       run: |
