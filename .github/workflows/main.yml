@@ -78,6 +78,7 @@ jobs:
         # 安装新的渲染器
         npm install hexo-renderer-pandoc --save
         npm install hexo-filter-mathjax --save
+        npm ls --depth 0
       # 指定命令执行的工作路径
       working-directory: ./blog
 
