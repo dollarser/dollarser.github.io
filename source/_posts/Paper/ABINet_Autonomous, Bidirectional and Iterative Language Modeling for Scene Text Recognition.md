@@ -1,5 +1,5 @@
 ---
-title: ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition
+title: "ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition"
 date: 2025-04-22 17:00:00
 toc: true
 tags:

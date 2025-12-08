@@ -1,5 +1,5 @@
 ---
-title: CRNN: An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition
+title: "CRNN: An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition"
 date: 2025-04-16 19:00:00
 tags:
  - PyTorch

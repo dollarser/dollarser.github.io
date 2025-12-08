@@ -1,5 +1,5 @@
 ---
-title: DBNet: Real-time Scene Text Detection with Differentiable Binarization
+title: "DBNet: Real-time Scene Text Detection with Differentiable Binarization"
 date: 2025-04-21 15:00:00
 toc: true
 tags:

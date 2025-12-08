@@ -3,24 +3,22 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 遗世独立
-subtitle: 憧憬是距离理解最遥远的感情
-description: 初次测试用博客，仅用来练习使用
-keywords: learn,学习,考研,计算机,CS,ACG
-author: 神火不知灭
-language:
+title: Hexo
+subtitle: ''
+description: ''
+keywords:
+author: John Doe
+language: en
 timezone: ''
-
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://blog.sunlingzhang.com
+url: http://example.com
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
-root: /
 
 # Directory
 source_dir: source
@@ -30,8 +28,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-# skip_render:
-skip_render: ["README.md", "md/**"]
+skip_render:
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -99,43 +96,9 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: butterfly
-# theme: landscape
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
-
 deploy:
-  type: git
-  repo: https://github.com/dollarser/dollarser.github.io.git
-  branch: gh-pages
-
-# kramed:
-#   gfm: true
-#   pedantic: false
-#   sanitize: false
-#   tables: true
-#   breaks: true
-#   smartLists: true
-#   smartypants: true
-
-# mathjax:
-#   tags: none
-#   single_dollars: true   # 启用行内公式的单美元符号分隔符
-#   cjk_width: 0.9
-#   normal_width: 0.6
-#   append_css: true
-#   every_page: false
-
-pandoc:
-  extensions:
-    - '-mathjax'           # 数学公式支持
-    - '-smart'             # 智能标点
-    - '-footnotes'         # 脚注支持
-    - '-implicit_figures'  # 隐式图片
-    - '-table-of-contents' # 目录
-    - '-raw_tex'           # 原始 TeX 支持
-    - '-markdown-in-html_blocks'
-    - '-fenced_code_attributes'  # 代码块属性
-    - '-fenced_code_blocks'      # 围栏代码块
-  templates: []
+  type: ''

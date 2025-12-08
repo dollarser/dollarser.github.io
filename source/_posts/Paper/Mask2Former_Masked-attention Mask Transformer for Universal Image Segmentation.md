@@ -1,5 +1,5 @@
 ---
-title: Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation
+title: "Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation"
 date: 2024-12-5 11:00:00
 toc: true
 tags:

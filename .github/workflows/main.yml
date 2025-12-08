@@ -5,7 +5,6 @@ name: blog deploy
 on:
   push:
     branches: 
-      - 'master'
       - 'md'
   # 手动触发
   workflow_dispatch:
