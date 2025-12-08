@@ -45,11 +45,12 @@ cnpm install hexo-renderer-pug hexo-renderer-stylus --save
 
 1. 安装插件
 ```bash
-# 安装
+# 安装 --save的作用是将插件保存在依赖配置项中
 npm install hexo-renderer-marked --save # 默认渲染器
 npm install hexo-renderer-kramed --save  # 主题推荐的渲染器
 npm install hexo-filter-mathjax --save  # 公式过滤
 npm install hexo-renderer-pandoc --save  # 渲染公式
+npm install hexo-deployer-git --save  # 部署网站用
 
 # 卸载
 npm un hexo-renderer-marked --save
