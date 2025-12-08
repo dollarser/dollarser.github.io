@@ -61,10 +61,10 @@ tags:
 
 
 [1]:http://ahulearn.com#	"个人博客"
-图片在的链接的基础上增加了一个'！'，同样存在内部引用，![内部引用](https://avatar.csdn.net/7/7/B/1_ralf_hx163com.jpg#pic_center "内部引用")和外部引用。
+图片在的链接的基础上增加了一个'！'，同样存在内部引用，![内部引用](https://cdn.pixabay.com/photo/2017/08/01/00/37/architecture-2562316_1280.jpg "内部引用")和外部引用。
 ![外部引用][2]
 
-[2]:https://avatar.csdn.net/7/7/B/1_ralf_hx163com.jpg#pic_center	" 外部引用 "
+[2]:https://cdn.pixabay.com/photo/2017/08/01/00/37/architecture-2562316_1280.jpg	"外部引用"
 
 脚注用来注明引用来源格式为`[^n]`
 
