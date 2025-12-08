@@ -88,7 +88,7 @@ kramed:
 
 ### 最终所有的包：
 ```
-npm list
+npm ls --depth 0
 hexo-site@0.0.0 D:\OneDrive\blog
 ├── hexo-filter-mathjax@0.9.1
 ├── hexo-generator-archive@2.0.0
