@@ -75,13 +75,16 @@ jobs:
         # 公式依赖
         # 删除默认的渲染器
         npm un hexo-renderer-marked --save
-        npm install hexo-renderer-kramed --save
         # 安装新的渲染器
-        npm install hexo-renderer-pandoc --save
-        npm install hexo-filter-mathjax --save
+        npm install hexo-deployer-git hexo-generator-archive hexo-generator-category hexo-generator-index hexo-generator-tag hexo-renderer-ejs hexo-util --save
+        npm install hexo-renderer-pandoc hexo-server hexo-filter-mathjax moment-timezone --save
         npm ls --depth 0
       # 指定命令执行的工作路径
       working-directory: ./blog
+
+
+
+
 
     - name: 处理文件
       run: |

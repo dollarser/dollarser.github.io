@@ -26,6 +26,7 @@ npm install -g cnpm --registry=https://registry.npmmirror.com
 - 安装Hexo
 ```bash
 cnpm install -g hexo-cli
+cnpm install hexo
 ```
 
 ### 3. 安装主题
@@ -39,7 +40,13 @@ git clone -b master https://github.com/jerryc127/hexo-theme-butterfly.git themes
 - 主题其他依赖
 ```bash
 cnpm install hexo-renderer-pug hexo-renderer-stylus --save
+
+cnpm install hexo-deployer-git hexo-generator-archive hexo-generator-category hexo-generator-index hexo-generator-tag hexo-renderer-ejs --save
+
+cnpm install hexo-renderer-pandoc hexo-server hexo-filter-mathjax --save
+cnpm install hexo-util moment-timezone --save
 ```
+
 ### 4.公式支持
 使用 Mathjax 前，你需要卸載 hexo 的 markdown 渲染器，然後安裝hexo-renderer-kramed
 
