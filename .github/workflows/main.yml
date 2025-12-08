@@ -61,21 +61,9 @@ jobs:
         hexo init blog
         ls -lha
 
-    - name: 处理文件
-      # 删除文件
-      run: |
-        rm -r blog/source blog/themes
-        rm -r blog/_config.yml
-        # copy文件
-        cp -r themes blog
-        cp -r _config.yml blog
-        cp -r _config.butterfly.yml blog
-        cp -r source blog
-        # 将markdown文档备份, 供用户下载
-        # cp -r source/_posts blog/source/md
-
     - name: 安装pandoc
       run: |
+        sudo apt update
         sudo apt install pandoc
         pandoc --version
 
@@ -92,6 +80,21 @@ jobs:
         npm install hexo-filter-mathjax --save
       # 指定命令执行的工作路径
       working-directory: ./blog
+
+    - name: 处理文件
+      run: |
+        # 删除文件
+        rm -r blog/source
+        rm -r blog/themes
+        rm -r blog/_config.yml
+        # 复制文件
+        cp -r themes blog
+        cp -r source blog
+        cp -r _config.yml blog
+        cp -r _config.butterfly.yml blog
+        # 将markdown文档备份, 供用户下载
+        # cp -r source/_posts blog/source/md
+
 
     - name: 生成文件
       run: |
