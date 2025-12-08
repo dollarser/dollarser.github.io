@@ -39,7 +39,7 @@ jobs:
     - name: 选择分支分支
       uses: actions/checkout@v4
       with:
-        ref: md
+        ref: master
 
     - name: 安装 nodejs
       # 设置 node.js 环境
@@ -74,7 +74,7 @@ jobs:
         # 将markdown文档备份, 供用户下载
         cp -r source/_posts blog/source/md
 
-    - name: 安装依赖
+    - name: 安装pandoc
       run: |
         sudo apt install pandoc
         pandoc --version
