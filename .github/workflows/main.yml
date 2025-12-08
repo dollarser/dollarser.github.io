@@ -82,10 +82,6 @@ jobs:
       # 指定命令执行的工作路径
       working-directory: ./blog
 
-
-
-
-
     - name: 处理文件
       run: |
         # 删除文件
