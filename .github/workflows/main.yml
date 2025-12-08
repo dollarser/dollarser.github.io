@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
 
     steps:
-    - name: 选择分支分支
+    - name: 选择分支
       uses: actions/checkout@v4
       with:
         ref: master
