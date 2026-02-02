@@ -60,6 +60,8 @@ jobs:
       run: |
         npm install -g hexo-cli
         hexo init blog
+        cd blog
+        npm install
         ls -lha
 
     - name: 安装依赖
