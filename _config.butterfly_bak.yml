@@ -459,11 +459,35 @@ busuanzi:
 # if you set it to true, it will load mathjax/katex script in each page
 # if you set it to false, it will load mathjax/katex script according to your setting (add the 'mathjax: true' or 'katex: true' in page's front-matter)
 math:
-  use: katex
+  # Choose: mathjax, katex
+  # Leave it empty if you don't need math
+  use: mathjax
+  engine: mathjax # 指定引擎为 mathjax
+  enable: true
   per_page: true
+  hide_scrollbar: false
+
+  mathjax:
+    enable: true
+    # Enable the contextual menu
+    enableMenu: true
+    # Choose: all / ams / none, This controls whether equations are numbered and how
+    tags: none
+    copy_tex: false
+    # 使用更兼容的 CDN 配置
+    cdn: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    # 额外配置选项
+    # options:
+    #   processEscapes: true  # 处理转义字符
+    #   skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    chtml:
+      mtextInheritFont: true
+      merrorInheritFont: true
+
   katex:
+    enable: false
     # Enable the copy KaTeX formula
-    copy_tex: true
+    copy_tex: false
     css: https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css
     js: https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js
     copy_css: true

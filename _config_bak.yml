@@ -110,11 +110,22 @@ deploy:
   repo: https://github.com/dollarser/dollarser.github.io.git
   branch: gh-pages
 
-# 参考https://github.com/jerryc127/hexo-theme-butterfly/issues/1693
-# 确保 markdown-it-katex 插件被启用
-markdown:
-  plugins:
-    - '@renbaoshuo/markdown-it-katex'
+# kramed:
+#   gfm: true
+#   pedantic: false
+#   sanitize: false
+#   tables: true
+#   breaks: true
+#   smartLists: true
+#   smartypants: true
+
+# mathjax:
+#   tags: none
+#   single_dollars: true   # 启用行内公式的单美元符号分隔符
+#   cjk_width: 0.9
+#   normal_width: 0.6
+#   append_css: true
+#   every_page: false
 
 pandoc:
   extensions:
