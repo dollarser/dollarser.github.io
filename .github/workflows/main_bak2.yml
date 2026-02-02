@@ -5,7 +5,7 @@ name: blog deploy
 on:
   push:
     branches: 
-      - 'master'
+      - 'none'
 
   # 手动触发
   workflow_dispatch:
@@ -62,18 +62,23 @@ jobs:
         hexo init blog
         ls -lha
 
+    - name: 安装pandoc
+      run: |
+        sudo apt update
+        sudo apt install pandoc
+        pandoc --version
+
     - name: 安装依赖
       run: |
         npm ls --depth 0
-        # hexo相关依赖
-        npm install hexo-deployer-git hexo-server hexo-util moment-timezone --save
-        npm install hexo-generator-archive hexo-generator-category hexo-generator-index hexo-generator-tag hexo-renderer-ejs --save
         # 主题依赖
-        npm install hexo-renderer-pug hexo-renderer-stylus --save
-        # markdown渲染器
-        cnpm install hexo-renderer-markdown-it --save
-        # 公式渲染器
-        cnpm install katex @renbaoshuo/markdown-it-katex --save
+        npm i hexo-renderer-pug hexo-renderer-stylus --save
+        # 公式依赖
+        # 删除默认的渲染器
+        npm un hexo-renderer-marked --save
+        # 安装新的渲染器
+        npm install hexo-deployer-git hexo-generator-archive hexo-generator-category hexo-generator-index hexo-generator-tag hexo-renderer-ejs hexo-util --save
+        npm install hexo-renderer-pandoc hexo-server hexo-filter-mathjax moment-timezone --save
         npm ls --depth 0
       # 指定命令执行的工作路径
       working-directory: ./blog
@@ -91,7 +96,6 @@ jobs:
         cp -r _config.butterfly.yml blog
         # 将markdown文档备份, 供用户下载
         # cp -r source/_posts blog/source/md
-        pwd
 
 
     - name: 生成文件
