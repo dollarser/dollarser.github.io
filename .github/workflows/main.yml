@@ -73,9 +73,9 @@ jobs:
         # 主题依赖
         npm install hexo-renderer-pug hexo-renderer-stylus --save
         # markdown渲染器
-        cnpm install hexo-renderer-markdown-it --save
+        npm install hexo-renderer-markdown-it --save
         # 公式渲染器
-        cnpm install katex @renbaoshuo/markdown-it-katex --save
+        npm install katex @renbaoshuo/markdown-it-katex --save
         npm ls --depth 0
       # 指定命令执行的工作路径
       working-directory: ./blog
