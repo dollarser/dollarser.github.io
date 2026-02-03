@@ -89,6 +89,7 @@ jobs:
         rm -rf blog/source
         rm -rf blog/themes
         rm -rf blog/_config.yml
+        pwd
         ls themes/butterfly
         # 复制文件
         cp -r themes blog
@@ -97,6 +98,7 @@ jobs:
         cp -r _config.butterfly.yml blog
         # 将markdown文档备份, 供用户下载
         # cp -r source/_posts blog/source/md
+        pwd
         ls blog
         ls blog/themes/butterfly
         # ls blog/themes/butterfly/layout
