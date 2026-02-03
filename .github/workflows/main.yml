@@ -61,7 +61,8 @@ jobs:
         npm install -g hexo-cli
         hexo init blog
         cd blog
-        npm install
+        # 删除默认的渲染器
+        npm un hexo-renderer-marked --save
         ls -lha
 
     - name: 安装依赖
