@@ -64,7 +64,8 @@ jobs:
     - name: 处理文件
       # 删除文件
       run: |
-        rm -r blog/source blog/themes
+        rm -r blog/source
+        rm -r blog/themes
         rm -r blog/_config.yml
         # copy文件
         cp -r themes blog

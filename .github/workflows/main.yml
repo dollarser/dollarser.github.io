@@ -44,9 +44,9 @@ jobs:
 
     - name: 安装 nodejs
       # 设置 node.js 环境
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v6
       with:
-        node-version: '20.x'
+        node-version: 24
 
     - name: 设置包下载缓存
       # 设置包缓存目录，避免每次下载
@@ -83,9 +83,9 @@ jobs:
     - name: 处理文件
       run: |
         # 删除文件
-        rm -r blog/source
-        rm -r blog/themes
-        rm -r blog/_config.yml
+        rm -rf blog/source
+        rm -rf blog/themes
+        rm -rf blog/_config.yml
         # 复制文件
         cp -r themes blog
         cp -r source blog
@@ -93,12 +93,13 @@ jobs:
         cp -r _config.butterfly.yml blog
         # 将markdown文档备份, 供用户下载
         # cp -r source/_posts blog/source/md
-        pwd
+        ls blog
+        ls blog/themes
 
 
     - name: 生成文件
       run: |
-        # hexo clean
+        hexo clean
         hexo generate
         pwd
       # 指定命令执行的工作路径
