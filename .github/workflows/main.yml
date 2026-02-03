@@ -63,6 +63,8 @@ jobs:
         cd blog
         # 删除默认的渲染器
         npm un hexo-renderer-marked --save
+        # 删除默认主题
+        npm un hexo-theme-landscape --save
         ls -lha
 
     - name: 安装依赖
@@ -95,14 +97,14 @@ jobs:
         # 将markdown文档备份, 供用户下载
         # cp -r source/_posts blog/source/md
         ls blog
-        ls blog/themes
-
+        ls blog/themes/butterfly/layout
 
     - name: 生成文件
       run: |
         hexo clean
         hexo generate
-        pwd
+        ls -lha public
+        cat public/index.html
       # 指定命令执行的工作路径
       working-directory: ./blog
 
