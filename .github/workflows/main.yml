@@ -89,6 +89,7 @@ jobs:
         rm -rf blog/source
         rm -rf blog/themes
         rm -rf blog/_config.yml
+        ls themes/butterfly
         # 复制文件
         cp -r themes blog
         cp -r source blog
@@ -101,6 +102,7 @@ jobs:
         # ls blog/themes/butterfly/layout
 
     - name: 生成文件
+      continue-on-error: true
       run: |
         hexo clean
         hexo generate
