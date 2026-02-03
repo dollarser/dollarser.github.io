@@ -97,7 +97,8 @@ jobs:
         # 将markdown文档备份, 供用户下载
         # cp -r source/_posts blog/source/md
         ls blog
-        ls blog/themes/butterfly/layout
+        ls blog/themes/butterfly
+        # ls blog/themes/butterfly/layout
 
     - name: 生成文件
       run: |
