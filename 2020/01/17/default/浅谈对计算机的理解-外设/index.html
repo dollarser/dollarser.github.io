@@ -1,0 +1,189 @@
+<!DOCTYPE html><html data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>浅谈对计算机的理解--外设 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。 1）硬件 提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈对计算机的理解--外设">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。 1）硬件 提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2020-01-17T12:39:14.000Z">
+<meta property="article:modified_time" content="2026-02-04T13:27:55.620Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="CS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "浅谈对计算机的理解--外设",
+  "url": "http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2020-01-17T12:39:14.000Z",
+  "dateModified": "2026-02-04T13:27:55.620Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '浅谈对计算机的理解--外设',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></div><div class="menus_item"><a class="site-page" href="/data-structure/"><i class="fa-fw fas  fa-terminal"></i><span> 数据结构</span></a></div><div class="menus_item"><a class="site-page" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></div><div class="menus_item"><a class="site-page" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></div><div class="menus_item"><a class="site-page" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></div><div class="menus_item"><a class="site-page" href="/practice/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/essay/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/bug/"><i class="fa-fw fas fa-bug"></i><span> 踩坑记录</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">浅谈对计算机的理解--外设</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></div><div class="menus_item"><a class="site-page" href="/data-structure/"><i class="fa-fw fas  fa-terminal"></i><span> 数据结构</span></a></div><div class="menus_item"><a class="site-page" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></div><div class="menus_item"><a class="site-page" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></div><div class="menus_item"><a class="site-page" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></div><div class="menus_item"><a class="site-page" href="/practice/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/essay/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/bug/"><i class="fa-fw fas fa-bug"></i><span> 踩坑记录</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">浅谈对计算机的理解--外设</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-01-17T12:39:14.000Z" title="Created 2020-01-17 20:39:14">2020-01-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-04T13:27:55.620Z" title="Updated 2026-02-04 21:27:55">2026-02-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。</p>
+<p><strong>1）硬件</strong></p>
+<p>提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行软件的。</p>
+<p>我只能说你这种想法是把人的观点强加给计算机而已，它不过是一堆没有感情的芯片电路，就一铁疙瘩，懂什么代码。它不过是按既定的物理规律运行而已。</p>
+<p>甚至从我的角度来看即便是为计算机量身定做二进制也是计算机看不懂的东西，计算机所理解的这一切都是人强加给它的。</p>
+<p>这就相当于按下开关，通上电灯它亮了，而你把他看作是灯知道了你按下了开关，然后亮了，而且你还在这好奇，这灯它到底是咋知道我按下了开关的？灯知道个什么玩意，其实这不过是看待问题的角度本身强加给了它意义，计算机和灯本质上也并无差别。抛开人强加给它的意义，会更容易来理解计算机。</p>
+<p>下面来简析一下计算机的基本结构，此处的计算机不以任何现实机器为依据，单纯是对各种计算机抽象出来的一种通用机器模型。</p>
+<p>该机器应由 <strong>(1)cpu</strong>  <strong>(2)内存</strong>  和 <strong>(3)外设 <strong>构成，更细致的分：cpu由</strong>(1)控制器</strong>和**(2)运算器<strong>构成，内存既</strong>(3)存储器、主存**，外设既**(4)输入设备<strong>和</strong>(5)输出设备**。</p>
+<span id="more"></span>
+<p>此处仅对输入输出设备仅稍作说明，之后的文章会涉及计算机的核心部分既软件部分。由上面的说明可知计算机除了控制器、运算器、存储器，其它设备均为外设，例如磁盘 显示器 键盘鼠标等。计算机对外设的操作都可以抽象为读写，既输入是读输出是写。而怎么读怎么写可以认为是外设的事，计算机可以把它们看做相同的。比如数据写入磁盘，计算机就是吧10数据写过去，磁盘的控制器把数据转为磁盘上的磁极偏转，而这个转换过程是磁盘自己的事，磁盘自己的硬件和驱动进行控制。显示器的画面显示也不过是计算机向显示器写入数据而已，显示器的控制器(GPU)将数据转为图像，这个过程也是个显示器自己的事，例如最原始的荧光屏靠电子射击屏幕显示画面，而电子的的坐标数据可以通过是cpu写过去。将坐标转为具体的像素点，控制器可以用高中物理带电粒子在磁场中的运动将这个单纯的数据转为在屏幕上的物理位置。</p>
+<p>另一方面，外设不能和cpu直接通信，因为外设都是物理量，磁盘是磁、话筒是磁、键盘敲击的动作，这些量cpu是不能直接输入输出的，必须经过传感器等将所有非电量转为电量，之后调制解调，数模转换等一系列操作转为cpu数字电路能直接操作的数电信号。cpu和外设通信都是通过设备控制器作为中介，这些转换操作可以看做是设备控制器完成的，cpu操作设备控制器，设备控制器操作具体的外设。操作不同的外设只是对设备控制器进行不同的操作，这种结构也让cpu对外设的操作可以统一抽象为读写操作。读写的数据可能是想读写入外设的，也可能是控制设备控制器的。</p>
+<p>当然不同的外设读写的内容肯定不同，同一种内容对于不同的外设意义也不同，设备控制器怎么去读写也不同，这些由都驱动程序具体来控制。</p>
+<p>驱动程序是和硬件直接相关的，属于最接近底层的软件，用于控制外设，个人认为操作系统就可以看做cpu和内存的广义上的驱动，或者更底层的bios看做cpu和内存的驱动，只不过一般的驱动用于驱动设备，操作系统或bios驱动cpu。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/">http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS/">CS</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/01/18/default/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/" title="特权指令、访管指令、陷入指令、广义指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">特权指令、访管指令、陷入指令、广义指令</div></div><div class="info-2"><div class="info-item-1">对操作系统、计算机组成原理入门具有一定指导意义，对计算机考研知识理解具有一定辅助作用，对工作中的实际应用可能基本没用。  特权指令  ○ 从指令系统（指令集）角度定义，在指令系统中拥有用于管理硬件和整个系统安全的指令，让程序随意使用具有极高危险性。不得在用户态（目态）执行，只能在核心态（管态）执行，用户态程序如果运行特权指令将发生异常，并切换到管态由操作系统接管cpu。所以用户程序不得使用特权指令，需要执行特权指令需要使用防管指令，进入核心态。   访管指令  ○ 同样从指令集的角度定义，或者说从硬件角度（cpu状态）。防管指令，是用户程序自愿进管的指令（进管同时也意味着程序放弃cpu的控制权），该指令本身属于非特权指令，可在用户态执行，执行后进入核心态。核心态是通过cpu置相应标志表明当前处于核心态。cpu进入核心态后可以执行指令集中的所有指令（包括特权指令和非特权指令，但不执行访管指令）。  陷入指令  ○ 原则上可看作访管指令，但是从操作系统的角度定义的。访管强调的是cpu从用户态切换到了核心态，可以执行指令集中的所有指令。而陷入（自陷、陷阱）指令强调程序从用户程序从用户台...</div></div></div></a><a class="pagination-related" href="/2020/01/17/default/IPV4%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86%E8%AF%A6%E8%A7%A3/" title="IPV4地址划分详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">IPV4地址划分详解</div></div><div class="info-2"><div class="info-item-1">1.  概述： 早期网络分配是只能以网段为单位进行(可能是出于路由简单的目的，网段类似电话号区号)。类比到电话4位区号，7位座机号，共11位。当电话呼叫时，线路进行转接的时候只需看区号就可以直接把电话接到某个地区，地区再看座机号接到具体某一户。这样一来转接过程各自分工让电话接通变得更加简单。网络通信也是类似，ip地址总共32位（二进制），但是网络号（区号）和主机号（座机号）不像11位电话那样始终固定为4位7位。 ip的划分稍微复杂一点，其划分原则为：ip地址中若第一位为0，则网络号8位，主机号24位，被称为A类地址。若第一位为1第二位为0，则网络号16位，主机号16位，被称为B类地址。若第一二位为1第三位为0，则网络号24位，主机号8位，被称为C类地址。早期网络并非个人使用，而是科研机构军工学校企业等使用，故ip的分配也是以网络号为单位，而不是以单个ip为单位来售卖。类比到电话就是，直接区号分配给你，而不是分配手机号。机构的用户多就购买一个A类网段，约可以连16M(2^24，主机号24位)台电脑，人少就购买B类网段，约可以连64k(2^16)台电脑，更少则购买C类网段，约可以连2...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/06/07/JAVA/Mybatis/" title="Mybatis"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-07</div><div class="info-item-2">Mybatis</div></div><div class="info-2"><div class="info-item-1">环境：   JDK1.8   Mysql 5.7   maven 3.6.1   IDEA   回顾：   JDBC   Mysql   Java基础   Maven   Junit：单元测试   1. 简介 1.1 什么是Mybatis MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。 框架：配置文件最好直接看官网 MyBatis官方文档：https://mybatis.org/mybatis-3/zh/index.html GitHub主页：https://github.com/mybatis/mybatis-3 Maven地址：https://mvnrepository.com/artifact/org.mybatis/mybatis 123456&lt;!-- https:/...</div></div></div></a><a class="pagination-related" href="/2021/08/05/Python/Python%E5%85%A5%E9%97%A8/" title="Python入门"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-05</div><div class="info-item-2">Python入门</div></div><div class="info-2"><div class="info-item-1">1、环境配置 python作为脚本语言，只需要一个python解释器就可以直接编写代码和运行。 但是为了方便我们通常会使用IDE(集成开发环境)或轻量级的文本编辑器进行开发。 这里首先介绍使用最简单的python编辑器编写代码，以及使用VS Code、Jupyter开发。  1.1 安装python解释器 这里推荐安装Conda,Conda是极其方便且强大的包管理器，安装后自带python解释器，同时为以后开发带来极大的便利。如果只想安装python解释器可以从下方地址下载： 官网Windows下载：https://www.python.org/downloads/windows/ 1.2、安装Conda conda分为anaconda和miniconda。anaconda是包含一些常用包的版本，miniconda则是精简版，需要什么装什么，这里介绍miniconda的安装。 官网地址：https://docs.conda.io/en/latest/miniconda.html 1.2.1、安装 进入官网：https://docs.conda.io/en/latest/minic...</div></div></div></a><a class="pagination-related" href="/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="VS Code 常用快捷键"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-27</div><div class="info-item-2">VS Code 常用快捷键</div></div><div class="info-2"><div class="info-item-1">Visual Studio Code（VS Code）是开发者广泛使用的轻量级但功能强大的代码编辑器。掌握其常用快捷键可以极大提升编码效率。 以下整理了 Windows / Linux 和 macOS 两大平台的常用快捷键（括号内为 macOS 键位）：   🚀 一、通用导航与编辑    功能 Windows/Linux macOS 说明     保存文件 Ctrl + S Cmd + S 保存当前文件   撤销 Ctrl + Z Cmd + Z 撤销上一步操作   重做 Ctrl + Y 或 Ctrl + Shift + Z Cmd + Y 或 Cmd + Shift + Z 重做   复制一行 Ctrl + C（无选中） Cmd + C（无选中） 复制整行   剪切一行 Ctrl + X（无选中） Cmd + X（无选中） 剪切整行   删除一行 Ctrl + Shift + K Cmd + Shift + K 删除当前行   向上/下移动一行 Alt + ↑ / ↓ Option + ↑ / ↓ 移动当前行   复制一行到上下 Alt + Shift + ↑ / ↓ Op...</div></div></div></a><a class="pagination-related" href="/2023/06/23/JAVA/SpringMVC/" title="SpringMVC"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-23</div><div class="info-item-2">SpringMVC</div></div><div class="info-2"><div class="info-item-1">官方文档：https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web 基于Spring实现的MVC轻量级Web框架 SSM: mybatis+Spring+SpringMVC MVC三层架构 Java基础：认真学习，老师带，入门快   JavaSE   JavaWeb   框架：研究官方文档，锻炼官方文档，锻炼自学能力，锻炼笔记能力，锻炼项目能力 SpringMVC + Vue + SpringBoot + SpringCloud + Linux SSM = JavaWeb项目 Sping: IOC和AOP SpringMVC：SpringMVC的执行流程！ SpringMVC: SSM框架整合！ MVC：模型（dao, service）, 视图（jsp），控制器（Servlet）  1. 什么是SpringMVC 1、回顾MVC 1.1、什么是MVC  MVC是模型(Model)、视图(View)、控制器(Controller)的简写，是一种软件设计规范。 是将业...</div></div></div></a><a class="pagination-related" href="/2022/06/27/JAVA/JAVA%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" title="JAVA学习路线"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-27</div><div class="info-item-2">JAVA学习路线</div></div><div class="info-2"><div class="info-item-1">CodeSheep 参考视频：https://www.bilibili.com/video/BV1GQ4y1N7HD 相关思维导图：https://www.processon.com/view/link/5eb6a1b0e401fd16f4283225 编程基础（掌握） JAVA语法 Java基础 JVM  类加载机制 字节码执行机制 JVM内存模型 GC垃圾回收 JVM性能监控与故障定位 JVM调优  多线程  并发编程的基础 线程池 锁 并发容器 原子类 JUC并发工具类   数据结构和算法 数据结构  字符串 数组 链表 堆、栈、队列 二叉树 哈希 图  算法  排序 查找 贪心 分治 动态规划 回溯  计算机网络  ARP协议 IP、ICMP协议 TCP、UDP协议 DNS、HTTP/HTTPS协议 Session/Cookie  MySQL数据库  SQL语句的书写 SQL语句的优化 事务、隔离级别 索引 锁  操作系统  进程、线程 并发、锁 内存管理和调度 I/O原理  设计模式  单例 工厂 代理 策略 模板方法 观察者 适配器 责任链 建造者  研发工具 集成开...</div></div></div></a><a class="pagination-related" href="/2023/08/23/JAVA/SpringBoot/" title="SpringBoot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-23</div><div class="info-item-2">SpringBoot</div></div><div class="info-2"><div class="info-item-1">官方文档：https://spring.io/projects/spring-boot#learn 其他笔记： 主要参考： Spring Boot 2 学习笔记（1 / 2）_KISS-CSDN博客 SpringBootWeb模块的默认规则研究_大恐龙的小弟的博客-CSDN博客 01、基础入门-Spring生态圈 Spring官网 Spring能做什么  Spring的生态 覆盖了：  web开发 数据访问 安全控制 分布式 消息服务 移动开发 批处理 …   Spring5重大升级  响应式编程    内部源码设计  基于Java8的一些新特性，如：接口默认实现。重新设计源码架构。 接口的默认实现：即适配器模式（adapter）  由于接口的抽象方法太多，而一般情况下我们只需要使用接口的某几个方法，此时继承了接口必须实现所有方法，即便不用，也要加上空方法。 此时我们使用适配器实现接口的所有方法，通过继承适配器来重新部分方法即可，避免大量无用的方法实现  为什么用SpringBoot  Spring Boot makes it easy to create stand-alone...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">初次测试用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/08/Paper/YOLOv26/" title="YOLOv26技术文档">YOLOv26技术文档</a><time datetime="2026-02-08T07:32:00.000Z" title="Created 2026-02-08 15:32:00">2026-02-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/07/Paper/YOLOv13/" title="YOLOv13技术文档">YOLOv13技术文档</a><time datetime="2026-02-07T07:32:00.000Z" title="Created 2026-02-07 15:32:00">2026-02-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/06/Paper/YOLOv12/" title="YOLOv12技术文档">YOLOv12技术文档</a><time datetime="2026-02-06T07:32:00.000Z" title="Created 2026-02-06 15:32:00">2026-02-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/05/Paper/YOLOv11/" title="YOLOv11技术文档">YOLOv11技术文档</a><time datetime="2026-02-05T07:32:00.000Z" title="Created 2026-02-05 15:32:00">2026-02-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/04/Paper/YOLOv10/" title="YOLOv10技术文档">YOLOv10技术文档</a><time datetime="2026-02-04T07:32:00.000Z" title="Created 2026-02-04 15:32:00">2026-02-04</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
