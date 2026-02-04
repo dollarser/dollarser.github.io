@@ -1,6 +1,7 @@
 ---
 title: pytorch-优化器算法
 date: 2024-05-14 14:24:00
+toc: true
 tags:
  - PyTorch
  - 深度学习
@@ -122,6 +123,8 @@ $$m_t = \beta m_{t-1} + (1-\tau)g_t $$
 $$g_t = b_t$$
 
 $$\theta_t = \theta_{t-1} -\gamma g_t $$
+
+
 
 ### 1.3 代码
 

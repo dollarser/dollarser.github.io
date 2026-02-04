@@ -11,7 +11,7 @@ typora-copy-images-to: ../img/pytorch
 
 
 
-### 什么是 Label Smoothing Cross Entropy？
+### Label Smoothing Cross Entropy介绍
 
 Label Smoothing 是一种正则化技术，用于改进分类任务中的交叉熵损失函数。传统的交叉熵损失函数假设目标标签是硬性（hard）的，即每个样本只有一个正确的类别标签，并且该类别的概率为 1，其他类别的概率为 0。然而，这种硬性标签可能会导致模型过拟合训练数据，尤其是在训练数据有限或标签可能存在噪声的情况下。
 
@@ -21,7 +21,10 @@ Label Smoothing 的基本思想是对目标标签进行“平滑”处理，将�
 
 <!--more-->
 
-### Label Smoothing 的工作原理
+- 提出论文: Rethinking the Inception Architecture for Computer Vision
+- 会议: CVPR 2016
+
+### Label Smoothing（标签平滑）的工作原理
 
 #### 1. **传统交叉熵损失**
 
@@ -39,20 +42,21 @@ $$
 
 #### 2. **Label Smoothing 的引入**
 
-Label Smoothing 将目标标签从硬性分布转换为软性分布，具体公式如下：
+Label Smoothing 将目标标签从硬性分布转换为软性分布，软标签具体公式如下：
 $$
-y_i′ =\left\{
-\begin{aligned}
-1−ϵ, & if\ i =true\ class\\
-\frac ϵ{C-1}, & otherwise
-\end{aligned}
-\right.
+y_i' =
+\begin{cases}
+1 - \epsilon, & \text{if } i = \text{true class} \\
+\frac{\epsilon}{C - 1}, & \text{otherwise}
+\end{cases}
 $$
+
+
 其中：
 
-- *ϵ* 是平滑参数，通常取值在 [0, 1] 范围内（例如 0.1）。
 - $y_i'$ 是平滑后的目标标签分布。
-- 正确类别的概率被降低为 1−*ϵ*，而其他类别的概率被提升为$\frac ϵ {C−1}$。
+- $\epsilon$  是平滑参数，通常取值在 [0, 1] 范围内（例如 0.1）。
+- 正确类别的概率被降低为 $1−\epsilon$ ，而其他类别的概率被提升为 $\frac \epsilon {C−1}$ 。
 
 #### 3. **平滑后的交叉熵损失**
 
@@ -94,6 +98,7 @@ $$
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
 
 class LabelSmoothingCrossEntropy(nn.Module):
     def __init__(self, label_smoothing=0.1, class_weights=None, reduction='mean'):
@@ -139,11 +144,12 @@ print("Label Smoothing Cross Entropy Loss:", loss.item())
 
 
 
-+ PyTorch 1.10之后CrossEntropyLoss 已经原生支持标签平滑功能
++ PyTorch 1.10之后Cross Entropy Loss 已经原生支持标签平滑功能
 
 ```python
 import torch
 from torch.nn import CrossEntropyLoss
+
 
 # 示例用法
 preds = torch.tensor([[2.0, 1.0, 0.1], [1.5, 2.5, 0.3]])  # 模型预测的 logits

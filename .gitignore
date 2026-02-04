@@ -1,8 +1,9 @@
 .DS_Store
 ._.DS_Store
 **/.DS_Store
-
+# 需要忽略node包配置文件
+# 否则影响github actions安装
+package.json
 node_modules
 public
-
 db.json
