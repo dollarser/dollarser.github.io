@@ -117,16 +117,12 @@ YOLOv11 在检测头的分类分支中替换了两个常规卷积层为深度可
 - 深度可分离卷积的总 MACs 约为 16.1 亿次运算
 - **计算效率提升约 7 倍**，同时精度损失控制在 0.3% 以内
 
-
-
 #### 2.3.2 边缘设备优势
 
 在分类分支中引入深度可分离卷积配合通道洗牌（Channel Shuffle）操作，能显著提升模型在边缘设备上的推理性能：
 
 - 在 Jetson AGX Orin 上，YOLOv11n 达到 1200 FPS，满足实时边缘检测需求
 - 在 Jetson Nano 上，YOLOv11n 的推理速度比 YOLOv8n 快 60%，模型体积压缩 30%
-
-
 
 ## 3. 网络架构
 
@@ -166,26 +162,20 @@ YOLOv11 的特征融合网络采用以下设计：
 
 YOLOv11 的检测头设计体现了轻量化与精准预测的平衡：
 
-1. 双分支设计
-
-   ：
+1. 双分支设计：
 
    - **回归分支**：结合标准卷积与可变形卷积，精准捕捉目标的边界信息。
    - **中心度分支**：通过 3×3 卷积 + Sigmoid 激活，专门评估预测框的中心位置准确性，在训练阶段抑制低质量框，减少误检。
-
-2. 轻量化分类头
-
-   ：
+   
+2. 轻量化分类头：
 
    - 分类分支采用深度可分离卷积（DWConv）替代标准卷积。
    - 通过通道洗牌（Channel Shuffle）操作，让不同通道的特征充分交互，弥补轻量化带来的特征多样性损失。
-
-3. 无锚框设计
-
-   ：
+   
+3. 无锚框设计：
 
    - 直接预测目标的中心点坐标和宽高偏移，摆脱了对先验锚框的依赖。
-   - 提升了对未知尺度目标的适应能力，简化了训练流程。
+- 提升了对未知尺度目标的适应能力，简化了训练流程。
 
 ### 3.5 模型规模差异
 
@@ -203,10 +193,6 @@ YOLOv11 提供五种不同规模的预训练模型（n/s/m/l/x），通过调整
 
 - 以 YOLOv11s 为例，网络深度比 YOLOv8s 增加 20%，但宽度缩减 15%，通过这种再平衡保持模型性能的同时减小体积。
 - 通过调整 `depth`（模块重复次数）、`width`（通道数比例）和 `max_channels`（最大通道数限制），实现不同规模模型的性能梯度。
-
-
-
-
 
 ## 4. Performance
 
@@ -250,8 +236,6 @@ YOLOv11 在 VisDrone 这类无人机航拍数据集上表现尤为突出，尤�
 - 这一提升主要归功于 C2PSA 模块增强的全局上下文建模能力和小目标特征提取能力。
 - YOLOv11m 在 AP₇₅ 指标上比 YOLOv8 提升了 3.5 个百分点，表明其对中等和大目标的检测能力也有所提升。
 
-
-
 ### 4.3 多硬件部署性能
 
 YOLOv11 在不同硬件平台上的推理速度表现如下：
@@ -274,16 +258,16 @@ YOLOv11 在不同硬件平台上的推理速度表现如下：
 
 YOLOv11 在多个数据集上与 SOTA 模型的对比结果：
 
-| 任务     | 模型          | AP@0.5 | 参数量 (M)   | 推理速度 (ms)  | 优势                     |
-| :------- | :------------ | :----- | :----------- | :------------- | :----------------------- |
-| 目标检测 | YOLOv11m      | 51.5   | 20.1         | 4.7            | **轻量高效、精度高**     |
-| 目标检测 | YOLOv8m       | 51.3   | 26.2         | 5.0            | 较重、精度略低           |
-| 目标检测 | YOLOv9m       | 52.0   | 25.4         | 5.5            | 较重、速度较慢           |
-| 目标检测 | YOLOv10m      | 51.3   | 25.4TRGL 4.2 | 轻量但精度略低 |                          |
-| 实例分割 | YOLOv11m-seg  | 39.5   | 22.1         | 5.5            | **统一架构、多任务支持** |
-| 实例分割 | Mask R-CNN    | 38.0   | 35.7         | 18.3           | 较重、速度慢             |
-| 姿态估计 | YOLOv11m-pose | 55.2   | 23.4         | 6.2            | **实时性能、端到端处理** |
-| 姿态估计 | HRNet         | 54.5   | 32.7         | 22.1           | 较重、速度慢             |
+| 任务     | 模型          | AP@0.5 | 参数量 (M) | 推理速度 (ms) | 优势                     |
+| :------- | :------------ | :----- | :--------- | :------------ | :----------------------- |
+| 目标检测 | YOLOv11m      | 51.5   | 20.1       | 4.7           | **轻量高效、精度高**     |
+| 目标检测 | YOLOv8m       | 51.3   | 26.2       | 5.0           | 较重、精度略低           |
+| 目标检测 | YOLOv9m       | 52.0   | 25.4       | 5.5           | 较重、速度较慢           |
+| 目标检测 | YOLOv10m      | 51.3   | 25.4       | 4.2           | 轻量但精度略低           |
+| 实例分割 | YOLOv11m-seg  | 39.5   | 22.1       | 5.5           | **统一架构、多任务支持** |
+| 实例分割 | Mask R-CNN    | 38.0   | 35.7       | 18.3          | 较重、速度慢             |
+| 姿态估计 | YOLOv11m-pose | 55.2   | 23.4       | 6.2           | **实时性能、端到端处理** |
+| 姿态估计 | HRNet         | 54.5   | 32.7       | 22.1          | 较重、速度慢             |
 
 **关键优势**：
 
@@ -299,7 +283,7 @@ YOLOv11 在多个数据集上与 SOTA 模型的对比结果：
 
 YOLOv11 推荐使用以下环境配置：
 
-```
+```bash
 # 创建虚拟环境
 conda create -n yolov11 python=3.9 -y
 conda activate yolov11
@@ -318,22 +302,18 @@ pip install ultralytics==8.3.9
 
 YOLOv11 支持多种数据集格式，包括 COCO、PASCAL VOC 和自定义数据集。以下是自定义数据集的准备步骤：
 
-1. 数据标注
-
-   ：
+1. 数据标注：
 
    - 使用 LabelMe 等工具生成 JSON 格式标注文件。
    - 对于实例分割任务，需沿目标轮廓点击描点生成多边形标注。
    - 对于目标检测任务，只需标注边界框。
-
-2. 数据集配置文件
-
-   ：
+   
+2. 数据集配置文件：
 
    - 创建 `data.yaml` 文件，定义数据集路径和类别。
-   - 示例配置：
+- 示例配置：
 
-```
+```yaml
 # data.yaml 示例
 path: /path/to/dataset/  # 数据集根目录
 train: train.txt           # 训练集图像路径列表
@@ -352,7 +332,7 @@ YOLOv11 支持通过命令行或 Python API 进行模型训练。以下是几种
 
 #### 5.2.1 命令行训练
 
-```
+```bash
 # 基础训练命令
 yolo train data=coco.yaml model=yolov11-s.yaml epochs=300 imgsz=640
 
@@ -365,7 +345,7 @@ yolo train data=visdrone.yaml model=yolov11-s.yaml epochs=200 imgsz=640 augment=
 
 #### 5.2.2 Python API 训练
 
-```
+```python
 from ultralytics import YOLO
 
 # 加载预训练模型
@@ -424,7 +404,7 @@ YOLOv11 的训练参数分为以下几类：
 
 对于小目标检测任务（如 VisDrone），可启用 Copy-Paste 数据增强：
 
-```
+```bash
 # 小目标增强训练
 yolo train data=visdrone.yaml model=yolov11-s.yaml epochs=200 imgsz=640 augment=True close_mosaic=10 hyp=data/hyps/hyp.VisDrone.yaml
 ```
@@ -439,7 +419,7 @@ yolo train data=visdrone.yaml model=yolov11-s.yaml epochs=200 imgsz=640 augment=
 
 为了减少 INT8 量化导致的精度损失，可启用量化感知训练：
 
-```
+```bash
 # 量化感知训练
 yolo train data=coco.yaml model=yolov11-s.yaml epochs=100 imgsz=640 quantize=True
 ```
@@ -454,7 +434,7 @@ yolo train data=coco.yaml model=yolov11-s.yaml epochs=100 imgsz=640 quantize=Tru
 
 YOLOv11 支持多任务联合训练，例如同时进行目标检测和实例分割：
 
-```
+```bash
 # 多任务联合训练
 yolo train data=coco-seg.yaml model=yolov11-s-seg.yaml epochs=300 imgsz=640
 ```
@@ -471,7 +451,7 @@ YOLOv11 支持多种部署格式的导出，包括 ONNX、TensorRT、CoreML、Op
 
 #### 5.5.1 ONNX 导出
 
-```
+```bash
 # 导出ONNX模型（静态输入尺寸）
 python export.py --weights runs/detect/exp/weights/best.pt --img 640 --batch 1 --format onnx
 
@@ -534,10 +514,6 @@ for result in results:
     im.save(f"bus_{result.path}.jpg")  # 保存结果
 ```
 
-
-
-
-
 #### 5.6.2 视频流处理
 
 ```python
@@ -567,8 +543,6 @@ while cap.isOpened():
 cap.release()
 cv2.destroyAllWindows()
 ```
-
-
 
 #### 5.6.3 实例分割
 
@@ -630,8 +604,6 @@ model = YOLO("best.onnx", dynamic=True)
 results640 = model("bus.jpg", imgsz=640)
 results320 = model("bus.jpg", imgsz=320)
 ```
-
-
 
 **动态输入尺寸优势**：
 - 支持不同分辨率图像输入，无需固定图像尺寸。
@@ -705,7 +677,7 @@ model.to(device).eval()
 
 ## 7. 优缺点分析
 
-**✅ 优势**
+**优势**
 
 1. **精度-效率平衡**：在保持高精度的同时，显著降低参数量和计算量，实现轻量化与高效推理的双重优势。
 2. **多任务统一架构**：一套架构支持检测、分割、姿态估计等多种任务，避免多模型部署的复杂性。
@@ -713,7 +685,7 @@ model.to(device).eval()
 4. **API 兼容性**：与 YOLOv8/v9/v10 保持相同 API 接口，迁移成本低。
 5. **计算效率高**：相比前代，参数量减少 22%，推理速度提升 15%。
 
-**⚠️ 局限**
+**局限**
 
 1. **小模型精度限制**：YOLOv11-n/s 在小目标检测上仍略逊于带 NMS 的 YOLOv9（性能差距约 1.0-0.5 AP）。
 2. **多任务扩展需定制**：多任务模型需在数据集和训练配置上进行适当调整。

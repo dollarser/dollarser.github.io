@@ -36,30 +36,172 @@ typora-copy-images-to: ..\..\img\yolo
 
 ## YOLOv1（You Only Look Once）
 
+- 官网：https://pjreddie.com/darknet/yolo/
+- 论文：https://arxiv.org/abs/1506.02640
+- 会议：CVPR 2016
+
 ### 1. 概述
 
 YOLOv1（You Only Look Once version 1）是由 Joseph Redmon 等人在 2015 年提出的实时目标检测算法，首次发表于论文《You Only Look Once: Unified, Real-Time Object Detection》。与传统两阶段检测器（如 R-CNN 系列）不同，YOLOv1 将目标检测任务视为一个**单阶段的回归问题**，直接从图像像素预测边界框和类别概率，从而实现高速检测。
 
 YOLOv1 的核心思想是：将输入图像划分为 S×S 的网格（grid cells），每个网格负责预测 B 个边界框（bounding boxes）及其置信度，以及 C 个类别概率。整个过程通过一个卷积神经网络端到端完成，仅需一次前向传播即可输出所有检测结果。
 
-------
-
 ### 2. 网络结构
 
+![0CAE7301-6E9E-4737-A93E-266283F77C54](/img/yolo/0CAE7301-6E9E-4737-A93E-266283F77C54.png)
+
 YOLOv1 使用一个定制的卷积神经网络作为骨干（backbone），其结构如下：
+
+```python
+import torch
+import torch.nn as nn
+
+class YOLOv1(nn.Module):
+    """
+    YOLOv1 目标检测模型 (原始论文结构)
+    输入: (batch, 3, 448, 448)
+    输出: (batch, 7, 7, B*5 + C)  # B=边界框数, C=类别数
+    """
+    def __init__(self, num_classes=20, num_boxes=2):
+        super(YOLOv1, self).__init__()
+        self.num_classes = num_classes
+        self.num_boxes = num_boxes
+        output_channels = num_boxes * 5 + num_classes  # 通常为 2*5+20=30
+        
+        # =============== 特征提取主干 (24个卷积层) ===============
+        self.features = nn.Sequential(
+            # Stage 1: 448 -> 224 -> 112
+            nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3),  # 448->224
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.MaxPool2d(2, 2),  # 224->112
+            
+            # Stage 2: 112 -> 56
+            nn.Conv2d(64, 192, kernel_size=3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.MaxPool2d(2, 2),  # 112->56
+            
+            # Stage 3: 56 -> 28 (含1x1降维)
+            nn.Conv2d(192, 128, kernel_size=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(128, 256, kernel_size=3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(256, 256, kernel_size=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(256, 512, kernel_size=3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.MaxPool2d(2, 2),  # 56->28
+            
+            # Stage 4: 4个(1x1 + 3x3)块 + 附加层 (保持28x28)
+            *self._make_conv_blocks(512, 256, 512, num_blocks=4),
+            nn.Conv2d(512, 512, kernel_size=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(512, 1024, kernel_size=3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.MaxPool2d(2, 2),  # 28->14
+            
+            # Stage 5: 14 -> 7 (关键尺寸压缩层)
+            nn.Conv2d(1024, 1024, kernel_size=3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(1024, 1024, kernel_size=3, stride=2, padding=1),  # 14->7
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(1024, 1024, kernel_size=3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(1024, 1024, kernel_size=3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+        )
+        
+        # =============== 检测头 (全连接层) ===============
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(7 * 7 * 1024, 4096),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Dropout(0.5),  # 论文指定 Dropout rate=0.5
+            nn.Linear(4096, 7 * 7 * output_channels)  # 输出 7x7x30
+        )
+        
+        self._initialize_weights()
+    
+    @staticmethod
+    def _make_conv_blocks(in_ch, mid_ch, out_ch, num_blocks):
+        """创建重复的 (1x1 -> 3x3) 卷积块"""
+        layers = []
+        for _ in range(num_blocks):
+            layers.extend([
+                nn.Conv2d(in_ch, mid_ch, kernel_size=1),
+                nn.LeakyReLU(0.1, inplace=True),
+                nn.Conv2d(mid_ch, out_ch, kernel_size=3, padding=1),
+                nn.LeakyReLU(0.1, inplace=True)
+            ])
+            in_ch = out_ch  # 后续块输入通道更新
+        return layers
+    
+    def _initialize_weights(self):
+        """权重初始化 (论文使用预训练分类网络，此处用标准初始化)"""
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='leaky_relu')
+                if m.bias is not None:
+                    nn.init.constant_(m.bias, 0)
+            elif isinstance(m, nn.Linear):
+                nn.init.normal_(m.weight, 0, 0.01)
+                nn.init.constant_(m.bias, 0)
+    
+    def forward(self, x):
+        """
+        前向传播
+        Args:
+            x: 输入张量 [B, 3, 448, 448]
+        Returns:
+            predictions: [B, 7, 7, (B*5 + C)]
+                每个网格预测: [x1,y1,w1,h1,conf1, x2,y2,w2,h2,conf2, cls_probs...]
+        """
+        # 验证输入尺寸 (调试用，可注释)
+        assert x.shape[2:] == (448, 448), f"Input must be 448x448, got {x.shape[2:]}"
+        
+        x = self.features(x)      # [B, 1024, 7, 7]
+        x = self.classifier(x)    # [B, 1470]
+        x = x.view(-1, 7, 7, self.num_boxes * 5 + self.num_classes)  # [B, 7, 7, 30]
+        return x
+
+
+# ==================== 使用示例与验证 ====================
+if __name__ == "__main__":
+    # 创建模型 (默认 VOC: 20类, 2个预测框)
+    model = YOLOv1(num_classes=20, num_boxes=2)
+    model.eval()
+    
+    # 模拟输入 (batch=2)
+    dummy_input = torch.randn(2, 3, 448, 448)
+    
+    # 前向传播
+    with torch.no_grad():
+        output = model(dummy_input)
+    
+    # 验证输出形状
+    print(f"Input shape:  {dummy_input.shape}")   # torch.Size([2, 3, 448, 448])
+    print(f"Output shape: {output.shape}")        # torch.Size([2, 7, 7, 30])
+    
+    # 验证输出内容范围 (confidence 和 坐标应在合理范围)
+    print(f"Confidence min/max: {output[..., 4].min():.4f} / {output[..., 4].max():.4f}")
+    print(f"Class prob min/max: {output[..., -1].min():.4f} / {output[..., -1].max():.4f}")
+    
+    # 可选：计算参数量
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"Total parameters: {total_params / 1e6:.2f}M")
+```
 
 - 输入尺寸：448 × 448 × 3（RGB 图像）
 - 卷积层：24 个卷积层，用于提取特征
   - 前 20 层使用 3×3 和 1×1 卷积交替堆叠
   - 后 4 层为高维特征提取层
-- 全连接层：2 个全连接层（4096 → 1470）
+- 全连接层：2 个全连接层（4096 →  7 × 7 × 30）
 - 输出维度：S × S × (B × 5 + C)
+  - S是网格（特征图）尺寸，B是每个网格预测的bbox数，5是每个bbox需要预测的值，C是类别数
   - 默认参数：S = 7, B = 2, C = 20（PASCAL VOC 数据集）
   - 输出大小：7 × 7 × (2 × 5 + 20) = 7 × 7 × 30 = 1470
+  
 
 > 注：5 表示每个边界框包含 5 个值：(x, y, w, h, confidence)
-
-------
 
 ### 3. 预测机制
 
@@ -74,7 +216,7 @@ YOLOv1 使用一个定制的卷积神经网络作为骨干（backbone），其�
 - 每个边界框包含：
   - 中心坐标 (x, y)：相对于当前网格左上角的偏移（归一化到 [0,1]）
   - 宽高 (w, h)：相对于整张图像的宽高（归一化）
-  - 置信度（confidence）：Pr(Object) × IOU_{pred}^{truth}
+  - 置信度（confidence）：$Pr(Object) × IoU_{pred}^{truth}$
     - 若无物体，置信度为 0
     - 若有物体，置信度为预测框与真实框的 IoU
 
@@ -87,7 +229,7 @@ YOLOv1 使用一个定制的卷积神经网络作为骨干（backbone），其�
 
 - 对每个边界框计算类别置信度：
   $$
-  \text{Class-Specific Confidence} = \text{Pr(Class}_i|\text{Object)} \times \text{Confidence}
+  \text{Class-Specific Confidence} = \text{Pr(Class}_i|\text{Object)} \times \text{Confidence} = \text{Pr(Class}_i|\text{Object)} \times Pr(Object) \times IoU_{pred}^{truth}
   $$
 
 - 使用非极大值抑制（NMS）去除冗余检测框
@@ -98,14 +240,16 @@ YOLOv1 使用多任务损失函数，统一回归边界框、置信度和类别�
 $$
 \mathcal{L} = \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} \left[ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 \right] \\
 + \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} \left[ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2 \right] \\
+
 + \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} (C_i - \hat{C}_i)^2 \\
 + \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{noobj}} (C_i - \hat{C}_i)^2 \\
+
 + \sum_{i=0}^{S^2} \mathbb{1}_{i}^{\text{obj}} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2
 $$
 其中：
 
 - $\mathbb{1}_{ij}^{\text{obj}}$ ：第 i 个网格的第 j 个边界框是否负责预测某个真实物体（即该物体中心落在该网格中）
-- $\mathbb{1}_{ij}^{\text{noobj}}$：反之
+- $\mathbb{1}_{ij}^{\text{noobj}}$：没有包含物体的网格（即物体中心没有落到的网格中）
 - $\lambda_{\text{coord}} = 5$：加大定位误差权重
 - $\lambda_{\text{noobj}} = 0.5$：降低无物体时的置信度误差权重
 - 对 w、h 使用平方根是为了对小框的误差给予更高惩罚
@@ -135,8 +279,6 @@ $$
 
 > 虽然 mAP 低于两阶段方法，但速度优势显著。
 
----
-
 ### 7. 总结
 
 YOLOv1 开创了单阶段目标检测的先河，其“将检测视为回归问题”的思想影响深远。尽管存在定位不准、漏检等问题，但它为后续 YOLOv2/v3/v4/v5/v8 等高效检测器奠定了基础。YOLO 系列至今仍是工业界最广泛使用的实时目标检测框架之一。
@@ -149,7 +291,7 @@ YOLOv1 开创了单阶段目标检测的先河，其“将检测视为回归问�
 
 ### 1. 概述
 
- YOLOv2（又称 YOLO9000）由 Joseph Redmon 和 Ali Farhadi 于 2016 年提出，发表在论文《YOLO9000: Better, Faster, Stronger》中。YOLOv2 在 YOLOv1 的基础上进行了多项关键改进，显著提升了检测精度和速度，同时引入了联合训练策略，使其能够检测超过 9000 种物体类别。
+YOLOv2（又称 YOLO9000）由 Joseph Redmon 和 Ali Farhadi 于 2016 年提出，发表在论文《YOLO9000: Better, Faster, Stronger》中。YOLOv2 在 YOLOv1 的基础上进行了多项关键改进，显著提升了检测精度和速度，同时引入了联合训练策略，使其能够检测超过 9000 种物体类别。
 
 YOLOv2 的设计目标是：**在保持实时性的同时，提高检测准确率，并扩展到更大规模的类别集合**。它通过引入一系列工程与算法优化，在 PASCAL VOC 和 COCO 等基准上实现了优于 Faster R-CNN 的性能，同时推理速度更快。
 
@@ -379,8 +521,6 @@ YOLOv3 的损失函数包含三部分：
 
 > 注意：YOLOv3 **不再使用 YOLOv1 中的 λ_coord 权重**，因 anchor 提供了良好初始化。
 
----
-
 ## 8. 性能表现（COCO test-dev）
 
 | 模型 | mAP@0.5 | mAP@[0.5:0.95] | 推理速度（Titan X） |
@@ -452,8 +592,6 @@ YOLOv4 并未提出全新网络结构，而是通过以下方式实现性能突�
 - **SPP（Spatial Pyramid Pooling）模块**：融合多尺度上下文信息，增强感受野
 - **PANet（Path Aggregation Network）**：自底向上 + 自顶向下路径融合，强化特征金字塔
 
-
-
 ### 3. 网络架构
 
 YOLOv4 整体结构分为三部分：
@@ -502,8 +640,6 @@ YOLOv4 整体结构分为三部分：
 - 第一阶段：正常训练
 - 第二阶段：固定网络，**对输入图像进行对抗扰动**，使网络“自我欺骗”
 - 提升模型鲁棒性，尤其对遮挡和噪声
-
-
 
 ### 5. 训练策略
 
@@ -560,7 +696,7 @@ YOLOv5 由 **Ultralytics** 团队于 2020 年 6 月首次开源发布，是 YOLO
 
 YOLOv5 的核心优势在于：**PyTorch 原生实现、模块化设计、训练/部署一体化、支持多平台导出（ONNX、TensorRT、CoreML 等）**，使其迅速成为工业界最常用的目标检测框架之一。它在保持与 YOLOv4 相当精度的同时，显著简化了使用流程，并提供了灵活的模型缩放策略。
 
-> ⚠️ 注意：YOLOv5 并非 Joseph Redmon 或 Alexey Bochkovskiy 官方作品，而是社区驱动的高质量实现。
+> 注意：YOLOv5 并非 Joseph Redmon 或 Alexey Bochkovskiy 官方作品，而是社区驱动的高质量实现。
 
 
 ### 2. 核心特点
@@ -910,7 +1046,7 @@ YOLOv8 由 **Ultralytics** 团队于 2023 年 1 月正式发布，是 YOLO 系�
 
 YOLOv8 的核心理念是：**简化工作流、提升精度、强化部署能力**。通过 Anchor-Free 架构、任务对齐分配器、解耦检测头等创新，在 COCO、Objects365 等基准上实现 SOTA 性能，同时提供极致友好的 Python API 与 CLI 工具链，成为当前工业界部署最广泛的目标检测框架之一。
 
-> 💡 注：YOLOv8 无学术论文，技术细节源自官方文档、源码及社区验证。
+> 注：YOLOv8 无学术论文，技术细节源自官方文档、源码及社区验证。
 
 ### 2. 核心创新
 
@@ -948,8 +1084,6 @@ YOLOv8 的核心理念是：**简化工作流、提升精度、强化部署能�
 
 > 分割任务：在 Head 增加 **Mask Proto Head**，输出原型掩码 + 系数  
 > 姿态任务：增加 **关键点回归分支**（x, y, visibility）
-
----
 
 ### 4. 关键技术详解
 
@@ -1024,13 +1158,11 @@ YOLOv8 的核心理念是：**简化工作流、提升精度、强化部署能�
 
 ####  局限
 
-- 大模型（x）对显存要求高（训练需 24GB+）
+- 大模型（X）对显存要求高（训练需 24GB+）
 - Anchor-Free 对极端长宽比目标泛化略弱于 Anchor-Based
 - 无官方学术论文，部分设计细节需源码验证
 
 ### 9. 与 YOLO 系列对比
-
-
 
 | 特性       | YOLOv5 | YOLOv6 | YOLOv7  | **YOLOv8**                     |
 | :--------- | :----- | :----- | :------ | :----------------------------- |
@@ -1059,8 +1191,6 @@ YOLOv9 由 **Alexey Bochkovskiy 团队**（YOLOv4/v7 作者）与 **Chien-Yao Wa
 
 YOLOv9 的核心理念是：**让网络“学会学习”**——通过设计可传递完整梯度信息的架构，使浅层特征也能获得高质量监督信号，显著提升小目标检测与密集场景表现，同时避免传统深度监督（Deep Supervision）带来的信息损耗。
 
----
-
 ## 2. 核心创新
 
 | 技术 | 说明 |
@@ -1070,8 +1200,6 @@ YOLOv9 的核心理念是：**让网络“学会学习”**——通过设计可
 | **CSP-ELAN 模块** | 跨阶段部分连接 + ELAN，增强梯度流，减少重复计算 |
 | **新型模型缩放策略** | 针对 GELAN 架构设计深度/宽度/分辨率联合缩放规则 |
 | **轻量级辅助头设计** | 仅训练时启用，推理零开销，强化梯度传播 |
-
----
 
 ## 3. 网络架构
 
@@ -1107,8 +1235,6 @@ Input → [GELAN Backbone] → [Enhanced PAN Neck] → [Task-Specific Heads]
   - 分割/姿态：扩展专用 Head（社区实现）
 - 输出：分类分数 + 边界框（DFL 回归）
 
----
-
 ## 4. 关键技术详解
 
 ### 4.1 可编程梯度信息（PGI）
@@ -1132,8 +1258,6 @@ Input → [GELAN Backbone] → [Enhanced PAN Neck] → [Task-Specific Heads]
   - 宽度缩放：按比例调整通道数（遵循通道对齐原则）
   - 分辨率缩放：320 → 1280 动态适配
 - 衍生模型：YOLOv9-T/S/M/C/E（C: Compact, E: Extra-large）
-
----
 
 ## 5. 性能表现（COCO test-dev）
 
@@ -1169,14 +1293,12 @@ Input → [GELAN Backbone] → [Enhanced PAN Neck] → [Task-Specific Heads]
 - **PGI 启用**：仅训练阶段激活辅助路径
 - **硬件要求**：YOLOv9-E 建议 48GB+ GPU 显存
 
-- 支持格式：ONNX, TensorRT, OpenVINO, CoreML, TFLite
-- 推理库：提供 C++/Python SDK（含预处理/后处理）
-
-------
+- **支持格式**：ONNX, TensorRT, OpenVINO, CoreML, TFLite
+- **推理库**：提供 C++/Python SDK（含预处理/后处理）
 
 ## 7. 优缺点分析
 
-### ✅ 优势
+### 优势
 
 - **突破信息瓶颈**：PGI 使浅层特征获得高质量监督，小目标检测显著提升
 - **架构通用性强**：GELAN 可适配多种硬件与计算单元
@@ -1184,7 +1306,7 @@ Input → [GELAN Backbone] → [Enhanced PAN Neck] → [Task-Specific Heads]
 - **训练-推理解耦**：辅助路径零推理开销
 - **开源完整**：官方提供 PyTorch 训练代码 + 多平台部署方案
 
-### ⚠️ 局限
+### 局限
 
 - 训练复杂度高（需管理辅助路径）
 - 大模型（E）对训练资源要求苛刻
@@ -1202,9 +1324,7 @@ Input → [GELAN Backbone] → [Enhanced PAN Neck] → [Task-Specific Heads]
 
 > △：辅助头提供监督但未解决梯度稀释；✓：PGI 主动重构高质量梯度回传路径
 
-------
-
-## 10. 总结 
+## 10. 总结
 
 YOLOv9 是 YOLO 系列中**首次从信息理论层面重构检测架构**的里程碑工作。它不再局限于模块堆叠或训练技巧优化，而是直面深度网络的根本挑战——**信息瓶颈**，通过 PGI 技术让网络“学会传递有效学习信号”，实现精度与效率的双重飞跃。
 
