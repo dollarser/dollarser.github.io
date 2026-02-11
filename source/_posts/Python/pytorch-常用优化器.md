@@ -1,17 +1,16 @@
 ---
-title: pytorch-优化器算法
+title: pytorch-常用优化器
 date: 2024-05-14 14:24:00
 toc: true
 tags:
  - PyTorch
- - 深度学习
+ - optimizer
+ - SGD
+ - Adam
+ - AdamW
 typora-root-url: ..
 typora-copy-images-to: ../img/pytorch
 ---
-
-# 优化器算法
-
-
 
 [TOC]
 
@@ -212,3 +211,8 @@ $$\theta_t = \theta_{t-1} -\gamma \hat{m_t}/(\sqrt {\hat v_t} + \epsilon)$$
 
 相当于动量系数$\beta_1$为0的Adam，根据参数之前的梯度作为当前参数的权重
 
+
+
+
+
+## 4. Muon

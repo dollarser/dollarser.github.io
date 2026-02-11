@@ -56,6 +56,7 @@ YOLOv1 使用一个定制的卷积神经网络作为骨干（backbone），其�
 import torch
 import torch.nn as nn
 
+
 class YOLOv1(nn.Module):
     """
     YOLOv1 目标检测模型 (原始论文结构)
@@ -246,6 +247,26 @@ $$
 
 + \sum_{i=0}^{S^2} \mathbb{1}_{i}^{\text{obj}} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2
 $$
+
+
+边界框损失（中心坐标和宽高）：
+$$
+\mathcal{L}_{reg} = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} \left[ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 \right] \\
+
++ \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} \left[ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2 \right]
+$$
+置信度损失：
+$$
+\mathcal{L}_{class} = \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{obj}} (C_i - \hat{C}_i)^2 \\
+
++ \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^{B} \mathbb{1}_{ij}^{\text{noobj}} (C_i - \hat{C}_i)^2
+$$
+类别概率损失：
+$$
+\mathcal{L}_{class} = \sum_{i=0}^{S^2} \mathbb{1}_{i}^{\text{obj}} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2
+$$
+
+
 其中：
 
 - $\mathbb{1}_{ij}^{\text{obj}}$ ：第 i 个网格的第 j 个边界框是否负责预测某个真实物体（即该物体中心落在该网格中）
@@ -386,7 +407,8 @@ YOLOv2 的损失函数继承自 YOLOv1，但适配了 anchor 机制：
 - 分类损失：仅当网格包含物体时计算
 - 不再使用平方根处理 w/h，因 anchor 已提供合理初始值
 
-### 8. 性能对比（PASCAL VOC 2007） 
+### 8. 性能对比（PASCAL VOC 2007）
+
 | 方法         | mAP (%) | 推理速度 (FPS) | 输入尺寸 |
 |--------------|--------|----------------|----------|
 | YOLOv1       | 63.4   | 45             | 448×448  | 

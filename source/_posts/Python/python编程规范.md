@@ -1,10 +1,11 @@
 ---
-title: python编程规范
+title: Python编程规范
 date: 2025-08-28 12:00:00
 tags:
- - cs
-typora-root-url: ..
-typora-copy-images-to: ../img/python
+ - CS
+ - python
+typora-root-url: ../..
+typora-copy-images-to: ../../img/python
 ---
 
 Python 作为一门强调“可读性”和“简洁性”的语言，拥有非常完善的**代码规范与最佳实践体系**。遵循主流规范不仅能提升代码质量，还能增强团队协作效率。

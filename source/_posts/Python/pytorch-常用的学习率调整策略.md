@@ -1,16 +1,13 @@
 ---
-title: pytorch 常用的学习率调整策略 [lr_scheduler]
+title: pytorch 常用的学习率调整策略
 date: 2024-05-11 10:07:00
 tags:
  - PyTorch
  - 深度学习
-typora-root-url: ..
-typora-copy-images-to: ../img/pytorch
+ - lr_scheduler
+typora-root-url: ../..
+typora-copy-images-to: ../../img/pytorch
 ---
-
-
-
-# PyTorch 常用的学习率调整策略 [lr_scheduler]
 
 
 

@@ -5,8 +5,8 @@ tags:
  - CS
  - python
 
-typora-root-url: ..
-typora-copy-images-to: ..\img\python
+typora-root-url: ../..
+typora-copy-images-to: ../../img/python
 
 ---
 

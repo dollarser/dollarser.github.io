@@ -4,8 +4,8 @@ date: 2024-05-20 20:00:00
 tags:
  - python
  - 深度学习
-typora-root-url: ..
-typora-copy-images-to: ../img/python
+typora-root-url: ../..
+typora-copy-images-to: ../../img/python
 ---
 
 

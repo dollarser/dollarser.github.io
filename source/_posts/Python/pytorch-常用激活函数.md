@@ -1,16 +1,14 @@
 ---
-title: pytorch-激活函数
+title: pytorch-常用激活函数
 date: 2025-08-5 10:14:00
 tags:
  - PyTorch
  - 深度学习
-typora-root-url: ..
-typora-copy-images-to: ../img/pytorch
+typora-root-url: ../..
+typora-copy-images-to: ../../img/pytorch
 ---
 
 
-
-# 常用的激活函数介绍
 
 激活函数的原则：
 
