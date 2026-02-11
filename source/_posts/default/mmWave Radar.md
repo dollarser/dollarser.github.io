@@ -3,7 +3,7 @@ title: 毫米波雷达
 date: 2021-10-07 13:19:00
 tags:
  - mmWave
- - other
+ - 入门实践
 typora-root-url: ..
 typora-copy-images-to: ..\img\mmWave
 ---

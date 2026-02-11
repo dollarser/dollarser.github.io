@@ -2,7 +2,7 @@
 title: VS Code 常用快捷键
 date: 2025-08-27 12:00:00
 tags:
- - CS
+ - 入门实践
 typora-root-url: ..
 typora-copy-images-to: ..\img
 ---

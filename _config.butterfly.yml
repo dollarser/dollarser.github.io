@@ -21,17 +21,30 @@ nav:
 # https://www.runoob.com/font-awesome/fontawesome-icons-brand.html
 menu:
   首页: / || fas fa-home
-  算法: /algorithm/ || fas fa-code
-  数据结构: /data-structure/ || fas  fa-terminal
-  操作系统: /operation-system/ || fas fa-desktop
-  计算机组成原理: /computer-composition/ || fas fa-microchip
-  计算机网络: /network/ || fas fa-network-wired
-  入门实践: /practice/ || fas fa-keyboard
-  随笔: /essay/ || fas fa-edit
-  踩坑记录: /bug/ || fas fa-bug
-  List||fas fa-list:
-    Music: /music/ || fas fa-music
-    Movie: /movies/ || fas fa-video
+
+  # 踩坑记录: /bug/ || fas fa-bug
+  # practice
+  入门实践: /tags/入门实践/ || fas fa-keyboard
+  # essay
+  随笔: /tags/随笔/ || fas fa-edit
+  论文解读: /tags/paper/ || fal fa-paperclip
+
+  计算机 || fas fa-book:
+    算法: /algorithm/ || fas fa-code
+    数据结构: /data-structure/ || fas fa-terminal
+    操作系统: /operation-system/ || fas fa-desktop
+    计算机组成原理: /computer-composition/ || fas fa-microchip
+    计算机网络: /network/ || fas fa-network-wired
+
+  页面 || fas fa-book:
+    归档: /archives/ || fas fa-archive
+    标签: /tags/ || fas fa-tags
+    分类: /categories/ || fas fa-folder-open
+
+  编程语言 || fas fa-list:
+    Java: /tags/Java/ || fas fa-music
+    Python: /tags/Python/ || fas fa-video
+  
 
 # --------------------------------------
 # Code Blocks Settings
