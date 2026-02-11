@@ -4,7 +4,7 @@ date: 2026-02-10 17:00:00
 toc: true
 tags:
  - PyTorch
- - muon
+ - Muon
 typora-root-url: ../..
 typora-copy-images-to: ../../img/pytorch
 ---

@@ -4,8 +4,8 @@ date: 2020-03-13 12:00:00
 tags:
  - 入门实践
  - 配置相关
-typora-root-url: ..
-typora-copy-images-to: ..\img
+typora-root-url: ../..
+typora-copy-images-to: ../../img
 ---
 
 ### 图像插入设置
@@ -19,11 +19,16 @@ typora-copy-images-to: ..\img
 + 设置图像根目录
   
   + 以hexo根目录下的source文件夹为例
+  
   + 该文件夹中的内容会上传至web根目录，因此此文件相当于网站的根目录
+  
   + 而文章所在目录为source文件夹下的_post文件夹, 根目录在文章的上级目录
+  
   + 因此设置图片根目录为`..`
+  
   + 既在标题栏添加此内容：`typora-root-url: ..`
-  + ![typera_setting2](/img/typera_setting2.JPG)
+  
+    ![typera_setting2](/img/default/typera_setting2.JPG)
   
   + 设置图片目录
   
