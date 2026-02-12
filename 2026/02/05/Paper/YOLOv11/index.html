@@ -1,0 +1,1063 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>YOLOv11技术文档 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 1.概述 YOLOv11 是 Ultralytics 公司于 2024年9月30日正式发布的新一代目标检测框架。作为 YOLO 系列的第11代迭代，YOLOv11 在保持与 YOLOv8&#x2F;v9&#x2F;v10 高度兼容的 API 设计基础上，通过三大核心技术创新实现了精度与效率的双重突破：在 COCO 数据集上 mAP 指标平均提升 2-3 个百分点，同时推理速度提升约 15%，参数量减少 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YOLOv11技术文档">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2026/02/05/Paper/YOLOv11/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="[TOC] 1.概述 YOLOv11 是 Ultralytics 公司于 2024年9月30日正式发布的新一代目标检测框架。作为 YOLO 系列的第11代迭代，YOLOv11 在保持与 YOLOv8&#x2F;v9&#x2F;v10 高度兼容的 API 设计基础上，通过三大核心技术创新实现了精度与效率的双重突破：在 COCO 数据集上 mAP 指标平均提升 2-3 个百分点，同时推理速度提升约 15%，参数量减少 2">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2026-02-05T07:32:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.980Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="CV">
+<meta property="article:tag" content="Detection">
+<meta property="article:tag" content="YOLO">
+<meta property="article:tag" content="paper">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "YOLOv11技术文档",
+  "url": "http://blog.sunlingzhang.com/2026/02/05/Paper/YOLOv11/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2026-02-05T07:32:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.980Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2026/02/05/Paper/YOLOv11/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'YOLOv11技术文档',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">YOLOv11技术文档</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">YOLOv11技术文档</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-05T07:32:00.000Z" title="Created 2026-02-05 15:32:00">2026-02-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.980Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>[TOC]</p>
+<h2 id="1-概述">1.概述</h2>
+<p>YOLOv11 是 Ultralytics 公司于 <strong>2024年9月30日</strong>正式发布的新一代目标检测框架。作为 YOLO 系列的第11代迭代，YOLOv11 在保持与 YOLOv8/v9/v10 高度兼容的 API 设计基础上，通过三大核心技术创新实现了<strong>精度与效率的双重突破</strong>：在 COCO 数据集上 mAP 指标平均提升 2-3 个百分点，同时推理速度提升约 15%，参数量减少 22%。</p>
+<p>YOLOv11 的核心定位是**“面向复杂场景的轻量化实时检测”**，特别针对小目标检测、遮挡目标识别和密集场景分析进行了深度优化。其创新设计包括：</p>
+<ol>
+<li><strong>C3k2结构</strong>：替代 YOLOv8 的 C2f 模块，通过参数 c3k 控制浅层网络特性，优化计算效率。</li>
+<li><strong>新增C2PSA模块</strong>：在传统 C2 结构中嵌入位置敏感注意力机制（PSA），增强全局上下文建模能力。</li>
+<li><strong>深度可分离卷积应用</strong>：在分类分支中替换标准卷积为 DWConv，减少参数量 40%，降低显存占用 30%。</li>
+<li><strong>模型结构调整</strong>：通过调整 depth、width、max_channels 的比例参数，实现不同规模模型的性能平衡。</li>
+</ol>
+<p>YOLOv11 提供五种不同规模的预训练模型（n/s/m/l/x），从轻量级边缘设备到高性能GPU服务器均有覆盖，满足全场景部署需求。同时，YOLOv11 延续了 YOLOv8/v9/v10 的多任务统一框架特性，支持目标检测、实例分割、图像分类、姿态估计和旋转框检测等任务，实现一套架构解决多种视觉任务。</p>
+<p><strong>与前代YOLO模型相比</strong>，YOLOv11 在保持与 YOLOv8/v9/v10 相同 API 兼容性的同时，实现了精度与效率的显著提升。例如，YOLOv11m 在 COCO 数据集上 mAP@0.5 达 51.5%，参数量 20.1M，T4 GPU 推理速度 4.7ms，相比 YOLOv8m 提升约 3-5% 的 mAP，同时减少 22% 的参数量。这种技术演进使 YOLOv11 成为当前工业界和学术界广泛应用的实时检测框架。</p>
+<blockquote>
+<h4 id="关键结论-YOLOv11m-性能">关键结论: YOLOv11m 性能</h4>
+<p>YOLOv11m 在 COCO 数据集上 mAP@0.5 达 <strong>51.5%</strong>，参数量仅 <strong>20.1M</strong>，T4 GPU 推理速度 <strong>4.7ms</strong>，相比 YOLOv8m 提升约 3-5% 的 mAP，同时减少 22% 的参数量。</p>
+</blockquote>
+<h2 id="2-核心创新">2.核心创新</h2>
+<h3 id="2-1-C3k2模块">2.1 C3k2模块</h3>
+<p>C3k2 是 YOLOv11 对 YOLOv8 的 C2f 模块的重大改进，通过优化特征融合路径和瓶颈设计，在计算效率与特征表达能力之间取得了完美平衡。</p>
+<h4 id="2-1-1-结构原理">2.1.1 结构原理</h4>
+<p>C3k2 模块继承自 C2f 结构并进行了关键改进：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># C3k2模块核心实现（基于Ultralytics代码库）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C3k2</span>(<span class="title class_ inherited__">C2f</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;C3k2 module with 2 convolutions and k=2 bottlenecks.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, c1, c2, n=<span class="number">1</span>, shortcut=<span class="literal">False</span>, g=<span class="number">1</span>, e=<span class="number">0.5</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(c1, c2, n, shortcut, g, e)</span><br><span class="line">        <span class="variable language_">self</span>.m = nn.ModuleList(Bottleneck(<span class="variable language_">self</span>.c, <span class="variable language_">self</span>.c, shortcut, g, k=((<span class="number">3</span>,<span class="number">3</span>), (<span class="number">3</span>,<span class="number">3</span>)), e=<span class="number">1.0</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n))</span><br></pre></td></tr></table></figure>
+<p>C3k2 模块的核心创新包括：</p>
+<ul>
+<li><strong>双通道并行结构</strong>：将输入特征分为两路，一路通过多级 C3k 处理，一路直连，形成更丰富的特征融合路径。</li>
+<li><strong>k=2 瓶颈设计</strong>：采用两个连续 3×3 卷积的 Bottleneck 结构，增强局部特征提取能力。</li>
+<li><strong>动态扩展比</strong>：通过参数 e 控制隐藏通道数（self.c = int(c2 * e)），实现精度与速度的灵活调配。</li>
+</ul>
+<h4 id="2-1-2-性能优势">2.1.2 性能优势</h4>
+<p>C3k2 模块在相同 FLOPs 下，比 YOLOv8 的 C3 模块提升 1.5–2.0 mAP。其优势主要体现在：</p>
+<ul>
+<li><strong>计算效率优化</strong>：通过双分支设计减少冗余计算，使推理速度提升约 15%。</li>
+<li><strong>特征表达能力增强</strong>：直连路径保留浅层信息，深度处理路径提取深层特征，输出融合特征具有更丰富的信息表达能力。</li>
+<li><strong>轻量化特性</strong>：通过参数 e 控制通道数，实现模型大小与性能的灵活平衡。</li>
+</ul>
+<h3 id="2-2-C2PSA模块">2.2 C2PSA模块</h3>
+<p>C2PSA（Cross-Channel Partial Spatial Attention） 是 YOLOv11 引入的创新模块，旨在通过引入位置敏感注意力机制增强特征提取和处理能力，尤其在复杂场景和小目标检测中表现显著。</p>
+<h4 id="2-2-1-模块组成">2.2.1 模块组成</h4>
+<p>C2PSA 模块由两个关键分支组成：</p>
+<ol>
+<li>
+<p><strong>通道注意力分支</strong>：</p>
+<ul>
+<li>输入特征图经过全局平均池化（Global Average Pooling, GAP）和全连接层，生成一组通道权重向量。</li>
+<li>这些权重用于重新调整原始特征图中各通道的重要性，突出显示重要的语义信息。</li>
+</ul>
+</li>
+<li>
+<p><strong>空间金字塔分支</strong>：</p>
+<ul>
+<li>使用多个并行的空间金字塔池化层捕获多尺度的空间信息。</li>
+<li>每一级池化的输出会被展平并通过激活函数映射回原特征图维度。</li>
+<li>通过可学习位置编码（positional encoding）增强空间先验，使模型能够更有效地捕捉图像中关键区域。</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-2-2-设计动机">2.2.2 设计动机</h4>
+<p>C2PSA 解决了传统注意力机制的三大痛点：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">传统方案痛点</th>
+<th style="text-align:left">C2PSA 解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">通道注意力只建模全局均值，丢失局部结构</td>
+<td style="text-align:left">引入 3×3 分组卷积，显式挖掘局部跨通道相关性</td>
+</tr>
+<tr>
+<td style="text-align:left">空间注意力对位置不敏感，难以区分&quot;哪里重要&quot;</td>
+<td style="text-align:left">引入可学习位置编码，增强空间先验</td>
+</tr>
+<tr>
+<td style="text-align:left">模块太重，边缘端难以部署</td>
+<td style="text-align:left">全部操作基于 1×1 和 3×3 卷积，无矩阵乘法，保持 O(n) 复杂度</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-2-3-性能提升">2.2.3 性能提升</h4>
+<p>C2PSA 模块在几乎不增加计算开销的情况下（+0.6% FLOPs），将 mAP 提升 1.5～2.3 个百分点。在 VisDrone 这类无人机航拍数据集中，YOLOv11 对小于 32×32 像素的目标检测 APₛ 达到了 41.7%，相比 YOLOv8 提升了 6.2 个百分点。</p>
+<blockquote>
+<h4 id="关键结论-小目标检测">关键结论: 小目标检测</h4>
+<p>在 VisDrone 数据集中，YOLOv11 对小于 32×32 像素的目标检测 APₛ 达到了 <strong>41.7%</strong>，相比 YOLOv8 提升了 <strong>6.2</strong> 个百分点。</p>
+</blockquote>
+<h3 id="2-3-深度可分离卷积（DWConv）应用">2.3 深度可分离卷积（DWConv）应用</h3>
+<p>YOLOv11 在检测头的分类分支中替换了两个常规卷积层为深度可分离卷积，这一设计使得参数量减少约 40%，实测显存占用降低 30% 以上，特别适合移动端部署场景。</p>
+<h4 id="2-3-1-技术原理">2.3.1 技术原理</h4>
+<p>深度可分离卷积将标准卷积分解为两个独立步骤：</p>
+<ol>
+<li><strong>深度卷积</strong>：对输入特征图的每个通道单独应用一个卷积核，仅提取空间特征。</li>
+<li><strong>点卷积</strong>：通过 1×1 卷积整合深度卷积输出的通道特征，实现跨通道的特征交互。</li>
+</ol>
+<p>这种拆分能显著减少乘加运算（MACs）的数量。以输入张量为 640×640×3、卷积核大小 3×3、输出通道 32 为例：</p>
+<ul>
+<li>标准卷积的总 MACs 约为 113 亿次运算</li>
+<li>深度可分离卷积的总 MACs 约为 16.1 亿次运算</li>
+<li><strong>计算效率提升约 7 倍</strong>，同时精度损失控制在 0.3% 以内</li>
+</ul>
+<h4 id="2-3-2-边缘设备优势">2.3.2 边缘设备优势</h4>
+<p>在分类分支中引入深度可分离卷积配合通道洗牌（Channel Shuffle）操作，能显著提升模型在边缘设备上的推理性能：</p>
+<ul>
+<li>在 Jetson AGX Orin 上，YOLOv11n 达到 1200 FPS，满足实时边缘检测需求</li>
+<li>在 Jetson Nano 上，YOLOv11n 的推理速度比 YOLOv8n 快 60%，模型体积压缩 30%</li>
+</ul>
+<h2 id="3-网络架构">3. 网络架构</h2>
+<h3 id="3-1-整体框架">3.1 整体框架</h3>
+<p>YOLOv11 的网络架构遵循 YOLO 系列的传统设计，但通过模块级创新实现了性能提升：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Input → [C3k2 backbone] → [SPPF + C2PSA] → [PANet++ neck] → [Task-Specific Heads]</span><br></pre></td></tr></table></figure>
+<p>网络架构的主要创新点：</p>
+<ul>
+<li><strong>Backbone</strong>：采用 C3k2 模块替代 YOLOv8 的 C2f 模块，优化浅层网络特征提取能力</li>
+<li><strong>Neck</strong>：在 SPPF 后新增 C2PSA 模块，增强全局上下文建模能力</li>
+<li><strong>Head</strong>：在分类分支中采用深度可分离卷积（DWConv），减少参数量和计算量</li>
+<li><strong>多任务扩展</strong>：支持目标检测、实例分割、图像分类、姿态估计和旋转框检测等多种任务</li>
+</ul>
+<h3 id="3-2-骨干网络（Backbone）">3.2 骨干网络（Backbone）</h3>
+<p>YOLOv11 的骨干网络基于改进的 CSPDarknet，关键改进包括：</p>
+<ol>
+<li><strong>C3k2 模块堆叠</strong>：在不同阶段堆叠 C3k2 模块，如 YOLOv11n 在 P2 阶段堆叠 2 ayer C3k2，P3 阶段堆叠 2 层，P4 阶段堆叠 2 层，P5 阶段堆叠 2 层。</li>
+<li><strong>C2PSA 模块插入</strong>：在 SPPF 模块后插入 C2PSA 模块，增强全局上下文建模能力。</li>
+<li><strong>通道解耦下采样</strong>：将空间降采样（stride=2 卷积）与通道扩展操作分离，先通过小核卷积压缩通道，再单独执行下采样，减少计算冗余。</li>
+<li><strong>移除冗余层</strong>：如初始 6×6 卷积层，替换为 3×3 卷积，减少早期计算开销。</li>
+</ol>
+<h3 id="3-3-特征融合网络（Neck）">3.3 特征融合网络（Neck）</h3>
+<p>YOLOv11 的特征融合网络采用以下设计：</p>
+<ol>
+<li><strong>增强版 PANet（PANet++）</strong>：在保留双向特征融合的基础上，引入自适应拼接模块，减少信息递归损失。</li>
+<li><strong>动态权重分配</strong>：在跨尺度连接中使用可学习的动态权重，优化不同尺度特征的融合比例。</li>
+<li><strong>C2PSA 模块增强</strong>：在 SPPF 后插入 C2PSA 模块，通过通道-空间双分支注意力机制，增强全局上下文建模能力。</li>
+</ol>
+<h3 id="3-4-检测头（Head）">3.4 检测头（Head）</h3>
+<p>YOLOv11 的检测头设计体现了轻量化与精准预测的平衡：</p>
+<ol>
+<li>
+<p>双分支设计：</p>
+<ul>
+<li><strong>回归分支</strong>：结合标准卷积与可变形卷积，精准捕捉目标的边界信息。</li>
+<li><strong>中心度分支</strong>：通过 3×3 卷积 + Sigmoid 激活，专门评估预测框的中心位置准确性，在训练阶段抑制低质量框，减少误检。</li>
+</ul>
+</li>
+<li>
+<p>轻量化分类头：</p>
+<ul>
+<li>分类分支采用深度可分离卷积（DWConv）替代标准卷积。</li>
+<li>通过通道洗牌（Channel Shuffle）操作，让不同通道的特征充分交互，弥补轻量化带来的特征多样性损失。</li>
+</ul>
+</li>
+<li>
+<p>无锚框设计：</p>
+<ul>
+<li>直接预测目标的中心点坐标和宽高偏移，摆脱了对先验锚框的依赖。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>提升了对未知尺度目标的适应能力，简化了训练流程。</li>
+</ul>
+<h3 id="3-5-模型规模差异">3.5 模型规模差异</h3>
+<p>YOLOv11 提供五种不同规模的预训练模型（n/s/m/l/x），通过调整 depth、width、max_channels 参数实现性能平衡：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模型版本</th>
+<th style="text-align:left">depth</th>
+<th style="text-align:left">width</th>
+<th style="text-align:left">max_channels</th>
+<th style="text-align:left">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">YOLOv11n</td>
+<td style="text-align:left">0.33</td>
+<td style="text-align:left">0.25</td>
+<td style="text-align:left">1024</td>
+<td style="text-align:left">边缘设备、实时监控</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11s</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">1024</td>
+<td style="text-align:left">移动端应用、轻量级服务</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11m</td>
+<td style="text-align:left">1.0</td>
+<td style="text-align:left">1.0</td>
+<td style="text-align:left">1024</td>
+<td style="text-align:left">通用服务器、中等精度需求</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11l</td>
+<td style="text-align:left">1.5</td>
+<td style="text-align:left">1.25</td>
+<td style="text-align:left">2048</td>
+<td style="text-align:left">高性能需求、视频流处理</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11x</td>
+<td style="text-align:left">2.0</td>
+<td style="text-align:left">1.5</td>
+<td style="text-align:left">2048</td>
+<td style="text-align:left">专业应用、高精度场景</td>
+</tr>
+</tbody>
+</table>
+<p><strong>模型结构调整策略</strong>：</p>
+<ul>
+<li>以 YOLOv11s 为例，网络深度比 YOLOv8s 增加 20%，但宽度缩减 15%，通过这种再平衡保持模型性能的同时减小体积。</li>
+<li>通过调整 <code>depth</code>（模块重复次数）、<code>width</code>（通道数比例）和 <code>max_channels</code>（最大通道数限制），实现不同规模模型的性能梯度。</li>
+</ul>
+<h2 id="4-Performance">4. Performance</h2>
+<h3 id="4-1-COCO-数据集性能">4.1 COCO 数据集性能</h3>
+<p>YOLOv11 在 COCO 数据集上表现优异，不同规模模型的性能对比如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模型版本</th>
+<th style="text-align:left">参数量 (M)</th>
+<th style="text-align:left">FLOPs (G)</th>
+<th style="text-align:left">mAP@0.5</th>
+<th style="text-align:left">AP@[0.5:0.95]</th>
+<th style="text-align:left">T4 TensorRT 速度 (ms)</th>
+<th style="text-align:left">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">YOLOv8n</td>
+<td style="text-align:left">2.7</td>
+<td style="text-align:left">6.8</td>
+<td style="text-align:left">39.5</td>
+<td style="text-align:left">30.0</td>
+<td style="text-align:left">1.84</td>
+<td style="text-align:left">边缘设备</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11n</td>
+<td style="text-align:left">2.6</td>
+<td style="text-align:left">6.7</td>
+<td style="text-align:left">39.5</td>
+<td style="text-align:left">30.0</td>
+<td style="text-align:left"><strong>1.5</strong></td>
+<td style="text-align:left">边缘设备</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv8s</td>
+<td style="text-align:left">7.5</td>
+<td style="text-align:left">26.2</td>
+<td style="text-align:left">46.8</td>
+<td style="text-align:left">44.8</td>
+<td style="text-align:left">2.5</td>
+<td style="text-align:left">移动端应用</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11s</td>
+<td style="text-align:left">9.4</td>
+<td style="text-align:left">21.6</td>
+<td style="text-align:left">47.0</td>
+<td style="text-align:left">44.8</td>
+<td style="text-align:left"><strong>2.0</strong></td>
+<td style="text-align:left">移动端应用</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv8m</td>
+<td style="text-align:left">26.2</td>
+<td style="text-align:left">53.4</td>
+<td style="text-align:left">51.3</td>
+<td style="text-align:left">49.9</td>
+<td style="text-align:left">5.0</td>
+<td style="text-align:left">通用服务器</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11m</td>
+<td style="text-align:left">20.1</td>
+<td style="text-align:left">80.0</td>
+<td style="text-align:left">51.5</td>
+<td style="text-align:left"><strong>53.0</strong></td>
+<td style="text-align:left"><strong>4.7</strong></td>
+<td style="text-align:left">通用服务器</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv8l</td>
+<td style="text-align:left">46.6</td>
+<td style="text-align:left">161.0</td>
+<td style="text-align:left">53.4</td>
+<td style="text-align:left">53.4</td>
+<td style="text-align:left">8.33</td>
+<td style="text-align:left">高性能需求</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11l</td>
+<td style="text-align:left">25.3</td>
+<td style="text-align:left">16.1</td>
+<td style="text-align:left">53.4</td>
+<td style="text-align:left">53.4</td>
+<td style="text-align:left"><strong>6.2</strong></td>
+<td style="text-align:left">高性能需求</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv8x</td>
+<td style="text-align:left">87.3</td>
+<td style="text-align:left">69.7</td>
+<td style="text-align:left">54.4</td>
+<td style="text-align:left">54.4</td>
+<td style="text-align:left">10.7</td>
+<td style="text-align:left">专业应用</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11x</td>
+<td style="text-align:left">56.9</td>
+<td style="text-align:left">239.5</td>
+<td style="text-align:left">54.7</td>
+<td style="text-align:left"><strong>54.7</strong></td>
+<td style="text-align:left"><strong>11.3</strong></td>
+<td style="text-align:left">专业应用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键性能指标</strong>：</p>
+<ul>
+<li>YOLOv11m 在 COCO 数据集上 mAP@0.5 达 51.5%，AP@[0.5:0.95] 达 53.0%，参数量仅 20.1M，相比 YOLOv8m 提升约 3-5% 的 mAP，同时减少 22% 的参数量。</li>
+<li>YOLOv11x 在 COCO 数据集上 mAP@0.5 达 54.7%，AP@[0.5:0.95] 达 54.7%，相比 YOLOv8x 提升约 0.3% 的 mAP，但推理速度显著提升。</li>
+<li>在相同 backbone 下，YOLOv11 的 FPS 比 YOLOv8 提高 8-12%，得益于算子优化和轻量化设计。</li>
+</ul>
+<h3 id="4-2-VisDrone-数据集性能">4.2 VisDrone 数据集性能</h3>
+<p>YOLOv11 在 VisDrone 这类无人机航拍数据集上表现尤为突出，尤其在小目标检测方面：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模型版本</th>
+<th style="text-align:left">AP</th>
+<th style="text-align:left">AP₅₀</th>
+<th style="text-align:left">AP₇₅</th>
+<th style="text-align:left">APₛ</th>
+<th style="text-align:left">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">YOLOv8m</td>
+<td style="text-align:left">30.0</td>
+<td style="text-align:left">55.0</td>
+<td style="text-align:left">32.0</td>
+<td style="text-align:left">35.5</td>
+<td style="text-align:left">无人机监控</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv9m</td>
+<td style="text-align:left">32.5</td>
+<td style="text-align:left">57.0</td>
+<td style="text-align:left">34.5</td>
+<td style="text-align:left">38.0</td>
+<td style="text-align:left">无人机监控</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv10m</td>
+<td style="text-align:left">33.0</td>
+<td style="text-align:left">57.5</td>
+<td style="text-align:left">35.0</td>
+<td style="text-align:left">39.0</td>
+<td style="text-align:left">无人机监控</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>YOLOv11m</strong></td>
+<td style="text-align:left"><strong>34.1</strong></td>
+<td style="text-align:left"><strong>58.5</strong></td>
+<td style="text-align:left"><strong>35.5</strong></td>
+<td style="text-align:left"><strong>41.7</strong></td>
+<td style="text-align:left"><strong>无人机监控</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>小目标检测优势</strong>：</p>
+<ul>
+<li>YOLOv11m 在 VisDrone 数据集上的小目标 APₛ 达到 41.7%，相比 YOLOv8 提升了 6.2 个百分点。</li>
+<li>这一提升主要归功于 C2PSA 模块增强的全局上下文建模能力和小目标特征提取能力。</li>
+<li>YOLOv11m 在 AP₇₅ 指标上比 YOLOv8 提升了 3.5 个百分点，表明其对中等和大目标的检测能力也有所提升。</li>
+</ul>
+<h3 id="4-3-多硬件部署性能">4.3 多硬件部署性能</h3>
+<p>YOLOv11 在不同硬件平台上的推理速度表现如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模型版本</th>
+<th style="text-align:left">RTX 3090 FPS</th>
+<th style="text-align:left">RTX 4090 FPS</th>
+<th style="text-align:left">T4 TensorRT FPS</th>
+<th style="text-align:left">Jetson Nano FPS</th>
+<th style="text-align:left">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">YOLOv11n</td>
+<td style="text-align:left">140</td>
+<td style="text-align:left">180</td>
+<td style="text-align:left">120</td>
+<td style="text-align:left">1200</td>
+<td style="text-align:left">边缘设备、实时监控</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11s</td>
+<td style="text-align:left">85</td>
+<td style="text-align:left">110</td>
+<td style="text-align:left">80</td>
+<td style="text-align:left">600</td>
+<td style="text-align:left">移动端应用、轻量级服务</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11m</td>
+<td style="text-align:left">58</td>
+<td style="text-align:left">75</td>
+<td style="text-align:left">40</td>
+<td style="text-align:left">300</td>
+<td style="text-align:left">通用服务器、中等精度需求</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11l</td>
+<td style="text-align:left">40</td>
+<td style="text-align:left">50</td>
+<td style="text-align:left">25</td>
+<td style="text-align:left">150</td>
+<td style="text-align:left">高性能需求、视频流处理</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11x</td>
+<td style="text-align:left">20</td>
+<td style="text-align:left">25</td>
+<td style="text-align:left">15</td>
+<td style="text-align:left">60</td>
+<td style="text-align:left">专业应用、高精度场景</td>
+</tr>
+</tbody>
+</table>
+<p><strong>TensorRT 加速效果</strong>：</p>
+<ul>
+<li>YOLOv11 的 TensorRT 版本比原始 PyTorch 模型快 3-5 倍，尤其在边缘设备上表现更为显著。</li>
+<li>例如，YOLOv11n 在 Jetson Nano 上通过 TensorRT 优化后达到 1200 FPS，是未优化版本的 4 倍。</li>
+<li>在 T4 GPU 上，YOLOv11m 的 TensorRT 推理速度从 YOLOv8m 的 5.0ms 提升到 4.7ms，快 25.6%。</li>
+</ul>
+<h3 id="4-4-与其他-SOTA-模型对比">4.4 与其他 SOTA 模型对比</h3>
+<p>YOLOv11 在多个数据集上与 SOTA 模型的对比结果：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">任务</th>
+<th style="text-align:left">模型</th>
+<th style="text-align:left">AP@0.5</th>
+<th style="text-align:left">参数量 (M)</th>
+<th style="text-align:left">推理速度 (ms)</th>
+<th style="text-align:left">优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">目标检测</td>
+<td style="text-align:left">YOLOv11m</td>
+<td style="text-align:left">51.5</td>
+<td style="text-align:left">20.1</td>
+<td style="text-align:left">4.7</td>
+<td style="text-align:left"><strong>轻量高效、精度高</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">目标检测</td>
+<td style="text-align:left">YOLOv8m</td>
+<td style="text-align:left">51.3</td>
+<td style="text-align:left">26.2</td>
+<td style="text-align:left">5.0</td>
+<td style="text-align:left">较重、精度略低</td>
+</tr>
+<tr>
+<td style="text-align:left">目标检测</td>
+<td style="text-align:left">YOLOv9m</td>
+<td style="text-align:left">52.0</td>
+<td style="text-align:left">25.4</td>
+<td style="text-align:left">5.5</td>
+<td style="text-align:left">较重、速度较慢</td>
+</tr>
+<tr>
+<td style="text-align:left">目标检测</td>
+<td style="text-align:left">YOLOv10m</td>
+<td style="text-align:left">51.3</td>
+<td style="text-align:left">25.4</td>
+<td style="text-align:left">4.2</td>
+<td style="text-align:left">轻量但精度略低</td>
+</tr>
+<tr>
+<td style="text-align:left">实例分割</td>
+<td style="text-align:left">YOLOv11m-seg</td>
+<td style="text-align:left">39.5</td>
+<td style="text-align:left">22.1</td>
+<td style="text-align:left">5.5</td>
+<td style="text-align:left"><strong>统一架构、多任务支持</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">实例分割</td>
+<td style="text-align:left">Mask R-CNN</td>
+<td style="text-align:left">38.0</td>
+<td style="text-align:left">35.7</td>
+<td style="text-align:left">18.3</td>
+<td style="text-align:left">较重、速度慢</td>
+</tr>
+<tr>
+<td style="text-align:left">姿态估计</td>
+<td style="text-align:left">YOLOv11m-pose</td>
+<td style="text-align:left">55.2</td>
+<td style="text-align:left">23.4</td>
+<td style="text-align:left">6.2</td>
+<td style="text-align:left"><strong>实时性能、端到端处理</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">姿态估计</td>
+<td style="text-align:left">HRNet</td>
+<td style="text-align:left">54.5</td>
+<td style="text-align:left">32.7</td>
+<td style="text-align:left">22.1</td>
+<td style="text-align:left">较重、速度慢</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键优势</strong>：</p>
+<ul>
+<li><strong>多任务统一架构</strong>：YOLOv11 采用统一架构支持检测、分割、姿态估计等多种任务，避免了传统方法需要多个独立模型的部署复杂性。</li>
+<li><strong>轻量化设计</strong>：相比同等精度的 SOTA 模型，YOLOv11 的参数量和计算量显著减少，更适合资源受限场景。</li>
+<li><strong>实时推理能力</strong>：YOLOv11 在保持高精度的同时，实现了超实时的推理速度，满足工业应用需求。</li>
+</ul>
+<h2 id="5-训练与部署指南">5. 训练与部署指南</h2>
+<h3 id="5-1-环境配置">5.1 环境配置</h3>
+<h4 id="5-1-1-基础依赖">5.1.1 基础依赖</h4>
+<p>YOLOv11 推荐使用以下环境配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建虚拟环境</span></span><br><span class="line">conda create -n yolov11 python=3.9 -y</span><br><span class="line">conda activate yolov11</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装Ultralytics框架</span></span><br><span class="line">pip install ultralytics==8.3.9</span><br></pre></td></tr></table></figure>
+<p><strong>硬件要求</strong>：</p>
+<ul>
+<li><strong>GPU</strong>：推荐 8GB 以上显存（训练大型模型如 YOLOv11x 需要 24GB+ 显存）。</li>
+<li><strong>CPU</strong>：建议 8 核以上，16GB+ 内存。</li>
+<li><strong>Windows 用户注意</strong>：设置 <code>workers=0</code> 避免线程冲突。</li>
+</ul>
+<h4 id="5-1-2-数据集准备">5.1.2 数据集准备</h4>
+<p>YOLOv11 支持多种数据集格式，包括 COCO、PASCAL VOC 和自定义数据集。以下是自定义数据集的准备步骤：</p>
+<ol>
+<li>
+<p>数据标注：</p>
+<ul>
+<li>使用 LabelMe 等工具生成 JSON 格式标注文件。</li>
+<li>对于实例分割任务，需沿目标轮廓点击描点生成多边形标注。</li>
+<li>对于目标检测任务，只需标注边界框。</li>
+</ul>
+</li>
+<li>
+<p>数据集配置文件：</p>
+<ul>
+<li>创建 <code>data.yaml</code> 文件，定义数据集路径和类别。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>示例配置：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># data.yaml 示例</span></span><br><span class="line"><span class="attr">path:</span> <span class="string">/path/to/dataset/</span>  <span class="comment"># 数据集根目录</span></span><br><span class="line"><span class="attr">train:</span> <span class="string">train.txt</span>           <span class="comment"># 训练集图像路径列表</span></span><br><span class="line"><span class="attr">val:</span> <span class="string">val.txt</span>               <span class="comment"># 验证集图像路径列表</span></span><br><span class="line"><span class="attr">test:</span> <span class="string">test.txt</span>             <span class="comment"># 测试集图像路径列表（可选）</span></span><br><span class="line"><span class="attr">nc:</span> <span class="number">80</span>                     <span class="comment"># 类别数量</span></span><br><span class="line"><span class="attr">names:</span></span><br><span class="line">  <span class="attr">0:</span> <span class="string">person</span></span><br><span class="line">  <span class="attr">1:</span> <span class="string">bicycle</span></span><br><span class="line">  <span class="comment"># ... 其他类别</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-2-基础训练命令">5.2 基础训练命令</h3>
+<p>YOLOv11 支持通过命令行或 Python API 进行模型训练。以下是几种常见的训练方式：</p>
+<h4 id="5-2-1-命令行训练">5.2.1 命令行训练</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础训练命令</span></span><br><span class="line">yolo train data=coco.yaml model=yolov11-s.yaml epochs=300 imgsz=640</span><br><span class="line"></span><br><span class="line"><span class="comment"># 边缘设备优化训练</span></span><br><span class="line">yolo train data=crack-seg.yaml model=yolov11-n-seg.yaml epochs=150 imgsz=320 batch=4 workers=0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 小目标增强训练</span></span><br><span class="line">yolo train data=visdrone.yaml model=yolov11-s.yaml epochs=200 imgsz=640 augment=True close_mosaic=10</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-2-Python-API-训练">5.2.2 Python API 训练</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载预训练模型</span></span><br><span class="line">model = YOLO(<span class="string">&quot;yolov11s.pt&quot;</span>)  <span class="comment"># 目标检测</span></span><br><span class="line"><span class="comment"># model = YOLO(&quot;yolov11s-seg.pt&quot;)  # 实例分割</span></span><br><span class="line"><span class="comment"># model = YOLO(&quot;yolov11s-pose.pt&quot;)  # 姿态估计</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练配置</span></span><br><span class="line">results = model.train(</span><br><span class="line">    data=<span class="string">&quot;your-dataset.yaml&quot;</span>,</span><br><span class="line">    epochs=<span class="number">300</span>,</span><br><span class="line">    imgsz=<span class="number">640</span>,</span><br><span class="line">    batch=<span class="number">16</span>,</span><br><span class="line">    lr0=<span class="number">0.01</span>,</span><br><span class="line">    momentum=<span class="number">0.937</span>,</span><br><span class="line">    weight_decay=<span class="number">5e-4</span>,</span><br><span class="line">    optimizer=<span class="string">&quot;SGD&quot;</span>,</span><br><span class="line">    lr_sch=<span class="string">&quot;cosine&quot;</span>,</span><br><span class="line">    augment=<span class="literal">True</span>,</span><br><span class="line">    mosaic=<span class="literal">True</span>,</span><br><span class="line">    mixup=<span class="literal">True</span>,</span><br><span class="line">    device=<span class="number">0</span>,</span><br><span class="line">    workers=<span class="number">8</span>,</span><br><span class="line">    project=<span class="string">&quot;runs/detect&quot;</span>,</span><br><span class="line">    name=<span class="string">&quot;yolov11-s&quot;</span>,</span><br><span class="line">    exist_ok=<span class="literal">True</span>,</span><br><span class="line">    close_mosaic=<span class="number">10</span>,  <span class="comment"># 最后10个epoch关闭马赛克增强</span></span><br><span class="line">    hyp=<span class="string">&quot;data/hyps/hyp.scratch.yaml&quot;</span>  <span class="comment"># 超参数文件</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-训练参数详解">5.3 训练参数详解</h3>
+<p>YOLOv11 的训练参数分为以下几类：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数类别</th>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">默认值</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>训练基础</strong></td>
+<td style="text-align:left">epochs</td>
+<td style="text-align:left">300</td>
+<td style="text-align:left">总训练轮次</td>
+</tr>
+<tr>
+<td style="text-align:left">imgsz</td>
+<td style="text-align:left">640</td>
+<td style="text-align:left">输入图像尺寸</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">batch</td>
+<td style="text-align:left">16</td>
+<td style="text-align:left">批量大小</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">data</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">数据集配置文件路径</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>优化器设置</strong></td>
+<td style="text-align:left">optimizer</td>
+<td style="text-align:left">SGD</td>
+<td style="text-align:left">优化器类型（SGD/Adam）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>学习率策略</strong></td>
+<td style="text-align:left">lr_sch</td>
+<td style="text-align:left">cosine</td>
+<td style="text-align:left">学习率调度策略（cosine/linear）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>数据增强</strong></td>
+<td style="text-align:left">augment</td>
+<td style="text-align:left">True</td>
+<td style="text-align:left">是否启用数据增强</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>硬件设置</strong></td>
+<td style="text-align:left">device</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">设备编号（CPU/-1）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键参数优化建议</strong>：</p>
+<ul>
+<li>启用余弦学习率调度（<code>cos_lr=True</code>）可提升最终精度。</li>
+<li>关闭马赛克增强（<code>close_mosaic=10</code>）可提高模型收敛性。</li>
+<li>对于显存不足的 GPU，建议设置 <code>batch_size=4-8</code>。</li>
+</ul>
+<h3 id="5-4-高级训练技巧">5.4 高级训练技巧</h3>
+<h4 id="5-4-1-小目标增强训练">5.4.1 小目标增强训练</h4>
+<p>对于小目标检测任务（如 VisDrone），可启用 Copy-Paste 数据增强：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 小目标增强训练</span></span><br><span class="line">yolo train data=visdrone.yaml model=yolov11-s.yaml epochs=200 imgsz=640 augment=True close_mosaic=10 hyp=data/hyps/hyp.VisDrone.yaml</span><br></pre></td></tr></table></figure>
+<p><strong>Copy-Paste 数据增强原理</strong>：</p>
+<ul>
+<li>从其他图像中随机裁剪小目标区域并粘贴到当前图像中。</li>
+<li>增强小目标样本的多样性和数量。</li>
+<li>提高模型对小目标的检测能力。</li>
+</ul>
+<h4 id="5-4-2-量化感知训练（QAT）">5.4.2 量化感知训练（QAT）</h4>
+<p>为了减少 INT8 量化导致的精度损失，可启用量化感知训练：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 量化感知训练</span></span><br><span class="line">yolo train data=coco.yaml model=yolov11-s.yaml epochs=100 imgsz=640 quantize=True</span><br></pre></td></tr></table></figure>
+<p><strong>QAT 关键点</strong>：</p>
+<ul>
+<li>在训练过程中模拟量化误差，使模型适应低精度计算。</li>
+<li>减少量化后精度损失，通常可将精度损失控制在 1% 以内。</li>
+<li>适用于需要部署到边缘设备或使用 INT8 量化加速的场景。</li>
+</ul>
+<h4 id="5-4-3-多任务联合训练">5.4.3 多任务联合训练</h4>
+<p>YOLOv11 支持多任务联合训练，例如同时进行目标检测和实例分割：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多任务联合训练</span></span><br><span class="line">yolo train data=coco-seg.yaml model=yolov11-s-seg.yaml epochs=300 imgsz=640</span><br></pre></td></tr></table></figure>
+<p><strong>多任务联合训练优势</strong>：</p>
+<ul>
+<li>共享骨干网络特征提取能力，减少模型参数量。</li>
+<li>提高特征表达能力，增强模型对不同任务的泛化能力。</li>
+<li>部署时只需一个模型，简化系统架构。</li>
+</ul>
+<h3 id="5-5-模型导出">5.5 模型导出</h3>
+<p>YOLOv11 支持多种部署格式的导出，包括 ONNX、TensorRT、CoreML、OpenVINO 和 TFLite。</p>
+<h4 id="5-5-1-ONNX-导出">5.5.1 ONNX 导出</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导出ONNX模型（静态输入尺寸）</span></span><br><span class="line">python export.py --weights runs/detect/exp/weights/best.pt --img 640 --batch 1 --format onnx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出支持动态输入尺寸的ONNX模型</span></span><br><span class="line">python export.py --weights runs/detect/exp/weights/best.pt --img 640 --batch 1 --dynamic --format onnx</span><br></pre></td></tr></table></figure>
+<p><strong>动态 ONNX 模型优势</strong>：</p>
+<ul>
+<li>支持不同尺寸输入，无需固定图像尺寸。</li>
+<li>部署时更灵活，适合处理不同分辨率的图像。</li>
+<li>但模型文件体积会略有增大，推理速度可能略有下降。</li>
+</ul>
+<h4 id="5-5-2-TensorRT-量化导出">5.5.2 TensorRT 量化导出</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导出FP16 TensorRT引擎</span></span><br><span class="line">trtexec --onnx=best.onnx --saveEngine=best FP16.engine --fp16 --builderOptimizationLevel=5</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出INT8 TensorRT引擎（需准备校准数据集）</span></span><br><span class="line">trtexec --onnx=best.onnx --saveEngine=best INT8.engine --fp16 --int8 --calibCache=best-int8-calib --calibData=coco.yaml --calibBatch=8 --builderOptimizationLevel=5#</span><br></pre></td></tr></table></figure>
+<p><strong>TensorRT 量化效果</strong>：</p>
+<ul>
+<li>FP16 量化可将推理速度提升 1.8-2.5 倍。</li>
+<li>INT8 量化可将推理速度提升 3-5 倍。</li>
+<li>校准数据集建议使用 1000-5000 张图像，以获得最佳量化效果。</li>
+</ul>
+<h4 id="5-5-3-CoreML-导出">5.5.3 CoreML 导出</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导出CoreML模型（需安装coremltools）</span></span><br><span class="line">pip install coremltools</span><br><span class="line">python export.py --weights runs/detect/exp/weights/best.pt --img 640 --batch 1 --format coreml</span><br></pre></td></tr></table></figure>
+<p><strong>CoreML 部署优势</strong>：</p>
+<ul>
+<li>支持 iOS/macOS 等 Apple 设备的硬件加速。</li>
+<li>模型文件体积小，适合移动端部署。</li>
+<li>需注意：CoreML 不支持动态输入尺寸，导出时需指定固定输入尺寸。</li>
+</ul>
+<h3 id="5-6-推理示例">5.6 推理示例</h3>
+<h4 id="5-6-1-图像检测">5.6.1 图像检测</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载模型</span></span><br><span class="line">model = YOLO(<span class="string">&quot;yolov11s.pt&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图像检测</span></span><br><span class="line">results = model(<span class="string">&quot;bus.jpg&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历结果</span></span><br><span class="line"><span class="keyword">for</span> result <span class="keyword">in</span> results:</span><br><span class="line">    im_array = result.plot()  <span class="comment"># 在图像上绘制检测框</span></span><br><span class="line">    im = Image.fromarray(im_array[..., ::-<span class="number">1</span>])  <span class="comment"># 转换为PIL图像</span></span><br><span class="line">    im.save(<span class="string">f&quot;bus_<span class="subst">&#123;result.path&#125;</span>.jpg&quot;</span>)  <span class="comment"># 保存结果</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-6-2-视频流处理">5.6.2 视频流处理</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载模型</span></span><br><span class="line">model = YOLO(<span class="string">&quot;yolov11m.pt&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取视频</span></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">&quot;video.mp4&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实时处理视频流</span></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ret:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 检测</span></span><br><span class="line">    results = model(frame)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 显示结果</span></span><br><span class="line">    cv2.imshow(<span class="string">&quot;YOLOv11 Detection&quot;</span>, results[<span class="number">0</span>].plot())</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h4 id="5-6-3-实例分割">5.6.3 实例分割</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载模型</span></span><br><span class="line">model = YOLO(<span class="string">&quot;yolov11m-seg.pt&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图像</span></span><br><span class="line">frame = cv2.imread(<span class="string">&quot;image.jpg&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检测</span></span><br><span class="line">results = model(frame)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历检测结果</span></span><br><span class="line"><span class="keyword">for</span> result <span class="keyword">in</span> results:</span><br><span class="line">    <span class="comment"># 绘制边界框和类别标签</span></span><br><span class="line">    im_array = result.plot()</span><br><span class="line">    im = Image.fromarray(im_array[..., ::-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取分割掩码</span></span><br><span class="line">    masks = result_masks</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可视化掩码</span></span><br><span class="line">    <span class="keyword">for</span> mask <span class="keyword">in</span> masks:</span><br><span class="line">        mask Vis = (mask * <span class="number">255</span>).astype(<span class="string">&quot;uint8&quot;</span>)</span><br><span class="line">        cv2.imshow(<span class="string">&quot;Segmentation Mask&quot;</span>, mask Vis)</span><br><span class="line">        cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="5-7-部署优化技巧">5.7 部署优化技巧</h3>
+<h4 id="5-7-1-混合精度推理">5.7.1 混合精度推理</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载模型并启用FP16推理</span></span><br><span class="line">model = YOLO(<span class="string">&quot;best FP16.engine&quot;</span>).to(<span class="string">&quot;cuda:0&quot;</span>).<span class="built_in">eval</span>().half()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推理</span></span><br><span class="line">results = model(<span class="string">&quot;bus.jpg&quot;</span>, conf=<span class="number">0.25</span>, iou=<span class="number">0.45</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>混合精度推理优势</strong>：</p>
+<ul>
+<li>FP16 推理速度比 FP32 快 1.8-2.5 倍。</li>
+<li>对于边缘设备，INT8 量化推理速度比 FP32 快 3-5 倍。</li>
+<li>精度损失通常控制在 1% 以内，对大多数应用场景影响可忽略。</li>
+</ul>
+<h4 id="5-7-2-动态输入尺寸">5.7.2 动态输入尺寸</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 动态输入尺寸推理（需导出动态ONNX模型）</span></span><br><span class="line">model = YOLO(<span class="string">&quot;best.onnx&quot;</span>, dynamic=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推理不同尺寸图像</span></span><br><span class="line">results640 = model(<span class="string">&quot;bus.jpg&quot;</span>, imgsz=<span class="number">640</span>)</span><br><span class="line">results320 = model(<span class="string">&quot;bus.jpg&quot;</span>, imgsz=<span class="number">320</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>动态输入尺寸优势</strong>：</p>
+<ul>
+<li>支持不同分辨率图像输入，无需固定图像尺寸。</li>
+<li>优化边缘设备上的功耗，可根据场景需求动态调整输入尺寸。</li>
+<li>提高模型在不同场景下的泛化能力。</li>
+</ul>
+<h4 id="5-7-3-边缘设备部署">5.7.3 边缘设备部署</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 部署到Jetson Nano（需安装Jetson-inference）</span></span><br><span class="line">pip install jetson-inference</span><br><span class="line">python export.py --weights best.pt --img <span class="number">320</span> --batch <span class="number">1</span> --<span class="built_in">format</span> engine --device <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用Jetson-inference进行推理</span></span><br><span class="line"><span class="keyword">import</span> jetson-inference</span><br><span class="line">net = jetson-inference detectNet(<span class="string">&quot;yolov11n.engine&quot;</span>, threshold=<span class="number">0.25</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>边缘设备部署优化</strong>：</p>
+<ul>
+<li>选择较小的模型版本（如 YOLOv11n）以适应有限的硬件资源。</li>
+<li>使用 INT8 量化减少模型体积和计算量。</li>
+<li>降低输入尺寸（如 320×320）以提高推理速度，但可能牺牲部分精度。</li>
+</ul>
+<h2 id="6-常见问题与解决方案">6. 常见问题与解决方案</h2>
+<h3 id="6-1-模型加载问题">6.1 模型加载问题</h3>
+<p><strong>问题</strong>：加载非官方 YOLOv11 权重时出现 <code>AttributeError: 'dict' object has no attribute 'model'</code> 错误。</p>
+<p><strong>原因</strong>：权重文件是 state_dict 格式，而非完整模型文件。</p>
+<p><strong>解决方案</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：加载完整模型（需确保模型结构与权重匹配）</span></span><br><span class="line">model = torch.load(<span class="string">&#x27;yolov11s_custom.pt&#x27;</span>, map_location=device)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：仅加载 state_dict（需先实例化模型）</span></span><br><span class="line">model = DetectionModel(cfg=<span class="string">&#x27;configs/yolov11s.yaml&#x27;</span>).to(device)</span><br><span class="line">state_dict = torch.load(<span class="string">&#x27;yolov11s_custom.pt&#x27;</span>, map_location=device)</span><br><span class="line">model.load_state_dict(state_dict)</span><br><span class="line">model.to(device).<span class="built_in">eval</span>()</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-数据增强问题">6.2 数据增强问题</h3>
+<p><strong>问题</strong>：训练过程中数据增强导致模型收敛困难。</p>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>适当降低数据增强强度，如设置 mosaic=True 但 mixup=False。</li>
+<li>使用 close_mosaic 参数在训练后期关闭马赛克增强，如 close_mosaic=10（最后10个epoch关闭）。</li>
+<li>对于小目标检测任务，启用 Copy-Paste 数据增强，但避免过度增强导致目标失真。</li>
+</ul>
+<h3 id="6-3-部署问题">6.3 部署问题</h3>
+<p><strong>问题</strong>：TensorRT 引擎构建失败，提示 “Dynamic dimensions are not supported”。</p>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>检查 ONNX 模型是否支持动态输入尺寸，可使用 --dynamic 参数导出。</li>
+<li>如果仍失败，尝试在目标设备上&quot;现场构建引擎&quot;，确保输入尺寸与训练时一致。</li>
+<li>对于 iOS 部署，使用 CoreML 格式并指定固定输入尺寸，如 --imgsz 640。</li>
+</ul>
+<h3 id="6-4-多任务模型训练问题">6.4 多任务模型训练问题</h3>
+<p><strong>问题</strong>：训练分割模型时，分割掩码质量不佳。</p>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>检查数据集标注质量，确保分割掩码准确。</li>
+<li>调整损失权重，如增加分割任务的损失权重。</li>
+<li>尝试使用预训练的检测模型进行分割任务的微调，通常可获得更好的分割效果。</li>
+</ul>
+<h2 id="7-优缺点分析">7. 优缺点分析</h2>
+<p><strong>优势</strong></p>
+<ol>
+<li><strong>精度-效率平衡</strong>：在保持高精度的同时，显著降低参数量和计算量，实现轻量化与高效推理的双重优势。</li>
+<li><strong>多任务统一架构</strong>：一套架构支持检测、分割、姿态估计等多种任务，避免多模型部署的复杂性。</li>
+<li><strong>边缘部署友好</strong>：通过深度可分离卷积和模型结构调整，显著提升边缘设备上的推理性能。</li>
+<li><strong>API 兼容性</strong>：与 YOLOv8/v9/v10 保持相同 API 接口，迁移成本低。</li>
+<li><strong>计算效率高</strong>：相比前代，参数量减少 22%，推理速度提升 15%。</li>
+</ol>
+<p><strong>局限</strong></p>
+<ol>
+<li><strong>小模型精度限制</strong>：YOLOv11-n/s 在小目标检测上仍略逊于带 NMS 的 YOLOv9（性能差距约 1.0-0.5 AP）。</li>
+<li><strong>多任务扩展需定制</strong>：多任务模型需在数据集和训练配置上进行适当调整。</li>
+<li><strong>复杂场景适应性</strong>：在极端光照条件或超小目标（&lt;16×16 像素）场景下，性能可能不如专用模型。</li>
+<li><strong>训练资源要求高</strong>：大型模型（如 YOLOv11x）训练需要 24GB+ 显存，对普通开发者构成挑战。</li>
+</ol>
+<h3 id="7-1-适用场景推荐">7.1 适用场景推荐</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模型版本</th>
+<th style="text-align:left">适用场景</th>
+<th style="text-align:left">不适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">YOLOv11n</td>
+<td style="text-align:left">边缘设备、实时监控、低功耗设备</td>
+<td style="text-align:left">高精度检测、复杂场景分析</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11s</td>
+<td style="text-align:left">移动端应用、轻量级服务、无人机监控</td>
+<td style="text-align:left">工业质检、高精度场景</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11m</td>
+<td style="text-align:left">通用服务器、中等精度需求、视频分析</td>
+<td style="text-align:left">专业应用、高精度场景</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11l</td>
+<td style="text-align:left">高性能需求、视频流处理、复杂场景分析</td>
+<td style="text-align:left">边缘设备、低功耗设备</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv11x</td>
+<td style="text-align:left">专业应用、高精度场景、科研实验</td>
+<td style="text-align:left">移动端、边缘设备</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-2-与其他-YOLO-版本对比">7.2 与其他 YOLO 版本对比</h3>
+<p>YOLOv11 与前代 YOLO 模型的对比：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">版本</th>
+<th style="text-align:left">核心突破</th>
+<th style="text-align:left">参数量</th>
+<th style="text-align:left">推理速度</th>
+<th style="text-align:left">小目标 APₛ</th>
+<th style="text-align:left">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">YOLOv5</td>
+<td style="text-align:left">工程易用性</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">快</td>
+<td style="text-align:left">低</td>
+<td style="text-align:left">通用场景</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv8</td>
+<td style="text-align:left">多任务统一</td>
+<td style="text-align:left">中</td>
+<td style="text-align:left">快</td>
+<td style="text-align:left">中</td>
+<td style="text-align:left">全场景</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv9</td>
+<td style="text-align:left">PGI（可编程梯度信息）</td>
+<td style="text-align:left">低</td>
+<td style="text-align:left">快</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">小目标场景</td>
+</tr>
+<tr>
+<td style="text-align:left">YOLOv10</td>
+<td style="text-align:left">无NMS设计</td>
+<td style="text-align:left">低</td>
+<td style="text-align:left">快</td>
+<td style="text-align:left">中</td>
+<td style="text-align:left">实时场景</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>YOLOv11</strong></td>
+<td style="text-align:left"><strong>C3k2 + C2PSA + DWConv</strong></td>
+<td style="text-align:left"><strong>低</strong></td>
+<td style="text-align:left"><strong>更快</strong></td>
+<td style="text-align:left"><strong>高</strong></td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键区别</strong>：</p>
+<ul>
+<li>YOLOv11 在小目标检测方面比 YOLOv8/v9/v10 更优秀，APₛ 提升 6.2%。</li>
+<li>YOLOv11 在相同精度下比 YOLOv8/v9/v10 更轻量，参数量减少 22%。</li>
+<li>YOLOv11 在相同硬件上比 YOLOv8/v9/v10 推理速度更快，速度提升 15%。</li>
+</ul>
+<h2 id="8-结论与展望">8. 结论与展望</h2>
+<p>YOLOv11 是 YOLO 系列中<strong>首次系统性解决复杂场景下小目标检测问题</strong>的里程碑工作。它通过 C3k2 模块优化浅层网络特征提取能力，通过 C2PSA 模块增强全局上下文建模能力，通过深度可分离卷积实现轻量化设计，三大创新技术共同推动了模型性能的全面提升。</p>
+<p><strong>YOLOv11 的核心价值在于</strong>：</p>
+<ul>
+<li><strong>降低 AI 落地门槛</strong>：通过轻量化设计，使更多边缘设备能够部署高精度模型。</li>
+<li><strong>平衡精度与效率</strong>：在保持高精度的同时，显著提升推理速度，满足实时应用场景需求。</li>
+<li><strong>统一多任务框架</strong>：一套架构解决多种视觉任务，降低系统复杂度和开发成本。</li>
+</ul>
+<p>未来，YOLOv11 可能在以下方向进一步演进：</p>
+<ol>
+<li><strong>多模态感知</strong>：结合视觉语言模型（VLM）能力，支持文本提示检测等开放词汇任务。</li>
+<li><strong>时序建模增强</strong>：引入轻量时序建模模块，提升视频时序推理能力。</li>
+<li><strong>绿色 AI 优化</strong>：进一步优化动态稀疏推理和量化友好设计，降低功耗。</li>
+<li><strong>安全与可解释性</strong>：内置对抗鲁棒性模块和注意力热力图可视化功能，提升模型安全性。</li>
+</ol>
+<p>无论 YOLOv11 是否会继续迭代为 YOLOv12/v13，其技术创新和设计理念都为计算机视觉领域带来了重要启发：<strong>“在保持实时推理速度的同时，通过模块化设计和注意力机制增强，实现复杂场景下的高精度检测”</strong>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2026/02/05/Paper/YOLOv11/">http://blog.sunlingzhang.com/2026/02/05/Paper/YOLOv11/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/paper/">paper</a><a class="post-meta__tags" href="/tags/Detection/">Detection</a><a class="post-meta__tags" href="/tags/YOLO/">YOLO</a><a class="post-meta__tags" href="/tags/CV/">CV</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/02/06/Paper/YOLOv12/" title="YOLOv12技术文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">YOLOv12技术文档</div></div><div class="info-2"><div class="info-item-1">[TOC] 核心摘要   核心范式: 首个以注意力机制为核心的实时目标检测模型，开创“注意力+实时检测”新范式。   关键创新: 引入区域注意力(A²)机制和残差高效层聚合网络(R-ELAN)两大核心技术。   性能突破: 在相似推理速度下，mAP提升约1.2%，小目标检测性能提升12%。   YOLOv12（You Only Look Once v12）是Ultralytics团队于2025年初推出的首个以注意力机制为核心的实时目标检测模型，它成功解决了注意力机制在实时检测任务中面临的计算复杂度高、内存访问效率低等核心挑战。YOLOv12通过引入区域注意力（A²）机制和残差高效层聚合网络（R-ELAN）两大核心技术，在保持与传统CNN架构相当推理速度的同时，实现了显著的精度提升。与前代YOLOv11相比，YOLOv12在相似推理速度下mAP提升约1.2%，同时小目标检测性能提升12%，为实时目标检测领域带来了革命性突破。  关键结论 (Key Takeaway) YOLOv12是首个以注意力机制为核心的实时目标检测模型，它通过引入区域注意力（A²）机制和残差高效层聚合网络（R-...</div></div></div></a><a class="pagination-related" href="/2026/02/04/Paper/YOLOv10/" title="YOLOv10技术文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">YOLOv10技术文档</div></div><div class="info-2"><div class="info-item-1">[TOC] 核心摘要   端到端革命: 通过无NMS训练策略，彻底消除后处理，实现真正的端到端实时检测，显著降低延迟。   效率与精度: 通过轻量化模型设计，在保持高精度的同时，参数量和计算量显著降低，实现双赢。   硬件适配: 提供从边缘设备到高性能GPU服务器的全系列预训练模型，满足不同硬件的部署需求。   1. 概述 YOLOv10（You Only Look Once v10）是清华大学THU-MIG团队与Ultralytics合作开发的新一代实时端到端目标检测框架，于2024年5月正式发布。作为YOLO系列的里程碑式迭代，YOLOv10通过创新性的无NMS（非极大值抑制）训练策略和效率-精度驱动的模型设计，在保持高精度的同时显著降低了计算复杂度，实现了真正的端到端实时检测。 YOLOv10的核心突破在于：  完全消除NMS后处理：通过&quot;一致双分配&quot;策略，使模型在训练时利用多标签监督，推理时直接输出最终检测框，无需依赖后处理 全面优化计算路径：通过轻量化分类头、空间-通道解耦下采样、基于秩的块设计等技术，实现参数与计算量的显著降低 多硬件适配：从边缘设...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/02/08/Paper/YOLOv26/" title="YOLOv26技术文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-08</div><div class="info-item-2">YOLOv26技术文档</div></div><div class="info-2"><div class="info-item-1">[TOC] 核心摘要   范式变革: YOLO26是全新一代实时目标检测模型，代表了目标检测技术的范式性变革。   核心创新: 首次实现&quot;原生端到端无NMS&quot;推理，移除了非极大值抑制后处理步骤，提升了速度与稳定性。   性能卓越: 通过HyperACE和FullPAD等创新架构，显著提升了模型对高阶语义关联的建模能力。   YOLO26是Ultralytics团队于2025年9月发布、2026年1月正式开源的全新一代实时目标检测模型，它代表了目标检测技术的范式性变革。与前代YOLO系列相比，YOLO26彻底移除了非极大值抑制（NMS）这一后处理步骤，首次实现了&quot;原生端到端无NMS&quot;的推理能力，同时保留了轻量级设计和高效训练策略。这一突破不仅解决了NMS带来的延迟不稳定性与超参敏感问题，还通过HyperACE（超图自适应相关性增强）和FullPAD（全流程聚合与分发）两大创新架构，显著提升了模型对高阶语义关联的建模能力，尤其在复杂场景下表现优异。此外，YOLO26还引入了STAL（空间-尺度自适应标签分配）和ProgLoss（渐进式损失平衡）...</div></div></div></a><a class="pagination-related" href="/2026/02/04/Paper/YOLOv10/" title="YOLOv10技术文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-04</div><div class="info-item-2">YOLOv10技术文档</div></div><div class="info-2"><div class="info-item-1">[TOC] 核心摘要   端到端革命: 通过无NMS训练策略，彻底消除后处理，实现真正的端到端实时检测，显著降低延迟。   效率与精度: 通过轻量化模型设计，在保持高精度的同时，参数量和计算量显著降低，实现双赢。   硬件适配: 提供从边缘设备到高性能GPU服务器的全系列预训练模型，满足不同硬件的部署需求。   1. 概述 YOLOv10（You Only Look Once v10）是清华大学THU-MIG团队与Ultralytics合作开发的新一代实时端到端目标检测框架，于2024年5月正式发布。作为YOLO系列的里程碑式迭代，YOLOv10通过创新性的无NMS（非极大值抑制）训练策略和效率-精度驱动的模型设计，在保持高精度的同时显著降低了计算复杂度，实现了真正的端到端实时检测。 YOLOv10的核心突破在于：  完全消除NMS后处理：通过&quot;一致双分配&quot;策略，使模型在训练时利用多标签监督，推理时直接输出最终检测框，无需依赖后处理 全面优化计算路径：通过轻量化分类头、空间-通道解耦下采样、基于秩的块设计等技术，实现参数与计算量的显著降低 多硬件适配：从边缘设...</div></div></div></a><a class="pagination-related" href="/2026/02/06/Paper/YOLOv12/" title="YOLOv12技术文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-06</div><div class="info-item-2">YOLOv12技术文档</div></div><div class="info-2"><div class="info-item-1">[TOC] 核心摘要   核心范式: 首个以注意力机制为核心的实时目标检测模型，开创“注意力+实时检测”新范式。   关键创新: 引入区域注意力(A²)机制和残差高效层聚合网络(R-ELAN)两大核心技术。   性能突破: 在相似推理速度下，mAP提升约1.2%，小目标检测性能提升12%。   YOLOv12（You Only Look Once v12）是Ultralytics团队于2025年初推出的首个以注意力机制为核心的实时目标检测模型，它成功解决了注意力机制在实时检测任务中面临的计算复杂度高、内存访问效率低等核心挑战。YOLOv12通过引入区域注意力（A²）机制和残差高效层聚合网络（R-ELAN）两大核心技术，在保持与传统CNN架构相当推理速度的同时，实现了显著的精度提升。与前代YOLOv11相比，YOLOv12在相似推理速度下mAP提升约1.2%，同时小目标检测性能提升12%，为实时目标检测领域带来了革命性突破。  关键结论 (Key Takeaway) YOLOv12是首个以注意力机制为核心的实时目标检测模型，它通过引入区域注意力（A²）机制和残差高效层聚合网络（R-...</div></div></div></a><a class="pagination-related" href="/2026/02/07/Paper/YOLOv13/" title="YOLOv13技术文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-07</div><div class="info-item-2">YOLOv13技术文档</div></div><div class="info-2"><div class="info-item-1">[TOC] 核心摘要   核心创新: 引入HyperACE超图机制与FullPAD范式，首次将超图计算应用于实时目标检测，实现全局高阶关联建模。   性能突破: 相比YOLOv12，参数量减少12%，COCO数据集mAP提升1.5%，边缘设备推理速度提升40%，实现精度与速度的平衡。   架构设计: 采用基于深度可分离卷积的轻量化设计，并发布Nano、Small、Large、X-Large四种变体，全面覆盖从边缘到云端的部署需求。   YOLOv13是Ultralytics团队于2025年推出的最新实时目标检测模型，它继承了YOLO系列&quot;一步到位&quot;的核心思想，同时在特征关联建模和网络架构设计上实现了革命性突破。YOLOv13引入了HyperACE（超图自适应相关性增强）机制和FullPAD（全流程聚合与分发）范式，首次将超图计算技术应用于实时目标检测领域，解决了传统YOLO系列模型在复杂场景下高阶语义关联建模能力不足的问题。此外，YOLOv13还采用了基于深度可分离卷积的轻量化设计，使模型在保持高精度的同时实现了更低的计算复杂度和更小的模型体积。 YOLOv1...</div></div></div></a><a class="pagination-related" href="/2026/02/03/Paper/YOLO%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/" title="YOLO系列论文解读(v1-v9)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-03</div><div class="info-item-2">YOLO系列论文解读(v1-v9)</div></div><div class="info-2"><div class="info-item-1">[TOC] YOLO 简史    YOLO（You Only Look Once）是一种流行的目标检测和图像分割模型，于 2015 年推出，因其高速和高精度而广受欢迎。   YOLOv2于2016年发布，通过引入批量归一化(batch normalization)、锚框(anchor boxes)和维度聚类(dimension clusters)，改进了原始模型。   YOLOv3于2018年推出，通过使用更高效的主干网络、多个锚点(multiple anchors)和空间金字塔池化(spatial pyramid pooling)，进一步提高了模型的性能。   YOLOv4于 2020 年发布，引入了诸如 Mosaic 数据增强、一种新的无锚框检测头(anchor-free detection head)以及一种新的 损失函数等创新。   YOLOv5 进一步提高了模型的性能，并添加了新功能，例如超参数优化、集成实验跟踪和自动导出为流行的导出格式。   YOLOv6 由美团于 2022 年开源，并已应用于该公司的许多自动送货机器人中。   YOLOv7 添加了其他任务，例如在 ...</div></div></div></a><a class="pagination-related" href="/2024/11/05/Paper/GraphSAGE_Inductive%20Representation%20Learning%20on%20Large%20Graphs/" title="Graph SAGE: Inductive Representation Learning on Large Graphs"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-05</div><div class="info-item-2">Graph SAGE: Inductive Representation Learning on Large Graphs</div></div><div class="info-2"><div class="info-item-1">Inductive Representation Learning on Large Graphs </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1.概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%BB%93%E8%AE%BA-YOLOv11m-%E6%80%A7%E8%83%BD"><span class="toc-number">1.1.</span> <span class="toc-text">关键结论: YOLOv11m 性能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%A0%B8%E5%BF%83%E5%88%9B%E6%96%B0"><span class="toc-number">2.</span> <span class="toc-text">2.核心创新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-C3k2%E6%A8%A1%E5%9D%97"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 C3k2模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-%E7%BB%93%E6%9E%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1 结构原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8A%BF"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2 性能优势</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-C2PSA%E6%A8%A1%E5%9D%97"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 C2PSA模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E6%A8%A1%E5%9D%97%E7%BB%84%E6%88%90"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 模块组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E8%AE%BE%E8%AE%A1%E5%8A%A8%E6%9C%BA"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 设计动机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.2.3 性能提升</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%BB%93%E8%AE%BA-%E5%B0%8F%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B"><span class="toc-number">2.2.4.</span> <span class="toc-text">关键结论: 小目标检测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF%EF%BC%88DWConv%EF%BC%89%E5%BA%94%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 深度可分离卷积（DWConv）应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.1.</span> <span class="toc-text">2.3.1 技术原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-%E8%BE%B9%E7%BC%98%E8%AE%BE%E5%A4%87%E4%BC%98%E5%8A%BF"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.3.2 边缘设备优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">3. 网络架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 整体框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%AA%A8%E5%B9%B2%E7%BD%91%E7%BB%9C%EF%BC%88Backbone%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 骨干网络（Backbone）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E7%89%B9%E5%BE%81%E8%9E%8D%E5%90%88%E7%BD%91%E7%BB%9C%EF%BC%88Neck%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 特征融合网络（Neck）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E6%A3%80%E6%B5%8B%E5%A4%B4%EF%BC%88Head%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 检测头（Head）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E6%A8%A1%E5%9E%8B%E8%A7%84%E6%A8%A1%E5%B7%AE%E5%BC%82"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 模型规模差异</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Performance"><span class="toc-number">4.</span> <span class="toc-text">4. Performance</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-COCO-%E6%95%B0%E6%8D%AE%E9%9B%86%E6%80%A7%E8%83%BD"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 COCO 数据集性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-VisDrone-%E6%95%B0%E6%8D%AE%E9%9B%86%E6%80%A7%E8%83%BD"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 VisDrone 数据集性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%A4%9A%E7%A1%AC%E4%BB%B6%E9%83%A8%E7%BD%B2%E6%80%A7%E8%83%BD"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 多硬件部署性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E4%B8%8E%E5%85%B6%E4%BB%96-SOTA-%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 与其他 SOTA 模型对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AE%AD%E7%BB%83%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97"><span class="toc-number">5.</span> <span class="toc-text">5. 训练与部署指南</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-1-%E5%9F%BA%E7%A1%80%E4%BE%9D%E8%B5%96"><span class="toc-number">5.1.1.</span> <span class="toc-text">5.1.1 基础依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%87%86%E5%A4%87"><span class="toc-number">5.1.2.</span> <span class="toc-text">5.1.2 数据集准备</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%9F%BA%E7%A1%80%E8%AE%AD%E7%BB%83%E5%91%BD%E4%BB%A4"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 基础训练命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-1-%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%AE%AD%E7%BB%83"><span class="toc-number">5.2.1.</span> <span class="toc-text">5.2.1 命令行训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-2-Python-API-%E8%AE%AD%E7%BB%83"><span class="toc-number">5.2.2.</span> <span class="toc-text">5.2.2 Python API 训练</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 训练参数详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E9%AB%98%E7%BA%A7%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 高级训练技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-1-%E5%B0%8F%E7%9B%AE%E6%A0%87%E5%A2%9E%E5%BC%BA%E8%AE%AD%E7%BB%83"><span class="toc-number">5.4.1.</span> <span class="toc-text">5.4.1 小目标增强训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-2-%E9%87%8F%E5%8C%96%E6%84%9F%E7%9F%A5%E8%AE%AD%E7%BB%83%EF%BC%88QAT%EF%BC%89"><span class="toc-number">5.4.2.</span> <span class="toc-text">5.4.2 量化感知训练（QAT）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-3-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%81%94%E5%90%88%E8%AE%AD%E7%BB%83"><span class="toc-number">5.4.3.</span> <span class="toc-text">5.4.3 多任务联合训练</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E6%A8%A1%E5%9E%8B%E5%AF%BC%E5%87%BA"><span class="toc-number">5.5.</span> <span class="toc-text">5.5 模型导出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-1-ONNX-%E5%AF%BC%E5%87%BA"><span class="toc-number">5.5.1.</span> <span class="toc-text">5.5.1 ONNX 导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-2-TensorRT-%E9%87%8F%E5%8C%96%E5%AF%BC%E5%87%BA"><span class="toc-number">5.5.2.</span> <span class="toc-text">5.5.2 TensorRT 量化导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-3-CoreML-%E5%AF%BC%E5%87%BA"><span class="toc-number">5.5.3.</span> <span class="toc-text">5.5.3 CoreML 导出</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-%E6%8E%A8%E7%90%86%E7%A4%BA%E4%BE%8B"><span class="toc-number">5.6.</span> <span class="toc-text">5.6 推理示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6-1-%E5%9B%BE%E5%83%8F%E6%A3%80%E6%B5%8B"><span class="toc-number">5.6.1.</span> <span class="toc-text">5.6.1 图像检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6-2-%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86"><span class="toc-number">5.6.2.</span> <span class="toc-text">5.6.2 视频流处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6-3-%E5%AE%9E%E4%BE%8B%E5%88%86%E5%89%B2"><span class="toc-number">5.6.3.</span> <span class="toc-text">5.6.3 实例分割</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-%E9%83%A8%E7%BD%B2%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7"><span class="toc-number">5.7.</span> <span class="toc-text">5.7 部署优化技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-7-1-%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E6%8E%A8%E7%90%86"><span class="toc-number">5.7.1.</span> <span class="toc-text">5.7.1 混合精度推理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-7-2-%E5%8A%A8%E6%80%81%E8%BE%93%E5%85%A5%E5%B0%BA%E5%AF%B8"><span class="toc-number">5.7.2.</span> <span class="toc-text">5.7.2 动态输入尺寸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-7-3-%E8%BE%B9%E7%BC%98%E8%AE%BE%E5%A4%87%E9%83%A8%E7%BD%B2"><span class="toc-number">5.7.3.</span> <span class="toc-text">5.7.3 边缘设备部署</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">6.</span> <span class="toc-text">6. 常见问题与解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 模型加载问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%E9%97%AE%E9%A2%98"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 数据增强问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98"><span class="toc-number">6.3.</span> <span class="toc-text">6.3 部署问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%97%AE%E9%A2%98"><span class="toc-number">6.4.</span> <span class="toc-text">6.4 多任务模型训练问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E4%BC%98%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">7.</span> <span class="toc-text">7. 优缺点分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E6%8E%A8%E8%8D%90"><span class="toc-number">7.1.</span> <span class="toc-text">7.1 适用场景推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E4%B8%8E%E5%85%B6%E4%BB%96-YOLO-%E7%89%88%E6%9C%AC%E5%AF%B9%E6%AF%94"><span class="toc-number">7.2.</span> <span class="toc-text">7.2 与其他 YOLO 版本对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E7%BB%93%E8%AE%BA%E4%B8%8E%E5%B1%95%E6%9C%9B"><span class="toc-number">8.</span> <span class="toc-text">8. 结论与展望</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

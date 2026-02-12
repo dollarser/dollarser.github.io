@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC]  名称：Read Like Humans: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition 论文：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2103.06495 会议：AAAI2020 Github: https:&#x2F;&#x2F;github.com&#x2F;FangShanchen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2025/04/22/Paper/ABINet_Autonomous,%20Bidirectional%20and%20Iterative%20Language%20Modeling%20for%20Scene%20Text%20Recognition/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="[TOC]  名称：Read Like Humans: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition 论文：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2103.06495 会议：AAAI2020 Github: https:&#x2F;&#x2F;github.com&#x2F;FangShanchen">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2025-04-22T09:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.979Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="CVPR 2021">
+<meta property="article:tag" content="OCR">
+<meta property="article:tag" content="paper">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition",
+  "url": "http://blog.sunlingzhang.com/2025/04/22/Paper/ABINet_Autonomous,%20Bidirectional%20and%20Iterative%20Language%20Modeling%20for%20Scene%20Text%20Recognition/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2025-04-22T09:00:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.979Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2025/04/22/Paper/ABINet_Autonomous,%20Bidirectional%20and%20Iterative%20Language%20Modeling%20for%20Scene%20Text%20Recognition/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-04-22T09:00:00.000Z" title="Created 2025-04-22 17:00:00">2025-04-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.979Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/paper/">paper</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>[TOC]</p>
+<ul>
+<li>名称：Read Like Humans: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition</li>
+<li>论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2103.06495">https://arxiv.org/abs/2103.06495</a></li>
+<li>会议：AAAI2020</li>
+<li>Github: <a target="_blank" rel="noopener" href="https://github.com/FangShancheng/ABINet">https://github.com/FangShancheng/ABINet</a></li>
+</ul>
+<p>ABINet（Attention-based Bidirectional Network）是一种用于场景文本识别（Scene Text Recognition, STR）的深度学习模型。它在处理复杂背景、噪声干扰以及弯曲或倾斜文本时表现出色。ABINet 的核心创新点是引入了 <strong>双向注意力机制</strong> 和 <strong>迭代优化策略</strong> ，从而显著提升了文本识别的准确性和鲁棒性。</p>
+<p>以下是 ABINet 的详细解析，包括其架构设计、工作原理、优势和实现细节。</p>
+<hr>
+<h3 id="1-ABINet-的背景">1. <strong>ABINet 的背景</strong></h3>
+<h4 id="问题">问题</h4>
+<ul>
+<li>自然场景中的文本通常具有复杂的形状（如弯曲、倾斜等），并且背景可能包含大量噪声。</li>
+<li>传统的基于分类的方法（如 CRNN）难以处理长文本和复杂背景。</li>
+<li>现有的注意力机制通常只关注单向信息流（从左到右或从右到左），忽略了上下文的双向依赖关系。</li>
+</ul>
+<h4 id="解决方案">解决方案</h4>
+<ul>
+<li>ABINet 提出了一个端到端的框架，通过以下创新点解决上述问题：
+<ol>
+<li><strong>双向注意力机制</strong> ：同时建模从左到右和从右到左的上下文信息，本质就是<strong>Bert</strong>。</li>
+<li><strong>迭代优化策略</strong> ：通过多次迭代逐步优化预测结果。</li>
+<li><strong>视觉和语言联合建模</strong> ：结合视觉特征和语言先验知识，提升识别性能。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<span id="more"></span>
+<h3 id="2-ABINet-的架构">2. <strong>ABINet 的架构</strong></h3>
+<p><img src="/img/ocr/image-20250422170653342.png" alt="image-20250422170653342"></p>
+<p>ABINet 的整体架构包括以下几个关键部分：</p>
+<h4 id="2-1-主干网络（Backbone）">2.1 <strong>主干网络（Backbone）</strong></h4>
+<ul>
+<li>主干网络用于提取输入图像的视觉特征。</li>
+<li>常用的主干网络包括 ResNet、MobileNet 等。</li>
+<li>输出是一个特征图，表示每个位置的视觉特征。</li>
+</ul>
+<h4 id="2-2-视觉注意力模块（Visual-Attention-Module）">2.2 <strong>视觉注意力模块（Visual Attention Module）</strong></h4>
+<p>主干网络提取特征图，位置编码初始化Q，K是特征图经过Unet生成，V是特征图本身。学习每个位置编码关注的文本区域。</p>
+<p><img src="/img/ocr/image-20250422171519011.png" alt="image-20250422171519011"></p>
+<ul>
+<li>视觉注意力模块基于编码器-解码器结构，利用注意力机制生成字符序列。</li>
+<li>包括两个方向的注意力：
+<ul>
+<li><strong>正向注意力</strong> ：从左到右生成字符序列。</li>
+<li><strong>反向注意力</strong> ：从右到左生成字符序列。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-3-语言模型模块（Language-Model-Module）">2.3 <strong>语言模型模块（Language Model Module）</strong></h4>
+<ul>
+<li><strong>Q由位置编码初始化，K和V由视觉概率图提供</strong></li>
+<li>完形填空式预测：只看上下文，自己不进行attention，所有增加了Mask</li>
+<li>视觉模型只负责提取特征，后续矫正只更新文本模型</li>
+</ul>
+<p><img src="/img/ocr/image-20250422171618159.png" alt="image-20250422171618159"></p>
+<ul>
+<li>语言模型模块基于双向 Transformer，利用语言先验知识对字符序列进行校正。</li>
+<li>它能够捕捉字符之间的依赖关系，从而提高识别的准确性。</li>
+</ul>
+<h4 id="2-4-迭代优化策略">2.4 <strong>迭代优化策略</strong></h4>
+<ul>
+<li>ABINet 采用多次迭代的方式逐步优化预测结果：
+<ol>
+<li>第一次迭代：基于视觉特征生成初步的字符序列。</li>
+<li>后续迭代：结合语言模型对初步结果进行校正。</li>
+<li>最终输出：后续经过多次迭代后的最优预测结果。</li>
+<li><strong>迭代只有第一次和第二次用到视觉特征，之后的输入都只来自融合模型</strong></li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="3-ABINet-的工作原理">3. <strong>ABINet 的工作原理</strong></h3>
+<h4 id="3-1-双向注意力机制">3.1 <strong>双向注意力机制</strong></h4>
+<ul>
+<li>正向注意力和反向注意力分别建模从左到右和从右到左的上下文信息。</li>
+<li>通过融合两个方向的注意力结果，获得更全面的上下文信息。</li>
+</ul>
+<h4 id="3-2-语言模型的作用">3.2 <strong>语言模型的作用</strong></h4>
+<ul>
+<li>语言模型模块基于 Transformer 架构，利用双向注意力机制捕捉字符之间的依赖关系。</li>
+<li>它能够纠正初步预测中的错误（如拼写错误或顺序错误）。</li>
+</ul>
+<h4 id="3-3-迭代优化">3.3 <strong>迭代优化</strong></h4>
+<ul>
+<li>每次迭代都会将前一次的预测结果作为输入，结合语言模型进行进一步优化。</li>
+<li>这种迭代策略能够逐步逼近最优解，尤其适用于长文本和复杂场景。</li>
+</ul>
+<hr>
+<h3 id="4-ABINet-的优势">4. <strong>ABINet 的优势</strong></h3>
+<ol>
+<li><strong>双向上下文建模</strong>
+<ul>
+<li>通过双向注意力机制，充分利用了上下文信息，提高了识别的准确性。</li>
+</ul>
+</li>
+<li><strong>语言先验知识</strong>
+<ul>
+<li>结合语言模型模块，能够捕捉字符之间的依赖关系，从而纠正初步预测中的错误。</li>
+</ul>
+</li>
+<li><strong>迭代优化</strong>
+<ul>
+<li>多次迭代逐步优化预测结果，特别适合处理长文本和复杂场景。</li>
+</ul>
+</li>
+<li><strong>鲁棒性</strong>
+<ul>
+<li>能够处理弯曲、倾斜、遮挡等复杂场景中的文本。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="5-代码实现">5. <strong>代码实现</strong></h3>
+<p>以下是一个基于 PyTorch 的简化实现示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ABINet</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, backbone, num_classes, max_iter=<span class="number">3</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(ABINet, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.backbone = backbone</span><br><span class="line">        <span class="variable language_">self</span>.visual_attention = VisualAttentionModule(num_classes)</span><br><span class="line">        <span class="variable language_">self</span>.language_model = LanguageModelModule(num_classes)</span><br><span class="line">        <span class="variable language_">self</span>.max_iter = max_iter</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="comment"># 主干网络提取特征</span></span><br><span class="line">        features = <span class="variable language_">self</span>.backbone(x)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 初始化预测结果</span></span><br><span class="line">        predictions = <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 迭代优化</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.max_iter):</span><br><span class="line">            <span class="comment"># 视觉注意力模块生成初步预测</span></span><br><span class="line">            <span class="keyword">if</span> predictions <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                visual_output = <span class="variable language_">self</span>.visual_attention(features)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                visual_output = <span class="variable language_">self</span>.visual_attention(features, predictions)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 语言模型模块校正预测结果</span></span><br><span class="line">            predictions = <span class="variable language_">self</span>.language_model(visual_output)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> predictions</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VisualAttentionModule</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, num_classes</span>):</span><br><span class="line">        <span class="built_in">super</span>(VisualAttentionModule, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.attention = nn.MultiheadAttention(embed_dim=<span class="number">512</span>, num_heads=<span class="number">8</span>)</span><br><span class="line">        <span class="variable language_">self</span>.fc = nn.Linear(<span class="number">512</span>, num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, features, prev_predictions=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="comment"># 注意力机制生成字符序列</span></span><br><span class="line">        attention_output, _ = <span class="variable language_">self</span>.attention(features, features, features)</span><br><span class="line">        logits = <span class="variable language_">self</span>.fc(attention_output)</span><br><span class="line">        <span class="keyword">return</span> logits</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LanguageModelModule</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, num_classes</span>):</span><br><span class="line">        <span class="built_in">super</span>(LanguageModelModule, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.transformer = nn.Transformer(d_model=<span class="number">512</span>, num_encoder_layers=<span class="number">2</span>, num_decoder_layers=<span class="number">2</span>)</span><br><span class="line">        <span class="variable language_">self</span>.fc = nn.Linear(<span class="number">512</span>, num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, inputs</span>):</span><br><span class="line">        <span class="comment"># 双向 Transformer 校正字符序列</span></span><br><span class="line">        transformer_output = <span class="variable language_">self</span>.transformer(inputs, inputs)</span><br><span class="line">        logits = <span class="variable language_">self</span>.fc(transformer_output)</span><br><span class="line">        <span class="keyword">return</span> logits</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例用法</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment"># 定义一个简单的主干网络</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">SimpleBackbone</span>(nn.Module):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">            <span class="built_in">super</span>(SimpleBackbone, <span class="variable language_">self</span>).__init__()</span><br><span class="line">            <span class="variable language_">self</span>.conv = nn.Conv2d(<span class="number">3</span>, <span class="number">512</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.conv(x)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化模型</span></span><br><span class="line">    backbone = SimpleBackbone()</span><br><span class="line">    model = ABINet(backbone, num_classes=<span class="number">37</span>)  <span class="comment"># 假设有 36 个字符 + 1 个空白符</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 输入图像</span></span><br><span class="line">    image = torch.randn(<span class="number">1</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">128</span>)  <span class="comment"># [B, C, H, W]</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 前向传播</span></span><br><span class="line">    predictions = model(image)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;预测结果形状：&quot;</span>, predictions.shape)</span><br></pre></td></tr></table></figure>
+<h3 id="6-运行结果">6. <strong>运行结果</strong></h3>
+<p>假设输入图像的尺寸为 <code>[1, 3, 32, 128]</code>，则输出结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">预测结果形状： torch.Size([1, L, 37])</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>L</code> 是字符序列的最大长度。</li>
+<li><code>37</code> 是词汇表的大小（包括空白符）。</li>
+</ul>
+<hr>
+<h3 id="7-注意事项">7. <strong>注意事项</strong></h3>
+<ol>
+<li><strong>主干网络的选择</strong>
+<ul>
+<li>主干网络的选择会影响特征提取的质量，建议使用预训练的深度网络（如 ResNet、MobileNet）。</li>
+</ul>
+</li>
+<li><strong>迭代次数的设置</strong>
+<ul>
+<li>迭代次数需要根据具体任务进行调整，过多的迭代可能导致过拟合。</li>
+</ul>
+</li>
+<li><strong>语言模型的设计</strong>
+<ul>
+<li>语言模型的架构需要结合具体任务，确保能够捕捉字符之间的依赖关系。</li>
+</ul>
+</li>
+<li><strong>后处理</strong>
+<ul>
+<li>在推理阶段，需要对预测结果进行解码（如使用贪婪搜索或束搜索）生成最终的文本。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="8-总结">8. <strong>总结</strong></h3>
+<p>ABINet 是一种高效的场景文本识别模型，通过引入双向注意力机制和迭代优化策略，解决了传统方法中上下文信息不足和长文本识别困难的问题。它的设计简单且高效，能够处理复杂的自然场景文本识别任务。通过结合视觉特征和语言先验知识，ABINet 在精度和鲁棒性之间取得了良好的平衡，成为场景文本识别领域的经典方法之一。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2025/04/22/Paper/ABINet_Autonomous,%20Bidirectional%20and%20Iterative%20Language%20Modeling%20for%20Scene%20Text%20Recognition/">http://blog.sunlingzhang.com/2025/04/22/Paper/ABINet_Autonomous,%20Bidirectional%20and%20Iterative%20Language%20Modeling%20for%20Scene%20Text%20Recognition/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OCR/">OCR</a><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/CVPR-2021/">CVPR 2021</a><a class="post-meta__tags" href="/tags/paper/">paper</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/04/22/Paper/CTPN_Detecting%20Text%20in%20Natural%20Image%20with%20Connectionist%20Text%20Proposal%20Network/" title="Detecting Text in Natural Image with Connectionist Text Proposal Network"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Detecting Text in Natural Image with Connectionist Text Proposal Network</div></div><div class="info-2"><div class="info-item-1">名称：Detecting Text in Natural Image with Connectionist Text Proposal Network 论文：https://arxiv.org/abs/1609.03605 会议：ECCV 2016 github: https://github.com/tianzhi0549/CTPN  CTPN（Connectionist Text Proposal Network）是一种基于深度学习的文本检测算法，擅长在自然场景图像中定位文本行。其核心思想是将文本行分解为多个小文本段（text proposals），再通过序列连接形成完整文本行 。以下从算法流程、关键技术、优缺点及改进方向展开详解：  一、算法流程  特征提取 使用预训练的CNN（如VGG16）提取图像特征，得到高维特征图（如conv5层输出）。 双向LSTM序列建模 在特征图上滑动窗口（如3×3），每个窗口生成固定高度（如11px）的锚点（anchors），覆盖不同宽度（如16px、32px等）。通过双向LSTM捕捉水平方向的文本序列上下文信息，增强对长文本的建模能力。 文...</div></div></div></a><a class="pagination-related" href="/2025/04/21/Paper/DBNet_Real-time%20Scene%20Text%20Detection%20with%20Differentiable%20Binarization/" title="DBNet: Real-time Scene Text Detection with Differentiable Binarization"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">DBNet: Real-time Scene Text Detection with Differentiable Binarization</div></div><div class="info-2"><div class="info-item-1">[TOC] 名称：DBNet: Real-time Scene Text Detection with Differentiable Binarization 论文：https://arxiv.org/abs/1911.08947 会议：AAAI2020 V2：Real-Time Scene Text Detection with Differentiable Binarization and Adaptive Scale Fusion V2：https://arxiv.org/abs/2202.10304 顶刊：TPAMI 2022  DBNet（Differentiable Binarization Network）是一种用于文本检测的深度学习模型，特别适用于自然场景中的文本检测任务。它在处理弯曲、倾斜或复杂背景中的文本时表现出色。DBNet 的核心创新点是引入了 可微分二值化（Differentiable Binarization, DB） 模块，使得模型能够在训练过程中直接优化分割掩码的二值化效果。 以下是 DBNet 的详细解析，包括其架构设计、工作原理、优势和实现细节...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/04/21/Paper/DBNet_Real-time%20Scene%20Text%20Detection%20with%20Differentiable%20Binarization/" title="DBNet: Real-time Scene Text Detection with Differentiable Binarization"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-21</div><div class="info-item-2">DBNet: Real-time Scene Text Detection with Differentiable Binarization</div></div><div class="info-2"><div class="info-item-1">[TOC] 名称：DBNet: Real-time Scene Text Detection with Differentiable Binarization 论文：https://arxiv.org/abs/1911.08947 会议：AAAI2020 V2：Real-Time Scene Text Detection with Differentiable Binarization and Adaptive Scale Fusion V2：https://arxiv.org/abs/2202.10304 顶刊：TPAMI 2022  DBNet（Differentiable Binarization Network）是一种用于文本检测的深度学习模型，特别适用于自然场景中的文本检测任务。它在处理弯曲、倾斜或复杂背景中的文本时表现出色。DBNet 的核心创新点是引入了 可微分二值化（Differentiable Binarization, DB） 模块，使得模型能够在训练过程中直接优化分割掩码的二值化效果。 以下是 DBNet 的详细解析，包括其架构设计、工作原理、优势和实现细节...</div></div></div></a><a class="pagination-related" href="/2025/08/05/Paper/Multi-Head%20Latent%20Attention%20(MLA)/" title="Multi-Head Latent Attention (MLA)详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-05</div><div class="info-item-2">Multi-Head Latent Attention (MLA)详解</div></div><div class="info-2"><div class="info-item-1">Multi-Head Latent Attention (MLA)详解   论文 DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model   github: DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model   参考博客：   https://www.bilibili.com/video/BV1wjQvY6Enm   https://bruceyuan.com/post/hands-on-deepseek-mla-projection-absorption.html   https://kexue.fm/archives/10091   https://github.com/madsys-dev/deepseekv2-profile/blob/main/workspace/blog/optimizing-mla.md   1234洞见：1.位置编码目前是添加...</div></div></div></a><a class="pagination-related" href="/2024/12/05/Paper/Mask2Former_Masked-attention%20Mask%20Transformer%20for%20Universal%20Image%20Segmentation/" title="Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-05</div><div class="info-item-2">Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation</div></div><div class="info-2"><div class="info-item-1">摘要 图像分割将具有不同语义（如类别或实例成员关系）的像素分组，每种语义选择定义了一项任务。虽然各项任务仅在语义上有所不同，但当前研究主要集中于为每个任务设计专门的架构。我们提出了掩码注意力掩码变换器（Mask2Former），这是一种能够处理任何图像分割任务（全景、实例或语义）的新架构。其关键组件包括掩码注意力，它通过将交叉注意力约束在预测掩码区域内来提取局部特征。除了将研究工作量至少减少三倍外，它在四个流行数据集上显著优于最佳专用架构。最值得注意的是，Mask2Former 在全景分割（COCO 上的 57.8 PQ）、实例分割（COCO 上的 50.1 AP）和语义分割（ADE20K 上的 57.7 mIoU）方面设定了新的最先进水平。  1. 引言 图像分割研究像素分组问题。像素分组的不同语义，例如类别或实例成员关系，导致了不同类型的分割任务，如全景、实例或语义分割。虽然这些任务仅在语义上有所不同，但当前方法为每个任务开发专门的架构。基于全卷积网络（FCN）的逐像素分类架构用于语义分割，而预测一组与单个类别相关联的二进制掩码的掩码分类架构在实例级分割中占主导地位。尽管这些...</div></div></div></a><a class="pagination-related" href="/2024/11/05/Paper/GraphSAGE_Inductive%20Representation%20Learning%20on%20Large%20Graphs/" title="Graph SAGE: Inductive Representation Learning on Large Graphs"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-05</div><div class="info-item-2">Graph SAGE: Inductive Representation Learning on Large Graphs</div></div><div class="info-2"><div class="info-item-1">Inductive Representation Learning on Large Graphs </div></div></div></a><a class="pagination-related" href="/2020/07/02/Paper/Unifying%20Deep%20Local%20and%20Global%20Features%20for%20Image%20Search/" title="Unifying Deep Local and Global Features for Image Search"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="info-item-2">Unifying Deep Local and Global Features for Image Search</div></div><div class="info-2"><div class="info-item-1">统一局部和全局特征进行图像搜索的深层(网络) ​    本文使用机翻，稍加润色，主要用于个人理解，不恰当之处请看客见谅。 摘要 图像检索是在图像数据库中搜索与查询图像相似的项的问题。为了解决这一问题，研究了两种主要的图像表示方法：全局图像特征和局部图像特征。在这项工作中，我们的主要贡献是将全局和局部特征统一到一个单一的深度模型中，从而实现精确的检索和高效的特征提取。我们将新模型称为DELG，代表了深层网络的本地和全局特性。我们利用最近特征学习工作的经验教训，提出了一个将全局特征的广义均值池和局部特征的注意选择相结合的模型。通过仔细平衡两部分之间的梯度流，整个网络可以端到端地学习——只需要图像级别的标签。我们还引入了一种基于自动编码器的局部特征降维技术，并将其集成到模型中，提高了训练效率和匹配性能。在重新修改的牛津和巴黎数据集上的实验表明，我们共同学习的基于ResNet-50的特征优于使用深层全局特征（大多数具有更重量级的主干）和那些进一步使用局部特征重新排序的结果。代码和模型将被发布。 关键词：deep features，image retrieval，unified model...</div></div></div></a><a class="pagination-related" href="/2025/04/22/Paper/CTPN_Detecting%20Text%20in%20Natural%20Image%20with%20Connectionist%20Text%20Proposal%20Network/" title="Detecting Text in Natural Image with Connectionist Text Proposal Network"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-22</div><div class="info-item-2">Detecting Text in Natural Image with Connectionist Text Proposal Network</div></div><div class="info-2"><div class="info-item-1">名称：Detecting Text in Natural Image with Connectionist Text Proposal Network 论文：https://arxiv.org/abs/1609.03605 会议：ECCV 2016 github: https://github.com/tianzhi0549/CTPN  CTPN（Connectionist Text Proposal Network）是一种基于深度学习的文本检测算法，擅长在自然场景图像中定位文本行。其核心思想是将文本行分解为多个小文本段（text proposals），再通过序列连接形成完整文本行 。以下从算法流程、关键技术、优缺点及改进方向展开详解：  一、算法流程  特征提取 使用预训练的CNN（如VGG16）提取图像特征，得到高维特征图（如conv5层输出）。 双向LSTM序列建模 在特征图上滑动窗口（如3×3），每个窗口生成固定高度（如11px）的锚点（anchors），覆盖不同宽度（如16px、32px等）。通过双向LSTM捕捉水平方向的文本序列上下文信息，增强对长文本的建模能力。 文...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ABINet-%E7%9A%84%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">1. ABINet 的背景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ABINet-%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">2. ABINet 的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E4%B8%BB%E5%B9%B2%E7%BD%91%E7%BB%9C%EF%BC%88Backbone%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 主干网络（Backbone）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E8%A7%86%E8%A7%89%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%EF%BC%88Visual-Attention-Module%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 视觉注意力模块（Visual Attention Module）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E6%A8%A1%E5%9D%97%EF%BC%88Language-Model-Module%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 语言模型模块（Language Model Module）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-%E8%BF%AD%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 迭代优化策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ABINet-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">3. ABINet 的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%8F%8C%E5%90%91%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 双向注意力机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 语言模型的作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E8%BF%AD%E4%BB%A3%E4%BC%98%E5%8C%96"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 迭代优化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-ABINet-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">4.</span> <span class="toc-text">4. ABINet 的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">5. 代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">6.</span> <span class="toc-text">6. 运行结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">7.</span> <span class="toc-text">7. 注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%80%BB%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">8. 总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

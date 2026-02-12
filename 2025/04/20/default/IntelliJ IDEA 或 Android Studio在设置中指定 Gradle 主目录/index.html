@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Android Studio配置Gradle | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在IntelliJ IDEA 和Android Studio 中，可以通过以下步骤指定 Gradle 主目录（Gradle Home Directory）。这个设置允许你使用手动安装的 Gradle 版本，而不是依赖 IDE 自动下载的版本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio配置Gradle">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2025/04/20/default/IntelliJ%20IDEA%20%E6%88%96%20Android%20Studio%E5%9C%A8%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%8C%87%E5%AE%9A%20Gradle%20%E4%B8%BB%E7%9B%AE%E5%BD%95/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="在IntelliJ IDEA 和Android Studio 中，可以通过以下步骤指定 Gradle 主目录（Gradle Home Directory）。这个设置允许你使用手动安装的 Gradle 版本，而不是依赖 IDE 自动下载的版本。">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2025-04-20T15:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.981Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Gradle">
+<meta property="article:tag" content="入门实践">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Android Studio配置Gradle",
+  "url": "http://blog.sunlingzhang.com/2025/04/20/default/IntelliJ%20IDEA%20%E6%88%96%20Android%20Studio%E5%9C%A8%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%8C%87%E5%AE%9A%20Gradle%20%E4%B8%BB%E7%9B%AE%E5%BD%95/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2025-04-20T15:00:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.981Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2025/04/20/default/IntelliJ%20IDEA%20%E6%88%96%20Android%20Studio%E5%9C%A8%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%8C%87%E5%AE%9A%20Gradle%20%E4%B8%BB%E7%9B%AE%E5%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Android Studio配置Gradle',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">Android Studio配置Gradle</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Android Studio配置Gradle</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-04-20T15:00:00.000Z" title="Created 2025-04-20 23:00:00">2025-04-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.981Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>在<strong>IntelliJ IDEA</strong> 和<strong>Android Studio</strong> 中，可以通过以下步骤指定 Gradle 主目录（Gradle Home Directory）。这个设置允许你使用手动安装的 Gradle 版本，而不是依赖 IDE 自动下载的版本。</p>
+<span id="more"></span>
+<hr>
+<h3 id="步骤-1：打开设置窗口"><strong>步骤 1：打开设置窗口</strong></h3>
+<ol>
+<li>启动 IntelliJ IDEA 或 Android Studio。</li>
+<li>打开 <strong>设置/首选项</strong> 窗口：
+<ul>
+<li><strong>Windows/Linux</strong> 作系统 ：<code>File &gt; Settings</code>。</li>
+<li><strong>macOS</strong> ：<code>IntelliJ IDEA &gt; Preferences</code>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="步骤-2：导航到-Gradle-设置"><strong>步骤 2：导航到 Gradle 设置</strong></h3>
+<ol>
+<li>在设置窗口中，展开左侧的<strong>Build, Execution, Deployment</strong> 菜单</li>
+<li>点击<strong>Build Tools &gt; Gradle</strong> 。</li>
+</ol>
+<hr>
+<h3 id="步骤-3：指定-Gradle-主目录"><strong>步骤 3：指定 Gradle 主目录</strong></h3>
+<p>在右侧的 Gradle 设置面板中，找到**“Gradle JVM”** 和**“Use Gradle from”** 部分</p>
+<h5 id="选项-1：使用-Gradle-Wrapper"><strong>选项 1：使用 Gradle Wrapper</strong></h5>
+<ul>
+<li>默认情况下，IDE 会选择**‘gradle-wrapper.properties’ 文件**。</li>
+<li>这意味着 IDE 会根据项目中的<code>gradle/wrapper/gradle-wrapper.properties</code>文件自动下载并使用指定的 Gradle 版本。</li>
+<li>如果你希望继续使用 Wrapper 方式，则无需更改此设置。</li>
+</ul>
+<h5 id="选项-2：手动指定-Gradle-主目录"><strong>选项 2：手动指定 Gradle 主目录</strong></h5>
+<p>如果需要手动指定 Gradle 主目录，请按照以下步骤作：</p>
+<ol>
+<li>将**“Distribution”** 下<strong>指定位置</strong> 。</li>
+<li>点击右侧的文件夹图标（或直接输入路径），选择你手动安装的 Gradle 目录。
+<ul>
+<li>例如：
+<ul>
+<li>Windows：<code>C:\Gradle\gradle-8.11.1</code></li>
+<li>macOS/Linux：<code>/opt/gradle/gradle-8.11.1</code></li>
+</ul>
+</li>
+<li>确保该目录包含以下子目录和文件：
+<ul>
+<li><code>bin/gradle</code>（可执行文件）</li>
+<li><code>lib/gradle</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="步骤-4：配置-Gradle-JVM"><strong>步骤 4：配置 Gradle JVM</strong></h3>
+<ol>
+<li>在同一设置页面，找到 <strong>Gradle JVM</strong> 部分。</li>
+<li>选择一个合适的 JDK 版本用于运行 Gradle。
+<ul>
+<li>如果未列出所需的 JDK，可以点击右侧的下拉菜单，选择<strong>添加 JDK</strong> 并</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="步骤-5：应用更改"><strong>步骤 5：应用更改</strong></h3>
+<ol>
+<li>点击<strong>Apply</strong> 或 <strong>OK</strong> 按钮保存设置。</li>
+<li>如果项目已经打开，IDE 可能会提示重新加载 Gradle 配置。点击<strong>Reload</strong> 或 <strong>Sync Now</strong>以应用更改。</li>
+</ol>
+<hr>
+<h3 id="步骤-6：验证设置是否生效"><strong>步骤 6：验证设置是否生效</strong></h3>
+<ol>
+<li>
+<p>打开终端（Terminal）窗口，运行以下命令检查 Gradle 版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle --version</span><br></pre></td></tr></table></figure>
+<p>输出应显示你指定的 Gradle 版本。</p>
+</li>
+<li>
+<p>在 IDE 中，尝试构建项目，确保 Gradle 构建成功。</p>
+</li>
+</ol>
+<hr>
+<h3 id="额外注意事项"><strong>额外注意事项</strong></h3>
+<ol>
+<li>
+<p><strong>兼容性检查</strong> ：</p>
+<ul>
+<li>
+<p>确保指定的 Gradle 版本与项目的<code>build.gradle</code>文件兼容。</p>
+</li>
+<li>
+<p>如果项目需要特定的 Gradle 版本，请参考<code>gradle-wrapper.properties</code>文件中的<code>distributionUrl</code>。</p>
+</li>
+<li>
+<p>示例 <code>gradle-wrapper.properties</code>文件内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distributionUrl=https\://services.gradle.org/distributions/gradle-8.11.1-bin.zip</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>环境变量</strong> ：</p>
+<ul>
+<li>如果你在系统中设置了<code>GRADLE_HOME</code>环境变量，IDE 通常会自动检测到它，但仍需在设置中明确指定路径</li>
+</ul>
+</li>
+<li>
+<p><strong>代理设置</strong></p>
+<p>如果你的网络需要代理，确保在 IDE 的 HTTP Proxy 设置中正确配置代理信息：</p>
+<ul>
+<li>路径：<code>File &gt; Settings &gt; Appearance &amp; Behavior &gt; System Settings &gt; HTTP Proxy</code></li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>通过以上步骤，你可以成功在 IntelliJ IDEA 或 Android Studio 中指定 Gradle 主目录，并使用手动安装的 Gradle 版本进行项目构建。如果有其他问题，请随时补充说明！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2025/04/20/default/IntelliJ%20IDEA%20%E6%88%96%20Android%20Studio%E5%9C%A8%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%8C%87%E5%AE%9A%20Gradle%20%E4%B8%BB%E7%9B%AE%E5%BD%95/">http://blog.sunlingzhang.com/2025/04/20/default/IntelliJ%20IDEA%20%E6%88%96%20Android%20Studio%E5%9C%A8%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%8C%87%E5%AE%9A%20Gradle%20%E4%B8%BB%E7%9B%AE%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Gradle/">Gradle</a><a class="post-meta__tags" href="/tags/Android/">Android</a><a class="post-meta__tags" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/">入门实践</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/04/21/Paper/DBNet_Real-time%20Scene%20Text%20Detection%20with%20Differentiable%20Binarization/" title="DBNet: Real-time Scene Text Detection with Differentiable Binarization"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">DBNet: Real-time Scene Text Detection with Differentiable Binarization</div></div><div class="info-2"><div class="info-item-1">[TOC] 名称：DBNet: Real-time Scene Text Detection with Differentiable Binarization 论文：https://arxiv.org/abs/1911.08947 会议：AAAI2020 V2：Real-Time Scene Text Detection with Differentiable Binarization and Adaptive Scale Fusion V2：https://arxiv.org/abs/2202.10304 顶刊：TPAMI 2022  DBNet（Differentiable Binarization Network）是一种用于文本检测的深度学习模型，特别适用于自然场景中的文本检测任务。它在处理弯曲、倾斜或复杂背景中的文本时表现出色。DBNet 的核心创新点是引入了 可微分二值化（Differentiable Binarization, DB） 模块，使得模型能够在训练过程中直接优化分割掩码的二值化效果。 以下是 DBNet 的详细解析，包括其架构设计、工作原理、优势和实现细节...</div></div></div></a><a class="pagination-related" href="/2025/04/19/default/%E4%BD%BF%E7%94%A8%20Kivy%20%E6%88%96%E5%85%B6%E4%BB%96%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" title="Python开发安卓应用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Python开发安卓应用</div></div><div class="info-2"><div class="info-item-1">要在安卓设备上运行使用 PyQt 编写的程序，需要解决一个关键问题：PyQt 是为桌面环境设计的，而安卓是一个移动操作系统，直接在安卓上运行 PyQt 程序并不支持。不过，可以通过一些工具和框架将 PyQt 应用适配到安卓平台。以下是实现这一目标的主要方法和步骤：  1. 使用 Kivy 或其他移动开发框架 如果目标是开发跨平台的 Python 应用（包括安卓），可以考虑使用专门为移动设备设计的框架，例如 Kivy 或 BeeWare 。这些框架支持直接构建安卓应用，并且语法与 PyQt 类似。 原因：  PyQt 的 GUI 依赖于 Qt，而 Qt 在安卓上的支持有限。 Kivy 和 BeeWare 提供了更轻量级的解决方案，更适合移动设备。    2. 通过 PySide/Qt for Android Qt 官方提供了对安卓的支持（称为 “Qt for Android”），因此理论上可以通过以下方式将 PyQt 应用移植到安卓： 步骤：  安装 Qt for Android 工具链 下载并安装 Qt 官方提供的 Android 开发工具链，包括 Qt Creator 和 An...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/04/19/default/%E4%BD%BF%E7%94%A8%20Kivy%20%E6%88%96%E5%85%B6%E4%BB%96%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" title="Python开发安卓应用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-19</div><div class="info-item-2">Python开发安卓应用</div></div><div class="info-2"><div class="info-item-1">要在安卓设备上运行使用 PyQt 编写的程序，需要解决一个关键问题：PyQt 是为桌面环境设计的，而安卓是一个移动操作系统，直接在安卓上运行 PyQt 程序并不支持。不过，可以通过一些工具和框架将 PyQt 应用适配到安卓平台。以下是实现这一目标的主要方法和步骤：  1. 使用 Kivy 或其他移动开发框架 如果目标是开发跨平台的 Python 应用（包括安卓），可以考虑使用专门为移动设备设计的框架，例如 Kivy 或 BeeWare 。这些框架支持直接构建安卓应用，并且语法与 PyQt 类似。 原因：  PyQt 的 GUI 依赖于 Qt，而 Qt 在安卓上的支持有限。 Kivy 和 BeeWare 提供了更轻量级的解决方案，更适合移动设备。    2. 通过 PySide/Qt for Android Qt 官方提供了对安卓的支持（称为 “Qt for Android”），因此理论上可以通过以下方式将 PyQt 应用移植到安卓： 步骤：  安装 Qt for Android 工具链 下载并安装 Qt 官方提供的 Android 开发工具链，包括 Qt Creator 和 An...</div></div></div></a><a class="pagination-related" href="/2020/03/13/default/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/" title="Typora配合hexo编写文章"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-13</div><div class="info-item-2">Typora配合hexo编写文章</div></div><div class="info-2"><div class="info-item-1">图像插入设置  主要涉及Typora的两个参数设置  图片根目录设置  既告诉Typora哪个文件夹作为网站的根目录   图片复制路径  既图片插入时，自动复制图片到指定路径，如此上传至空间，才能生成正确的url        设置图像根目录   以hexo根目录下的source文件夹为例   该文件夹中的内容会上传至web根目录，因此此文件相当于网站的根目录   而文章所在目录为source文件夹下的_post文件夹, 根目录在文章的上级目录   因此设置图片根目录为..   既在标题栏添加此内容：typora-root-url: ..    设置图片目录  设置source文件夹下的img文件夹，为图片所在文件夹 因为img在source文件夹下，既在文章的上级目录下的img文件夹下 因此设置图片目录为..\img   既在标题连添加此内容：typora-copy-images-to: ..\img       注意事项：以上设置只能采用相对路径    Typora换行Enter键自动添加一个空行，Shift+Enter普通换行。  hexo 设置   无需进行设置  说明一...</div></div></div></a><a class="pagination-related" href="/2019/10/14/default/hexo%E9%81%BF%E5%9D%91%E5%B0%8F%E7%BB%93/" title="hexo避坑小结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-14</div><div class="info-item-2">hexo避坑小结</div></div><div class="info-2"><div class="info-item-1">简单记录一下搭建过程  启动（可能需要安装python）  hexo init / hexo init &lt;dir&gt; 此为hexo初始化，后加目录名则创建文件夹，将博客搭建环境部署在此文件夹下；否则将环境部署在当前文件夹下，故如果初始化不加文件夹，请手动创建一个文件夹后，在该文件夹下执行此命令。   远程部署  安装hexo-deployer-git，此为将hexo部署到github的插件，安装时若报错，提示缺eslint，则直接安装eslint即可，‘npm install  hexo-deployer-git --save’,另外可能是hexo-deployer-git没有创建软链接，手动创建即可：‘sudo ln -s /usr/local/&lt;nodejs安装目录&gt;/lib/node_modules/hexo-deployer-git /usr/bin/hexo-deployer-git’.   标签  注意hexo配置文件中每个’:‘后都有一个空格’ '，不要忘记，其次标签’tags:‘多标签不可在用’,‘隔开的形式，而是分行来写，各行之前均有一个’...</div></div></div></a><a class="pagination-related" href="/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="VS Code 常用快捷键"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-27</div><div class="info-item-2">VS Code 常用快捷键</div></div><div class="info-2"><div class="info-item-1">Visual Studio Code（VS Code）是开发者广泛使用的轻量级但功能强大的代码编辑器。掌握其常用快捷键可以极大提升编码效率。 以下整理了 Windows / Linux 和 macOS 两大平台的常用快捷键（括号内为 macOS 键位）：   🚀 一、通用导航与编辑    功能 Windows/Linux macOS 说明     保存文件 Ctrl + S Cmd + S 保存当前文件   撤销 Ctrl + Z Cmd + Z 撤销上一步操作   重做 Ctrl + Y 或 Ctrl + Shift + Z Cmd + Y 或 Cmd + Shift + Z 重做   复制一行 Ctrl + C（无选中） Cmd + C（无选中） 复制整行   剪切一行 Ctrl + X（无选中） Cmd + X（无选中） 剪切整行   删除一行 Ctrl + Shift + K Cmd + Shift + K 删除当前行   向上/下移动一行 Alt + ↑ / ↓ Option + ↑ / ↓ 移动当前行   复制一行到上下 Alt + Shift + ↑ / ↓ Op...</div></div></div></a><a class="pagination-related" href="/2021/10/07/default/mmWave%20Radar/" title="毫米波雷达"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-07</div><div class="info-item-2">毫米波雷达</div></div><div class="info-2"><div class="info-item-1">毫米波雷达-AWR2243 简介 毫米波雷达，是工作在毫米波波段（Millimeter Wave ）探测的雷达。通常毫米波是指30～300GHz频域(波长为1～10mm)的。毫米波的波长介于微波和厘米波之间，因此毫米波雷达兼有微波雷达和光学雷达的一些优点。 同厘米波雷达相比，毫米波雷达具有体积小、质量轻和空间分辨率高的特点。与红外、激光、电视等光学雷达相比，毫米波雷达穿透雾、烟、灰尘的能力强，具有全天候(大雨天除外)全天时的特点。另外，毫米波雷达的抗干扰、反隐身能力也优于其他微波雷达 。毫米波雷达能分辨识别很小的目标，而且能同时识别多个目标；具有成像能力，体积小、机动性和隐蔽性好，在战场上生存能力强 。 目前在自动驾驶，智能监控领域广泛运用。毫米波雷达能直接获取目标的距离，速度，角度等基本信息。通过对数据的进一步处理，对目标的尺寸，轮廓可能也有一定的估计能力。  1 调频连续波(FMCW) 调频连续波(Frequency-Modulated Continuous Wave)，是一组幅值不变，但频率变化的连续波形，毫米波雷达使用的调频连续波是频率线性增加的正弦波，又叫线性调频连续波...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1%EF%BC%9A%E6%89%93%E5%BC%80%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3"><span class="toc-number">1.</span> <span class="toc-text">步骤 1：打开设置窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-2%EF%BC%9A%E5%AF%BC%E8%88%AA%E5%88%B0-Gradle-%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">步骤 2：导航到 Gradle 设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-3%EF%BC%9A%E6%8C%87%E5%AE%9A-Gradle-%E4%B8%BB%E7%9B%AE%E5%BD%95"><span class="toc-number">3.</span> <span class="toc-text">步骤 3：指定 Gradle 主目录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%89%E9%A1%B9-1%EF%BC%9A%E4%BD%BF%E7%94%A8-Gradle-Wrapper"><span class="toc-number">3.1.</span> <span class="toc-text">选项 1：使用 Gradle Wrapper</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%89%E9%A1%B9-2%EF%BC%9A%E6%89%8B%E5%8A%A8%E6%8C%87%E5%AE%9A-Gradle-%E4%B8%BB%E7%9B%AE%E5%BD%95"><span class="toc-number">3.2.</span> <span class="toc-text">选项 2：手动指定 Gradle 主目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-4%EF%BC%9A%E9%85%8D%E7%BD%AE-Gradle-JVM"><span class="toc-number">4.</span> <span class="toc-text">步骤 4：配置 Gradle JVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-5%EF%BC%9A%E5%BA%94%E7%94%A8%E6%9B%B4%E6%94%B9"><span class="toc-number">5.</span> <span class="toc-text">步骤 5：应用更改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-6%EF%BC%9A%E9%AA%8C%E8%AF%81%E8%AE%BE%E7%BD%AE%E6%98%AF%E5%90%A6%E7%94%9F%E6%95%88"><span class="toc-number">6.</span> <span class="toc-text">步骤 6：验证设置是否生效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%9D%E5%A4%96%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">7.</span> <span class="toc-text">额外注意事项</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>损失函数-CTCLoss | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什么是CTCLoss？ CTC (Connectionist Temporal Classification) 是一种用于序列到序列学习的损失函数，特别适用于输入和输出长度不固定的场景。它在语音识别、手写体识别等任务中应用广泛。CTC 的核心思想是通过引入一个“空白”符号（blank token），允许模型对不定长的输入序列生成不定长的输出序列，同时避免了对输入和输出进行显式的对齐操作。 传统的序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="损失函数-CTCLoss">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-CTCLoss/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="什么是CTCLoss？ CTC (Connectionist Temporal Classification) 是一种用于序列到序列学习的损失函数，特别适用于输入和输出长度不固定的场景。它在语音识别、手写体识别等任务中应用广泛。CTC 的核心思想是通过引入一个“空白”符号（blank token），允许模型对不定长的输入序列生成不定长的输出序列，同时避免了对输入和输出进行显式的对齐操作。 传统的序">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2025-04-16T06:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.981Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="CTCLoss">
+<meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "损失函数-CTCLoss",
+  "url": "http://blog.sunlingzhang.com/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-CTCLoss/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2025-04-16T06:00:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.981Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-CTCLoss/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '损失函数-CTCLoss',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">损失函数-CTCLoss</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">损失函数-CTCLoss</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-04-16T06:00:00.000Z" title="Created 2025-04-16 14:00:00">2025-04-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.981Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h3 id="什么是CTCLoss？">什么是CTCLoss？</h3>
+<p>CTC (Connectionist Temporal Classification) 是一种用于序列到序列学习的损失函数，特别适用于输入和输出长度不固定的场景。它在语音识别、手写体识别等任务中应用广泛。CTC 的核心思想是通过引入一个“空白”符号（blank token），允许模型对不定长的输入序列生成不定长的输出序列，同时避免了对输入和输出进行显式的对齐操作。</p>
+<p>传统的序列标注方法通常需要将输入和输出进行严格的对齐（例如，逐帧标注），而 CTC 允许模型自动学习输入和输出之间的对齐关系，从而大大简化了训练过程。</p>
+<hr>
+<span id="more"></span>
+<h3 id="CTCLoss-的工作原理">CTCLoss 的工作原理</h3>
+<h4 id="1-输入与输出的关系">1. <strong>输入与输出的关系</strong></h4>
+<ul>
+<li>输入是一个不定长的序列，比如语音信号或手写笔迹的时间序列。</li>
+<li>输出是一个较短的目标序列，比如文本转录结果。</li>
+<li>输入和输出的长度可能不同，且没有明确的对齐关系。</li>
+</ul>
+<h4 id="2-引入空白符号">2. <strong>引入空白符号</strong></h4>
+<p>CTC 引入了一个特殊的“空白”符号（通常记作 <code>-</code> 或 <code>blank</code>），表示某个时间步没有对应的输出。空白符号在最终的输出中会被移除。</p>
+<h4 id="3-路径的概念">3. <strong>路径的概念</strong></h4>
+<p>CTC 将输入序列到输出序列的所有可能对齐方式称为“路径”。例如：</p>
+<ul>
+<li>输入序列长度为 <em>T</em>，目标序列长度为 <em>L</em>。</li>
+<li>每个时间步可以选择输出字符或空白符号。</li>
+<li>所有可能的路径构成了所有可能的输入到输出的对齐方式。</li>
+</ul>
+<h4 id="4-路径的约束">4. <strong>路径的约束</strong></h4>
+<p>为了保证输出的有效性，CTC 对路径施加了一些约束：</p>
+<ul>
+<li>相邻的重复字符会被合并。例如，路径 <code>a--a-b</code> 会被解码为 <code>ab</code>。</li>
+<li>空白符号会被忽略。例如，路径 <code>a-b---c</code> 会被解码为 <code>abc</code>。</li>
+</ul>
+<h4 id="5-概率计算">5. <strong>概率计算</strong></h4>
+<p>对于每个可能的路径，CTC 计算其概率，并将所有可能路径的概率相加，得到目标序列的总概率。</p>
+<h4 id="6-损失函数">6. <strong>损失函数</strong></h4>
+<p>CTC Loss 的目标是最大化目标序列的总概率（即最小化负对数似然）。公式如下：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>C</mi><mi>T</mi><mi>C</mi><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo>=</mo><mo>−</mo><mi>l</mi><mi>o</mi><mi>g</mi><mrow><munder><mo>∑</mo><mrow><mi>π</mi><mo>∈</mo><mi>P</mi><mi>a</mi><mi>t</mi><mi>h</mi><mi>s</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></munder><mi>P</mi><mo stretchy="false">(</mo><mi>π</mi><mo>∣</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">CTC Loss=−log{\sum_{π\in Paths(y)} P(π∣X)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">CTC</span><span class="mord mathnormal">L</span><span class="mord mathnormal">oss</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.566em;vertical-align:-1.516em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.809em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">s</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.516em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span></span></span></p>
+<p>其中：</p>
+<ul>
+<li>Paths(<em>y</em>) 表示所有能生成目标序列 <em>y</em> 的路径集合。</li>
+<li><em>P</em>(<em>π</em>∣<em>X</em>) 表示给定输入 <em>X</em> 时路径 <em>π</em> 的概率。</li>
+</ul>
+<hr>
+<h3 id="CTCLoss-的计算过程演示">CTCLoss 的计算过程演示</h3>
+<p>假设我们有以下输入和目标序列：</p>
+<h4 id="输入序列">输入序列</h4>
+<ul>
+<li>输入序列为一个长度为 <em>T</em>=6 的特征序列。</li>
+<li>模型的输出是一个 <em>T</em>×<em>V</em> 的矩阵，其中 <em>V</em> 是词汇表大小（包括空白符号）。</li>
+<li>假设词汇表为 <code>{a, b, c, blank}</code>，则 <em>V</em>=4。</li>
+</ul>
+<h4 id="目标序列">目标序列</h4>
+<ul>
+<li>目标序列为 <code>abc</code>。</li>
+</ul>
+<h4 id="步骤-1：生成所有可能路径">步骤 1：生成所有可能路径</h4>
+<p>CTC 需要找到所有可以生成目标序列 <code>abc</code> 的路径。例如：</p>
+<ul>
+<li>路径 <code>a-b-c</code>。</li>
+<li>路径 <code>a-b-c-blank</code>。</li>
+<li>路径 <code>a-blank-b-c</code>。</li>
+<li>路径 <code>a-blank-blank-b-c</code>。</li>
+<li>等等。</li>
+</ul>
+<p>注意：相邻的重复字符会被合并，因此路径 <code>a-a-b-c</code> 也会被解码为 <code>abc</code>。</p>
+<h4 id="步骤-2：计算每条路径的概率">步骤 2：计算每条路径的概率</h4>
+<p>对于每条路径，计算其概率。假设模型输出的 <em>T</em>×<em>V</em> 矩阵如下：</p>
+<table>
+<thead>
+<tr>
+<th>时间步</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>blank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.4</td>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.3</td>
+<td>0.4</td>
+<td>0.1</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.1</td>
+<td>0.3</td>
+<td>0.4</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.2</td>
+<td>0.3</td>
+<td>0.2</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.1</td>
+<td>0.2</td>
+<td>0.5</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0.1</td>
+<td>0.1</td>
+<td>0.6</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+<p>例如，路径 <code>a-b-c</code> 的概率为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><mo>−</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>t</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⋅</mo><mi>P</mi><mo stretchy="false">(</mo><mi>b</mi><mo>∣</mo><mi>t</mi><mo>=</mo><mn>2</mn><mo stretchy="false">)</mo><mo>⋅</mo><mi>P</mi><mo stretchy="false">(</mo><mi>c</mi><mo>∣</mo><mi>t</mi><mo>=</mo><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0.4</mn><mo>⋅</mo><mn>0.4</mn><mo>⋅</mo><mn>0.4</mn><mo>=</mo><mn>0.064</mn></mrow><annotation encoding="application/x-tex">P(a−b-c)=P(a|t=1)⋅P(b∣t=2)⋅P(c∣t=3) = 0.4 ⋅ 0.4 ⋅ 0.4 = 0.064
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord">∣</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.064</span></span></span></span></span></p>
+<p>例如，路径 <code>a-b-blank-c</code> 的概率为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>a</mi><mo>−</mo><mi>b</mi><mo>−</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false">(</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mi>t</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⋅</mo><mi>P</mi><mo stretchy="false">(</mo><mi>b</mi><mo>∣</mo><mi>t</mi><mo>=</mo><mn>2</mn><mo stretchy="false">)</mo><mo>⋅</mo><mi>P</mi><mo stretchy="false">(</mo><mi>b</mi><mi>l</mi><mi>a</mi><mi>n</mi><mi>k</mi><mo>∣</mo><mi>t</mi><mo>=</mo><mn>3</mn><mo stretchy="false">)</mo><mo>⋅</mo><mi>P</mi><mo stretchy="false">(</mo><mi>c</mi><mo>∣</mo><mi>t</mi><mo>=</mo><mn>4</mn><mo stretchy="false">)</mo><mo>=</mo><mn>0.4</mn><mo>⋅</mo><mn>0.4</mn><mo>⋅</mo><mn>0.2</mn><mo>⋅</mo><mn>0.4</mn><mo>=</mo><mn>0.0128</mn></mrow><annotation encoding="application/x-tex">P(a−b-c)=P(a|t=1) ⋅ P(b∣t=2) ⋅ P(blank∣t=3) ⋅ P(c∣t=4) = 0.4 ⋅ 0.4 ⋅ 0.2 ⋅ 0.4 = 0.0128
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mord">∣</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">b</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.03148em;">ank</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">4</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.0128</span></span></span></span></span></p>
+<h4 id="步骤-3：合并路径概率">步骤 3：合并路径概率</h4>
+<p>根据 CTC 的规则，将所有能生成目标序列 <code>abc</code> 的路径概率相加，得到目标序列的总概率。</p>
+<h4 id="步骤-4：计算损失">步骤 4：计算损失</h4>
+<p>最终，CTC Loss 为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>C</mi><mi>T</mi><mi>C</mi><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo>=</mo><mo>−</mo><mi>l</mi><mi>o</mi><mi>g</mi><mrow><munder><mo>∑</mo><mrow><mi>π</mi><mo>∈</mo><mi>P</mi><mi>a</mi><mi>t</mi><mi>h</mi><mi>s</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></munder><mi>P</mi><mo stretchy="false">(</mo><mi>π</mi><mo>∣</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">CTC Loss=−log{\sum_{π\in Paths(y)} P(π∣X)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">CTC</span><span class="mord mathnormal">L</span><span class="mord mathnormal">oss</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.566em;vertical-align:-1.516em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.809em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">π</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">s</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.516em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span></span></span></p>
+<h3 id="PyTorch实现">PyTorch实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="comment"># 参数定义</span></span><br><span class="line">T = <span class="number">6</span>               <span class="comment"># 时间步长（如音频帧数）</span></span><br><span class="line">N = <span class="number">1</span>               <span class="comment"># 批次大小</span></span><br><span class="line">C = <span class="number">4</span>               <span class="comment"># 类别数（含空白符）</span></span><br><span class="line">target_length = <span class="number">3</span>   <span class="comment"># 每个样本的标签长度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义输入输出</span></span><br><span class="line">log_probs = torch.tensor([</span><br><span class="line">    [[<span class="number">0.4</span>, <span class="number">0.1</span>, <span class="number">0.1</span>, <span class="number">0.4</span>],  <span class="comment"># t=1</span></span><br><span class="line">     [<span class="number">0.3</span>, <span class="number">0.4</span>, <span class="number">0.1</span>, <span class="number">0.2</span>],  <span class="comment"># t=2</span></span><br><span class="line">     [<span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.4</span>, <span class="number">0.2</span>],  <span class="comment"># t=3</span></span><br><span class="line">     [<span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.2</span>, <span class="number">0.3</span>],  <span class="comment"># t=4</span></span><br><span class="line">     [<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.5</span>, <span class="number">0.2</span>],  <span class="comment"># t=5</span></span><br><span class="line">     [<span class="number">0.1</span>, <span class="number">0.1</span>, <span class="number">0.6</span>, <span class="number">0.2</span>]]  <span class="comment"># t=6</span></span><br><span class="line">], dtype=torch.float32).log_softmax(dim=<span class="number">2</span>)  <span class="comment"># 取对数概率</span></span><br><span class="line">log_probs = log_probs.permute(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>)  <span class="comment"># shape: time_step, batch_size, dimension</span></span><br><span class="line">targets = torch.tensor([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]])  <span class="comment"># 目标序列索引，对应 &#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义输入序列的实际长度</span></span><br><span class="line">input_lengths = torch.tensor([T]*N)  <span class="comment"># 输入序列长度</span></span><br><span class="line">input_lengths = torch.full(size=(N,), fill_value=T, dtype=torch.long)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签实际长度（假设每个样本的标签长度为 target_length）</span></span><br><span class="line">target_lengths = torch.tensor([<span class="built_in">len</span>(target) <span class="keyword">for</span> target <span class="keyword">in</span> targets])  <span class="comment"># 目标序列长度</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(target_lengths)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 CTCLoss</span></span><br><span class="line">ctc_loss = nn.CTCLoss(blank=<span class="number">3</span>)  <span class="comment"># 空白符号索引为 3</span></span><br><span class="line">loss = ctc_loss(log_probs, targets, input_lengths, target_lengths)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;CTC Loss:&quot;</span>, loss.item())</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-CTCLoss/">http://blog.sunlingzhang.com/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-CTCLoss/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PyTorch/">PyTorch</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/CTCLoss/">CTCLoss</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-LabelSmoothingCrossEntropy/" title="损失函数-Label Smoothing Cross Entropy"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">损失函数-Label Smoothing Cross Entropy</div></div><div class="info-2"><div class="info-item-1">Label Smoothing Cross Entropy介绍 Label Smoothing 是一种正则化技术，用于改进分类任务中的交叉熵损失函数。传统的交叉熵损失函数假设目标标签是硬性（hard）的，即每个样本只有一个正确的类别标签，并且该类别的概率为 1，其他类别的概率为 0。然而，这种硬性标签可能会导致模型过拟合训练数据，尤其是在训练数据有限或标签可能存在噪声的情况下。 Label Smoothing 的基本思想是对目标标签进行“平滑”处理，将原本硬性的标签分布替换为一个更柔和的分布。这样可以减少模型对单一类别的过度自信，从而提高模型的泛化能力。    提出论文: Rethinking the Inception Architecture for Computer Vision 会议: CVPR 2016  Label Smoothing（标签平滑）的工作原理 1. 传统交叉熵损失 在分类问题中，交叉熵损失函数定义如下： Cross Entropy Loss=−∑i=1Cyilog(pi)Cross\ Entropy\ Loss = -\sum_{i=1}^{C} y_i...</div></div></div></a><a class="pagination-related" href="/2024/12/05/Paper/Mask2Former_Masked-attention%20Mask%20Transformer%20for%20Universal%20Image%20Segmentation/" title="Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation</div></div><div class="info-2"><div class="info-item-1">摘要 图像分割将具有不同语义（如类别或实例成员关系）的像素分组，每种语义选择定义了一项任务。虽然各项任务仅在语义上有所不同，但当前研究主要集中于为每个任务设计专门的架构。我们提出了掩码注意力掩码变换器（Mask2Former），这是一种能够处理任何图像分割任务（全景、实例或语义）的新架构。其关键组件包括掩码注意力，它通过将交叉注意力约束在预测掩码区域内来提取局部特征。除了将研究工作量至少减少三倍外，它在四个流行数据集上显著优于最佳专用架构。最值得注意的是，Mask2Former 在全景分割（COCO 上的 57.8 PQ）、实例分割（COCO 上的 50.1 AP）和语义分割（ADE20K 上的 57.7 mIoU）方面设定了新的最先进水平。  1. 引言 图像分割研究像素分组问题。像素分组的不同语义，例如类别或实例成员关系，导致了不同类型的分割任务，如全景、实例或语义分割。虽然这些任务仅在语义上有所不同，但当前方法为每个任务开发专门的架构。基于全卷积网络（FCN）的逐像素分类架构用于语义分割，而预测一组与单个类别相关联的二进制掩码的掩码分类架构在实例级分割中占主导地位。尽管这些...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-LabelSmoothingCrossEntropy/" title="损失函数-Label Smoothing Cross Entropy"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-16</div><div class="info-item-2">损失函数-Label Smoothing Cross Entropy</div></div><div class="info-2"><div class="info-item-1">Label Smoothing Cross Entropy介绍 Label Smoothing 是一种正则化技术，用于改进分类任务中的交叉熵损失函数。传统的交叉熵损失函数假设目标标签是硬性（hard）的，即每个样本只有一个正确的类别标签，并且该类别的概率为 1，其他类别的概率为 0。然而，这种硬性标签可能会导致模型过拟合训练数据，尤其是在训练数据有限或标签可能存在噪声的情况下。 Label Smoothing 的基本思想是对目标标签进行“平滑”处理，将原本硬性的标签分布替换为一个更柔和的分布。这样可以减少模型对单一类别的过度自信，从而提高模型的泛化能力。    提出论文: Rethinking the Inception Architecture for Computer Vision 会议: CVPR 2016  Label Smoothing（标签平滑）的工作原理 1. 传统交叉熵损失 在分类问题中，交叉熵损失函数定义如下： Cross Entropy Loss=−∑i=1Cyilog(pi)Cross\ Entropy\ Loss = -\sum_{i=1}^{C} y_i...</div></div></div></a><a class="pagination-related" href="/2025/04/17/Python/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2-%E6%B8%B8%E7%A8%8B%E7%BC%96%E7%A0%81/" title="语义分割-游程编码（Run-Length Encoding, RLE）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-17</div><div class="info-item-2">语义分割-游程编码（Run-Length Encoding, RLE）</div></div><div class="info-2"><div class="info-item-1">游程编码（RLE，Run-Length Encoding）是一种简单而有效的数据压缩方法，特别适用于具有大量连续重复值的数据。它在图像处理、分割掩码表示和时间序列数据压缩等领域有着广泛的应用。 它通过记录每个值的“运行长度”（即连续出现的次数）来减少存储空间。RLE 在图像处理、文件压缩和机器学习中都有广泛应用，例如在 COCO 数据集中用于表示分割掩码。  1. RLE 的基本概念 定义：  游程 ：一段连续的相同值。 编码 ：将每个游程用一对值表示，通常是 (值, 长度) 或 (长度, 值)或(起点, 长度)。  对于二值mask编码有简化形式  交替存储连续的前景像素数和背景像素数。示例：11100111110 编码为 [3, 2, 5, 1] 存储前景像素的起点和长度。示例：11100111110 编码为 [0, 3, 5, 5]      示例： 假设有一个二值数组 [0, 0, 0, 1, 1, 1, 1, 0, 0]：  使用 RLE 编码后可以表示为 [(0, 3), (1, 4), (0, 2)]，即：  0 出现了 3 次， 1 出现了 4 次， 0 又出现了...</div></div></div></a><a class="pagination-related" href="/2025/08/05/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="pytorch-常用激活函数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-05</div><div class="info-item-2">pytorch-常用激活函数</div></div><div class="info-2"><div class="info-item-1">激活函数的原则：  单调函数（或有极小一部分不单调） 非线性函数 具有良好的梯度    1. Sigmoid 函数 Sigmoid 是早期神经网络中常用的激活函数，其数学表达式为： f(x)=11+e−xf(x) = \frac{1}{1 + e^{-x}} f(x)=1+e−x1​  优点：输出值在 (0, 1) 区间内，适合用于二分类问题的概率预测。 缺点：容易出现梯度消失问题，计算量相对较大。  2. Tanh（双曲正切）函数 Tanh 的数学表达式如下： f(x)=tanh⁡(x)=ex−e−xex+e−x f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}  f(x)=tanh(x)=ex+e−xex−e−x​  优点：将输入值压缩到 (-1, 1)，对于后续的优化过程较为友好。 缺点：与 Sigmoid 类似，两端的导数接近于零，可能导致梯度消失问题。  3. ReLU（修正线性单元） ReLU 是当前深度学习中最常用的激活函数之一，定义为： f(x)=max⁡(0,x) f(x) = \max(0, x)  f(x...</div></div></div></a><a class="pagination-related" href="/2024/05/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%B0%83%E6%95%B4%E7%AD%96%E7%95%A5/" title="pytorch 常用的学习率调整策略"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-11</div><div class="info-item-2">pytorch 常用的学习率调整策略</div></div><div class="info-2"><div class="info-item-1">[TOC] 参考地址：https://zhuanlan.zhihu.com/p/538447997 官方文档：https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate 0. 基础 导入 1from torch.optim import lr_scheduler 常用的学习率策略  StepLR LambdaLR  基础代码 12345678910import torchimport numpy as npfrom torch.optim import SGDfrom torch.optim import lr_schedulerfrom torch.nn.parameter import Parameter# 随机创建一组模型参数model = [Parameter(torch.randn(2, 2, requires_grad=True))]# 使用SGD优化器，学习率设为0.1optimizer = SGD(model, lr=0.1)  1. StepLR 最简单且最常用的学习率调整方法，每...</div></div></div></a><a class="pagination-related" href="/2024/05/22/Python/YOLOV8%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" title="YOLOV8代码阅读"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-22</div><div class="info-item-2">YOLOV8代码阅读</div></div><div class="info-2"><div class="info-item-1">YOLOV8代码阅读  YOLO 训练参数 官网地址：训练参数    Argument Default Description     model None Specifies the model file for training. Accepts a path to either a .pt pretrained model or a .yaml configuration file. Essential for defining the model structure or initializing weights.   data None Path to the dataset configuration file (e.g., coco8.yaml). This file contains dataset-specific parameters, including paths to training and validation data, class names, and number of classes.   epochs 100 Total number of...</div></div></div></a><a class="pagination-related" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-10</div><div class="info-item-2">Muon优化器</div></div><div class="info-2"><div class="info-item-1"> 参考：   https://kexue.fm/archives/10592   https://kexue.fm/archives/10739   https://kexue.fm/archives/10922   https://kexue.fm/archives/10996    核心摘要   核心思想：将参数更新从逐元素提升到矩阵层面，通过正交化梯度矩阵实现更高效、更稳定的参数更新。   关键创新：使用Newton-Schulz迭代法近似求解梯度矩阵的正交化形式，在保持计算效率的同时提升收敛速度。   实际效益：训练效率提升约2倍，显著降低大模型研发成本，并可直接复用AdamW的超参数，降低工程成本。   Muon优化器：矩阵正交化与高效训练的数学革命 在深度学习优化算法领域，随着模型规模的指数级增长，传统优化器如AdamW在处理超大规模模型时逐渐显现出局限性。2024年，Keller Jordan提出了一种革命性的新优化器——Muon（Matrix Update with Orthogonalization），其核心思想是将参数更新从逐元素处理提升到矩阵层面，通过正交化...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFCTCLoss%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是CTCLoss？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CTCLoss-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">CTCLoss 的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.1.</span> <span class="toc-text">1. 输入与输出的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%BC%95%E5%85%A5%E7%A9%BA%E7%99%BD%E7%AC%A6%E5%8F%B7"><span class="toc-number">2.2.</span> <span class="toc-text">2. 引入空白符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%B7%AF%E5%BE%84%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">2.3.</span> <span class="toc-text">3. 路径的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%B7%AF%E5%BE%84%E7%9A%84%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.4.</span> <span class="toc-text">4. 路径的约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%A6%82%E7%8E%87%E8%AE%A1%E7%AE%97"><span class="toc-number">2.5.</span> <span class="toc-text">5. 概率计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">2.6.</span> <span class="toc-text">6. 损失函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CTCLoss-%E7%9A%84%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B%E6%BC%94%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">CTCLoss 的计算过程演示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E5%BA%8F%E5%88%97"><span class="toc-number">3.1.</span> <span class="toc-text">输入序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E5%BA%8F%E5%88%97"><span class="toc-number">3.2.</span> <span class="toc-text">目标序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1%EF%BC%9A%E7%94%9F%E6%88%90%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E8%B7%AF%E5%BE%84"><span class="toc-number">3.3.</span> <span class="toc-text">步骤 1：生成所有可能路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-2%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%AF%8F%E6%9D%A1%E8%B7%AF%E5%BE%84%E7%9A%84%E6%A6%82%E7%8E%87"><span class="toc-number">3.4.</span> <span class="toc-text">步骤 2：计算每条路径的概率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-3%EF%BC%9A%E5%90%88%E5%B9%B6%E8%B7%AF%E5%BE%84%E6%A6%82%E7%8E%87"><span class="toc-number">3.5.</span> <span class="toc-text">步骤 3：合并路径概率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-4%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%8D%9F%E5%A4%B1"><span class="toc-number">3.6.</span> <span class="toc-text">步骤 4：计算损失</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PyTorch%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">PyTorch实现</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

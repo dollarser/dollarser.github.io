@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Graph SAGE: Inductive Representation Learning on Large Graphs | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Inductive Representation Learning on Large Graphs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph SAGE: Inductive Representation Learning on Large Graphs">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2024/11/05/Paper/GraphSAGE_Inductive%20Representation%20Learning%20on%20Large%20Graphs/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="Inductive Representation Learning on Large Graphs">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2024-11-05T03:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.980Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="GCN">
+<meta property="article:tag" content="paper">
+<meta property="article:tag" content="论文翻译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Graph SAGE: Inductive Representation Learning on Large Graphs",
+  "url": "http://blog.sunlingzhang.com/2024/11/05/Paper/GraphSAGE_Inductive%20Representation%20Learning%20on%20Large%20Graphs/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2024-11-05T03:00:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.980Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2024/11/05/Paper/GraphSAGE_Inductive%20Representation%20Learning%20on%20Large%20Graphs/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Graph SAGE: Inductive Representation Learning on Large Graphs',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">Graph SAGE: Inductive Representation Learning on Large Graphs</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Graph SAGE: Inductive Representation Learning on Large Graphs</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-11-05T03:00:00.000Z" title="Created 2024-11-05 11:00:00">2024-11-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.980Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h1>Inductive Representation Learning on Large Graphs</h1>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2024/11/05/Paper/GraphSAGE_Inductive%20Representation%20Learning%20on%20Large%20Graphs/">http://blog.sunlingzhang.com/2024/11/05/Paper/GraphSAGE_Inductive%20Representation%20Learning%20on%20Large%20Graphs/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/paper/">paper</a><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/">论文翻译</a><a class="post-meta__tags" href="/tags/GCN/">GCN</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/12/05/Paper/Mask2Former_Masked-attention%20Mask%20Transformer%20for%20Universal%20Image%20Segmentation/" title="Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation</div></div><div class="info-2"><div class="info-item-1">摘要 图像分割将具有不同语义（如类别或实例成员关系）的像素分组，每种语义选择定义了一项任务。虽然各项任务仅在语义上有所不同，但当前研究主要集中于为每个任务设计专门的架构。我们提出了掩码注意力掩码变换器（Mask2Former），这是一种能够处理任何图像分割任务（全景、实例或语义）的新架构。其关键组件包括掩码注意力，它通过将交叉注意力约束在预测掩码区域内来提取局部特征。除了将研究工作量至少减少三倍外，它在四个流行数据集上显著优于最佳专用架构。最值得注意的是，Mask2Former 在全景分割（COCO 上的 57.8 PQ）、实例分割（COCO 上的 50.1 AP）和语义分割（ADE20K 上的 57.7 mIoU）方面设定了新的最先进水平。  1. 引言 图像分割研究像素分组问题。像素分组的不同语义，例如类别或实例成员关系，导致了不同类型的分割任务，如全景、实例或语义分割。虽然这些任务仅在语义上有所不同，但当前方法为每个任务开发专门的架构。基于全卷积网络（FCN）的逐像素分类架构用于语义分割，而预测一组与单个类别相关联的二进制掩码的掩码分类架构在实例级分割中占主导地位。尽管这些...</div></div></div></a><a class="pagination-related" href="/2024/08/27/Paper/Rethinking%20Table%20Recognition%20using%20%20GNN/" title="Rethinking Table Recognitionusing Graph Neural Networks"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Rethinking Table Recognitionusing Graph Neural Networks</div></div><div class="info-2"><div class="info-item-1">Rethinking Table Recognitionusing Graph Neural Networks 会议: ICDAR 2019 论文地址：https://arxiv.org/abs/1905.13391 github: https://github.com/shahrukhqasim/TIES-2.0 [TOC] 摘要 文档结构分析，例如区域分割和表格识别，是文档处理中的复杂问题，并且是一个活跃的研究领域。深度学习在解决各种计算机视觉和机器学习问题方面的近期成功尚未反映在文档结构分析中，因为传统的神经网络不适合该问题的输入结构。本文提出了一种基于图网络的架构作为标准神经网络更好的替代方案来识别表格。我们主张图网络对于这些问题是一种更自然的选择，并探索了两种基于梯度的图神经网络。我们的提出的架构结合了卷积神经网络用于视觉特征提取以及图网络用于处理问题结构的好处。我们在实验上证明，与基线相比，我们的方法具有显著的优势。此外，我们还指出大规模数据集缺乏是结构分析领域深度学习研究的主要障碍，并提出了一个针对表格识别的新大规模合成数据集。最后，我们开源了我们的数据生成和图网络...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/08/05/Paper/Hierarchical%20Graph%20Pooling%20with%20Structure%20Learning/" title="Hierarchical Graph Pooling with Structure Learning"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-05</div><div class="info-item-2">Hierarchical Graph Pooling with Structure Learning</div></div><div class="info-2"><div class="info-item-1">Hierarchical Graph Pooling with Structure Learning 会议: AAAI 2020(疑似撤稿) 论文地址：https://arxiv.org/abs/1911.05954 github: https://github.com/cszhangzhen/HGP-SL DGL开源库：https://github.com/dmlc/dgl/tree/master/examples/pytorch/hgp_sl [TOC] 摘要 图神经网络 (GNN) 将深度神经网络扩展到图结构数据，在许多图相关任务中取得了最先进的性能。然而，现有的 GNN 模型主要关注设计图卷积操作。图池化 (或下采样) 操作在分层表示学习中发挥着重要作用，通常被忽视。在这篇论文中，我们提出了一种新的图池化操作符，称为具有结构学习的分层图池化 (HGP-SL)，它可以集成到各种图神经网络架构中。HGP-SL 将图池化和结构学习集成到一个统一的模块中，以生成图的分层表示。具体来说，图池化操作根据我们定义的节点信息分数自适应地选择一组节点来形成一个诱导子图，用于后续层。为了保留...</div></div></div></a><a class="pagination-related" href="/2020/07/02/Paper/Unifying%20Deep%20Local%20and%20Global%20Features%20for%20Image%20Search/" title="Unifying Deep Local and Global Features for Image Search"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="info-item-2">Unifying Deep Local and Global Features for Image Search</div></div><div class="info-2"><div class="info-item-1">统一局部和全局特征进行图像搜索的深层(网络) ​    本文使用机翻，稍加润色，主要用于个人理解，不恰当之处请看客见谅。 摘要 图像检索是在图像数据库中搜索与查询图像相似的项的问题。为了解决这一问题，研究了两种主要的图像表示方法：全局图像特征和局部图像特征。在这项工作中，我们的主要贡献是将全局和局部特征统一到一个单一的深度模型中，从而实现精确的检索和高效的特征提取。我们将新模型称为DELG，代表了深层网络的本地和全局特性。我们利用最近特征学习工作的经验教训，提出了一个将全局特征的广义均值池和局部特征的注意选择相结合的模型。通过仔细平衡两部分之间的梯度流，整个网络可以端到端地学习——只需要图像级别的标签。我们还引入了一种基于自动编码器的局部特征降维技术，并将其集成到模型中，提高了训练效率和匹配性能。在重新修改的牛津和巴黎数据集上的实验表明，我们共同学习的基于ResNet-50的特征优于使用深层全局特征（大多数具有更重量级的主干）和那些进一步使用局部特征重新排序的结果。代码和模型将被发布。 关键词：deep features，image retrieval，unified model...</div></div></div></a><a class="pagination-related" href="/2024/12/05/Paper/Mask2Former_Masked-attention%20Mask%20Transformer%20for%20Universal%20Image%20Segmentation/" title="Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-05</div><div class="info-item-2">Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation</div></div><div class="info-2"><div class="info-item-1">摘要 图像分割将具有不同语义（如类别或实例成员关系）的像素分组，每种语义选择定义了一项任务。虽然各项任务仅在语义上有所不同，但当前研究主要集中于为每个任务设计专门的架构。我们提出了掩码注意力掩码变换器（Mask2Former），这是一种能够处理任何图像分割任务（全景、实例或语义）的新架构。其关键组件包括掩码注意力，它通过将交叉注意力约束在预测掩码区域内来提取局部特征。除了将研究工作量至少减少三倍外，它在四个流行数据集上显著优于最佳专用架构。最值得注意的是，Mask2Former 在全景分割（COCO 上的 57.8 PQ）、实例分割（COCO 上的 50.1 AP）和语义分割（ADE20K 上的 57.7 mIoU）方面设定了新的最先进水平。  1. 引言 图像分割研究像素分组问题。像素分组的不同语义，例如类别或实例成员关系，导致了不同类型的分割任务，如全景、实例或语义分割。虽然这些任务仅在语义上有所不同，但当前方法为每个任务开发专门的架构。基于全卷积网络（FCN）的逐像素分类架构用于语义分割，而预测一组与单个类别相关联的二进制掩码的掩码分类架构在实例级分割中占主导地位。尽管这些...</div></div></div></a><a class="pagination-related" href="/2024/08/21/Paper/GCN_Semi-Supervised%20Classification%20with%20Graph%20Convolutional%20Networks/" title="Semi-Supervised Classification with Graph Convolutional Networks"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-21</div><div class="info-item-2">Semi-Supervised Classification with Graph Convolutional Networks</div></div><div class="info-2"><div class="info-item-1">基于图卷积网络的半监督分类（GCN） 会议: ICLR 2017 论文地址：https://arxiv.org/abs/1609.02907 github: https://github.com/tkipf/pygcn  [TOC] 摘要 本文提出了一种可扩展的方法来处理图结构数据上的半监督学习，该方法基于一种高效的卷积神经网络变体，它直接在图上操作。本文通过局部一阶近似谱图卷积，优化我们的卷积架构的选择。我们的模型与图中边的数量线性相关，并且可以学习编码了图的局部结构和节点特征的隐藏层表示。我们在引用网络和知识图数据库上的一系列实验中展示了我们的方法相比其他相关方法具有显著优势。  1 简介 我们考虑在图（如文献引用网络）中对节点（如文档）进行分类的问题，其中仅有一小部分节点有标签。这个问题可以被看作基于图的半监督学习，通过某种显式的基于图的正则化形式来平滑（迁移）标签信息到图中，例如，在损失函数中使用图拉普拉斯正则化项：  式中，$L_0 $ 表示与图中带标签部分相关的监督损失。f(⋅)f(·)f(⋅)可以是类似于神经网络的可微函数，λλλ 是一个权重因子，XXX 是节点特征...</div></div></div></a><a class="pagination-related" href="/2025/04/22/Paper/ABINet_Autonomous,%20Bidirectional%20and%20Iterative%20Language%20Modeling%20for%20Scene%20Text%20Recognition/" title="ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-22</div><div class="info-item-2">ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition</div></div><div class="info-2"><div class="info-item-1">[TOC]  名称：Read Like Humans: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition 论文：https://arxiv.org/abs/2103.06495 会议：AAAI2020 Github: https://github.com/FangShancheng/ABINet  ABINet（Attention-based Bidirectional Network）是一种用于场景文本识别（Scene Text Recognition, STR）的深度学习模型。它在处理复杂背景、噪声干扰以及弯曲或倾斜文本时表现出色。ABINet 的核心创新点是引入了 双向注意力机制 和 迭代优化策略 ，从而显著提升了文本识别的准确性和鲁棒性。 以下是 ABINet 的详细解析，包括其架构设计、工作原理、优势和实现细节。  1. ABINet 的背景 问题  自然场景中的文本通常具有复杂的形状（如弯曲、倾斜等），并且背景可能包含大量噪声。 传统的基于分类的方法...</div></div></div></a><a class="pagination-related" href="/2025/04/21/Paper/DBNet_Real-time%20Scene%20Text%20Detection%20with%20Differentiable%20Binarization/" title="DBNet: Real-time Scene Text Detection with Differentiable Binarization"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-21</div><div class="info-item-2">DBNet: Real-time Scene Text Detection with Differentiable Binarization</div></div><div class="info-2"><div class="info-item-1">[TOC] 名称：DBNet: Real-time Scene Text Detection with Differentiable Binarization 论文：https://arxiv.org/abs/1911.08947 会议：AAAI2020 V2：Real-Time Scene Text Detection with Differentiable Binarization and Adaptive Scale Fusion V2：https://arxiv.org/abs/2202.10304 顶刊：TPAMI 2022  DBNet（Differentiable Binarization Network）是一种用于文本检测的深度学习模型，特别适用于自然场景中的文本检测任务。它在处理弯曲、倾斜或复杂背景中的文本时表现出色。DBNet 的核心创新点是引入了 可微分二值化（Differentiable Binarization, DB） 模块，使得模型能够在训练过程中直接优化分割掩码的二值化效果。 以下是 DBNet 的详细解析，包括其架构设计、工作原理、优势和实现细节...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Inductive Representation Learning on Large Graphs</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

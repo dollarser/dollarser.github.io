@@ -1,0 +1,615 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>VS Code 常用快捷键 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Visual Studio Code（VS Code）是开发者广泛使用的轻量级但功能强大的代码编辑器。掌握其常用快捷键可以极大提升编码效率。 以下整理了 Windows &#x2F; Linux 和 macOS 两大平台的常用快捷键（括号内为 macOS 键位）：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS Code 常用快捷键">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="Visual Studio Code（VS Code）是开发者广泛使用的轻量级但功能强大的代码编辑器。掌握其常用快捷键可以极大提升编码效率。 以下整理了 Windows &#x2F; Linux 和 macOS 两大平台的常用快捷键（括号内为 macOS 键位）：">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2025-08-27T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.981Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="入门实践">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "VS Code 常用快捷键",
+  "url": "http://blog.sunlingzhang.com/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2025-08-27T04:00:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.981Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'VS Code 常用快捷键',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">VS Code 常用快捷键</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">VS Code 常用快捷键</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-08-27T04:00:00.000Z" title="Created 2025-08-27 12:00:00">2025-08-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.981Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>Visual Studio Code（VS Code）是开发者广泛使用的轻量级但功能强大的代码编辑器。掌握其<strong>常用快捷键</strong>可以极大提升编码效率。</p>
+<p>以下整理了 <strong>Windows / Linux</strong> 和 <strong>macOS</strong> 两大平台的常用快捷键（括号内为 macOS 键位）：</p>
+<hr>
+<span id="more"></span>
+<h2 id="🚀-一、通用导航与编辑">🚀 一、通用导航与编辑</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Windows/Linux</th>
+<th>macOS</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>保存文件</td>
+<td><code>Ctrl + S</code></td>
+<td><code>Cmd + S</code></td>
+<td>保存当前文件</td>
+</tr>
+<tr>
+<td>撤销</td>
+<td><code>Ctrl + Z</code></td>
+<td><code>Cmd + Z</code></td>
+<td>撤销上一步操作</td>
+</tr>
+<tr>
+<td>重做</td>
+<td><code>Ctrl + Y</code> 或 <code>Ctrl + Shift + Z</code></td>
+<td><code>Cmd + Y</code> 或 <code>Cmd + Shift + Z</code></td>
+<td>重做</td>
+</tr>
+<tr>
+<td>复制一行</td>
+<td><code>Ctrl + C</code>（无选中）</td>
+<td><code>Cmd + C</code>（无选中）</td>
+<td>复制整行</td>
+</tr>
+<tr>
+<td>剪切一行</td>
+<td><code>Ctrl + X</code>（无选中）</td>
+<td><code>Cmd + X</code>（无选中）</td>
+<td>剪切整行</td>
+</tr>
+<tr>
+<td>删除一行</td>
+<td><code>Ctrl + Shift + K</code></td>
+<td><code>Cmd + Shift + K</code></td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>向上/下移动一行</td>
+<td><code>Alt + ↑ / ↓</code></td>
+<td><code>Option + ↑ / ↓</code></td>
+<td>移动当前行</td>
+</tr>
+<tr>
+<td>复制一行到上下</td>
+<td><code>Alt + Shift + ↑ / ↓</code></td>
+<td><code>Option + Shift + ↑ / ↓</code></td>
+<td>复制一行</td>
+</tr>
+<tr>
+<td>跳转到行首</td>
+<td><code>Home</code></td>
+<td><code>Cmd + ←</code></td>
+<td></td>
+</tr>
+<tr>
+<td>跳转到行尾</td>
+<td><code>End</code></td>
+<td><code>Cmd + →</code></td>
+<td></td>
+</tr>
+<tr>
+<td>跳转到文件开头</td>
+<td><code>Ctrl + Home</code></td>
+<td><code>Cmd + ↑</code></td>
+<td></td>
+</tr>
+<tr>
+<td>跳转到文件结尾</td>
+<td><code>Ctrl + End</code></td>
+<td><code>Cmd + ↓</code></td>
+<td></td>
+</tr>
+<tr>
+<td>查找</td>
+<td><code>Ctrl + F</code></td>
+<td><code>Cmd + F</code></td>
+<td>当前文件内查找</td>
+</tr>
+<tr>
+<td>替换</td>
+<td><code>Ctrl + H</code></td>
+<td><code>Cmd + H</code></td>
+<td>查找并替换</td>
+</tr>
+<tr>
+<td>全局搜索</td>
+<td><code>Ctrl + Shift + F</code></td>
+<td><code>Cmd + Shift + F</code></td>
+<td>在整个项目中搜索</td>
+</tr>
+<tr>
+<td>跳转到指定行</td>
+<td><code>Ctrl + G</code></td>
+<td><code>Cmd + G</code></td>
+<td>输入行号跳转</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="🌐-二、窗口与面板控制">🌐 二、窗口与面板控制</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Windows/Linux</th>
+<th>macOS</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打开命令面板</td>
+<td><code>Ctrl + Shift + P</code> 或 <code>F1</code></td>
+<td><code>Cmd + Shift + P</code> 或 <code>F1</code></td>
+<td>执行任何命令</td>
+</tr>
+<tr>
+<td>快速打开文件</td>
+<td><code>Ctrl + P</code></td>
+<td><code>Cmd + P</code></td>
+<td>模糊搜索并打开文件</td>
+</tr>
+<tr>
+<td>切换侧边栏显示</td>
+<td><code>Ctrl + B</code></td>
+<td><code>Cmd + B</code></td>
+<td>显示/隐藏资源管理器</td>
+</tr>
+<tr>
+<td>切换终端面板</td>
+<td><code>Ctrl + `</code></td>
+<td><code>Cmd + `</code></td>
+<td>打开/关闭集成终端</td>
+</tr>
+<tr>
+<td>分屏：垂直拆分</td>
+<td><code>Ctrl + \</code></td>
+<td><code>Cmd + \</code></td>
+<td>将当前编辑器垂直拆分</td>
+</tr>
+<tr>
+<td>在编辑器间切换</td>
+<td><code>Ctrl + 1/2/3</code></td>
+<td><code>Cmd + 1/2/3</code></td>
+<td>切换到第 1/2/3 个编辑器组</td>
+</tr>
+<tr>
+<td>关闭当前标签页</td>
+<td><code>Ctrl + W</code></td>
+<td><code>Cmd + W</code></td>
+<td>关闭当前文件</td>
+</tr>
+<tr>
+<td>新建文件</td>
+<td><code>Ctrl + N</code></td>
+<td><code>Cmd + N</code></td>
+<td>新建空白文件</td>
+</tr>
+<tr>
+<td>新建窗口</td>
+<td><code>Ctrl + Shift + N</code></td>
+<td><code>Cmd + Shift + N</code></td>
+<td>新建 VS Code 窗口</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="💡-三、代码编辑技巧">💡 三、代码编辑技巧</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>格式化代码</td>
+<td><code>Shift + Alt + F</code></td>
+<td>使用 Prettier、Black 等格式化</td>
+</tr>
+<tr>
+<td>智能提示</td>
+<td><code>Ctrl + Space</code></td>
+<td>触发代码补全</td>
+</tr>
+<tr>
+<td>注释/取消注释行</td>
+<td><code>Ctrl + /</code></td>
+<td>添加或移除 <code>#</code> 或 <code>//</code></td>
+</tr>
+<tr>
+<td>块注释（CSS/JS等）</td>
+<td><code>Ctrl + Shift + /</code></td>
+<td><code>/* ... */</code></td>
+</tr>
+<tr>
+<td>折叠代码块</td>
+<td><code>Ctrl + Shift + [</code></td>
+<td>折叠选中或当前块</td>
+</tr>
+<tr>
+<td>展开代码块</td>
+<td><code>Ctrl + Shift + ]</code></td>
+<td>展开折叠的块</td>
+</tr>
+<tr>
+<td>多光标选择</td>
+<td><code>Ctrl + Alt + ↑/↓</code></td>
+<td>向上/下添加光标</td>
+</tr>
+<tr>
+<td>选择当前单词</td>
+<td><code>Ctrl + D</code></td>
+<td>逐个选中相同单词（可多选编辑）</td>
+</tr>
+<tr>
+<td>跳转到定义</td>
+<td><code>F12</code> 或 <code>Ctrl + 点击</code></td>
+<td>跳转到函数/变量定义</td>
+</tr>
+<tr>
+<td>查看定义预览</td>
+<td><code>Alt + F12</code></td>
+<td>在弹出窗口中查看定义</td>
+</tr>
+<tr>
+<td>返回上一位置</td>
+<td><code>Alt + ←</code></td>
+<td>返回跳转前的位置</td>
+</tr>
+<tr>
+<td>前进</td>
+<td><code>Alt + →</code></td>
+<td>回到跳转后的位置</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="🔍-四、调试相关">🔍 四、调试相关</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开始/继续调试</td>
+<td><code>F5</code></td>
+<td>启动调试会话</td>
+</tr>
+<tr>
+<td>单步跳过（Step Over）</td>
+<td><code>F10</code></td>
+<td>执行下一行（不进入函数）</td>
+</tr>
+<tr>
+<td>单步进入（Step Into）</td>
+<td><code>F11</code></td>
+<td>进入函数内部</td>
+</tr>
+<tr>
+<td>单步跳出（Step Out）</td>
+<td><code>Shift + F11</code></td>
+<td>从当前函数跳出</td>
+</tr>
+<tr>
+<td>切换断点</td>
+<td><code>F9</code></td>
+<td>在当前行设置/取消断点</td>
+</tr>
+<tr>
+<td>重启调试</td>
+<td><code>Ctrl + Shift + F5</code></td>
+<td>重新启动调试</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="🧩-五、高级技巧（效率神器）">🧩 五、高级技巧（效率神器）</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>重命名符号</td>
+<td><code>F2</code></td>
+<td>安全重命名变量、函数名（自动更新所有引用）</td>
+</tr>
+<tr>
+<td>查看引用</td>
+<td><code>Shift + F12</code></td>
+<td>查看一个函数/变量的所有引用</td>
+</tr>
+<tr>
+<td>快速修复</td>
+<td><code>Ctrl + .</code></td>
+<td>显示修复建议（如导入缺失模块）</td>
+</tr>
+<tr>
+<td>行内自动补全</td>
+<td><code>Ctrl + Shift + Space</code></td>
+<td>在方法参数等场景下提供类型提示</td>
+</tr>
+<tr>
+<td>删除到行尾</td>
+<td><code>Ctrl + Delete</code></td>
+<td>删除从光标到行尾内容</td>
+</tr>
+<tr>
+<td>删除到行首</td>
+<td><code>Ctrl + Backspace</code></td>
+<td>删除从光标到行首内容</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="⚙️-六、自定义快捷键">⚙️ 六、自定义快捷键</h2>
+<p>你可以根据习惯自定义快捷键：</p>
+<ol>
+<li>打开命令面板：<code>Ctrl + Shift + P</code></li>
+<li>输入：<code>Preferences: Open Keyboard Shortcuts</code></li>
+<li>搜索功能并修改快捷键</li>
+</ol>
+<p>你也可以导出/导入快捷键设置（同步多台设备）。</p>
+<hr>
+<h2 id="📱-七、推荐插件提升快捷键体验">📱 七、推荐插件提升快捷键体验</h2>
+<table>
+<thead>
+<tr>
+<th>插件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Code Runner</strong></td>
+<td><code>Ctrl + Alt + N</code> 运行代码</td>
+</tr>
+<tr>
+<td><strong>Bookmarks</strong></td>
+<td><code>Ctrl + F2</code> 添加书签，<code>F2</code> 跳转</td>
+</tr>
+<tr>
+<td><strong>Prettier</strong></td>
+<td>格式化 JS/TS/JSON/CSS</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>提供 Python 智能补全、调试支持</td>
+</tr>
+<tr>
+<td><strong>Bracket Pair Colorizer</strong></td>
+<td>高亮匹配括号</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="📌-总结：必记-10-个核心快捷键">📌 总结：必记 10 个核心快捷键</h2>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl + P</code> (<code>Cmd + P</code>)</td>
+<td>快速打开文件</td>
+</tr>
+<tr>
+<td><code>Ctrl + Shift + P</code> (<code>Cmd + Shift + P</code>)</td>
+<td>命令面板（万能钥匙）</td>
+</tr>
+<tr>
+<td><code>Ctrl + \</code> (<code>Cmd + \</code>)</td>
+<td>拆分编辑器</td>
+</tr>
+<tr>
+<td><code>Ctrl + /</code></td>
+<td>注释代码</td>
+</tr>
+<tr>
+<td><code>F12</code></td>
+<td>跳转到定义</td>
+</tr>
+<tr>
+<td><code>Shift + F12</code></td>
+<td>查看所有引用</td>
+</tr>
+<tr>
+<td><code>F2</code></td>
+<td>重命名符号</td>
+</tr>
+<tr>
+<td><code>Shift + Alt + F</code></td>
+<td>格式化代码</td>
+</tr>
+<tr>
+<td><code>Ctrl + `</code></td>
+<td>切换终端</td>
+</tr>
+<tr>
+<td><code>Ctrl + Space</code></td>
+<td>触发智能提示</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>📌 <strong>提示</strong>：<br>
+使用 <code>Ctrl + K Ctrl + S</code>（Windows）或 <code>Cmd + K Cmd + S</code>（macOS）可以<strong>打开快捷键参考表</strong>，随时查看所有快捷键。</p>
+<hr>
+<p>✅ <strong>建议</strong>：<br>
+每天练习 2-3 个新快捷键，一周内即可大幅提升编码速度！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">http://blog.sunlingzhang.com/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/">入门实践</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/08/28/Python/python%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/" title="Python编程规范"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Python编程规范</div></div><div class="info-2"><div class="info-item-1">Python 作为一门强调“可读性”和“简洁性”的语言，拥有非常完善的代码规范与最佳实践体系。遵循主流规范不仅能提升代码质量，还能增强团队协作效率。 以下是目前 Python 主流的编码规范、风格指南和工程实践，涵盖语法、命名、结构、文档、测试等多个方面。  ✅ 一、PEP 8：官方代码风格指南（最核心）  📚 官方文档：PEP 8 – Style Guide for Python Code  这是 Python 官方推荐的代码风格标准，几乎所有 Python 项目都以此为基础。  1. 缩进  使用 4 个空格缩进（不要用 Tab） 不要混用空格和 Tab  1234567# ✅ 正确if x &gt; 0:    print(&quot;positive&quot;)# ❌ 错误if x &gt; 0:	print(&quot;positive&quot;)  # 使用了 Tab 2. 行宽  每行不超过 79 个字符（代码），注释/文档字符串不超过 72 超长表达式可用括号隐式换行  12345# ✅long_list = [    &quot;item1&quot;, ...</div></div></div></a><a class="pagination-related" href="/2025/08/05/Paper/Multi-Head%20Latent%20Attention%20(MLA)/" title="Multi-Head Latent Attention (MLA)详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Multi-Head Latent Attention (MLA)详解</div></div><div class="info-2"><div class="info-item-1">Multi-Head Latent Attention (MLA)详解   论文 DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model   github: DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model   参考博客：   https://www.bilibili.com/video/BV1wjQvY6Enm   https://bruceyuan.com/post/hands-on-deepseek-mla-projection-absorption.html   https://kexue.fm/archives/10091   https://github.com/madsys-dev/deepseekv2-profile/blob/main/workspace/blog/optimizing-mla.md   1234洞见：1.位置编码目前是添加...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/04/19/default/%E4%BD%BF%E7%94%A8%20Kivy%20%E6%88%96%E5%85%B6%E4%BB%96%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" title="Python开发安卓应用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-19</div><div class="info-item-2">Python开发安卓应用</div></div><div class="info-2"><div class="info-item-1">要在安卓设备上运行使用 PyQt 编写的程序，需要解决一个关键问题：PyQt 是为桌面环境设计的，而安卓是一个移动操作系统，直接在安卓上运行 PyQt 程序并不支持。不过，可以通过一些工具和框架将 PyQt 应用适配到安卓平台。以下是实现这一目标的主要方法和步骤：  1. 使用 Kivy 或其他移动开发框架 如果目标是开发跨平台的 Python 应用（包括安卓），可以考虑使用专门为移动设备设计的框架，例如 Kivy 或 BeeWare 。这些框架支持直接构建安卓应用，并且语法与 PyQt 类似。 原因：  PyQt 的 GUI 依赖于 Qt，而 Qt 在安卓上的支持有限。 Kivy 和 BeeWare 提供了更轻量级的解决方案，更适合移动设备。    2. 通过 PySide/Qt for Android Qt 官方提供了对安卓的支持（称为 “Qt for Android”），因此理论上可以通过以下方式将 PyQt 应用移植到安卓： 步骤：  安装 Qt for Android 工具链 下载并安装 Qt 官方提供的 Android 开发工具链，包括 Qt Creator 和 An...</div></div></div></a><a class="pagination-related" href="/2021/10/07/default/mmWave%20Radar/" title="毫米波雷达"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-07</div><div class="info-item-2">毫米波雷达</div></div><div class="info-2"><div class="info-item-1">毫米波雷达-AWR2243 简介 毫米波雷达，是工作在毫米波波段（Millimeter Wave ）探测的雷达。通常毫米波是指30～300GHz频域(波长为1～10mm)的。毫米波的波长介于微波和厘米波之间，因此毫米波雷达兼有微波雷达和光学雷达的一些优点。 同厘米波雷达相比，毫米波雷达具有体积小、质量轻和空间分辨率高的特点。与红外、激光、电视等光学雷达相比，毫米波雷达穿透雾、烟、灰尘的能力强，具有全天候(大雨天除外)全天时的特点。另外，毫米波雷达的抗干扰、反隐身能力也优于其他微波雷达 。毫米波雷达能分辨识别很小的目标，而且能同时识别多个目标；具有成像能力，体积小、机动性和隐蔽性好，在战场上生存能力强 。 目前在自动驾驶，智能监控领域广泛运用。毫米波雷达能直接获取目标的距离，速度，角度等基本信息。通过对数据的进一步处理，对目标的尺寸，轮廓可能也有一定的估计能力。  1 调频连续波(FMCW) 调频连续波(Frequency-Modulated Continuous Wave)，是一组幅值不变，但频率变化的连续波形，毫米波雷达使用的调频连续波是频率线性增加的正弦波，又叫线性调频连续波...</div></div></div></a><a class="pagination-related" href="/2020/03/13/default/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/" title="Typora配合hexo编写文章"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-13</div><div class="info-item-2">Typora配合hexo编写文章</div></div><div class="info-2"><div class="info-item-1">图像插入设置  主要涉及Typora的两个参数设置  图片根目录设置  既告诉Typora哪个文件夹作为网站的根目录   图片复制路径  既图片插入时，自动复制图片到指定路径，如此上传至空间，才能生成正确的url        设置图像根目录   以hexo根目录下的source文件夹为例   该文件夹中的内容会上传至web根目录，因此此文件相当于网站的根目录   而文章所在目录为source文件夹下的_post文件夹, 根目录在文章的上级目录   因此设置图片根目录为..   既在标题栏添加此内容：typora-root-url: ..    设置图片目录  设置source文件夹下的img文件夹，为图片所在文件夹 因为img在source文件夹下，既在文章的上级目录下的img文件夹下 因此设置图片目录为..\img   既在标题连添加此内容：typora-copy-images-to: ..\img       注意事项：以上设置只能采用相对路径    Typora换行Enter键自动添加一个空行，Shift+Enter普通换行。  hexo 设置   无需进行设置  说明一...</div></div></div></a><a class="pagination-related" href="/2025/04/20/default/IntelliJ%20IDEA%20%E6%88%96%20Android%20Studio%E5%9C%A8%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%8C%87%E5%AE%9A%20Gradle%20%E4%B8%BB%E7%9B%AE%E5%BD%95/" title="Android Studio配置Gradle"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-20</div><div class="info-item-2">Android Studio配置Gradle</div></div><div class="info-2"><div class="info-item-1">在IntelliJ IDEA 和Android Studio 中，可以通过以下步骤指定 Gradle 主目录（Gradle Home Directory）。这个设置允许你使用手动安装的 Gradle 版本，而不是依赖 IDE 自动下载的版本。   步骤 1：打开设置窗口  启动 IntelliJ IDEA 或 Android Studio。 打开 设置/首选项 窗口：  Windows/Linux 作系统 ：File &gt; Settings。 macOS ：IntelliJ IDEA &gt; Preferences。     步骤 2：导航到 Gradle 设置  在设置窗口中，展开左侧的Build, Execution, Deployment 菜单 点击Build Tools &gt; Gradle 。   步骤 3：指定 Gradle 主目录 在右侧的 Gradle 设置面板中，找到**“Gradle JVM”** 和**“Use Gradle from”** 部分 选项 1：使用 Gradle Wrapper  默认情况下，IDE 会选择**‘gradle-wrapp...</div></div></div></a><a class="pagination-related" href="/2019/10/14/default/hexo%E9%81%BF%E5%9D%91%E5%B0%8F%E7%BB%93/" title="hexo避坑小结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-14</div><div class="info-item-2">hexo避坑小结</div></div><div class="info-2"><div class="info-item-1">简单记录一下搭建过程  启动（可能需要安装python）  hexo init / hexo init &lt;dir&gt; 此为hexo初始化，后加目录名则创建文件夹，将博客搭建环境部署在此文件夹下；否则将环境部署在当前文件夹下，故如果初始化不加文件夹，请手动创建一个文件夹后，在该文件夹下执行此命令。   远程部署  安装hexo-deployer-git，此为将hexo部署到github的插件，安装时若报错，提示缺eslint，则直接安装eslint即可，‘npm install  hexo-deployer-git --save’,另外可能是hexo-deployer-git没有创建软链接，手动创建即可：‘sudo ln -s /usr/local/&lt;nodejs安装目录&gt;/lib/node_modules/hexo-deployer-git /usr/bin/hexo-deployer-git’.   标签  注意hexo配置文件中每个’:‘后都有一个空格’ '，不要忘记，其次标签’tags:‘多标签不可在用’,‘隔开的形式，而是分行来写，各行之前均有一个’...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-%E4%B8%80%E3%80%81%E9%80%9A%E7%94%A8%E5%AF%BC%E8%88%AA%E4%B8%8E%E7%BC%96%E8%BE%91"><span class="toc-number">1.</span> <span class="toc-text">🚀 一、通用导航与编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%90-%E4%BA%8C%E3%80%81%E7%AA%97%E5%8F%A3%E4%B8%8E%E9%9D%A2%E6%9D%BF%E6%8E%A7%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">🌐 二、窗口与面板控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E7%BC%96%E8%BE%91%E6%8A%80%E5%B7%A7"><span class="toc-number">3.</span> <span class="toc-text">💡 三、代码编辑技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E5%9B%9B%E3%80%81%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3"><span class="toc-number">4.</span> <span class="toc-text">🔍 四、调试相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A9-%E4%BA%94%E3%80%81%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7%EF%BC%88%E6%95%88%E7%8E%87%E7%A5%9E%E5%99%A8%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">🧩 五、高级技巧（效率神器）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9A%99%EF%B8%8F-%E5%85%AD%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">6.</span> <span class="toc-text">⚙️ 六、自定义快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%B1-%E4%B8%83%E3%80%81%E6%8E%A8%E8%8D%90%E6%8F%92%E4%BB%B6%E6%8F%90%E5%8D%87%E5%BF%AB%E6%8D%B7%E9%94%AE%E4%BD%93%E9%AA%8C"><span class="toc-number">7.</span> <span class="toc-text">📱 七、推荐插件提升快捷键体验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E6%80%BB%E7%BB%93%EF%BC%9A%E5%BF%85%E8%AE%B0-10-%E4%B8%AA%E6%A0%B8%E5%BF%83%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">8.</span> <span class="toc-text">📌 总结：必记 10 个核心快捷键</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

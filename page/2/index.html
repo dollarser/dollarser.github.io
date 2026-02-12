@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>遗世独立 - 憧憬是距离理解最遥远的感情</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="日常记录学习用博客，仅用来练习使用">
+<meta property="og:type" content="website">
+<meta property="og:title" content="遗世独立">
+<meta property="og:url" content="http://blog.sunlingzhang.com/page/2/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="日常记录学习用博客，仅用来练习使用">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="learn,学习,考研,计算机,CS,ACG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '遗世独立',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">遗世独立</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/02/03/Paper/YOLO%E7%B3%BB%E5%88%97%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/" title="YOLO系列论文解读(v1-v9)">YOLO系列论文解读(v1-v9)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2026-02-03T07:32:00.000Z" title="Created 2026-02-03 15:32:00">2026-02-03</time></span></div><div class="content">[TOC] YOLO 简史    YOLO（You Only Look Once）是一种流行的目标检测和图像分割模型，于 2015 年推出，因其高速和高精度而广受欢迎。   YOLOv2于2016年发布，通过引入批量归一化(batch normalization)、锚框(anchor boxes)和维度聚类(dimension clusters)，改进了原始模型。   YOLOv3于2018年推出，通过使用更高效的主干网络、多个锚点(multiple anchors)和空间金字塔池化(spatial pyramid pooling)，进一步提高了模型的性能。   YOLOv4于 2020 年发布，引入了诸如 Mosaic 数据增强、一种新的无锚框检测头(anchor-free detection head)以及一种新的 损失函数等创新。   YOLOv5 进一步提高了模型的性能，并添加了新功能，例如超参数优化、集成实验跟踪和自动导出为流行的导出格式。   YOLOv6 由美团于 2022 年开源，并已应用于该公司的许多自动送货机器人中。   YOLOv7 添加了其他任务，例如在 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/29/Work/python%E5%87%A0%E4%BD%95%E7%9B%B8%E4%BC%BC%E6%80%A7/" title="几何图形相似性判断">几何图形相似性判断</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-08-29T04:00:00.000Z" title="Created 2025-08-29 12:00:00">2025-08-29</time></span></div><div class="content">1有两个CAD矢量图形，图形相似但是绘制存在旋转和缩放，怎么判断其相似性 判断两个矢量图形的相似性是计算机图形学、CAD、BIM、图像识别等领域的重要问题。由于矢量图形由点、线、曲线、多边形等几何元素构成，不能像像素图像那样直接用像素差比较，需要从几何结构、拓扑关系、形状特征等多个维度综合判断。   ✅ 一、相似性的定义（根据场景不同）    场景 相似性含义     几何匹配 形状、尺寸、角度接近   拓扑结构 连接方式、邻接关系一致   语义结构 功能相同（如“门”、“墙”）   变换不变性 平移、旋转、缩放后仍视为相似     ✅ 二、判断矢量图形相似性的常用方法 1. 基于几何特征的比较 (1) Hausdorff 距离（推荐） 衡量两个点集之间的最大最小距离，适合比较线段、多边形轮廓。 1234567from scipy.spatial.distance import directed_hausdorff# shape1, shape2 是两组点 [(x,y), ...]dist = max(    directed_hausdorff(shape1, shape2)[...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/28/Python/python%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/" title="Python编程规范">Python编程规范</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-08-28T04:00:00.000Z" title="Created 2025-08-28 12:00:00">2025-08-28</time></span></div><div class="content">Python 作为一门强调“可读性”和“简洁性”的语言，拥有非常完善的代码规范与最佳实践体系。遵循主流规范不仅能提升代码质量，还能增强团队协作效率。 以下是目前 Python 主流的编码规范、风格指南和工程实践，涵盖语法、命名、结构、文档、测试等多个方面。  ✅ 一、PEP 8：官方代码风格指南（最核心）  📚 官方文档：PEP 8 – Style Guide for Python Code  这是 Python 官方推荐的代码风格标准，几乎所有 Python 项目都以此为基础。  1. 缩进  使用 4 个空格缩进（不要用 Tab） 不要混用空格和 Tab  1234567# ✅ 正确if x &gt; 0:    print(&quot;positive&quot;)# ❌ 错误if x &gt; 0:	print(&quot;positive&quot;)  # 使用了 Tab 2. 行宽  每行不超过 79 个字符（代码），注释/文档字符串不超过 72 超长表达式可用括号隐式换行  12345# ✅long_list = [    &quot;item1&quot;, ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="VS Code 常用快捷键">VS Code 常用快捷键</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-08-27T04:00:00.000Z" title="Created 2025-08-27 12:00:00">2025-08-27</time></span></div><div class="content">Visual Studio Code（VS Code）是开发者广泛使用的轻量级但功能强大的代码编辑器。掌握其常用快捷键可以极大提升编码效率。 以下整理了 Windows / Linux 和 macOS 两大平台的常用快捷键（括号内为 macOS 键位）：   🚀 一、通用导航与编辑    功能 Windows/Linux macOS 说明     保存文件 Ctrl + S Cmd + S 保存当前文件   撤销 Ctrl + Z Cmd + Z 撤销上一步操作   重做 Ctrl + Y 或 Ctrl + Shift + Z Cmd + Y 或 Cmd + Shift + Z 重做   复制一行 Ctrl + C（无选中） Cmd + C（无选中） 复制整行   剪切一行 Ctrl + X（无选中） Cmd + X（无选中） 剪切整行   删除一行 Ctrl + Shift + K Cmd + Shift + K 删除当前行   向上/下移动一行 Alt + ↑ / ↓ Option + ↑ / ↓ 移动当前行   复制一行到上下 Alt + Shift + ↑ / ↓ Op...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/05/Paper/Multi-Head%20Latent%20Attention%20(MLA)/" title="Multi-Head Latent Attention (MLA)详解">Multi-Head Latent Attention (MLA)详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-08-05T04:00:00.000Z" title="Created 2025-08-05 12:00:00">2025-08-05</time></span></div><div class="content">Multi-Head Latent Attention (MLA)详解   论文 DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model   github: DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model   参考博客：   https://www.bilibili.com/video/BV1wjQvY6Enm   https://bruceyuan.com/post/hands-on-deepseek-mla-projection-absorption.html   https://kexue.fm/archives/10091   https://github.com/madsys-dev/deepseekv2-profile/blob/main/workspace/blog/optimizing-mla.md   1234洞见：1.位置编码目前是添加...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/05/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="pytorch-常用激活函数">pytorch-常用激活函数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-08-05T02:14:00.000Z" title="Created 2025-08-05 10:14:00">2025-08-05</time></span></div><div class="content">激活函数的原则：  单调函数（或有极小一部分不单调） 非线性函数 具有良好的梯度    1. Sigmoid 函数 Sigmoid 是早期神经网络中常用的激活函数，其数学表达式为： f(x)=11+e−xf(x) = \frac{1}{1 + e^{-x}} f(x)=1+e−x1​  优点：输出值在 (0, 1) 区间内，适合用于二分类问题的概率预测。 缺点：容易出现梯度消失问题，计算量相对较大。  2. Tanh（双曲正切）函数 Tanh 的数学表达式如下： f(x)=tanh⁡(x)=ex−e−xex+e−x f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}  f(x)=tanh(x)=ex+e−xex−e−x​  优点：将输入值压缩到 (-1, 1)，对于后续的优化过程较为友好。 缺点：与 Sigmoid 类似，两端的导数接近于零，可能导致梯度消失问题。  3. ReLU（修正线性单元） ReLU 是当前深度学习中最常用的激活函数之一，定义为： f(x)=max⁡(0,x) f(x) = \max(0, x)  f(x...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/04/Work/%E6%A1%A9%E8%AF%86%E5%9B%BE/" title="桩识图">桩识图</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-04T06:00:00.000Z" title="Created 2025-07-04 14:00:00">2025-07-04</time></span></div><div class="content">一种建筑图纸中桩的识别方法和装置 技术领域 人工智能、图像处理，建筑审图 技术背景 在结构工程审图领域，桩平面图的自动识别面临以下严峻挑战：1. 图纸上桩的画法多样，2. 单张图纸中桩结构高度密集，3. 受墙体和柱子等其他建筑元素的严重干扰，这使得传统的基于规则的检测方法显得力不从心，无法满足现代建筑审图的高精度与效率需求。 解决的技术问题 本项目通过创新性地结合基于规则和深度学习的算法，实现了高效、准确的桩检测。相较于基于规则的传统方法，本方法检测效率提高3倍，召回率提高了30%，准确率达到99%，显著优化了检测效果。通过自研自动化数据生成，自监督训练方案，替代完全依赖人工标注的传统方式，降低大量标注成本。总体来看，本项目实现了从无到有的技术突破，为结构检测带来了新的赋能。 技术方案 1. 总体流程  基于规则的桩检测  采用基于规则的方法检测桩，检测时不区分桩类别。确保绝对准确率（100%），保持较高召回率（&gt;60%）。   生成桩检测数据集  利用规则检测的结果作为标注，生成桩检测数据集【pile_v0.1】。   模型训练  使用YOLO算法，在桩检测数据集上训练初...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/22/Paper/CTPN_Detecting%20Text%20in%20Natural%20Image%20with%20Connectionist%20Text%20Proposal%20Network/" title="Detecting Text in Natural Image with Connectionist Text Proposal Network">Detecting Text in Natural Image with Connectionist Text Proposal Network</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-22T11:00:00.000Z" title="Created 2025-04-22 19:00:00">2025-04-22</time></span></div><div class="content">名称：Detecting Text in Natural Image with Connectionist Text Proposal Network 论文：https://arxiv.org/abs/1609.03605 会议：ECCV 2016 github: https://github.com/tianzhi0549/CTPN  CTPN（Connectionist Text Proposal Network）是一种基于深度学习的文本检测算法，擅长在自然场景图像中定位文本行。其核心思想是将文本行分解为多个小文本段（text proposals），再通过序列连接形成完整文本行 。以下从算法流程、关键技术、优缺点及改进方向展开详解：  一、算法流程  特征提取 使用预训练的CNN（如VGG16）提取图像特征，得到高维特征图（如conv5层输出）。 双向LSTM序列建模 在特征图上滑动窗口（如3×3），每个窗口生成固定高度（如11px）的锚点（anchors），覆盖不同宽度（如16px、32px等）。通过双向LSTM捕捉水平方向的文本序列上下文信息，增强对长文本的建模能力。 文...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/22/Paper/ABINet_Autonomous,%20Bidirectional%20and%20Iterative%20Language%20Modeling%20for%20Scene%20Text%20Recognition/" title="ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition">ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-22T09:00:00.000Z" title="Created 2025-04-22 17:00:00">2025-04-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/paper/">paper</a></span></div><div class="content">[TOC]  名称：Read Like Humans: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition 论文：https://arxiv.org/abs/2103.06495 会议：AAAI2020 Github: https://github.com/FangShancheng/ABINet  ABINet（Attention-based Bidirectional Network）是一种用于场景文本识别（Scene Text Recognition, STR）的深度学习模型。它在处理复杂背景、噪声干扰以及弯曲或倾斜文本时表现出色。ABINet 的核心创新点是引入了 双向注意力机制 和 迭代优化策略 ，从而显著提升了文本识别的准确性和鲁棒性。 以下是 ABINet 的详细解析，包括其架构设计、工作原理、优势和实现细节。  1. ABINet 的背景 问题  自然场景中的文本通常具有复杂的形状（如弯曲、倾斜等），并且背景可能包含大量噪声。 传统的基于分类的方法...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/21/Paper/DBNet_Real-time%20Scene%20Text%20Detection%20with%20Differentiable%20Binarization/" title="DBNet: Real-time Scene Text Detection with Differentiable Binarization">DBNet: Real-time Scene Text Detection with Differentiable Binarization</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-21T07:00:00.000Z" title="Created 2025-04-21 15:00:00">2025-04-21</time></span></div><div class="content">[TOC] 名称：DBNet: Real-time Scene Text Detection with Differentiable Binarization 论文：https://arxiv.org/abs/1911.08947 会议：AAAI2020 V2：Real-Time Scene Text Detection with Differentiable Binarization and Adaptive Scale Fusion V2：https://arxiv.org/abs/2202.10304 顶刊：TPAMI 2022  DBNet（Differentiable Binarization Network）是一种用于文本检测的深度学习模型，特别适用于自然场景中的文本检测任务。它在处理弯曲、倾斜或复杂背景中的文本时表现出色。DBNet 的核心创新点是引入了 可微分二值化（Differentiable Binarization, DB） 模块，使得模型能够在训练过程中直接优化分割掩码的二值化效果。 以下是 DBNet 的详细解析，包括其架构设计、工作原理、优势和实现细节...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/paper/"><span class="card-category-list-name">paper</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%80%83%E7%A0%94/"><span class="card-category-list-name">考研</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/cv/" style="font-size: 1.1em; color: #999">cv</a> <a href="/tags/CV/" style="font-size: 1.3em; color: #99a1ac">CV</a> <a href="/tags/%E8%AE%A1%E7%BD%91/" style="font-size: 1.15em; color: #999b9e">计网</a> <a href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" style="font-size: 1.3em; color: #99a1ac">入门实践</a> <a href="/tags/AAAI-2020/" style="font-size: 1.1em; color: #999">AAAI 2020</a> <a href="/tags/CVPR-2021/" style="font-size: 1.1em; color: #999">CVPR 2021</a> <a href="/tags/CAD/" style="font-size: 1.2em; color: #999da3">CAD</a> <a href="/tags/matrix/" style="font-size: 1.1em; color: #999">matrix</a> <a href="/tags/Java/" style="font-size: 1.25em; color: #999fa7">Java</a> <a href="/tags/OCR/" style="font-size: 1.2em; color: #999da3">OCR</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">AI工具</a> <a href="/tags/CTCLoss/" style="font-size: 1.15em; color: #999b9e">CTCLoss</a> <a href="/tags/Android/" style="font-size: 1.15em; color: #999b9e">Android</a> <a href="/tags/Mybatis/" style="font-size: 1.1em; color: #999">Mybatis</a> <a href="/tags/paper/" style="font-size: 1.5em; color: #99a9bf">paper</a> <a href="/tags/scheduler/" style="font-size: 1.1em; color: #999">scheduler</a> <a href="/tags/YOLO/" style="font-size: 1.3em; color: #99a1ac">YOLO</a> <a href="/tags/%E5%BB%BA%E7%AD%91/" style="font-size: 1.2em; color: #999da3">建筑</a> <a href="/tags/Spring/" style="font-size: 1.1em; color: #999">Spring</a> <a href="/tags/work/" style="font-size: 1.2em; color: #999da3">work</a> <a href="/tags/SVD/" style="font-size: 1.1em; color: #999">SVD</a> <a href="/tags/optimizer/" style="font-size: 1.1em; color: #999">optimizer</a> <a href="/tags/GAN/" style="font-size: 1.1em; color: #999">GAN</a> <a href="/tags/GCN/" style="font-size: 1.2em; color: #999da3">GCN</a> <a href="/tags/CRNN/" style="font-size: 1.1em; color: #999">CRNN</a> <a href="/tags/ICLR-2018/" style="font-size: 1.1em; color: #999">ICLR 2018</a> <a href="/tags/CVPR2020/" style="font-size: 1.1em; color: #999">CVPR2020</a> <a href="/tags/AI/" style="font-size: 1.35em; color: #99a3b1">AI</a> <a href="/tags/ICLR-2017/" style="font-size: 1.1em; color: #999">ICLR 2017</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/" style="font-size: 1.1em; color: #999">配置相关</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.45em; color: #99a7ba">随笔</a> <a href="/tags/CS/" style="font-size: 1.4em; color: #99a5b6">CS</a> <a href="/tags/AdamW/" style="font-size: 1.1em; color: #999">AdamW</a> <a href="/tags/ICDAR-2019/" style="font-size: 1.1em; color: #999">ICDAR 2019</a> <a href="/tags/CTPN/" style="font-size: 1.1em; color: #999">CTPN</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 1.1em; color: #999">考研</a> <a href="/tags/Adam/" style="font-size: 1.1em; color: #999">Adam</a> <a href="/tags/NLP/" style="font-size: 1.1em; color: #999">NLP</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1.15em; color: #999b9e">学习笔记</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              February 2026
+            </span>
+            <span class="card-archive-list-count">11</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              August 2025
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              April 2025
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              December 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              November 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/08/">
+            <span class="card-archive-list-date">
+              August 2024
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/07/">
+            <span class="card-archive-list-date">
+              July 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">64</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-12T10:34:12.014Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

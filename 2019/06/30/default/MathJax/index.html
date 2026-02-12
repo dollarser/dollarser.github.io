@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>MathJax | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基本数学公式语法(of MathJax)[^queto1] [^queto1]: CSDN: 作者: ethmery 概述 在markdown中输入数学公式需要LaTaX语法的支持。 基本语法 呈现位置  正文（inline）中的LaTeX公式用$...$定义  例句为：$\sun_{i&#x3D;0}^N \int_{a}^{b} g(t,i)\text{d}t$ 显示为：∑i&#x3D;0N∫abg(t,i)dt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MathJax">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2019/06/30/default/MathJax/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="基本数学公式语法(of MathJax)[^queto1] [^queto1]: CSDN: 作者: ethmery 概述 在markdown中输入数学公式需要LaTaX语法的支持。 基本语法 呈现位置  正文（inline）中的LaTeX公式用$...$定义  例句为：$\sun_{i&#x3D;0}^N \int_{a}^{b} g(t,i)\text{d}t$ 显示为：∑i&#x3D;0N∫abg(t,i)dt">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2019-06-30T14:42:17.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.981Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MathJax",
+  "url": "http://blog.sunlingzhang.com/2019/06/30/default/MathJax/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2019-06-30T14:42:17.000Z",
+  "dateModified": "2026-02-12T10:34:06.981Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2019/06/30/default/MathJax/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MathJax',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">MathJax</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MathJax</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-06-30T14:42:17.000Z" title="Created 2019-06-30 22:42:17">2019-06-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.981Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h3 id="基本数学公式语法-of-MathJax-queto1">基本数学公式语法(of MathJax)[^queto1]</h3>
+<p>[^queto1]: CSDN: <a target="_blank" rel="noopener" href="https://blog.csdn.net/ethmery/article/details/50670297">作者: ethmery</a></p>
+<h2 id="概述">概述</h2>
+<p>在markdown中输入数学公式需要LaTaX语法的支持。</p>
+<h2 id="基本语法">基本语法</h2>
+<h3 id="呈现位置">呈现位置</h3>
+<ul>
+<li>正文（inline）中的LaTeX公式用<code>$...$</code>定义
+<ul>
+<li>例句为：<code>$\sun_{i=0}^N \int_{a}^{b} g(t,i)\text{d}t$</code></li>
+<li>显示为：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>N</mi></msubsup><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mi>g</mi><mo stretchy="false">(</mo><mi>t</mi><mo separator="true">,</mo><mi>i</mi><mo stretchy="false">)</mo><mtext>d</mtext><mi>t</mi></mrow><annotation encoding="application/x-tex">\sum_{i=0}^N \int_{a}^{b} g(t,i)\text{d}t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3998em;vertical-align:-0.3558em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9812em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0006em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.044em;"><span style="top:-2.3442em;margin-left:-0.1945em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span style="top:-3.2579em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3558em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">i</span><span class="mclose">)</span><span class="mord text"><span class="mord">d</span></span><span class="mord mathnormal">t</span></span></span></span></li>
+</ul>
+</li>
+<li>单独显示（display）的LaTeX公式用<code>$$...$$</code>定义，此时公式居中独立成块显示
+<ul>
+<li>例句为：<code>$$\sum_{i=0}^N \int_{a}^{b} g(i,t)\text{d}t$$</code></li>
+<li>显示为：$$\sum_{i=0}^N \int_{a}^{b} g(i,t)\text{d}t$$</li>
+</ul>
+</li>
+<li><em>下列描述语句中若非特别指出均省略<code>$</code></em></li>
+</ul>
+<span id="more"></span>
+<h3 id="希腊字母">希腊字母</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">显示</th>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">显示</th>
+<th style="text-align:center">命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span></td>
+<td style="text-align:center">\alpha</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span></span></span></span></td>
+<td style="text-align:center">\beta</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span></td>
+<td style="text-align:center">\gamma</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span></span></span></span></td>
+<td style="text-align:center">\delta</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span></td>
+<td style="text-align:center">\epslion</td>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ζ</mi></mrow><annotation encoding="application/x-tex">\zeta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span></td>
+<td style="text-align:center">\zeta</td>
+</tr>
+</tbody>
+</table>
+<p>-若需要大写希腊字母，将命令首字母大写即可<br>
+-<code>\Gamma</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">Γ</span></span></span></span><br>
+-若需要斜体希腊字母，将命令前加上前缀<code>var</code>即可<br>
+-<code>varGamma</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Γ</mi></mrow><annotation encoding="application/x-tex">\varGamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathit">Γ</span></span></span></span></p>
+<h3 id="字母修饰">字母修饰</h3>
+<h4 id="上下标">上下标</h4>
+<ul>
+<li>上标：<code>^</code></li>
+<li>下标：<code>_</code></li>
+<li>举例：<code>C_n^2</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>C</mi><mi>n</mi><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">C_n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0611em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-2.453em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+<h4 id="矢量">矢量</h4>
+<ul>
+<li><code>\vec a</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>a</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">\vec a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.714em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2355em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"/></svg></span></span></span></span></span></span></span></span></span></span></li>
+<li><code>\overrightarrow{xy}</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mrow><mi>x</mi><mi>y</mi></mrow><mo stretchy="true">→</mo></mover></mrow><annotation encoding="application/x-tex">\overrightarrow{xy}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.147em;vertical-align:-0.1944em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9526em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span><span class="svg-align" style="top:-3.4306em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="height:0.522em;min-width:0.888em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.522em" viewBox="0 0 400000 522" preserveAspectRatio="xMaxYMin slice"><path d="M0 241v40h399891c-47.3 35.3-84 78-110 128
+-16.7 32-27.7 63.7-33 95 0 1.3-.2 2.7-.5 4-.3 1.3-.5 2.3-.5 3 0 7.3 6.7 11 20
+ 11 8 0 13.2-.8 15.5-2.5 2.3-1.7 4.2-5.5 5.5-11.5 2-13.3 5.7-27 11-41 14.7-44.7
+ 39-84.5 73-119.5s73.7-60.2 119-75.5c6-2 9-5.7 9-11s-3-9-9-11c-45.3-15.3-85
+-40.5-119-75.5s-58.3-74.8-73-119.5c-4.7-14-8.3-27.3-11-40-1.3-6.7-3.2-10.8-5.5
+-12.5-2.3-1.7-7.5-2.5-15.5-2.5-14 0-21 3.7-21 11 0 2 2 10.3 6 25 20.7 83.3 67
+ 151.7 139 205zm0 0v40h399900v-40z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1944em;"><span></span></span></span></span></span></span></span></span></li>
+</ul>
+<h4 id="字体">字体</h4>
+<ul>
+<li>Typewriter:<code>\mathtt{A}</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="monospace">A</mi></mrow><annotation encoding="application/x-tex">\mathtt{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6111em;"></span><span class="mord mathtt">A</span></span></span></span>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="monospace">A</mi><mi mathvariant="monospace">B</mi><mi mathvariant="monospace">C</mi><mi mathvariant="monospace">D</mi><mi mathvariant="monospace">E</mi><mi mathvariant="monospace">F</mi><mi mathvariant="monospace">G</mi><mi mathvariant="monospace">H</mi><mi mathvariant="monospace">I</mi><mi mathvariant="monospace">J</mi><mi mathvariant="monospace">K</mi><mi mathvariant="monospace">L</mi><mi mathvariant="monospace">M</mi><mi mathvariant="monospace">N</mi><mi mathvariant="monospace">O</mi><mi mathvariant="monospace">P</mi><mi mathvariant="monospace">Q</mi><mi mathvariant="monospace">R</mi><mi mathvariant="monospace">S</mi><mi mathvariant="monospace">T</mi><mi mathvariant="monospace">U</mi><mi mathvariant="monospace">V</mi><mi mathvariant="monospace">W</mi><mi mathvariant="monospace">X</mi><mi mathvariant="monospace">Y</mi><mi mathvariant="monospace">Z</mi></mrow><annotation encoding="application/x-tex">\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.75em;vertical-align:-0.1389em;"></span><span class="mord"><span class="mord mathtt">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span></span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<h4 id="分组">分组</h4>
+<ul>
+<li>使用<code>{}</code>将具有相同等级的内容扩入其中，成组处理</li>
+<li>举例：<code>10^{10}</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>10</mn><mn>10</mn></msup></mrow><annotation encoding="application/x-tex">10^{10}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">10</span></span></span></span></span></span></span></span></span></span></span></span>, 而<code>10^10</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>10</mn><mn>1</mn></msup><mn>0</mn></mrow><annotation encoding="application/x-tex">10^10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span><span class="mord">0</span></span></span></span></li>
+</ul>
+<h4 id="括号">括号</h4>
+<ul>
+<li>小括号：<code>()</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">()</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mclose">)</span></span></span></span></li>
+<li>中括号：<code>[]</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mclose">]</span></span></span></span></li>
+<li>尖括号：<code>\langle,\rangle</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">⟨</mo><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\langle\rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span><span class="mclose">⟩</span></span></span></span>
+<ul>
+<li>此处与分组符号<code>{}</code>相区别，使用转义字符<code>\</code></li>
+</ul>
+</li>
+<li>使用<code>\left(</code>和<code>\right)</code>使符号大小与相邻的公式自适应；该语法适用于所有括号类型
+<ul>
+<li><code>(\frac{x}{y})</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mfrac><mi>x</mi><mi>y</mi></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(\frac{x}{y})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2311em;vertical-align:-0.4811em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4811em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></li>
+<li>而<code>\left(\frac{x}{y}\right)</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mfrac><mi>x</mi><mi>y</mi></mfrac><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left(\frac{x}{y}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.8em;vertical-align:-0.65em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4811em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<h4 id="求和、极限与积分">求和、极限与积分</h4>
+<ul>
+<li>求和：<code>sum</code>
+<ul>
+<li>举例：<code>\sum_{i=1}^n{a_i}</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\sum_{i=1}^n{a_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.104em;vertical-align:-0.2997em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8043em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+</li>
+<li>极限：<code>\to</code><br>
++举例： <code>\lim_{x\to 0}</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>lim</mi><mo>⁡</mo></mrow><mrow><mi>x</mi><mo>→</mo><mn>0</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\lim_{x\to 0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mop"><span class="mop">lim</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">→</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+<li>积分：<code>\int</code>
+<ul>
+<li>举例：<code>\int_0^\infty{f(x)dx}</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mrow></mrow><annotation encoding="application/x-tex">\int_0^\infty{f(x)dx}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2151em;vertical-align:-0.3558em;"></span><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0006em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8593em;"><span style="top:-2.3442em;margin-left:-0.1945em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.2579em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">∞</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3558em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<h4 id="分式和根式">分式和根式</h4>
+<ul>
+<li>分式（fractions）:<code>\frac{公式1}{公式2}</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mtext>公式</mtext><mn>1</mn></mrow><mrow><mtext>公式</mtext><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{公式1}{公式2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">公式</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">公式</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>根式：<code>\sqrt[x]{y+2}</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mroot><mrow><mi>y</mi><mo>+</mo><mn>2</mn></mrow><mi>x</mi></mroot></mrow><annotation encoding="application/x-tex">\sqrt[x]{y+2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.23em;"></span><span class="mord sqrt"><span class="root"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5633em;"><span style="top:-2.848em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size6 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.81em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span></span></span><span style="top:-2.77em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23em;"><span></span></span></span></span></span></span></span></span></li>
+</ul>
+<h4 id="特殊函数">特殊函数</h4>
+<ul>
+<li><code>\函数名</code></li>
+<li>举例：<code>\sin x</code>,<code>\ln x</code>,<code>\max(A,B,C)</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi><mtext>，</mtext><mi>ln</mi><mo>⁡</mo><mi>x</mi><mtext>，</mtext><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>A</mi><mo separator="true">,</mo><mi>B</mi><mo separator="true">,</mo><mi>C</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sin x，\ln x，\max(A,B,C)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mord cjk_fallback">，</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mord cjk_fallback">，</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<h4 id="特殊符号">特殊符号</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">显示</th>
+<th style="text-align:center">命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord">∞</span></span></span></span></td>
+<td style="text-align:center">\infty</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∪</mo></mrow><annotation encoding="application/x-tex">\cup</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5556em;"></span><span class="mord">∪</span></span></span></span></td>
+<td style="text-align:center">\cup</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∩</mo></mrow><annotation encoding="application/x-tex">\cap</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5556em;"></span><span class="mord">∩</span></span></span></span></td>
+<td style="text-align:center">\cap</td>
+</tr>
+</tbody>
+</table>
+<h4 id="空格">空格</h4>
+<ul>
+<li>LaTeX语法本身会忽略空格的存在</li>
+<li>小空格：<code>a\ b</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mtext> </mtext><mi>b</mi></mrow><annotation encoding="application/x-tex">a\ b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">a</span><span class="mspace"> </span><span class="mord mathnormal">b</span></span></span></span></li>
+<li>4格空格：<code>a\quad b</code>显示为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mspace width="1em"/><mi>b</mi></mrow><annotation encoding="application/x-tex">a\quad b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathnormal">b</span></span></span></span></li>
+</ul>
+<h3 id="矩阵">矩阵</h3>
+<h4 id="基本语法-2">基本语法</h4>
+<h4 id="矩阵边框">矩阵边框</h4>
+<h4 id="省略元素">省略元素</h4>
+<h4 id="阵列">阵列</h4>
+<h4 id="方程组">方程组</h4>
+<h2 id="流程图">流程图</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 开始</span><br><span class="line">op=&gt;operation: 操作</span><br><span class="line">cond=&gt;condition: 是或否?</span><br><span class="line">e=&gt;end: 结束</span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2019/06/30/default/MathJax/">http://blog.sunlingzhang.com/2019/06/30/default/MathJax/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2019/10/14/default/hexo%E9%81%BF%E5%9D%91%E5%B0%8F%E7%BB%93/" title="hexo避坑小结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">hexo避坑小结</div></div><div class="info-2"><div class="info-item-1">简单记录一下搭建过程  启动（可能需要安装python）  hexo init / hexo init &lt;dir&gt; 此为hexo初始化，后加目录名则创建文件夹，将博客搭建环境部署在此文件夹下；否则将环境部署在当前文件夹下，故如果初始化不加文件夹，请手动创建一个文件夹后，在该文件夹下执行此命令。   远程部署  安装hexo-deployer-git，此为将hexo部署到github的插件，安装时若报错，提示缺eslint，则直接安装eslint即可，‘npm install  hexo-deployer-git --save’,另外可能是hexo-deployer-git没有创建软链接，手动创建即可：‘sudo ln -s /usr/local/&lt;nodejs安装目录&gt;/lib/node_modules/hexo-deployer-git /usr/bin/hexo-deployer-git’.   标签  注意hexo配置文件中每个’:‘后都有一个空格’ '，不要忘记，其次标签’tags:‘多标签不可在用’,‘隔开的形式，而是分行来写，各行之前均有一个’...</div></div></div></a><a class="pagination-related" href="/2019/06/01/default/Markdown%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="Markdown第一篇文章"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Markdown第一篇文章</div></div><div class="info-2"><div class="info-item-1">[TOC] 介绍 这是第一次使用markdown来写文章 基本语法 *来表示强调，一颗 **斜体、*两颗 ** 粗体、三颗 *** 粗斜体  块级引用 使用&gt; 来标识  或者使用ESC 下方的`来标识,块内引用三个点 12这是块级引用这是块级引用 使用四个空格来表示块级引用 效果同上方  行内引用同样使用 ` 键，使用一个，效果如下：这是一段行内引用  文本样式修改 使用=和~可以改变文本样式，= 背景色 ==强调，~ 删除符号 上下标 2&lt;sup&gt;10&lt;/sup&gt; 会变为为210,H&lt;sub&gt;2&lt;sub&gt;O 会变为为H2O 注释 链接 脚注 图片 注释使用*[],这是一个 注释 *[这是一个注释]: 悬停后现实此注释 使用超链接有三种方式 内部链接, 格式 1[内部链接](http://ahulearn.com) 外部链接, 格式 12[外部连接][1][1]: http://ahulearn.com 图片在的链接的基础上增加了一个’！'，同样存在内部引用，和外部引用。  脚注用来注明引用来源格式为[^n] 例如：markd...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2019/06/01/default/Markdown%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="Markdown第一篇文章"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-01</div><div class="info-item-2">Markdown第一篇文章</div></div><div class="info-2"><div class="info-item-1">[TOC] 介绍 这是第一次使用markdown来写文章 基本语法 *来表示强调，一颗 **斜体、*两颗 ** 粗体、三颗 *** 粗斜体  块级引用 使用&gt; 来标识  或者使用ESC 下方的`来标识,块内引用三个点 12这是块级引用这是块级引用 使用四个空格来表示块级引用 效果同上方  行内引用同样使用 ` 键，使用一个，效果如下：这是一段行内引用  文本样式修改 使用=和~可以改变文本样式，= 背景色 ==强调，~ 删除符号 上下标 2&lt;sup&gt;10&lt;/sup&gt; 会变为为210,H&lt;sub&gt;2&lt;sub&gt;O 会变为为H2O 注释 链接 脚注 图片 注释使用*[],这是一个 注释 *[这是一个注释]: 悬停后现实此注释 使用超链接有三种方式 内部链接, 格式 1[内部链接](http://ahulearn.com) 外部链接, 格式 12[外部连接][1][1]: http://ahulearn.com 图片在的链接的基础上增加了一个’！'，同样存在内部引用，和外部引用。  脚注用来注明引用来源格式为[^n] 例如：markd...</div></div></div></a><a class="pagination-related" href="/2020/01/18/default/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/" title="特权指令、访管指令、陷入指令、广义指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-18</div><div class="info-item-2">特权指令、访管指令、陷入指令、广义指令</div></div><div class="info-2"><div class="info-item-1">对操作系统、计算机组成原理入门具有一定指导意义，对计算机考研知识理解具有一定辅助作用，对工作中的实际应用可能基本没用。  特权指令  ○ 从指令系统（指令集）角度定义，在指令系统中拥有用于管理硬件和整个系统安全的指令，让程序随意使用具有极高危险性。不得在用户态（目态）执行，只能在核心态（管态）执行，用户态程序如果运行特权指令将发生异常，并切换到管态由操作系统接管cpu。所以用户程序不得使用特权指令，需要执行特权指令需要使用防管指令，进入核心态。   访管指令  ○ 同样从指令集的角度定义，或者说从硬件角度（cpu状态）。防管指令，是用户程序自愿进管的指令（进管同时也意味着程序放弃cpu的控制权），该指令本身属于非特权指令，可在用户态执行，执行后进入核心态。核心态是通过cpu置相应标志表明当前处于核心态。cpu进入核心态后可以执行指令集中的所有指令（包括特权指令和非特权指令，但不执行访管指令）。  陷入指令  ○ 原则上可看作访管指令，但是从操作系统的角度定义的。访管强调的是cpu从用户态切换到了核心态，可以执行指令集中的所有指令。而陷入（自陷、陷阱）指令强调程序从用户程序从用户台...</div></div></div></a><a class="pagination-related" href="/2024/03/24/default/%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D%E3%80%81%E6%8B%89%E4%B8%81%E5%AD%97%E6%AF%8D%E8%A1%A8/" title="希腊字母、拉丁字母、Markdown、拼写与读音中英对照表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-24</div><div class="info-item-2">希腊字母、拉丁字母、Markdown、拼写与读音中英对照表</div></div><div class="info-2"><div class="info-item-1">   大写 小写 中文名 英文 英语音标注音 大写Markdown 小写Markdown 意义     A\AlphaA α\alphaα 阿尔法 Alpha /'ælfə/ \Alpha \alpha 角度、系数、角加速度、第一个、电离度、转化率   B\BetaB β\betaβ 贝塔/毕塔 Beta /'bi:tə/ 或 /'beɪtə/ \Beta \beta 磁通系数、角度、系数   Γ\GammaΓ γ\gammaγ 伽玛/甘玛 Gamma /'gæmə/ \Gamma \gamma 电导系数（小写）、角度、比热容比   Δ\DeltaΔ δ\deltaδ 德尔塔/岱欧塔 Delta /'deltə/ \Delta \delta 变化量、焓变、熵变、屈光度、变动、方程判别式（大写）、允许误差（小写，统计学）   E\EpsilonE ϵ\epsilonϵ　ε\varepsilonε 伊普西隆/埃普斯棱 Epsilon /'epsɪlɒn/ \Epsilon \epsilon　\varepsilon 对数之基数、介电常数   Z\ZetaZ ζ\zetaζ 泽塔/Z塔 ...</div></div></div></a><a class="pagination-related" href="/2020/09/01/Examination/%E6%9C%BA%E6%A2%B0%E8%B7%A8%E8%80%83%E4%BA%8C%E6%88%98%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" title="2020机械跨考二战复旦大学计算机经验分享"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-01</div><div class="info-item-2">2020机械跨考二战复旦大学计算机经验分享</div></div><div class="info-2"><div class="info-item-1">经验这东西，必须具体问题具体对待，一人的经验不可能适合所有人。也不存在什么复习的捷径，个人认为好的经验并不能让你事半功倍，只是单纯指出一条让你相信自己这么干也能成功的道路。以下观点和经验都是一家之言，我不坚持自己的看法。本来打算多写点，但是现在突然感觉没什么可写的了，感触还没我去年的深。  首先说明个人背景，如果和我相似可能这些经验有用，如果差别很大，那下面经验大概率没用的：   本科机械，跨专业二战，第一年已经打下一定基础，但其实第二年开始复习的时候已经差不多都忘完了。   有较好的数学基础，从小数学比较好，但是高中之后就考不了高分了，即便是题目很简单也考不高。自认为原因主要是粗心大意，草稿较乱，创新不足；分别导致简单题做错，计算复杂题做错，思路新颖题目做错。   英语极差，单词量历史最高不超过5k, 今年考研复习之初应该已经降到低于2k了, 四级考3次才过，六级没过。唯一的基础大概就是初中英语老师教的16种时态语态，自此就觉得语法(应该是句法)这东西不用学，初中水平够用一辈子。   对计算机很感兴趣，虽然没深入学习过任何一门语言，但是在平时做点自娱自乐的东西，接触或使用过至少...</div></div></div></a><a class="pagination-related" href="/2020/03/28/default/%E6%95%B0%E6%8D%AE%E6%B5%81%E9%87%8F%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%88%86%E6%9E%90/" title="移动数据流量请求头分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-28</div><div class="info-item-2">移动数据流量请求头分析</div></div><div class="info-2"><div class="info-item-1">1. http协议请求头 12345[method] [uri] [version]\r\nHost: www.example.com\r\nConnection: keep-alive\r\n...\r\n 1.1 第一行的字段为请求的：方法，资源地址，协议版本 http协议常用的请求方法[method]为  GET：用于向服务器请求数据； POST: 用于向服务器提交数据； CONNECT: 用于隧道代理; HEAD: 用于向服务器请求报头;  资源地址[uri]：一般为URL中去掉域名后剩下的那部分，即浏览器地址栏网址中域名之后的内容。 http协议版本[version]: 目前主流版本有HTTP/1.0和HTTP/1.1。 http请求头中的的换行用的是\r\n, 而非Linux中的换行符\n。以下为一个真实请求头的示例  GET /index.html HTTP/1.1 Host: www.example.com Connection: keep-alive   1.2 Host字段为请求的主机域名 早期没有虚拟主机的概念，一台服务器有一个主机名。因此规定在请求头的第一...</div></div></div></a><a class="pagination-related" href="/2021/07/28/default/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" title="从零开始的深度学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-28</div><div class="info-item-2">从零开始的深度学习</div></div><div class="info-2"><div class="info-item-1">从零开始的深度学习 主要内容：  安装NVIDIA GPU驱动 安装CUDA Toolkit 安装cuDNN 安装Conda(附带python) 安装PyTorch 安装TensorFlow  一、工具介绍   NVIDIA GPU驱动：nvidia-smi是nvidia 的系统管理接口，一般安装NVIDIA GPU驱动后即可使用。   CUDA  Toolkit：CUDA（Compute Unified Device Architecture），是NVIDIA推出的运算平台，AMD也有类似的平台 ROCm，但并不成熟。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。   cuDNN：NVIDIA cuDNN是用于深度神经网络的GPU加速库。它强调性能、易用性和低内存开销。NVIDIA cuDNN可以集成到更高级别的机器学习框架中，如Tensorflow、pytorch等。简单的插入式设计可以让开发人员专注于设计和实现神经网络模型，而不是简单调整性能，同时还可以在GP...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%AF%AD%E6%B3%95-of-MathJax-queto1"><span class="toc-number">1.</span> <span class="toc-text">基本数学公式语法(of MathJax)[^queto1]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%88%E7%8E%B0%E4%BD%8D%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text">呈现位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D"><span class="toc-number">3.2.</span> <span class="toc-text">希腊字母</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AF%8D%E4%BF%AE%E9%A5%B0"><span class="toc-number">3.3.</span> <span class="toc-text">字母修饰</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%A0%87"><span class="toc-number">3.3.1.</span> <span class="toc-text">上下标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A2%E9%87%8F"><span class="toc-number">3.3.2.</span> <span class="toc-text">矢量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E4%BD%93"><span class="toc-number">3.3.3.</span> <span class="toc-text">字体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%BB%84"><span class="toc-number">3.3.4.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%AC%E5%8F%B7"><span class="toc-number">3.3.5.</span> <span class="toc-text">括号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E5%92%8C%E3%80%81%E6%9E%81%E9%99%90%E4%B8%8E%E7%A7%AF%E5%88%86"><span class="toc-number">3.3.6.</span> <span class="toc-text">求和、极限与积分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%BC%8F%E5%92%8C%E6%A0%B9%E5%BC%8F"><span class="toc-number">3.3.7.</span> <span class="toc-text">分式和根式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%87%BD%E6%95%B0"><span class="toc-number">3.3.8.</span> <span class="toc-text">特殊函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7"><span class="toc-number">3.3.9.</span> <span class="toc-text">特殊符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E6%A0%BC"><span class="toc-number">3.3.10.</span> <span class="toc-text">空格</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5"><span class="toc-number">3.4.</span> <span class="toc-text">矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95-2"><span class="toc-number">3.4.1.</span> <span class="toc-text">基本语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E8%BE%B9%E6%A1%86"><span class="toc-number">3.4.2.</span> <span class="toc-text">矩阵边框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9C%81%E7%95%A5%E5%85%83%E7%B4%A0"><span class="toc-number">3.4.3.</span> <span class="toc-text">省略元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B5%E5%88%97"><span class="toc-number">3.4.4.</span> <span class="toc-text">阵列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="toc-number">3.4.5.</span> <span class="toc-text">方程组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">4.</span> <span class="toc-text">流程图</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

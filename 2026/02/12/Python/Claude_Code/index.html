@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Claude Code应用指南 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="参考视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1zqeMzfEiQ  环境配置 npm 安装（需要 Node.js 18+） 1npm install -g @anthropic-ai&#x2F;claude-code 3. 验证安装 1claude --version 4. 配置 API Key Windows (CMD)： 1set ANTHROPIC_API_KEY&#x3D;s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Claude Code应用指南">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2026/02/12/Python/Claude_Code/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="参考视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1zqeMzfEiQ  环境配置 npm 安装（需要 Node.js 18+） 1npm install -g @anthropic-ai&#x2F;claude-code 3. 验证安装 1claude --version 4. 配置 API Key Windows (CMD)： 1set ANTHROPIC_API_KEY&#x3D;s">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2026-02-12T09:30:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.980Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="AI工具">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code应用指南",
+  "url": "http://blog.sunlingzhang.com/2026/02/12/Python/Claude_Code/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2026-02-12T09:30:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.980Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2026/02/12/Python/Claude_Code/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Claude Code应用指南',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">Claude Code应用指南</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Claude Code应用指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.980Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><blockquote>
+<p>参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zqeMzfEiQ">https://www.bilibili.com/video/BV1zqeMzfEiQ</a></p>
+</blockquote>
+<h2 id="环境配置">环境配置</h2>
+<h4 id="npm-安装（需要-Node-js-18-）"><strong>npm 安装（需要 Node.js 18+）</strong></h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @anthropic-ai/claude-code</span><br></pre></td></tr></table></figure>
+<h3 id="3-验证安装">3. 验证安装</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude --version</span><br></pre></td></tr></table></figure>
+<h3 id="4-配置-API-Key">4. 配置 API Key</h3>
+<p><strong>Windows (CMD)</strong>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> ANTHROPIC_API_KEY=sk-xxxx-xxxxxx</span><br></pre></td></tr></table></figure>
+<p><strong>macOS/Linux (Bash/Zsh)</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export ANTHROPIC_API_KEY=&#x27;sk-xxxx-xxxxxx&#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="二、替换-切换模型">二、替换/切换模型</h2>
+<p>Claude Code 支持三种模型，你可以根据任务需求随时切换 ：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模型</th>
+<th style="text-align:left">特点</th>
+<th style="text-align:left">适用场景</th>
+<th style="text-align:left">价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Opus 4.6</strong></td>
+<td style="text-align:left">最强推理能力，支持 1M 上下文</td>
+<td style="text-align:left">复杂架构、深度调试、多步骤推理</td>
+<td style="text-align:left">$5/$25 每百万 token</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Sonnet 4.5</strong></td>
+<td style="text-align:left">平衡速度与质量（默认）</td>
+<td style="text-align:left">日常开发、大多数编码任务</td>
+<td style="text-align:left">$3/$15 每百万 token</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Haiku 4.5</strong></td>
+<td style="text-align:left">最快响应，成本最低</td>
+<td style="text-align:left">简单查询、批量操作、快速查找</td>
+<td style="text-align:left">$1/$5 每百万 token</td>
+</tr>
+</tbody>
+</table>
+<h3 id="切换模型的-4-种方法">切换模型的 4 种方法</h3>
+<h4 id="方法-1：会话中切换（最常用）"><strong>方法 1：会话中切换（最常用）</strong></h4>
+<p>在 Claude Code 交互界面中输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/model opus      # 切换到 Opus（最强模型）</span><br><span class="line">/model sonnet    # 切换到 Sonnet（默认平衡）</span><br><span class="line">/model haiku     # 切换到 Haiku（最快最便宜）</span><br></pre></td></tr></table></figure>
+<p>或使用简写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/mode opus</span><br><span class="line">/mode sonnet  </span><br><span class="line">/mode haiku</span><br></pre></td></tr></table></figure>
+<h4 id="方法-2：启动时指定"><strong>方法 2：启动时指定</strong></h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">claude --model opus</span><br><span class="line">claude --model sonnet</span><br><span class="line">claude --model haiku</span><br></pre></td></tr></table></figure>
+<h4 id="方法-3：设置默认模型（永久生效）"><strong>方法 3：设置默认模型（永久生效）</strong></h4>
+<p>添加到 shell 配置文件（<code>~/.bashrc</code> 或 <code>~/.zshrc</code>）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ANTHROPIC_MODEL=claude-opus-4-6</span><br></pre></td></tr></table></figure>
+<p>或使用具体版本号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_OPUS_MODEL=<span class="string">&quot;claude-opus-4-6&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_SONNET_MODEL=<span class="string">&quot;claude-sonnet-4-5-20250929&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_HAIKU_MODEL=<span class="string">&quot;claude-haiku-4-5-20251001&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、国内用户使用建议">三、国内用户使用建议</h2>
+<p>如果需要使用国内模型作为替代，可以通过修改 API Base URL 和模型映射来实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> ANTHROPIC_BASE_URL=https://your-proxy-url.com</span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_OPUS_MODEL=<span class="string">&quot;glm-4.7&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_SONNET_MODEL=<span class="string">&quot;glm-4.7&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_HAIKU_MODEL=<span class="string">&quot;glm-4.5-air&quot;</span></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2026/02/12/Python/Claude_Code/">http://blog.sunlingzhang.com/2026/02/12/Python/Claude_Code/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/AI%E5%B7%A5%E5%85%B7/">AI工具</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">MuSGD优化器</div></div><div class="info-2"><div class="info-item-1">核心摘要   核心创新: 引入梯度范数自适应动量调节机制，动态平衡训练稳定与收敛速度，专为轻量化模型设计。   性能优势: 相比传统SGDM，收敛速度提升约30%，显存占用降低15-20%，训练效率显著提高。   应用价值: 优先选择MuSGD训练轻量化模型，尤其在边缘设备上，可获得更快的收敛速度和更高的稳定性。   MuSGD（动量自适应SGD）是YOLO26专为边缘设备和轻量化模型设计的优化器，在传统SGD基础上引入&quot;梯度范数自适应动量调节&quot;机制，通过动态调整动量系数平衡训练初期的稳定性与训练后期的收敛速度，为轻量化模型提供了高效的训练方案。 一、MuSGD优化器的核心公式 MuSGD(Matrix Update)优化器的核心公式包含三个关键部分：梯度范数自适应动量系数计算、动量累积和参数更新。其完整数学表达式为： βt=βmax1+adapt_factor⋅∥∇θJ∥2（动量系数动态调整）vt=βt⋅vt−1+η⋅∇θJ(θt−1)（动量累积）θt=θt−1−vt（参数更新）\begin{align*} \beta_t &amp;= \frac{\bet...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/08/05/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="pytorch-常用激活函数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-05</div><div class="info-item-2">pytorch-常用激活函数</div></div><div class="info-2"><div class="info-item-1">激活函数的原则：  单调函数（或有极小一部分不单调） 非线性函数 具有良好的梯度    1. Sigmoid 函数 Sigmoid 是早期神经网络中常用的激活函数，其数学表达式为： f(x)=11+e−xf(x) = \frac{1}{1 + e^{-x}} f(x)=1+e−x1​  优点：输出值在 (0, 1) 区间内，适合用于二分类问题的概率预测。 缺点：容易出现梯度消失问题，计算量相对较大。  2. Tanh（双曲正切）函数 Tanh 的数学表达式如下： f(x)=tanh⁡(x)=ex−e−xex+e−x f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}  f(x)=tanh(x)=ex+e−xex−e−x​  优点：将输入值压缩到 (-1, 1)，对于后续的优化过程较为友好。 缺点：与 Sigmoid 类似，两端的导数接近于零，可能导致梯度消失问题。  3. ReLU（修正线性单元） ReLU 是当前深度学习中最常用的激活函数之一，定义为： f(x)=max⁡(0,x) f(x) = \max(0, x)  f(x...</div></div></div></a><a class="pagination-related" href="/2021/08/05/Python/Python%E5%85%A5%E9%97%A8/" title="Python入门"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-05</div><div class="info-item-2">Python入门</div></div><div class="info-2"><div class="info-item-1">1、环境配置 python作为脚本语言，只需要一个python解释器就可以直接编写代码和运行。 但是为了方便我们通常会使用IDE(集成开发环境)或轻量级的文本编辑器进行开发。 这里首先介绍使用最简单的python编辑器编写代码，以及使用VS Code、Jupyter开发。  1.1 安装python解释器 这里推荐安装Conda,Conda是极其方便且强大的包管理器，安装后自带python解释器，同时为以后开发带来极大的便利。如果只想安装python解释器可以从下方地址下载： 官网Windows下载：https://www.python.org/downloads/windows/ 1.2、安装Conda conda分为anaconda和miniconda。anaconda是包含一些常用包的版本，miniconda则是精简版，需要什么装什么，这里介绍miniconda的安装。 官网地址：https://docs.conda.io/en/latest/miniconda.html 1.2.1、安装 进入官网：https://docs.conda.io/en/latest/minic...</div></div></div></a><a class="pagination-related" href="/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-LabelSmoothingCrossEntropy/" title="损失函数-Label Smoothing Cross Entropy"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-16</div><div class="info-item-2">损失函数-Label Smoothing Cross Entropy</div></div><div class="info-2"><div class="info-item-1">Label Smoothing Cross Entropy介绍 Label Smoothing 是一种正则化技术，用于改进分类任务中的交叉熵损失函数。传统的交叉熵损失函数假设目标标签是硬性（hard）的，即每个样本只有一个正确的类别标签，并且该类别的概率为 1，其他类别的概率为 0。然而，这种硬性标签可能会导致模型过拟合训练数据，尤其是在训练数据有限或标签可能存在噪声的情况下。 Label Smoothing 的基本思想是对目标标签进行“平滑”处理，将原本硬性的标签分布替换为一个更柔和的分布。这样可以减少模型对单一类别的过度自信，从而提高模型的泛化能力。    提出论文: Rethinking the Inception Architecture for Computer Vision 会议: CVPR 2016  Label Smoothing（标签平滑）的工作原理 1. 传统交叉熵损失 在分类问题中，交叉熵损失函数定义如下： Cross Entropy Loss=−∑i=1Cyilog(pi)Cross\ Entropy\ Loss = -\sum_{i=1}^{C} y_i...</div></div></div></a><a class="pagination-related" href="/2024/05/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%B0%83%E6%95%B4%E7%AD%96%E7%95%A5/" title="pytorch 常用的学习率调整策略"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-11</div><div class="info-item-2">pytorch 常用的学习率调整策略</div></div><div class="info-2"><div class="info-item-1">[TOC] 参考地址：https://zhuanlan.zhihu.com/p/538447997 官方文档：https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate 0. 基础 导入 1from torch.optim import lr_scheduler 常用的学习率策略  StepLR LambdaLR  基础代码 12345678910import torchimport numpy as npfrom torch.optim import SGDfrom torch.optim import lr_schedulerfrom torch.nn.parameter import Parameter# 随机创建一组模型参数model = [Parameter(torch.randn(2, 2, requires_grad=True))]# 使用SGD优化器，学习率设为0.1optimizer = SGD(model, lr=0.1)  1. StepLR 最简单且最常用的学习率调整方法，每...</div></div></div></a><a class="pagination-related" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-02-10</div><div class="info-item-2">矩阵相关</div></div><div class="info-2"><div class="info-item-1">低秩近似的方法：   伪逆矩阵：https://kexue.fm/archives/10366   SVD分解：https://kexue.fm/archives/10407   CR分解：https://kexue.fm/archives/10427   插值分解（ID）：https://kexue.fm/archives/10501   CUR分解：https://kexue.fm/archives/10662   Monarch矩阵：https://kexue.fm/archives/10249   Lora:  梯度视角下的Lora：https://kexue.fm/archives/9590 学习率对Lora的影响：https://kexue.fm/archives/10001  核心结论：对于Lora AB，B的学习率 ηBη_BηB​ 要大于A的学习率 ηAη_AηA​ :   ηB/ηA≈n/mn/rη_B/η_A ≈ n/m \sqrt{n/r}ηB​/ηA​≈n/mn/r​   Lora改进1：https://kexue.fm/archives/10226  ...</div></div></div></a><a class="pagination-related" href="/2024/05/14/Python/pytorch-%E5%B8%B8%E7%94%A8%E4%BC%98%E5%8C%96%E5%99%A8/" title="pytorch-常用优化器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-14</div><div class="info-item-2">pytorch-常用优化器</div></div><div class="info-2"><div class="info-item-1">[TOC] 0. 基础 1. 导入 1import torch.optim as optim 2. 常用的优化器  SGD/Momentum SGD Adam/AdamW AdaGrad RMS prop   3. 使用框架  生成优化器  1234import torch.optim as optimoptimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)optimizer = optim.Adam([var1, var2], lr=0.0001)  同一个模型定义不同的优化器  1234567891011121314import torchimport torch.optim as optim# params可以用字典传参，给不同的参数赋值不同的学习率optim.SGD([&#123;&#x27;params&#x27;: model.base.parameters(), &#x27;lr&#x27;: 1e-2&#125;,            &#123;&#x27;params&#x27;: mo...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#npm-%E5%AE%89%E8%A3%85%EF%BC%88%E9%9C%80%E8%A6%81-Node-js-18-%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">npm 安装（需要 Node.js 18+）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">3. 验证安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE-API-Key"><span class="toc-number">1.3.</span> <span class="toc-text">4. 配置 API Key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%9B%BF%E6%8D%A2-%E5%88%87%E6%8D%A2%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">二、替换&#x2F;切换模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E6%A8%A1%E5%9E%8B%E7%9A%84-4-%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">切换模型的 4 种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1%EF%BC%9A%E4%BC%9A%E8%AF%9D%E4%B8%AD%E5%88%87%E6%8D%A2%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-number">2.1.1.</span> <span class="toc-text">方法 1：会话中切换（最常用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2%EF%BC%9A%E5%90%AF%E5%8A%A8%E6%97%B6%E6%8C%87%E5%AE%9A"><span class="toc-number">2.1.2.</span> <span class="toc-text">方法 2：启动时指定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-3%EF%BC%9A%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%A8%A1%E5%9E%8B%EF%BC%88%E6%B0%B8%E4%B9%85%E7%94%9F%E6%95%88%EF%BC%89"><span class="toc-number">2.1.3.</span> <span class="toc-text">方法 3：设置默认模型（永久生效）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9B%BD%E5%86%85%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE"><span class="toc-number">3.</span> <span class="toc-text">三、国内用户使用建议</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

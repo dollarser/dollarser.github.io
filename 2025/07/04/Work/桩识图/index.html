@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>桩识图 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一种建筑图纸中桩的识别方法和装置 技术领域 人工智能、图像处理，建筑审图 技术背景 在结构工程审图领域，桩平面图的自动识别面临以下严峻挑战：1. 图纸上桩的画法多样，2. 单张图纸中桩结构高度密集，3. 受墙体和柱子等其他建筑元素的严重干扰，这使得传统的基于规则的检测方法显得力不从心，无法满足现代建筑审图的高精度与效率需求。 解决的技术问题 本项目通过创新性地结合基于规则和深度学习的算法，实现了高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="桩识图">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2025/07/04/Work/%E6%A1%A9%E8%AF%86%E5%9B%BE/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="一种建筑图纸中桩的识别方法和装置 技术领域 人工智能、图像处理，建筑审图 技术背景 在结构工程审图领域，桩平面图的自动识别面临以下严峻挑战：1. 图纸上桩的画法多样，2. 单张图纸中桩结构高度密集，3. 受墙体和柱子等其他建筑元素的严重干扰，这使得传统的基于规则的检测方法显得力不从心，无法满足现代建筑审图的高精度与效率需求。 解决的技术问题 本项目通过创新性地结合基于规则和深度学习的算法，实现了高">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2025-07-04T06:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.981Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="CAD">
+<meta property="article:tag" content="work">
+<meta property="article:tag" content="建筑">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "桩识图",
+  "url": "http://blog.sunlingzhang.com/2025/07/04/Work/%E6%A1%A9%E8%AF%86%E5%9B%BE/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2025-07-04T06:00:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.981Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2025/07/04/Work/%E6%A1%A9%E8%AF%86%E5%9B%BE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '桩识图',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">桩识图</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">桩识图</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-07-04T06:00:00.000Z" title="Created 2025-07-04 14:00:00">2025-07-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.981Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h1>一种建筑图纸中桩的识别方法和装置</h1>
+<h2 id="技术领域">技术领域</h2>
+<p>人工智能、图像处理，建筑审图</p>
+<h2 id="技术背景">技术背景</h2>
+<p>在结构工程审图领域，桩平面图的自动识别面临以下严峻挑战：1. 图纸上桩的画法多样，2. 单张图纸中桩结构高度密集，3. 受墙体和柱子等其他建筑元素的严重干扰，这使得传统的基于规则的检测方法显得力不从心，无法满足现代建筑审图的高精度与效率需求。</p>
+<h2 id="解决的技术问题">解决的技术问题</h2>
+<p>本项目通过创新性地结合基于规则和深度学习的算法，实现了高效、准确的桩检测。相较于基于规则的传统方法，本方法检测效率提高3倍，召回率提高了30%，准确率达到99%，显著优化了检测效果。通过自研自动化数据生成，自监督训练方案，替代完全依赖人工标注的传统方式，降低大量标注成本。总体来看，本项目实现了从无到有的技术突破，为结构检测带来了新的赋能。</p>
+<h2 id="技术方案">技术方案</h2>
+<h3 id="1-总体流程">1. 总体流程</h3>
+<ul>
+<li>基于规则的桩检测
+<ul>
+<li>采用基于规则的方法检测桩，检测时不区分桩类别。确保绝对准确率（100%），保持较高召回率（&gt;60%）。</li>
+</ul>
+</li>
+<li>生成桩检测数据集
+<ul>
+<li>利用规则检测的结果作为标注，生成桩检测数据集【pile_v0.1】。</li>
+</ul>
+</li>
+<li>模型训练
+<ul>
+<li>使用YOLO算法，在桩检测数据集上训练初步的桩检测模型【model_v0.1】。</li>
+</ul>
+</li>
+<li>自监督训练
+<ul>
+<li>运用已训练模型检测基于规则无法识别的图纸，将高置信度结果纳入训练集继续训练。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-基于规则的桩检测">2. 基于规则的桩检测</h3>
+<h4 id="过滤干扰线">过滤干扰线</h4>
+<ul>
+<li>根据长度、直径和面积限制进行过滤。</li>
+<li>只保留特定类型的几何元素：直线、多段线、圆、椭圆、圆弧、实体、填充。</li>
+</ul>
+<h4 id="桩检测规则">桩检测规则</h4>
+<ul>
+<li>导出图像并求连通域。</li>
+<li>圆检测：识别圆、特定条件下的多段线和圆弧、椭圆。</li>
+<li>矩形检测：利用最近邻算法确定矩形。</li>
+<li>交叉线检测：扫描线算法检测交叉线。</li>
+<li>填充检测：检查填充是否位于圆或矩形内。</li>
+<li>多次应用连通域分析，提升准确率。</li>
+</ul>
+<h3 id="3-生成桩检测数据集">3. 生成桩检测数据集</h3>
+<ul>
+<li>依据规则检测结果生成桩边界框（bbox）。</li>
+<li>导出原始及过滤后的图纸图像，扩大数据规模和多样性。</li>
+<li>以640x640滑动窗口，20%重叠，切割图像。</li>
+<li>转换bbox至图像坐标系，并映射至小图坐标系。</li>
+<li>筛选含bbox的小图，构建训练集。</li>
+</ul>
+<h3 id="4-模型训练">4. 模型训练</h3>
+<ul>
+<li>选用YOLOv8n作为桩检测模型。</li>
+<li>调整数据集至YOLOv8所需格式，修改配置文件。</li>
+<li>加载预训练权重，设置batch=32，epoch=120，进行训练。</li>
+<li>输出桩检测模型【model_v0.1】。</li>
+</ul>
+<h3 id="5-自监督训练">5. 自监督训练</h3>
+<ul>
+<li>测试集使用规则检测遗漏的桩，由【model_v0.1】进行检测。</li>
+<li>高置信度检测结果作为新标签，与【pile_v0.1】合并成【pile_v0.2】。</li>
+<li>在【pile_v0.2】上继续训练，产出【model_v0.2】。</li>
+<li>重复步骤，循环5轮，持续迭代模型。</li>
+</ul>
+<h3 id="6-后处理">6. 后处理</h3>
+<ul>
+<li>切片检测结果合并</li>
+<li>基于cad原始图元，检测闭合多边形轮廓或圆形轮廓</li>
+<li>检测桩定位线</li>
+<li>验证区域内是否有满足条件的图元</li>
+<li>筛选误召回的检测</li>
+<li>引线检测匹配标注属性</li>
+</ul>
+<p><img src="/img/cad/image-20250704142759573.png" alt="image-20250704142805784"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2025/07/04/Work/%E6%A1%A9%E8%AF%86%E5%9B%BE/">http://blog.sunlingzhang.com/2025/07/04/Work/%E6%A1%A9%E8%AF%86%E5%9B%BE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/work/">work</a><a class="post-meta__tags" href="/tags/%E5%BB%BA%E7%AD%91/">建筑</a><a class="post-meta__tags" href="/tags/CAD/">CAD</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/08/05/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="pytorch-常用激活函数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">pytorch-常用激活函数</div></div><div class="info-2"><div class="info-item-1">激活函数的原则：  单调函数（或有极小一部分不单调） 非线性函数 具有良好的梯度    1. Sigmoid 函数 Sigmoid 是早期神经网络中常用的激活函数，其数学表达式为： f(x)=11+e−xf(x) = \frac{1}{1 + e^{-x}} f(x)=1+e−x1​  优点：输出值在 (0, 1) 区间内，适合用于二分类问题的概率预测。 缺点：容易出现梯度消失问题，计算量相对较大。  2. Tanh（双曲正切）函数 Tanh 的数学表达式如下： f(x)=tanh⁡(x)=ex−e−xex+e−x f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}  f(x)=tanh(x)=ex+e−xex−e−x​  优点：将输入值压缩到 (-1, 1)，对于后续的优化过程较为友好。 缺点：与 Sigmoid 类似，两端的导数接近于零，可能导致梯度消失问题。  3. ReLU（修正线性单元） ReLU 是当前深度学习中最常用的激活函数之一，定义为： f(x)=max⁡(0,x) f(x) = \max(0, x)  f(x...</div></div></div></a><a class="pagination-related" href="/2025/04/22/Paper/CTPN_Detecting%20Text%20in%20Natural%20Image%20with%20Connectionist%20Text%20Proposal%20Network/" title="Detecting Text in Natural Image with Connectionist Text Proposal Network"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Detecting Text in Natural Image with Connectionist Text Proposal Network</div></div><div class="info-2"><div class="info-item-1">名称：Detecting Text in Natural Image with Connectionist Text Proposal Network 论文：https://arxiv.org/abs/1609.03605 会议：ECCV 2016 github: https://github.com/tianzhi0549/CTPN  CTPN（Connectionist Text Proposal Network）是一种基于深度学习的文本检测算法，擅长在自然场景图像中定位文本行。其核心思想是将文本行分解为多个小文本段（text proposals），再通过序列连接形成完整文本行 。以下从算法流程、关键技术、优缺点及改进方向展开详解：  一、算法流程  特征提取 使用预训练的CNN（如VGG16）提取图像特征，得到高维特征图（如conv5层输出）。 双向LSTM序列建模 在特征图上滑动窗口（如3×3），每个窗口生成固定高度（如11px）的锚点（anchors），覆盖不同宽度（如16px、32px等）。通过双向LSTM捕捉水平方向的文本序列上下文信息，增强对长文本的建模能力。 文...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/08/29/Work/python%E5%87%A0%E4%BD%95%E7%9B%B8%E4%BC%BC%E6%80%A7/" title="几何图形相似性判断"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-29</div><div class="info-item-2">几何图形相似性判断</div></div><div class="info-2"><div class="info-item-1">1有两个CAD矢量图形，图形相似但是绘制存在旋转和缩放，怎么判断其相似性 判断两个矢量图形的相似性是计算机图形学、CAD、BIM、图像识别等领域的重要问题。由于矢量图形由点、线、曲线、多边形等几何元素构成，不能像像素图像那样直接用像素差比较，需要从几何结构、拓扑关系、形状特征等多个维度综合判断。   ✅ 一、相似性的定义（根据场景不同）    场景 相似性含义     几何匹配 形状、尺寸、角度接近   拓扑结构 连接方式、邻接关系一致   语义结构 功能相同（如“门”、“墙”）   变换不变性 平移、旋转、缩放后仍视为相似     ✅ 二、判断矢量图形相似性的常用方法 1. 基于几何特征的比较 (1) Hausdorff 距离（推荐） 衡量两个点集之间的最大最小距离，适合比较线段、多边形轮廓。 1234567from scipy.spatial.distance import directed_hausdorff# shape1, shape2 是两组点 [(x,y), ...]dist = max(    directed_hausdorff(shape1, shape2)[...</div></div></div></a><a class="pagination-related" href="/2024/07/17/Work/%E6%A1%A9%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95/" title="桩检测算法-自监督学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-17</div><div class="info-item-2">桩检测算法-自监督学习</div></div><div class="info-2"><div class="info-item-1">桩检测算法 总体流程  基于规则的桩检测  采用基于规则的方法检测桩，检测时不区分桩类别。这一步保证绝对的准确率（100%），较高的召回率（&gt;60%）。   生成桩检测数据集  使用规则检测的结果作为标注生成桩检测数据集【pile_v0.1】。   模型训练  使用YOLO算法在桩检测数据集上训练一个初步的桩检测模型【model_v0.1】。   自监督训练  使用训练好的模型对基于规则无法检测的图纸进行检测，将置信度较高的结果加入到训练集继续训练。     基于规则的桩检测   过滤干扰线  长度 &lt; 1500 直径 &lt; 1500 面积 &lt; 1500×1500 只保留直线，多段线，圆，椭圆，圆弧，实体，填充    桩检测  将去除干扰线后的实体导出图像求连通域 在每个连通域内进行桩检测，提高效率 圆检测：圆实体，多段线实体（只包含曲线，且构成360度），圆弧实体（构成360度），椭圆实体（长轴=短轴） 矩形检测：基于最近邻算法，遍历直线和它最近邻的直线是否组成矩形 交叉线检测：基于扫描线算法检测线是否交叉，判断交点是否在上述圆或矩形中心附近 填充检测：检...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">一种建筑图纸中桩的识别方法和装置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%A2%86%E5%9F%9F"><span class="toc-number">1.1.</span> <span class="toc-text">技术领域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%83%8C%E6%99%AF"><span class="toc-number">1.2.</span> <span class="toc-text">技术背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E7%9A%84%E6%8A%80%E6%9C%AF%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.</span> <span class="toc-text">解决的技术问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88"><span class="toc-number">1.4.</span> <span class="toc-text">技术方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%80%BB%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 总体流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9F%BA%E4%BA%8E%E8%A7%84%E5%88%99%E7%9A%84%E6%A1%A9%E6%A3%80%E6%B5%8B"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 基于规则的桩检测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%B9%B2%E6%89%B0%E7%BA%BF"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">过滤干扰线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%A9%E6%A3%80%E6%B5%8B%E8%A7%84%E5%88%99"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">桩检测规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%94%9F%E6%88%90%E6%A1%A9%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.4.3.</span> <span class="toc-text">3. 生成桩检测数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-number">1.4.4.</span> <span class="toc-text">4. 模型训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%87%AA%E7%9B%91%E7%9D%A3%E8%AE%AD%E7%BB%83"><span class="toc-number">1.4.5.</span> <span class="toc-text">5. 自监督训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%90%8E%E5%A4%84%E7%90%86"><span class="toc-number">1.4.6.</span> <span class="toc-text">6. 后处理</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

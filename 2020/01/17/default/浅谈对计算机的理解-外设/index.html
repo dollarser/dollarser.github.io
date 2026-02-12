@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>浅谈对计算机的理解--外设 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。 1）硬件 提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈对计算机的理解--外设">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。 1）硬件 提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2020-01-17T12:39:14.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.982Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "浅谈对计算机的理解--外设",
+  "url": "http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2020-01-17T12:39:14.000Z",
+  "dateModified": "2026-02-12T10:34:06.982Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '浅谈对计算机的理解--外设',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">浅谈对计算机的理解--外设</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">浅谈对计算机的理解--外设</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-01-17T12:39:14.000Z" title="Created 2020-01-17 20:39:14">2020-01-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.982Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。</p>
+<p><strong>1）硬件</strong></p>
+<p>提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行软件的。</p>
+<p>我只能说你这种想法是把人的观点强加给计算机而已，它不过是一堆没有感情的芯片电路，就一铁疙瘩，懂什么代码。它不过是按既定的物理规律运行而已。</p>
+<p>甚至从我的角度来看即便是为计算机量身定做二进制也是计算机看不懂的东西，计算机所理解的这一切都是人强加给它的。</p>
+<p>这就相当于按下开关，通上电灯它亮了，而你把他看作是灯知道了你按下了开关，然后亮了，而且你还在这好奇，这灯它到底是咋知道我按下了开关的？灯知道个什么玩意，其实这不过是看待问题的角度本身强加给了它意义，计算机和灯本质上也并无差别。抛开人强加给它的意义，会更容易来理解计算机。</p>
+<p>下面来简析一下计算机的基本结构，此处的计算机不以任何现实机器为依据，单纯是对各种计算机抽象出来的一种通用机器模型。</p>
+<p>该机器应由 <strong>(1)cpu</strong>  <strong>(2)内存</strong>  和 <strong>(3)外设 <strong>构成，更细致的分：cpu由</strong>(1)控制器</strong>和**(2)运算器<strong>构成，内存既</strong>(3)存储器、主存**，外设既**(4)输入设备<strong>和</strong>(5)输出设备**。</p>
+<span id="more"></span>
+<p>此处仅对输入输出设备仅稍作说明，之后的文章会涉及计算机的核心部分既软件部分。由上面的说明可知计算机除了控制器、运算器、存储器，其它设备均为外设，例如磁盘 显示器 键盘鼠标等。计算机对外设的操作都可以抽象为读写，既输入是读输出是写。而怎么读怎么写可以认为是外设的事，计算机可以把它们看做相同的。比如数据写入磁盘，计算机就是吧10数据写过去，磁盘的控制器把数据转为磁盘上的磁极偏转，而这个转换过程是磁盘自己的事，磁盘自己的硬件和驱动进行控制。显示器的画面显示也不过是计算机向显示器写入数据而已，显示器的控制器(GPU)将数据转为图像，这个过程也是个显示器自己的事，例如最原始的荧光屏靠电子射击屏幕显示画面，而电子的的坐标数据可以通过是cpu写过去。将坐标转为具体的像素点，控制器可以用高中物理带电粒子在磁场中的运动将这个单纯的数据转为在屏幕上的物理位置。</p>
+<p>另一方面，外设不能和cpu直接通信，因为外设都是物理量，磁盘是磁、话筒是磁、键盘敲击的动作，这些量cpu是不能直接输入输出的，必须经过传感器等将所有非电量转为电量，之后调制解调，数模转换等一系列操作转为cpu数字电路能直接操作的数电信号。cpu和外设通信都是通过设备控制器作为中介，这些转换操作可以看做是设备控制器完成的，cpu操作设备控制器，设备控制器操作具体的外设。操作不同的外设只是对设备控制器进行不同的操作，这种结构也让cpu对外设的操作可以统一抽象为读写操作。读写的数据可能是想读写入外设的，也可能是控制设备控制器的。</p>
+<p>当然不同的外设读写的内容肯定不同，同一种内容对于不同的外设意义也不同，设备控制器怎么去读写也不同，这些由都驱动程序具体来控制。</p>
+<p>驱动程序是和硬件直接相关的，属于最接近底层的软件，用于控制外设，个人认为操作系统就可以看做cpu和内存的广义上的驱动，或者更底层的bios看做cpu和内存的驱动，只不过一般的驱动用于驱动设备，操作系统或bios驱动cpu。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/">http://blog.sunlingzhang.com/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/01/18/default/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/" title="特权指令、访管指令、陷入指令、广义指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">特权指令、访管指令、陷入指令、广义指令</div></div><div class="info-2"><div class="info-item-1">对操作系统、计算机组成原理入门具有一定指导意义，对计算机考研知识理解具有一定辅助作用，对工作中的实际应用可能基本没用。  特权指令  ○ 从指令系统（指令集）角度定义，在指令系统中拥有用于管理硬件和整个系统安全的指令，让程序随意使用具有极高危险性。不得在用户态（目态）执行，只能在核心态（管态）执行，用户态程序如果运行特权指令将发生异常，并切换到管态由操作系统接管cpu。所以用户程序不得使用特权指令，需要执行特权指令需要使用防管指令，进入核心态。   访管指令  ○ 同样从指令集的角度定义，或者说从硬件角度（cpu状态）。防管指令，是用户程序自愿进管的指令（进管同时也意味着程序放弃cpu的控制权），该指令本身属于非特权指令，可在用户态执行，执行后进入核心态。核心态是通过cpu置相应标志表明当前处于核心态。cpu进入核心态后可以执行指令集中的所有指令（包括特权指令和非特权指令，但不执行访管指令）。  陷入指令  ○ 原则上可看作访管指令，但是从操作系统的角度定义的。访管强调的是cpu从用户态切换到了核心态，可以执行指令集中的所有指令。而陷入（自陷、陷阱）指令强调程序从用户程序从用户台...</div></div></div></a><a class="pagination-related" href="/2020/01/17/default/IPV4%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86%E8%AF%A6%E8%A7%A3/" title="IPV4地址划分详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">IPV4地址划分详解</div></div><div class="info-2"><div class="info-item-1">1.  概述： 早期网络分配是只能以网段为单位进行(可能是出于路由简单的目的，网段类似电话号区号)。类比到电话4位区号，7位座机号，共11位。当电话呼叫时，线路进行转接的时候只需看区号就可以直接把电话接到某个地区，地区再看座机号接到具体某一户。这样一来转接过程各自分工让电话接通变得更加简单。网络通信也是类似，ip地址总共32位（二进制），但是网络号（区号）和主机号（座机号）不像11位电话那样始终固定为4位7位。 ip的划分稍微复杂一点，其划分原则为：ip地址中若第一位为0，则网络号8位，主机号24位，被称为A类地址。若第一位为1第二位为0，则网络号16位，主机号16位，被称为B类地址。若第一二位为1第三位为0，则网络号24位，主机号8位，被称为C类地址。早期网络并非个人使用，而是科研机构军工学校企业等使用，故ip的分配也是以网络号为单位，而不是以单个ip为单位来售卖。类比到电话就是，直接区号分配给你，而不是分配手机号。机构的用户多就购买一个A类网段，约可以连16M(2^24，主机号24位)台电脑，人少就购买B类网段，约可以连64k(2^16)台电脑，更少则购买C类网段，约可以连2...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/03/11/default/Generative%20Adversarial%20Nets/" title="Generative Adversarial Networks"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-11</div><div class="info-item-2">Generative Adversarial Networks</div></div><div class="info-2"><div class="info-item-1">Generative Adversarial Networks(GAN神经网络) [TOC] 摘要 本文提出了一个新的基于对抗的网络框架，主要包含两个模型。一个是生成模型G，用于获取整个数据分布；另一个是判别模型D，用于判别数据是来自真实数据还是生成数据。生成模型尽可能让判别模型犯错。判别模型试图找到一个函数，使得判别模型在真实的数据上得分较高，在生成模型的数据上得分较低。  介绍 GAN网络由两个模型组成：生成模型G和判别模型D。生成模型G的目标是生成尽可能接近真实数据的数据，判别模型D的目标是判别数据是来自真实数据还是生成数据。 生成模型G通过一个随机过程生成数据，判别模型D试图判别数据是否来自真实数据。判别模型D有一个输出值，表示数据来自真实数据的概率。判别模型D有一个目标函数，使得判别模型在真实的数据上得分较高，在生成模型的数据上得分较低。 生成模型G有一个目标函数，使得判别模型在生成模型的数据上得分较低，在真实的数据上得分较高。 生成模型G和判别模型D交替更新，生成模型G的目标函数和判别模型D的目标函数相互对抗。 方法  GAN网络可以应用在图像生成、语音生成等领域。 ...</div></div></div></a><a class="pagination-related" href="/2020/07/27/default/Designing%20Network%20Design%20Spaces/" title="Designing Network Design Spaces"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-27</div><div class="info-item-2">Designing Network Design Spaces</div></div><div class="info-2"><div class="info-item-1">网络设计空间的设计 摘要 本文提出了一种新的网络设计范式。我们的目标是帮助提高对网络设计的理解，并发现在不同环境下普遍适用的设计原则。我们不再专注于设计单个的网络实例，而是设计了参数化网络总体的网络设计空间。整个过程类似于经典的人工网络设计，但提升到了设计空间层面。使用我们的方法，我们探索网络设计的结构方面，并得出一个低维的设计空间，由简单的，规则的网络组成，我们称之为RegNet。RegNet参数化的核心观点非常简单：良好网络的宽度和深度可以用量化的线性函数来解释。我们分析了RegNet的设计空间，得出了与当前网络设计实践不符的有趣发现。RegNet的设计空间提供了简单而快速的网络，可以很好地在各种不同的FLOP状态下工作。在类似的训练环境和FLOPs下，RegNet模型的性能优于流行的efficientnet模型，而在gpu上的速度高达5倍。  介绍 深卷积神经网络是视觉识别的引擎。在过去的几年里，更好的体系结构已经在广泛的视觉识别任务中取得了长足的进步。示例包括LeNet、AlexNet、VGG和ResNet。这一工作既提高了神经网络的有效性，也促进了我们对网络设计的理解。...</div></div></div></a><a class="pagination-related" href="/2019/06/30/default/MathJax/" title="MathJax"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-30</div><div class="info-item-2">MathJax</div></div><div class="info-2"><div class="info-item-1">基本数学公式语法(of MathJax)[^queto1] [^queto1]: CSDN: 作者: ethmery 概述 在markdown中输入数学公式需要LaTaX语法的支持。 基本语法 呈现位置  正文（inline）中的LaTeX公式用$...$定义  例句为：$\sun_{i=0}^N \int_{a}^{b} g(t,i)\text{d}t$ 显示为：∑i=0N∫abg(t,i)dt\sum_{i=0}^N \int_{a}^{b} g(t,i)\text{d}t∑i=0N​∫ab​g(t,i)dt   单独显示（display）的LaTeX公式用$$...$$定义，此时公式居中独立成块显示  例句为：$$\sum_{i=0}^N \int_{a}^{b} g(i,t)\text{d}t$$ 显示为：$$\sum_{i=0}^N \int_{a}^{b} g(i,t)\text{d}t$$   下列描述语句中若非特别指出均省略$   希腊字母    显示 命令 显示 命令     α\alphaα \alpha β\betaβ \beta   γ\gammaγ \g...</div></div></div></a><a class="pagination-related" href="/2020/03/28/default/%E6%95%B0%E6%8D%AE%E6%B5%81%E9%87%8F%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%88%86%E6%9E%90/" title="移动数据流量请求头分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-28</div><div class="info-item-2">移动数据流量请求头分析</div></div><div class="info-2"><div class="info-item-1">1. http协议请求头 12345[method] [uri] [version]\r\nHost: www.example.com\r\nConnection: keep-alive\r\n...\r\n 1.1 第一行的字段为请求的：方法，资源地址，协议版本 http协议常用的请求方法[method]为  GET：用于向服务器请求数据； POST: 用于向服务器提交数据； CONNECT: 用于隧道代理; HEAD: 用于向服务器请求报头;  资源地址[uri]：一般为URL中去掉域名后剩下的那部分，即浏览器地址栏网址中域名之后的内容。 http协议版本[version]: 目前主流版本有HTTP/1.0和HTTP/1.1。 http请求头中的的换行用的是\r\n, 而非Linux中的换行符\n。以下为一个真实请求头的示例  GET /index.html HTTP/1.1 Host: www.example.com Connection: keep-alive   1.2 Host字段为请求的主机域名 早期没有虚拟主机的概念，一台服务器有一个主机名。因此规定在请求头的第一...</div></div></div></a><a class="pagination-related" href="/2019/10/23/default/%E5%BD%BB%E5%BA%95%E8%A7%A3%E5%86%B3Windows%E5%90%84%E7%A7%8Ddll%E7%BC%BA%E5%B0%91%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98/" title="解决Windows各种dll缺失报错"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-23</div><div class="info-item-2">解决Windows各种dll缺失报错</div></div><div class="info-2"><div class="info-item-1"> 动态链接库简单理解就是在软件装入内存时才进行动态的链接，与程序链接成完整的可执行文件。  简单明了的说明就是，和软件主体组装到一块，动态链接库多是一些模块化可复用的代码，实现了一些频繁使用，或者难以实现的操作，供程序直接调用。减少开发人员的工作量，同时动态库在需要执行时才调入内存，一个库可用供多个进程同时使用，可以降低内存占中。 另一方面，因为操作系统很多底层的系统调用操作或者频繁使用的操作，每个软件都要用，而且这些操作可能还比较危险，直接交给软件实现也存在一些风险。所以系统自带了很多动态链接库文件，编程人员需要使用相关功能，直接调用系统的链接文件即可。      于是就会出现很多软件运行时提示缺少dll文件的情况，因为软件使用的dll文件，系统中并不一定有，或者对应的dll版本不一样。     下面正式说明解决方案了，切忌不要提醒缺什么dll文件，就下载什么dll。  首先版本选择就很复杂，全靠运气，其次软件运行可能缺的不止这一个dll文件，而每次运行它只能发现一个报错一次，一次次运行然后一个个下肯定不现实。 微软的动态链接库全部包含在一个叫Microsoft Visual ...</div></div></div></a><a class="pagination-related" href="/2020/09/01/Examination/%E6%9C%BA%E6%A2%B0%E8%B7%A8%E8%80%83%E4%BA%8C%E6%88%98%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" title="2020机械跨考二战复旦大学计算机经验分享"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-01</div><div class="info-item-2">2020机械跨考二战复旦大学计算机经验分享</div></div><div class="info-2"><div class="info-item-1">经验这东西，必须具体问题具体对待，一人的经验不可能适合所有人。也不存在什么复习的捷径，个人认为好的经验并不能让你事半功倍，只是单纯指出一条让你相信自己这么干也能成功的道路。以下观点和经验都是一家之言，我不坚持自己的看法。本来打算多写点，但是现在突然感觉没什么可写的了，感触还没我去年的深。  首先说明个人背景，如果和我相似可能这些经验有用，如果差别很大，那下面经验大概率没用的：   本科机械，跨专业二战，第一年已经打下一定基础，但其实第二年开始复习的时候已经差不多都忘完了。   有较好的数学基础，从小数学比较好，但是高中之后就考不了高分了，即便是题目很简单也考不高。自认为原因主要是粗心大意，草稿较乱，创新不足；分别导致简单题做错，计算复杂题做错，思路新颖题目做错。   英语极差，单词量历史最高不超过5k, 今年考研复习之初应该已经降到低于2k了, 四级考3次才过，六级没过。唯一的基础大概就是初中英语老师教的16种时态语态，自此就觉得语法(应该是句法)这东西不用学，初中水平够用一辈子。   对计算机很感兴趣，虽然没深入学习过任何一门语言，但是在平时做点自娱自乐的东西，接触或使用过至少...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

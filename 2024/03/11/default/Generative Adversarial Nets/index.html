@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Generative Adversarial Networks | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Generative Adversarial Networks(GAN神经网络) [TOC] 摘要 本文提出了一个新的基于对抗的网络框架，主要包含两个模型。一个是生成模型G，用于获取整个数据分布；另一个是判别模型D，用于判别数据是来自真实数据还是生成数据。生成模型尽可能让判别模型犯错。判别模型试图找到一个函数，使得判别模型在真实的数据上得分较高，在生成模型的数据上得分较低。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Generative Adversarial Networks">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2024/03/11/default/Generative%20Adversarial%20Nets/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="Generative Adversarial Networks(GAN神经网络) [TOC] 摘要 本文提出了一个新的基于对抗的网络框架，主要包含两个模型。一个是生成模型G，用于获取整个数据分布；另一个是判别模型D，用于判别数据是来自真实数据还是生成数据。生成模型尽可能让判别模型犯错。判别模型试图找到一个函数，使得判别模型在真实的数据上得分较高，在生成模型的数据上得分较低。">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2024-03-11T10:46:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.981Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Generative Adversarial Networks",
+  "url": "http://blog.sunlingzhang.com/2024/03/11/default/Generative%20Adversarial%20Nets/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2024-03-11T10:46:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.981Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2024/03/11/default/Generative%20Adversarial%20Nets/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Generative Adversarial Networks',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">Generative Adversarial Networks</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Generative Adversarial Networks</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-11T10:46:00.000Z" title="Created 2024-03-11 18:46:00">2024-03-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.981Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h2 id="Generative-Adversarial-Networks-GAN神经网络">Generative Adversarial Networks(GAN神经网络)</h2>
+<p>[TOC]</p>
+<h3 id="摘要">摘要</h3>
+<p>本文提出了一个新的基于对抗的网络框架，主要包含两个模型。一个是生成模型G，用于获取整个数据分布；另一个是判别模型D，用于判别数据是来自真实数据还是生成数据。生成模型尽可能让判别模型犯错。判别模型试图找到一个函数，使得判别模型在真实的数据上得分较高，在生成模型的数据上得分较低。</p>
+<span id="more"></span>
+<h3 id="介绍">介绍</h3>
+<p>GAN网络由两个模型组成：生成模型G和判别模型D。生成模型G的目标是生成尽可能接近真实数据的数据，判别模型D的目标是判别数据是来自真实数据还是生成数据。</p>
+<p>生成模型G通过一个随机过程生成数据，判别模型D试图判别数据是否来自真实数据。判别模型D有一个输出值，表示数据来自真实数据的概率。判别模型D有一个目标函数，使得判别模型在真实的数据上得分较高，在生成模型的数据上得分较低。</p>
+<p>生成模型G有一个目标函数，使得判别模型在生成模型的数据上得分较低，在真实的数据上得分较高。</p>
+<p>生成模型G和判别模型D交替更新，生成模型G的目标函数和判别模型D的目标函数相互对抗。</p>
+<h3 id="方法">方法</h3>
+<p><img src="/img/gan/image1.png" alt="公式"></p>
+<p>GAN网络可以应用在图像生成、语音生成等领域。</p>
+<h3 id="参考资料">参考资料</h3>
+<p>[1] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bharath Ramsundar, Tomaso Poggio. Generative Adversarial Nets. 2014.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2024/03/11/default/Generative%20Adversarial%20Nets/">http://blog.sunlingzhang.com/2024/03/11/default/Generative%20Adversarial%20Nets/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/03/24/default/%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D%E3%80%81%E6%8B%89%E4%B8%81%E5%AD%97%E6%AF%8D%E8%A1%A8/" title="希腊字母、拉丁字母、Markdown、拼写与读音中英对照表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">希腊字母、拉丁字母、Markdown、拼写与读音中英对照表</div></div><div class="info-2"><div class="info-item-1">   大写 小写 中文名 英文 英语音标注音 大写Markdown 小写Markdown 意义     A\AlphaA α\alphaα 阿尔法 Alpha /'ælfə/ \Alpha \alpha 角度、系数、角加速度、第一个、电离度、转化率   B\BetaB β\betaβ 贝塔/毕塔 Beta /'bi:tə/ 或 /'beɪtə/ \Beta \beta 磁通系数、角度、系数   Γ\GammaΓ γ\gammaγ 伽玛/甘玛 Gamma /'gæmə/ \Gamma \gamma 电导系数（小写）、角度、比热容比   Δ\DeltaΔ δ\deltaδ 德尔塔/岱欧塔 Delta /'deltə/ \Delta \delta 变化量、焓变、熵变、屈光度、变动、方程判别式（大写）、允许误差（小写，统计学）   E\EpsilonE ϵ\epsilonϵ　ε\varepsilonε 伊普西隆/埃普斯棱 Epsilon /'epsɪlɒn/ \Epsilon \epsilon　\varepsilon 对数之基数、介电常数   Z\ZetaZ ζ\zetaζ 泽塔/Z塔 ...</div></div></div></a><a class="pagination-related" href="/2023/08/23/JAVA/SpringBoot/" title="SpringBoot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">SpringBoot</div></div><div class="info-2"><div class="info-item-1">官方文档：https://spring.io/projects/spring-boot#learn 其他笔记： 主要参考： Spring Boot 2 学习笔记（1 / 2）_KISS-CSDN博客 SpringBootWeb模块的默认规则研究_大恐龙的小弟的博客-CSDN博客 01、基础入门-Spring生态圈 Spring官网 Spring能做什么  Spring的生态 覆盖了：  web开发 数据访问 安全控制 分布式 消息服务 移动开发 批处理 …   Spring5重大升级  响应式编程    内部源码设计  基于Java8的一些新特性，如：接口默认实现。重新设计源码架构。 接口的默认实现：即适配器模式（adapter）  由于接口的抽象方法太多，而一般情况下我们只需要使用接口的某几个方法，此时继承了接口必须实现所有方法，即便不用，也要加上空方法。 此时我们使用适配器实现接口的所有方法，通过继承适配器来重新部分方法即可，避免大量无用的方法实现  为什么用SpringBoot  Spring Boot makes it easy to create stand-alone...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2021/07/28/default/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" title="从零开始的深度学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-28</div><div class="info-item-2">从零开始的深度学习</div></div><div class="info-2"><div class="info-item-1">从零开始的深度学习 主要内容：  安装NVIDIA GPU驱动 安装CUDA Toolkit 安装cuDNN 安装Conda(附带python) 安装PyTorch 安装TensorFlow  一、工具介绍   NVIDIA GPU驱动：nvidia-smi是nvidia 的系统管理接口，一般安装NVIDIA GPU驱动后即可使用。   CUDA  Toolkit：CUDA（Compute Unified Device Architecture），是NVIDIA推出的运算平台，AMD也有类似的平台 ROCm，但并不成熟。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。   cuDNN：NVIDIA cuDNN是用于深度神经网络的GPU加速库。它强调性能、易用性和低内存开销。NVIDIA cuDNN可以集成到更高级别的机器学习框架中，如Tensorflow、pytorch等。简单的插入式设计可以让开发人员专注于设计和实现神经网络模型，而不是简单调整性能，同时还可以在GP...</div></div></div></a><a class="pagination-related" href="/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/" title="浅谈对计算机的理解--外设"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-17</div><div class="info-item-2">浅谈对计算机的理解--外设</div></div><div class="info-2"><div class="info-item-1">首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。 1）硬件 提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行软件的。 我只能说你这种想法是把人的观点强加给计算机而已，它不过是一堆没有感情的芯片电路，就一铁疙瘩，懂什么代码。它不过是按既定的物理规律运行而已。 甚至从我的角度来看即便是为计算机量身定做二进制也是计算机看不懂的东西，计算机所理解的这一切都是人强加给它的。 这就相当于按下开关，通上电灯它亮了，而你把他看作是灯知道了你按下了开关，然后亮了，而且你还在这好奇，这灯它到底是咋知道我按下了开关的？灯知道个什么玩意，其实这不过是看待问题的角度本身强加给了它意义，计算机和灯本质上也并无差别。抛开人强加给它的意义，会更容易来理解计算机。 下面来简析一下计算机的基本结构，此处的计算机不以任何现实机器为...</div></div></div></a><a class="pagination-related" href="/2024/05/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%B0%83%E6%95%B4%E7%AD%96%E7%95%A5/" title="pytorch 常用的学习率调整策略"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-11</div><div class="info-item-2">pytorch 常用的学习率调整策略</div></div><div class="info-2"><div class="info-item-1">[TOC] 参考地址：https://zhuanlan.zhihu.com/p/538447997 官方文档：https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate 0. 基础 导入 1from torch.optim import lr_scheduler 常用的学习率策略  StepLR LambdaLR  基础代码 12345678910import torchimport numpy as npfrom torch.optim import SGDfrom torch.optim import lr_schedulerfrom torch.nn.parameter import Parameter# 随机创建一组模型参数model = [Parameter(torch.randn(2, 2, requires_grad=True))]# 使用SGD优化器，学习率设为0.1optimizer = SGD(model, lr=0.1)  1. StepLR 最简单且最常用的学习率调整方法，每...</div></div></div></a><a class="pagination-related" href="/2020/03/28/default/%E6%95%B0%E6%8D%AE%E6%B5%81%E9%87%8F%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%88%86%E6%9E%90/" title="移动数据流量请求头分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-28</div><div class="info-item-2">移动数据流量请求头分析</div></div><div class="info-2"><div class="info-item-1">1. http协议请求头 12345[method] [uri] [version]\r\nHost: www.example.com\r\nConnection: keep-alive\r\n...\r\n 1.1 第一行的字段为请求的：方法，资源地址，协议版本 http协议常用的请求方法[method]为  GET：用于向服务器请求数据； POST: 用于向服务器提交数据； CONNECT: 用于隧道代理; HEAD: 用于向服务器请求报头;  资源地址[uri]：一般为URL中去掉域名后剩下的那部分，即浏览器地址栏网址中域名之后的内容。 http协议版本[version]: 目前主流版本有HTTP/1.0和HTTP/1.1。 http请求头中的的换行用的是\r\n, 而非Linux中的换行符\n。以下为一个真实请求头的示例  GET /index.html HTTP/1.1 Host: www.example.com Connection: keep-alive   1.2 Host字段为请求的主机域名 早期没有虚拟主机的概念，一台服务器有一个主机名。因此规定在请求头的第一...</div></div></div></a><a class="pagination-related" href="/2019/06/30/default/MathJax/" title="MathJax"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-06-30</div><div class="info-item-2">MathJax</div></div><div class="info-2"><div class="info-item-1">基本数学公式语法(of MathJax)[^queto1] [^queto1]: CSDN: 作者: ethmery 概述 在markdown中输入数学公式需要LaTaX语法的支持。 基本语法 呈现位置  正文（inline）中的LaTeX公式用$...$定义  例句为：$\sun_{i=0}^N \int_{a}^{b} g(t,i)\text{d}t$ 显示为：∑i=0N∫abg(t,i)dt\sum_{i=0}^N \int_{a}^{b} g(t,i)\text{d}t∑i=0N​∫ab​g(t,i)dt   单独显示（display）的LaTeX公式用$$...$$定义，此时公式居中独立成块显示  例句为：$$\sum_{i=0}^N \int_{a}^{b} g(i,t)\text{d}t$$ 显示为：$$\sum_{i=0}^N \int_{a}^{b} g(i,t)\text{d}t$$   下列描述语句中若非特别指出均省略$   希腊字母    显示 命令 显示 命令     α\alphaα \alpha β\betaβ \beta   γ\gammaγ \g...</div></div></div></a><a class="pagination-related" href="/2025/08/05/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="pytorch-常用激活函数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-05</div><div class="info-item-2">pytorch-常用激活函数</div></div><div class="info-2"><div class="info-item-1">激活函数的原则：  单调函数（或有极小一部分不单调） 非线性函数 具有良好的梯度    1. Sigmoid 函数 Sigmoid 是早期神经网络中常用的激活函数，其数学表达式为： f(x)=11+e−xf(x) = \frac{1}{1 + e^{-x}} f(x)=1+e−x1​  优点：输出值在 (0, 1) 区间内，适合用于二分类问题的概率预测。 缺点：容易出现梯度消失问题，计算量相对较大。  2. Tanh（双曲正切）函数 Tanh 的数学表达式如下： f(x)=tanh⁡(x)=ex−e−xex+e−x f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}  f(x)=tanh(x)=ex+e−xex−e−x​  优点：将输入值压缩到 (-1, 1)，对于后续的优化过程较为友好。 缺点：与 Sigmoid 类似，两端的导数接近于零，可能导致梯度消失问题。  3. ReLU（修正线性单元） ReLU 是当前深度学习中最常用的激活函数之一，定义为： f(x)=max⁡(0,x) f(x) = \max(0, x)  f(x...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Generative-Adversarial-Networks-GAN%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">1.</span> <span class="toc-text">Generative Adversarial Networks(GAN神经网络)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.4.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

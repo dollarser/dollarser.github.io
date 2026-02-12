@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>遗世独立 - 憧憬是距离理解最遥远的感情</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="日常记录学习用博客，仅用来练习使用">
+<meta property="og:type" content="website">
+<meta property="og:title" content="遗世独立">
+<meta property="og:url" content="http://blog.sunlingzhang.com/page/5/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="日常记录学习用博客，仅用来练习使用">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="learn,学习,考研,计算机,CS,ACG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/page/5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '遗世独立',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">遗世独立</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/08/23/JAVA/SpringBoot/" title="SpringBoot">SpringBoot</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-08-23T05:00:00.000Z" title="Created 2023-08-23 13:00:00">2023-08-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">官方文档：https://spring.io/projects/spring-boot#learn 其他笔记： 主要参考： Spring Boot 2 学习笔记（1 / 2）_KISS-CSDN博客 SpringBootWeb模块的默认规则研究_大恐龙的小弟的博客-CSDN博客 01、基础入门-Spring生态圈 Spring官网 Spring能做什么  Spring的生态 覆盖了：  web开发 数据访问 安全控制 分布式 消息服务 移动开发 批处理 …   Spring5重大升级  响应式编程    内部源码设计  基于Java8的一些新特性，如：接口默认实现。重新设计源码架构。 接口的默认实现：即适配器模式（adapter）  由于接口的抽象方法太多，而一般情况下我们只需要使用接口的某几个方法，此时继承了接口必须实现所有方法，即便不用，也要加上空方法。 此时我们使用适配器实现接口的所有方法，通过继承适配器来重新部分方法即可，避免大量无用的方法实现  为什么用SpringBoot  Spring Boot makes it easy to create stand-alone...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/06/23/JAVA/SpringMVC/" title="SpringMVC">SpringMVC</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-06-23T05:00:00.000Z" title="Created 2023-06-23 13:00:00">2023-06-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">官方文档：https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web 基于Spring实现的MVC轻量级Web框架 SSM: mybatis+Spring+SpringMVC MVC三层架构 Java基础：认真学习，老师带，入门快   JavaSE   JavaWeb   框架：研究官方文档，锻炼官方文档，锻炼自学能力，锻炼笔记能力，锻炼项目能力 SpringMVC + Vue + SpringBoot + SpringCloud + Linux SSM = JavaWeb项目 Sping: IOC和AOP SpringMVC：SpringMVC的执行流程！ SpringMVC: SSM框架整合！ MVC：模型（dao, service）, 视图（jsp），控制器（Servlet）  1. 什么是SpringMVC 1、回顾MVC 1.1、什么是MVC  MVC是模型(Model)、视图(View)、控制器(Controller)的简写，是一种软件设计规范。 是将业...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/06/07/JAVA/Mybatis/" title="Mybatis">Mybatis</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-06-07T10:00:00.000Z" title="Created 2023-06-07 18:00:00">2023-06-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">环境：   JDK1.8   Mysql 5.7   maven 3.6.1   IDEA   回顾：   JDBC   Mysql   Java基础   Maven   Junit：单元测试   1. 简介 1.1 什么是Mybatis MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。 框架：配置文件最好直接看官网 MyBatis官方文档：https://mybatis.org/mybatis-3/zh/index.html GitHub主页：https://github.com/mybatis/mybatis-3 Maven地址：https://mvnrepository.com/artifact/org.mybatis/mybatis 123456&lt;!-- https:/...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/05/27/JAVA/Spring/" title="Spring">Spring</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-05-27T10:00:00.000Z" title="Created 2023-05-27 18:00:00">2023-05-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">1. Spring 官网：https://spring.io/projects/spring-framework/ 文档：https://docs.spring.io/spring-framework/docs/current/reference/html/index.html 三大核心： ​	控制反转（ioc）-----&gt; Inversion of Control ​	依赖注入（di）---- &gt;Dependency Injection ​	面向切面编程（AOP）----&gt;Aspect Oriented Programming   测试依赖  123456&lt;dependency&gt;   &lt;groupId&gt;junit&lt;/groupId&gt;   &lt;artifactId&gt;junit&lt;/artifactId&gt;   &lt;version&gt;4.11&lt;/version&gt;   &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt;  测试代码写在/src...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2022/06/27/JAVA/JAVA%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" title="JAVA学习路线">JAVA学习路线</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-27T10:00:00.000Z" title="Created 2022-06-27 18:00:00">2022-06-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">CodeSheep 参考视频：https://www.bilibili.com/video/BV1GQ4y1N7HD 相关思维导图：https://www.processon.com/view/link/5eb6a1b0e401fd16f4283225 编程基础（掌握） JAVA语法 Java基础 JVM  类加载机制 字节码执行机制 JVM内存模型 GC垃圾回收 JVM性能监控与故障定位 JVM调优  多线程  并发编程的基础 线程池 锁 并发容器 原子类 JUC并发工具类   数据结构和算法 数据结构  字符串 数组 链表 堆、栈、队列 二叉树 哈希 图  算法  排序 查找 贪心 分治 动态规划 回溯  计算机网络  ARP协议 IP、ICMP协议 TCP、UDP协议 DNS、HTTP/HTTPS协议 Session/Cookie  MySQL数据库  SQL语句的书写 SQL语句的优化 事务、隔离级别 索引 锁  操作系统  进程、线程 并发、锁 内存管理和调度 I/O原理  设计模式  单例 工厂 代理 策略 模板方法 观察者 适配器 责任链 建造者  研发工具 集成开...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/10/07/default/mmWave%20Radar/" title="毫米波雷达">毫米波雷达</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-07T05:19:00.000Z" title="Created 2021-10-07 13:19:00">2021-10-07</time></span></div><div class="content">毫米波雷达-AWR2243 简介 毫米波雷达，是工作在毫米波波段（Millimeter Wave ）探测的雷达。通常毫米波是指30～300GHz频域(波长为1～10mm)的。毫米波的波长介于微波和厘米波之间，因此毫米波雷达兼有微波雷达和光学雷达的一些优点。 同厘米波雷达相比，毫米波雷达具有体积小、质量轻和空间分辨率高的特点。与红外、激光、电视等光学雷达相比，毫米波雷达穿透雾、烟、灰尘的能力强，具有全天候(大雨天除外)全天时的特点。另外，毫米波雷达的抗干扰、反隐身能力也优于其他微波雷达 。毫米波雷达能分辨识别很小的目标，而且能同时识别多个目标；具有成像能力，体积小、机动性和隐蔽性好，在战场上生存能力强 。 目前在自动驾驶，智能监控领域广泛运用。毫米波雷达能直接获取目标的距离，速度，角度等基本信息。通过对数据的进一步处理，对目标的尺寸，轮廓可能也有一定的估计能力。  1 调频连续波(FMCW) 调频连续波(Frequency-Modulated Continuous Wave)，是一组幅值不变，但频率变化的连续波形，毫米波雷达使用的调频连续波是频率线性增加的正弦波，又叫线性调频连续波...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/08/05/Python/Python%E5%85%A5%E9%97%A8/" title="Python入门">Python入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-08-05T10:00:00.000Z" title="Created 2021-08-05 18:00:00">2021-08-05</time></span></div><div class="content">1、环境配置 python作为脚本语言，只需要一个python解释器就可以直接编写代码和运行。 但是为了方便我们通常会使用IDE(集成开发环境)或轻量级的文本编辑器进行开发。 这里首先介绍使用最简单的python编辑器编写代码，以及使用VS Code、Jupyter开发。  1.1 安装python解释器 这里推荐安装Conda,Conda是极其方便且强大的包管理器，安装后自带python解释器，同时为以后开发带来极大的便利。如果只想安装python解释器可以从下方地址下载： 官网Windows下载：https://www.python.org/downloads/windows/ 1.2、安装Conda conda分为anaconda和miniconda。anaconda是包含一些常用包的版本，miniconda则是精简版，需要什么装什么，这里介绍miniconda的安装。 官网地址：https://docs.conda.io/en/latest/miniconda.html 1.2.1、安装 进入官网：https://docs.conda.io/en/latest/minic...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/28/default/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" title="从零开始的深度学习">从零开始的深度学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-28T10:46:00.000Z" title="Created 2021-07-28 18:46:00">2021-07-28</time></span></div><div class="content">从零开始的深度学习 主要内容：  安装NVIDIA GPU驱动 安装CUDA Toolkit 安装cuDNN 安装Conda(附带python) 安装PyTorch 安装TensorFlow  一、工具介绍   NVIDIA GPU驱动：nvidia-smi是nvidia 的系统管理接口，一般安装NVIDIA GPU驱动后即可使用。   CUDA  Toolkit：CUDA（Compute Unified Device Architecture），是NVIDIA推出的运算平台，AMD也有类似的平台 ROCm，但并不成熟。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。   cuDNN：NVIDIA cuDNN是用于深度神经网络的GPU加速库。它强调性能、易用性和低内存开销。NVIDIA cuDNN可以集成到更高级别的机器学习框架中，如Tensorflow、pytorch等。简单的插入式设计可以让开发人员专注于设计和实现神经网络模型，而不是简单调整性能，同时还可以在GP...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/05/21/Paper/Attention%20Is%20All%20You%20Need/" title="Attention Is All You Need">Attention Is All You Need</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-05-21T02:35:00.000Z" title="Created 2021-05-21 10:35:00">2021-05-21</time></span></div><div class="content">Transformer 注意力就是您所需要的 [TOC] 会议： NeurIPS 2017 论文地址：https://arxiv.org/abs/1706.03762 摘要 主流的序列转换模型多是基于复杂的循环或卷积神经网络，网络包括编码器和解码器。性能最好的模型还通过注意机制连接编码器和解码器。我们提出了一个新的简单且完全基于注意力机制的网络结构，Transformer，摒弃了循环和卷积。在两个机器翻译任务上的实验表明，这些模型具有更高的并行性，更少的训练时间。我们的模型在WMT 2014 Englishto-German 的翻译任务中达到28.4 BLEU，比现有的最佳结果（包括集成模型）提高了2 BLEU以上。在WMT 2014 English-to-French翻译任务中，我们的模型在8个GPU上训练3.5天后，达到了新的单模型BLEU 41.8的最新分数，这只相当于文献中最佳模型训练成本的一小部分。通过将Transformer成功地应用于大规模和有限训练数据下的英语选区分析，证明了Transformer具有良好的泛化能力。  1 简介 循环神经网络，特别是长-短期记忆(...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/04/22/Paper/Learning%20Event-Based%20Motion%20Deblurring/" title="Learning Event-Based Motion Deblurring">Learning Event-Based Motion Deblurring</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-04-22T05:38:00.000Z" title="Created 2021-04-22 13:38:00">2021-04-22</time></span></div><div class="content">学习基于事件的运动去模糊 会议：CVPR 2020 地址：https://arxiv.org/abs/2004.05794 摘要 由于模糊过程中丢失了大量的运动信息，从运动模糊图像中恢复清晰的视频序列是一个高度不适定问题。然而，对于基于事件的相机，快速运动可以在高时间率上作为事件被捕捉，从而提出了探索有效解决方案的新机遇。在本文中，我们从基于事件的运动去模糊的序列表述开始，然后说明如何使用新颖的端到端深度架构来实现其优化。所提出的架构是一个卷积循环神经网络，有原则的整合了全局和局部尺度的视觉和时间知识。为了进一步改进(图像的)重建，我们提出了一种可微的定向事件过滤模块，可以有效地从事件流中提取丰富的先验边界。我们在合成的GoPro数据集和新引入的使用DAVIS240C相机捕获的大型数据集上进行了大量的实验。我们提出的方法达到了最先进的重建质量，并更好地处理现实世界的运动模糊。  1. 概述 运动模糊通常是由于现代相机传感器需要曝光时间，在此期间，场景被记录在不同的时间戳，并累积成平均(模糊)信号。这个过程的反问题被称为“去模糊”，它揭示了运动模糊图像背后的场景动态，并生成一系列复...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="page-number" href="/page/7/#content-inner">7</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/paper/"><span class="card-category-list-name">paper</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%80%83%E7%A0%94/"><span class="card-category-list-name">考研</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/cv/" style="font-size: 1.1em; color: #999">cv</a> <a href="/tags/CV/" style="font-size: 1.3em; color: #99a1ac">CV</a> <a href="/tags/%E8%AE%A1%E7%BD%91/" style="font-size: 1.15em; color: #999b9e">计网</a> <a href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" style="font-size: 1.3em; color: #99a1ac">入门实践</a> <a href="/tags/AAAI-2020/" style="font-size: 1.1em; color: #999">AAAI 2020</a> <a href="/tags/CVPR-2021/" style="font-size: 1.1em; color: #999">CVPR 2021</a> <a href="/tags/CAD/" style="font-size: 1.2em; color: #999da3">CAD</a> <a href="/tags/matrix/" style="font-size: 1.1em; color: #999">matrix</a> <a href="/tags/Java/" style="font-size: 1.25em; color: #999fa7">Java</a> <a href="/tags/OCR/" style="font-size: 1.2em; color: #999da3">OCR</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">AI工具</a> <a href="/tags/CTCLoss/" style="font-size: 1.15em; color: #999b9e">CTCLoss</a> <a href="/tags/Android/" style="font-size: 1.15em; color: #999b9e">Android</a> <a href="/tags/Mybatis/" style="font-size: 1.1em; color: #999">Mybatis</a> <a href="/tags/paper/" style="font-size: 1.5em; color: #99a9bf">paper</a> <a href="/tags/scheduler/" style="font-size: 1.1em; color: #999">scheduler</a> <a href="/tags/YOLO/" style="font-size: 1.3em; color: #99a1ac">YOLO</a> <a href="/tags/%E5%BB%BA%E7%AD%91/" style="font-size: 1.2em; color: #999da3">建筑</a> <a href="/tags/Spring/" style="font-size: 1.1em; color: #999">Spring</a> <a href="/tags/work/" style="font-size: 1.2em; color: #999da3">work</a> <a href="/tags/SVD/" style="font-size: 1.1em; color: #999">SVD</a> <a href="/tags/optimizer/" style="font-size: 1.1em; color: #999">optimizer</a> <a href="/tags/GAN/" style="font-size: 1.1em; color: #999">GAN</a> <a href="/tags/GCN/" style="font-size: 1.2em; color: #999da3">GCN</a> <a href="/tags/CRNN/" style="font-size: 1.1em; color: #999">CRNN</a> <a href="/tags/ICLR-2018/" style="font-size: 1.1em; color: #999">ICLR 2018</a> <a href="/tags/CVPR2020/" style="font-size: 1.1em; color: #999">CVPR2020</a> <a href="/tags/AI/" style="font-size: 1.35em; color: #99a3b1">AI</a> <a href="/tags/ICLR-2017/" style="font-size: 1.1em; color: #999">ICLR 2017</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/" style="font-size: 1.1em; color: #999">配置相关</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.45em; color: #99a7ba">随笔</a> <a href="/tags/CS/" style="font-size: 1.4em; color: #99a5b6">CS</a> <a href="/tags/AdamW/" style="font-size: 1.1em; color: #999">AdamW</a> <a href="/tags/ICDAR-2019/" style="font-size: 1.1em; color: #999">ICDAR 2019</a> <a href="/tags/CTPN/" style="font-size: 1.1em; color: #999">CTPN</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 1.1em; color: #999">考研</a> <a href="/tags/Adam/" style="font-size: 1.1em; color: #999">Adam</a> <a href="/tags/NLP/" style="font-size: 1.1em; color: #999">NLP</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1.15em; color: #999b9e">学习笔记</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              February 2026
+            </span>
+            <span class="card-archive-list-count">11</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              August 2025
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              April 2025
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              December 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              November 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/08/">
+            <span class="card-archive-list-date">
+              August 2024
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/07/">
+            <span class="card-archive-list-date">
+              July 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">64</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-12T10:34:12.014Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

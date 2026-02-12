@@ -1,0 +1,674 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JAVA学习路线 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="CodeSheep 参考视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1GQ4y1N7HD 相关思维导图：https:&#x2F;&#x2F;www.processon.com&#x2F;view&#x2F;link&#x2F;5eb6a1b0e401fd16f4283225 编程基础（掌握） JAVA语法 Java基础 JVM  类加载机制 字节码执行机制 JVM内存模型 GC垃圾回收 JVM性能监控与故障定位 JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA学习路线">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2022/06/27/JAVA/JAVA%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="CodeSheep 参考视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1GQ4y1N7HD 相关思维导图：https:&#x2F;&#x2F;www.processon.com&#x2F;view&#x2F;link&#x2F;5eb6a1b0e401fd16f4283225 编程基础（掌握） JAVA语法 Java基础 JVM  类加载机制 字节码执行机制 JVM内存模型 GC垃圾回收 JVM性能监控与故障定位 JVM">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2022-06-27T10:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.979Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="CS">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "JAVA学习路线",
+  "url": "http://blog.sunlingzhang.com/2022/06/27/JAVA/JAVA%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2022-06-27T10:00:00.000Z",
+  "dateModified": "2026-02-12T10:34:06.979Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2022/06/27/JAVA/JAVA%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JAVA学习路线',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">JAVA学习路线</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">JAVA学习路线</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-06-27T10:00:00.000Z" title="Created 2022-06-27 18:00:00">2022-06-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.979Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h1>CodeSheep</h1>
+<p>参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GQ4y1N7HD">https://www.bilibili.com/video/BV1GQ4y1N7HD</a></p>
+<p>相关思维导图：<a target="_blank" rel="noopener" href="https://www.processon.com/view/link/5eb6a1b0e401fd16f4283225">https://www.processon.com/view/link/5eb6a1b0e401fd16f4283225</a></p>
+<h2 id="编程基础（掌握）">编程基础（掌握）</h2>
+<h3 id="JAVA语法">JAVA语法</h3>
+<h4 id="Java基础">Java基础</h4>
+<h4 id="JVM">JVM</h4>
+<ul>
+<li>类加载机制</li>
+<li>字节码执行机制</li>
+<li>JVM内存模型</li>
+<li>GC垃圾回收</li>
+<li>JVM性能监控与故障定位</li>
+<li>JVM调优</li>
+</ul>
+<h4 id="多线程">多线程</h4>
+<ul>
+<li>并发编程的基础</li>
+<li>线程池</li>
+<li>锁</li>
+<li>并发容器</li>
+<li>原子类</li>
+<li>JUC并发工具类</li>
+</ul>
+<span id="more"></span>
+<h3 id="数据结构和算法">数据结构和算法</h3>
+<h4 id="数据结构">数据结构</h4>
+<ul>
+<li>字符串</li>
+<li>数组</li>
+<li>链表</li>
+<li>堆、栈、队列</li>
+<li>二叉树</li>
+<li>哈希</li>
+<li>图</li>
+</ul>
+<h4 id="算法">算法</h4>
+<ul>
+<li>排序</li>
+<li>查找</li>
+<li>贪心</li>
+<li>分治</li>
+<li>动态规划</li>
+<li>回溯</li>
+</ul>
+<h3 id="计算机网络">计算机网络</h3>
+<ul>
+<li>ARP协议</li>
+<li>IP、ICMP协议</li>
+<li>TCP、UDP协议</li>
+<li>DNS、HTTP/HTTPS协议</li>
+<li>Session/Cookie</li>
+</ul>
+<h3 id="MySQL数据库">MySQL数据库</h3>
+<ul>
+<li>SQL语句的书写</li>
+<li>SQL语句的优化</li>
+<li>事务、隔离级别</li>
+<li>索引</li>
+<li>锁</li>
+</ul>
+<h3 id="操作系统">操作系统</h3>
+<ul>
+<li>进程、线程</li>
+<li>并发、锁</li>
+<li>内存管理和调度</li>
+<li>I/O原理</li>
+</ul>
+<h3 id="设计模式">设计模式</h3>
+<ul>
+<li>单例</li>
+<li>工厂</li>
+<li>代理</li>
+<li>策略</li>
+<li>模板方法</li>
+<li>观察者</li>
+<li>适配器</li>
+<li>责任链</li>
+<li>建造者</li>
+</ul>
+<h2 id="研发工具">研发工具</h2>
+<h3 id="集成开发环境">集成开发环境</h3>
+<ul>
+<li>Eclipse</li>
+<li>Intellij IDEA</li>
+<li>VSCode</li>
+</ul>
+<h3 id="Linux系统（了解）">Linux系统（了解）</h3>
+<ul>
+<li>常用命令</li>
+<li>Shell脚本### 项目管理/构建工具（掌握）</li>
+<li>Maven</li>
+<li>Gradle### 代码管理工具（了解）</li>
+<li>SVN</li>
+<li>Git</li>
+</ul>
+<h3 id="前端（了解）">前端（了解）</h3>
+<ul>
+<li>基础套餐（大致了解，2-3天）
+<ul>
+<li>三大件
+<ul>
+<li>HTML</li>
+<li>JavaScript</li>
+<li>CSS</li>
+</ul>
+</li>
+<li>基础库
+<ul>
+<li>jQuery</li>
+<li>Ajax</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>模板框架
+<ul>
+<li>JSP/JSTL（已过时）</li>
+<li>Thymeleaf</li>
+<li>FreeMarker</li>
+</ul>
+</li>
+<li>组件化框架
+<ul>
+<li>Vue</li>
+<li>React</li>
+<li>Angular</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="运维知识（配置）">运维知识（配置）</h2>
+<ul>
+<li>Web服务器
+<ul>
+<li>Nginx</li>
+</ul>
+</li>
+<li>应用服务器
+<ul>
+<li>Tomcat</li>
+<li>Jetty</li>
+<li>Undertow</li>
+</ul>
+</li>
+<li>CDN加速</li>
+<li>持续集成/持续部署
+<ul>
+<li>Jenkins</li>
+</ul>
+</li>
+<li>代码质量检查
+<ul>
+<li>sonar</li>
+</ul>
+</li>
+<li>日志收集和分析
+<ul>
+<li>ELK</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="成神之路">成神之路</h2>
+<ul>
+<li>徒手撕源码</li>
+<li>光脚造轮子</li>
+<li>闭着眼睛深度调优</li>
+<li>吊打面试官</li>
+</ul>
+<hr>
+<h2 id="平稳降落">平稳降落</h2>
+<p>调整心态、注意健康，飞的多高不重要，重要的是如何平望降落。</p>
+<h1>韩顺平版</h1>
+<p>参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14K4y177Qk">https://www.bilibili.com/video/BV14K4y177Qk</a></p>
+<p>东西很多，慢慢学，学完前5个阶段就可以找工作</p>
+<h2 id="1、JAVA基础">1、JAVA基础</h2>
+<ul>
+<li>数据类型</li>
+<li>流程控制
+<ul>
+<li>顺序结构</li>
+<li>分支结构</li>
+<li>循环结构</li>
+</ul>
+</li>
+<li>OOP
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+</li>
+<li>数组</li>
+<li>JavaAPI：学会查看文档</li>
+<li>异常和处理</li>
+<li>集合</li>
+<li>泛型</li>
+<li>IO</li>
+<li>反射</li>
+<li>网络通信</li>
+</ul>
+<h2 id="2、Java高级">2、Java高级</h2>
+<ul>
+<li>
+<p><strong>Java多线程/高并发</strong></p>
+</li>
+<li>
+<p>并发基础</p>
+<ul>
+<li>互斥同步</li>
+<li>非阻塞同步</li>
+<li>指令墨棑</li>
+<li>synchronized</li>
+<li>volatile</li>
+<li>线程</li>
+<li>锁
+<ul>
+<li>自旋锁</li>
+<li>偏向锁</li>
+<li>可重入锁</li>
+</ul>
+</li>
+<li>线程锁</li>
+<li>并发容器</li>
+<li>JUC
+<ul>
+<li>executor</li>
+<li>collections</li>
+<li>locks</li>
+<li>atomic(原子类)</li>
+<li>tools(CountDownLatch、Exchanger、ThreadLocal、CyclicBarrier)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>数据结构和算法</strong></p>
+</li>
+<li>
+<p>数据结构</p>
+<ul>
+<li>数组(稀疏数组)
+<ul>
+<li>队列</li>
+<li>栈</li>
+<li>链表</li>
+<li>树</li>
+<li>散列表</li>
+<li>堆</li>
+<li>图</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>算法</p>
+<ul>
+<li><strong>排序(8种)</strong></li>
+</ul>
+</li>
+<li>
+<p>查找</p>
+<ul>
+<li>分治</li>
+</ul>
+</li>
+<li>
+<p><strong>动态规划(背包问题)</strong></p>
+<ul>
+<li><strong>回溯(骑士周游问题)</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>贪心算法</strong></p>
+<ul>
+<li>KMP</li>
+</ul>
+</li>
+<li>
+<p>Prim-普里姆最小生成树算法</p>
+<ul>
+<li>Kruskal-克鲁斯卡尔最小生成树算法</li>
+</ul>
+</li>
+<li>
+<p>Floyd-弗洛伊德最短路径算法</p>
+<ul>
+<li>Dijkstra-迪杰斯特拉最短路径算法</li>
+</ul>
+</li>
+<li>
+<p>设计模式(23种)</p>
+<ul>
+<li>单例模式</li>
+<li>观察者模式</li>
+<li>工厂模式</li>
+<li>适配器模式</li>
+<li>装饰器模式</li>
+<li>代理模式</li>
+<li>模板模式</li>
+<li>职责链模式</li>
+<li>其他(组合模式，桥接模式，原型模式，…)</li>
+</ul>
+</li>
+<li>
+<p><strong>JVM</strong></p>
+<ul>
+<li>JVM体系</li>
+<li>类加载过程/机制</li>
+<li>双亲委派机制/沙箱安全机制</li>
+<li>JMM(java内存模式)</li>
+<li>字节码执行过程/机制</li>
+<li>GC(垃圾回收算法)</li>
+<li>JVM性能监控和故障定位</li>
+<li>JVM调优</li>
+</ul>
+</li>
+</ul>
+<h2 id="3、JavaWEB">3、JavaWEB</h2>
+<ul>
+<li>前端基础
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Ajax</li>
+<li>Jquery</li>
+</ul>
+</li>
+<li>前端框架（了解）
+<ul>
+<li>VUE</li>
+<li>React</li>
+<li>Angular</li>
+<li>bootstrap</li>
+<li>Node.js</li>
+</ul>
+</li>
+<li>Java web后端
+<ul>
+<li>Tomcat</li>
+<li>Servlet</li>
+<li>JSP</li>
+</ul>
+</li>
+</ul>
+<h2 id="4、主流框架和项目管理">4、主流框架和项目管理</h2>
+<ul>
+<li>
+<p>Linux(操作系统的使用，必学)</p>
+</li>
+<li>
+<p>Nginx(做反向代理的WEB服务器)</p>
+</li>
+<li>
+<p><strong>SSM</strong></p>
+<ul>
+<li>Spring(轻量级的容器框架)</li>
+<li>SpringMVC(分层的web开发框架)</li>
+<li>MyBatis(持久层的框架)</li>
+</ul>
+</li>
+<li>
+<p>项目管理</p>
+<ul>
+<li>Maven</li>
+<li>Git、Github</li>
+<li><em>SVN</em></li>
+</ul>
+</li>
+<li>
+<p><strong>数据库</strong></p>
+<ul>
+<li>MySQL</li>
+<li>Redis</li>
+<li>Oracle</li>
+</ul>
+</li>
+<li>
+<p>其他框架</p>
+<ul>
+<li>WebService(即SOA)</li>
+<li>Activiti(工作流框架。引擎)</li>
+<li>Shiro(安全框架)</li>
+<li>Spring Security(安全框架)</li>
+<li>JPA(持久化)</li>
+<li>SpringData(持久层的通用解决解决方案)</li>
+</ul>
+</li>
+</ul>
+<h2 id="5、分布式-微服务-并行框架">5、分布式 微服务 并行框架</h2>
+<ul>
+<li>
+<p><strong>Netty</strong></p>
+<p>​	初始了解：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b9f3f6a16911">https://www.jianshu.com/p/b9f3f6a16911</a></p>
+</li>
+<li>
+<p>Dubbo(RPC框架)</p>
+</li>
+<li>
+<p>FastDFS(分布式文件系统)</p>
+</li>
+<li>
+<p>Docker(应用容器引擎)</p>
+</li>
+<li>
+<p><strong>Spring家族</strong></p>
+<ul>
+<li>SpringBoot</li>
+<li>SpringCloud(组件很多)
+<ul>
+<li>Nacos(阿里巴巴 服务发现、配置、管理)</li>
+<li>Seata(阿里巴巴 分布式事务中间件)</li>
+<li>Sentinel(阿里巴巴 流量控制 熔断 负载保护)</li>
+<li>GateWay(网关、限流、日志、监控、鉴权)</li>
+<li>OpenFeign(服务间调用)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>搜索引擎</p>
+<ul>
+<li>ElasticSearch</li>
+<li>Solr</li>
+</ul>
+</li>
+<li>
+<p><strong>中间件</strong></p>
+<ul>
+<li>
+<p>MyCat(数据库，分库分表)</p>
+<p>了解参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kingsonfu/p/10627802.html">https://www.cnblogs.com/kingsonfu/p/10627802.html</a></p>
+</li>
+<li>
+<p>消息中间件</p>
+<ul>
+<li>ActiveMQ</li>
+<li>RabbitMQ</li>
+<li>Kafka</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>日志分析与监控(ELK)</p>
+<ul>
+<li>ElasticSearch(搜索，存储数据)</li>
+<li>LogStash(分析日志)</li>
+<li>Kibana(可视化)</li>
+</ul>
+</li>
+<li>
+<p>Zookeeper(一致性服务：配置维护、域名维护、分布式同步)</p>
+</li>
+</ul>
+<h2 id="6、DevOps-开发运维一体化，自动化项目部署管理，CI-CD">6、DevOps(开发运维一体化，自动化项目部署管理，CI/CD)</h2>
+<ul>
+<li>k8s(让部署容器化应用简单高效)</li>
+<li>Prometheus(普罗米修斯：系统监控和报警)</li>
+<li>Jenkins(监控持续的工作：部署、集成、交付)</li>
+<li>Harbor(容器的镜像仓库)</li>
+<li>GitLab</li>
+<li>项目工程代码质量检测(sonarqube)</li>
+</ul>
+<h2 id="7、大数据技术-了解">7、大数据技术(了解)</h2>
+<ul>
+<li>Hadoop</li>
+<li>Hive</li>
+<li>Impals</li>
+<li>spark</li>
+<li>flink</li>
+</ul>
+<h2 id="8、项目：应用之前学的技术，做三个以上">8、项目：应用之前学的技术，做三个以上</h2>
+<ul>
+<li>电商：<a target="_blank" rel="noopener" href="https://github.com/macrozheng/mall">https://github.com/macrozheng/mall</a></li>
+<li>金融：</li>
+<li>教育</li>
+<li>直播</li>
+<li>CRM, ERP</li>
+</ul>
+<h2 id="9、大厂高频面试题">9、大厂高频面试题</h2>
+<ul>
+<li>上面加黑部分：主要包括JAVA高级、主流框架、项目</li>
+</ul>
+<h2 id="10、底层源码、内核研究">10、底层源码、内核研究</h2>
+<h2 id="11、编程基础扩展">11、编程基础扩展</h2>
+<ul>
+<li>计算机网络</li>
+<li>操作系统</li>
+<li>计算机组成原理</li>
+<li>编译原理</li>
+<li>离散数学</li>
+<li>数值分析</li>
+<li>汇编语言</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2022/06/27/JAVA/JAVA%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">http://blog.sunlingzhang.com/2022/06/27/JAVA/JAVA%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS/">CS</a><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/05/27/JAVA/Spring/" title="Spring"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Spring</div></div><div class="info-2"><div class="info-item-1">1. Spring 官网：https://spring.io/projects/spring-framework/ 文档：https://docs.spring.io/spring-framework/docs/current/reference/html/index.html 三大核心： ​	控制反转（ioc）-----&gt; Inversion of Control ​	依赖注入（di）---- &gt;Dependency Injection ​	面向切面编程（AOP）----&gt;Aspect Oriented Programming   测试依赖  123456&lt;dependency&gt;   &lt;groupId&gt;junit&lt;/groupId&gt;   &lt;artifactId&gt;junit&lt;/artifactId&gt;   &lt;version&gt;4.11&lt;/version&gt;   &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt;  测试代码写在/src...</div></div></div></a><a class="pagination-related" href="/2021/10/07/default/mmWave%20Radar/" title="毫米波雷达"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">毫米波雷达</div></div><div class="info-2"><div class="info-item-1">毫米波雷达-AWR2243 简介 毫米波雷达，是工作在毫米波波段（Millimeter Wave ）探测的雷达。通常毫米波是指30～300GHz频域(波长为1～10mm)的。毫米波的波长介于微波和厘米波之间，因此毫米波雷达兼有微波雷达和光学雷达的一些优点。 同厘米波雷达相比，毫米波雷达具有体积小、质量轻和空间分辨率高的特点。与红外、激光、电视等光学雷达相比，毫米波雷达穿透雾、烟、灰尘的能力强，具有全天候(大雨天除外)全天时的特点。另外，毫米波雷达的抗干扰、反隐身能力也优于其他微波雷达 。毫米波雷达能分辨识别很小的目标，而且能同时识别多个目标；具有成像能力，体积小、机动性和隐蔽性好，在战场上生存能力强 。 目前在自动驾驶，智能监控领域广泛运用。毫米波雷达能直接获取目标的距离，速度，角度等基本信息。通过对数据的进一步处理，对目标的尺寸，轮廓可能也有一定的估计能力。  1 调频连续波(FMCW) 调频连续波(Frequency-Modulated Continuous Wave)，是一组幅值不变，但频率变化的连续波形，毫米波雷达使用的调频连续波是频率线性增加的正弦波，又叫线性调频连续波...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/06/07/JAVA/Mybatis/" title="Mybatis"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-07</div><div class="info-item-2">Mybatis</div></div><div class="info-2"><div class="info-item-1">环境：   JDK1.8   Mysql 5.7   maven 3.6.1   IDEA   回顾：   JDBC   Mysql   Java基础   Maven   Junit：单元测试   1. 简介 1.1 什么是Mybatis MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。 框架：配置文件最好直接看官网 MyBatis官方文档：https://mybatis.org/mybatis-3/zh/index.html GitHub主页：https://github.com/mybatis/mybatis-3 Maven地址：https://mvnrepository.com/artifact/org.mybatis/mybatis 123456&lt;!-- https:/...</div></div></div></a><a class="pagination-related" href="/2023/08/23/JAVA/SpringBoot/" title="SpringBoot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-23</div><div class="info-item-2">SpringBoot</div></div><div class="info-2"><div class="info-item-1">官方文档：https://spring.io/projects/spring-boot#learn 其他笔记： 主要参考： Spring Boot 2 学习笔记（1 / 2）_KISS-CSDN博客 SpringBootWeb模块的默认规则研究_大恐龙的小弟的博客-CSDN博客 01、基础入门-Spring生态圈 Spring官网 Spring能做什么  Spring的生态 覆盖了：  web开发 数据访问 安全控制 分布式 消息服务 移动开发 批处理 …   Spring5重大升级  响应式编程    内部源码设计  基于Java8的一些新特性，如：接口默认实现。重新设计源码架构。 接口的默认实现：即适配器模式（adapter）  由于接口的抽象方法太多，而一般情况下我们只需要使用接口的某几个方法，此时继承了接口必须实现所有方法，即便不用，也要加上空方法。 此时我们使用适配器实现接口的所有方法，通过继承适配器来重新部分方法即可，避免大量无用的方法实现  为什么用SpringBoot  Spring Boot makes it easy to create stand-alone...</div></div></div></a><a class="pagination-related" href="/2023/06/23/JAVA/SpringMVC/" title="SpringMVC"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-23</div><div class="info-item-2">SpringMVC</div></div><div class="info-2"><div class="info-item-1">官方文档：https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web 基于Spring实现的MVC轻量级Web框架 SSM: mybatis+Spring+SpringMVC MVC三层架构 Java基础：认真学习，老师带，入门快   JavaSE   JavaWeb   框架：研究官方文档，锻炼官方文档，锻炼自学能力，锻炼笔记能力，锻炼项目能力 SpringMVC + Vue + SpringBoot + SpringCloud + Linux SSM = JavaWeb项目 Sping: IOC和AOP SpringMVC：SpringMVC的执行流程！ SpringMVC: SSM框架整合！ MVC：模型（dao, service）, 视图（jsp），控制器（Servlet）  1. 什么是SpringMVC 1、回顾MVC 1.1、什么是MVC  MVC是模型(Model)、视图(View)、控制器(Controller)的简写，是一种软件设计规范。 是将业...</div></div></div></a><a class="pagination-related" href="/2023/05/27/JAVA/Spring/" title="Spring"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-27</div><div class="info-item-2">Spring</div></div><div class="info-2"><div class="info-item-1">1. Spring 官网：https://spring.io/projects/spring-framework/ 文档：https://docs.spring.io/spring-framework/docs/current/reference/html/index.html 三大核心： ​	控制反转（ioc）-----&gt; Inversion of Control ​	依赖注入（di）---- &gt;Dependency Injection ​	面向切面编程（AOP）----&gt;Aspect Oriented Programming   测试依赖  123456&lt;dependency&gt;   &lt;groupId&gt;junit&lt;/groupId&gt;   &lt;artifactId&gt;junit&lt;/artifactId&gt;   &lt;version&gt;4.11&lt;/version&gt;   &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt;  测试代码写在/src...</div></div></div></a><a class="pagination-related" href="/2025/08/28/Python/python%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/" title="Python编程规范"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-08-28</div><div class="info-item-2">Python编程规范</div></div><div class="info-2"><div class="info-item-1">Python 作为一门强调“可读性”和“简洁性”的语言，拥有非常完善的代码规范与最佳实践体系。遵循主流规范不仅能提升代码质量，还能增强团队协作效率。 以下是目前 Python 主流的编码规范、风格指南和工程实践，涵盖语法、命名、结构、文档、测试等多个方面。  ✅ 一、PEP 8：官方代码风格指南（最核心）  📚 官方文档：PEP 8 – Style Guide for Python Code  这是 Python 官方推荐的代码风格标准，几乎所有 Python 项目都以此为基础。  1. 缩进  使用 4 个空格缩进（不要用 Tab） 不要混用空格和 Tab  1234567# ✅ 正确if x &gt; 0:    print(&quot;positive&quot;)# ❌ 错误if x &gt; 0:	print(&quot;positive&quot;)  # 使用了 Tab 2. 行宽  每行不超过 79 个字符（代码），注释/文档字符串不超过 72 超长表达式可用括号隐式换行  12345# ✅long_list = [    &quot;item1&quot;, ...</div></div></div></a><a class="pagination-related" href="/2021/04/22/Paper/Learning%20Event-Based%20Motion%20Deblurring/" title="Learning Event-Based Motion Deblurring"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-22</div><div class="info-item-2">Learning Event-Based Motion Deblurring</div></div><div class="info-2"><div class="info-item-1">学习基于事件的运动去模糊 会议：CVPR 2020 地址：https://arxiv.org/abs/2004.05794 摘要 由于模糊过程中丢失了大量的运动信息，从运动模糊图像中恢复清晰的视频序列是一个高度不适定问题。然而，对于基于事件的相机，快速运动可以在高时间率上作为事件被捕捉，从而提出了探索有效解决方案的新机遇。在本文中，我们从基于事件的运动去模糊的序列表述开始，然后说明如何使用新颖的端到端深度架构来实现其优化。所提出的架构是一个卷积循环神经网络，有原则的整合了全局和局部尺度的视觉和时间知识。为了进一步改进(图像的)重建，我们提出了一种可微的定向事件过滤模块，可以有效地从事件流中提取丰富的先验边界。我们在合成的GoPro数据集和新引入的使用DAVIS240C相机捕获的大型数据集上进行了大量的实验。我们提出的方法达到了最先进的重建质量，并更好地处理现实世界的运动模糊。  1. 概述 运动模糊通常是由于现代相机传感器需要曝光时间，在此期间，场景被记录在不同的时间戳，并累积成平均(模糊)信号。这个过程的反问题被称为“去模糊”，它揭示了运动模糊图像背后的场景动态，并生成一系列复...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">CodeSheep</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%EF%BC%88%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">编程基础（掌握）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.1.</span> <span class="toc-text">JAVA语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Java基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JVM"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">JVM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">多线程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.2.</span> <span class="toc-text">数据结构和算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="toc-number">1.1.3.</span> <span class="toc-text">计算机网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.1.4.</span> <span class="toc-text">MySQL数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.5.</span> <span class="toc-text">操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.6.</span> <span class="toc-text">设计模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.</span> <span class="toc-text">研发工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.1.</span> <span class="toc-text">集成开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">Linux系统（了解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">前端（了解）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%BB%B4%E7%9F%A5%E8%AF%86%EF%BC%88%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">运维知识（配置）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF"><span class="toc-number">1.4.</span> <span class="toc-text">成神之路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E7%A8%B3%E9%99%8D%E8%90%BD"><span class="toc-number">1.5.</span> <span class="toc-text">平稳降落</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">韩顺平版</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81JAVA%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.</span> <span class="toc-text">1、JAVA基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81Java%E9%AB%98%E7%BA%A7"><span class="toc-number">2.2.</span> <span class="toc-text">2、Java高级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81JavaWEB"><span class="toc-number">2.3.</span> <span class="toc-text">3、JavaWEB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86"><span class="toc-number">2.4.</span> <span class="toc-text">4、主流框架和项目管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F-%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E5%B9%B6%E8%A1%8C%E6%A1%86%E6%9E%B6"><span class="toc-number">2.5.</span> <span class="toc-text">5、分布式 微服务 并行框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81DevOps-%E5%BC%80%E5%8F%91%E8%BF%90%E7%BB%B4%E4%B8%80%E4%BD%93%E5%8C%96%EF%BC%8C%E8%87%AA%E5%8A%A8%E5%8C%96%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E7%AE%A1%E7%90%86%EF%BC%8CCI-CD"><span class="toc-number">2.6.</span> <span class="toc-text">6、DevOps(开发运维一体化，自动化项目部署管理，CI&#x2F;CD)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF-%E4%BA%86%E8%A7%A3"><span class="toc-number">2.7.</span> <span class="toc-text">7、大数据技术(了解)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%BA%94%E7%94%A8%E4%B9%8B%E5%89%8D%E5%AD%A6%E7%9A%84%E6%8A%80%E6%9C%AF%EF%BC%8C%E5%81%9A%E4%B8%89%E4%B8%AA%E4%BB%A5%E4%B8%8A"><span class="toc-number">2.8.</span> <span class="toc-text">8、项目：应用之前学的技术，做三个以上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81%E5%A4%A7%E5%8E%82%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">2.9.</span> <span class="toc-text">9、大厂高频面试题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E5%BA%95%E5%B1%82%E6%BA%90%E7%A0%81%E3%80%81%E5%86%85%E6%A0%B8%E7%A0%94%E7%A9%B6"><span class="toc-number">2.10.</span> <span class="toc-text">10、底层源码、内核研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11%E3%80%81%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E6%89%A9%E5%B1%95"><span class="toc-number">2.11.</span> <span class="toc-text">11、编程基础扩展</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

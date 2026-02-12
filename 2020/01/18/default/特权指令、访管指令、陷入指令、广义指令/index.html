@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>特权指令、访管指令、陷入指令、广义指令 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对操作系统、计算机组成原理入门具有一定指导意义，对计算机考研知识理解具有一定辅助作用，对工作中的实际应用可能基本没用。  特权指令  ○ 从指令系统（指令集）角度定义，在指令系统中拥有用于管理硬件和整个系统安全的指令，让程序随意使用具有极高危险性。不得在用户态（目态）执行，只能在核心态（管态）执行，用户态程序如果运行特权指令将发生异常，并切换到管态由操作系统接管cpu。所以用户程序不得使用特权指令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="特权指令、访管指令、陷入指令、广义指令">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2020/01/18/default/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="对操作系统、计算机组成原理入门具有一定指导意义，对计算机考研知识理解具有一定辅助作用，对工作中的实际应用可能基本没用。  特权指令  ○ 从指令系统（指令集）角度定义，在指令系统中拥有用于管理硬件和整个系统安全的指令，让程序随意使用具有极高危险性。不得在用户态（目态）执行，只能在核心态（管态）执行，用户态程序如果运行特权指令将发生异常，并切换到管态由操作系统接管cpu。所以用户程序不得使用特权指令">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2020-01-18T12:38:31.000Z">
+<meta property="article:modified_time" content="2026-02-12T10:34:06.982Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "特权指令、访管指令、陷入指令、广义指令",
+  "url": "http://blog.sunlingzhang.com/2020/01/18/default/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2020-01-18T12:38:31.000Z",
+  "dateModified": "2026-02-12T10:34:06.982Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2020/01/18/default/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '特权指令、访管指令、陷入指令、广义指令',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">特权指令、访管指令、陷入指令、广义指令</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">特权指令、访管指令、陷入指令、广义指令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-01-18T12:38:31.000Z" title="Created 2020-01-18 20:38:31">2020-01-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-12T10:34:06.982Z" title="Updated 2026-02-12 18:34:06">2026-02-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>对操作系统、计算机组成原理入门具有一定指导意义，对计算机考研知识理解具有一定辅助作用，对工作中的实际应用可能基本没用。</p>
+<ul>
+<li>特权指令</li>
+</ul>
+<p>○ 从指令系统（指令集）角度定义，在指令系统中拥有用于管理硬件和整个系统安全的指令，让程序随意使用具有极高危险性。不得在用户态（目态）执行，只能在核心态（管态）执行，用户态程序如果运行特权指令将发生异常，并切换到管态由操作系统接管cpu。所以用户程序不得使用特权指令，需要执行特权指令需要使用防管指令，进入核心态。</p>
+<span id="more"></span>
+<ul>
+<li>访管指令</li>
+</ul>
+<p>○ 同样从指令集的角度定义，或者说从硬件角度（cpu状态）。防管指令，是用户程序自愿进管的指令（进管同时也意味着程序放弃cpu的控制权），该指令本身属于非特权指令，可在用户态执行，执行后进入核心态。核心态是通过cpu置相应标志表明当前处于核心态。cpu进入核心态后可以执行指令集中的所有指令（包括特权指令和非特权指令，但不执行访管指令）。</p>
+<ul>
+<li>陷入指令</li>
+</ul>
+<p>○ 原则上可看作访管指令，但是从操作系统的角度定义的。访管强调的是cpu从用户态切换到了核心态，可以执行指令集中的所有指令。而陷入（自陷、陷阱）指令强调程序从用户程序从用户台切换到内核态(以下简称切换到操作系统)，陷入指令即汇编中的中断指令。执行陷入指令程序会中断，跳转到中断服务程序（操作系统的代码）。所以访管强调的是可以执行特权指令，陷入强调的是进程放弃cpu，交还给操作系统。其实核心态和操作系统是不可分割的：道理很显然，进入核心态（管态），必然需要“跳转”到操作系统，不然区分用户态和核心态就没有了意义，如果程序执行完访管指令后，只是进入了管态，之后仍然执行自身的代码，那用户程序将可以为所欲为，显然不能允许。另一方面，如果cpu跳转到了操作系统，没有进入管态，那操作系统也无法执行特权指令，不能管理整个机器，显然也不行（当然也存在操作系统一部分运行在用户态，一部分（即内核）运行在管态，此时操作系统获取cpu控制权后不一定是处于核心态）。所以管态就是运行操作系统(内核代码)，访管指令本质上就是一条陷入（中断）指令。</p>
+<ul>
+<li>广义指令（系统调用）</li>
+</ul>
+<p>○ 系统调用，从操作系统的角度定义的。指用户程序需要借助操作系统来完成的特定操作，通过陷入指令可以进行系统调用。系统调用是一段代码而不是一条代码，在高级语言层面可能表现为一条，比如c语言的系统调用write()，在汇编层面这条语句包括，初始化相关参数和寄存器，执行陷入（中断）指令，跳转到中断服务程序执行，中断返回。之所以需要系统调用是因为用户程序不能执行特权指令，所以当需要完成特权指令才能做的特定操作，必须通过系统调用由操作系统完成。但系统调用一词并非强调程序不能使用特权指令，即不强调“需要”操作系统服务，仅仅强调“希望”让操作系统服务，表达的含义不是&quot;不能&quot;而是&quot;不需要&quot;，即目标操作用户程序不需要自己做，直接调用操作系统即可完成，进行系统调用时也并非一定为了执行特权指令，也可能相关操作过于复杂，或者用户程序自身难以实现（有权做但做起来麻烦），而操作系统刚好给出了相应的接口供直接使用。</p>
+<ul>
+<li>库函数</li>
+</ul>
+<p>○ 操作系统提供的函数，供用户程序直接调用，简化程序的编写。编程时调用库函数直接使用操作系统已经实现的功能即可。与系统调用有些相似，不过库函数调用可以在用户态执行(不需要执行特权指令时)，和普通的函数调用应该并没有什么区别。无需用户态切换到核心态，执行中断服务程序等一些操作。是对系统调用“不需要做”这一概念的推广，另外现在一般用户不直接使用系统调用，而是使用封装好的库函数，由库函数进行系统调用。库函数的意义在于，需要就拿去用，不用再浪费时间了，直接拿大佬已经实现好的来搞。</p>
+<ul>
+<li>系统调用和函数调用的区别</li>
+</ul>
+<p>○ 系统调用本质上应该也是一种函数调用，只是调用该函数是通过中断方式，INT 指令，进入核心态才能运行。</p>
+<p>○ 函数调用通过CALL指令来进行，功能和JMP类似，只是JMP用于跳转指令，而CALL用于调用函数，指令跳转的同时要保存函数调用前下条指令的地址，以保证函数调用完能返回当前指令接着运行。本质上都是修改PC（程序计数器）的值，将下一条指令地址修改成相应指令地址。</p>
+<p>○ 而系统调用是通过中断方式，即软件中断/陷入指令INT，执行后通过硬件关中断 保存断点和程序状态字 形成中断服务程序入口地址，之后执行中断服务程序。看起来很像是函数调用，只是系统调用会进入核心态，执行操作系统的代码。</p>
+<p>○ 8086汇编语言函数返回</p>
+<p>如果是段内调用，使用RET指令返回，从栈中弹出一个字，即IP(指令指针寄存器)</p>
+<p>如果是段间调用，使用RETF指令返回，从栈中弹出两个字，即CS（代码段基址寄存器） 和IP</p>
+<p>如果是系统调用，使用IREF指令返回，从栈中弹出三个字，即IP CS PSW（程序状态字）</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2020/01/18/default/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/">http://blog.sunlingzhang.com/2020/01/18/default/%E7%89%B9%E6%9D%83%E6%8C%87%E4%BB%A4%E3%80%81%E8%AE%BF%E7%AE%A1%E6%8C%87%E4%BB%A4%E3%80%81%E9%99%B7%E5%85%A5%E6%8C%87%E4%BB%A4%E3%80%81%E5%B9%BF%E4%B9%89%E6%8C%87%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/03/13/default/Typora%E9%85%8D%E5%90%88hexo%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/" title="Typora配合hexo编写文章"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Typora配合hexo编写文章</div></div><div class="info-2"><div class="info-item-1">图像插入设置  主要涉及Typora的两个参数设置  图片根目录设置  既告诉Typora哪个文件夹作为网站的根目录   图片复制路径  既图片插入时，自动复制图片到指定路径，如此上传至空间，才能生成正确的url        设置图像根目录   以hexo根目录下的source文件夹为例   该文件夹中的内容会上传至web根目录，因此此文件相当于网站的根目录   而文章所在目录为source文件夹下的_post文件夹, 根目录在文章的上级目录   因此设置图片根目录为..   既在标题栏添加此内容：typora-root-url: ..    设置图片目录  设置source文件夹下的img文件夹，为图片所在文件夹 因为img在source文件夹下，既在文章的上级目录下的img文件夹下 因此设置图片目录为..\img   既在标题连添加此内容：typora-copy-images-to: ..\img       注意事项：以上设置只能采用相对路径    Typora换行Enter键自动添加一个空行，Shift+Enter普通换行。  hexo 设置   无需进行设置  说明一...</div></div></div></a><a class="pagination-related" href="/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/" title="浅谈对计算机的理解--外设"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">浅谈对计算机的理解--外设</div></div><div class="info-2"><div class="info-item-1">首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。 1）硬件 提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行软件的。 我只能说你这种想法是把人的观点强加给计算机而已，它不过是一堆没有感情的芯片电路，就一铁疙瘩，懂什么代码。它不过是按既定的物理规律运行而已。 甚至从我的角度来看即便是为计算机量身定做二进制也是计算机看不懂的东西，计算机所理解的这一切都是人强加给它的。 这就相当于按下开关，通上电灯它亮了，而你把他看作是灯知道了你按下了开关，然后亮了，而且你还在这好奇，这灯它到底是咋知道我按下了开关的？灯知道个什么玩意，其实这不过是看待问题的角度本身强加给了它意义，计算机和灯本质上也并无差别。抛开人强加给它的意义，会更容易来理解计算机。 下面来简析一下计算机的基本结构，此处的计算机不以任何现实机器为...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/01/17/default/%E6%B5%85%E8%B0%88%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%90%86%E8%A7%A3-%E5%A4%96%E8%AE%BE/" title="浅谈对计算机的理解--外设"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-17</div><div class="info-item-2">浅谈对计算机的理解--外设</div></div><div class="info-2"><div class="info-item-1">首先声明本人非计算机专业，也不玩数码硬件，可以说我下面的内容既不偏向理论也不偏向实际应用。单纯是个外行人对计算机的初步印象，只做个人笔记，当然写在公开领域，自然避免不了外人看到，所以事先声明，以免误导各位。 1）硬件 提到计算机硬件，首先应该说一说开关。可以说简单的分析，计算机内部就是由一个个的开关组成。或者说就是由开关演化而来的。乍一听，可能很难接受，这种简单东西的组合是怎么认识代码，是怎么运行软件的。 我只能说你这种想法是把人的观点强加给计算机而已，它不过是一堆没有感情的芯片电路，就一铁疙瘩，懂什么代码。它不过是按既定的物理规律运行而已。 甚至从我的角度来看即便是为计算机量身定做二进制也是计算机看不懂的东西，计算机所理解的这一切都是人强加给它的。 这就相当于按下开关，通上电灯它亮了，而你把他看作是灯知道了你按下了开关，然后亮了，而且你还在这好奇，这灯它到底是咋知道我按下了开关的？灯知道个什么玩意，其实这不过是看待问题的角度本身强加给了它意义，计算机和灯本质上也并无差别。抛开人强加给它的意义，会更容易来理解计算机。 下面来简析一下计算机的基本结构，此处的计算机不以任何现实机器为...</div></div></div></a><a class="pagination-related" href="/2021/07/28/default/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" title="从零开始的深度学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-28</div><div class="info-item-2">从零开始的深度学习</div></div><div class="info-2"><div class="info-item-1">从零开始的深度学习 主要内容：  安装NVIDIA GPU驱动 安装CUDA Toolkit 安装cuDNN 安装Conda(附带python) 安装PyTorch 安装TensorFlow  一、工具介绍   NVIDIA GPU驱动：nvidia-smi是nvidia 的系统管理接口，一般安装NVIDIA GPU驱动后即可使用。   CUDA  Toolkit：CUDA（Compute Unified Device Architecture），是NVIDIA推出的运算平台，AMD也有类似的平台 ROCm，但并不成熟。 CUDA™是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。 它包含了CUDA指令集架构（ISA）以及GPU内部的并行计算引擎。   cuDNN：NVIDIA cuDNN是用于深度神经网络的GPU加速库。它强调性能、易用性和低内存开销。NVIDIA cuDNN可以集成到更高级别的机器学习框架中，如Tensorflow、pytorch等。简单的插入式设计可以让开发人员专注于设计和实现神经网络模型，而不是简单调整性能，同时还可以在GP...</div></div></div></a><a class="pagination-related" href="/2020/07/27/default/Designing%20Network%20Design%20Spaces/" title="Designing Network Design Spaces"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-27</div><div class="info-item-2">Designing Network Design Spaces</div></div><div class="info-2"><div class="info-item-1">网络设计空间的设计 摘要 本文提出了一种新的网络设计范式。我们的目标是帮助提高对网络设计的理解，并发现在不同环境下普遍适用的设计原则。我们不再专注于设计单个的网络实例，而是设计了参数化网络总体的网络设计空间。整个过程类似于经典的人工网络设计，但提升到了设计空间层面。使用我们的方法，我们探索网络设计的结构方面，并得出一个低维的设计空间，由简单的，规则的网络组成，我们称之为RegNet。RegNet参数化的核心观点非常简单：良好网络的宽度和深度可以用量化的线性函数来解释。我们分析了RegNet的设计空间，得出了与当前网络设计实践不符的有趣发现。RegNet的设计空间提供了简单而快速的网络，可以很好地在各种不同的FLOP状态下工作。在类似的训练环境和FLOPs下，RegNet模型的性能优于流行的efficientnet模型，而在gpu上的速度高达5倍。  介绍 深卷积神经网络是视觉识别的引擎。在过去的几年里，更好的体系结构已经在广泛的视觉识别任务中取得了长足的进步。示例包括LeNet、AlexNet、VGG和ResNet。这一工作既提高了神经网络的有效性，也促进了我们对网络设计的理解。...</div></div></div></a><a class="pagination-related" href="/2020/03/28/default/%E6%95%B0%E6%8D%AE%E6%B5%81%E9%87%8F%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%88%86%E6%9E%90/" title="移动数据流量请求头分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-28</div><div class="info-item-2">移动数据流量请求头分析</div></div><div class="info-2"><div class="info-item-1">1. http协议请求头 12345[method] [uri] [version]\r\nHost: www.example.com\r\nConnection: keep-alive\r\n...\r\n 1.1 第一行的字段为请求的：方法，资源地址，协议版本 http协议常用的请求方法[method]为  GET：用于向服务器请求数据； POST: 用于向服务器提交数据； CONNECT: 用于隧道代理; HEAD: 用于向服务器请求报头;  资源地址[uri]：一般为URL中去掉域名后剩下的那部分，即浏览器地址栏网址中域名之后的内容。 http协议版本[version]: 目前主流版本有HTTP/1.0和HTTP/1.1。 http请求头中的的换行用的是\r\n, 而非Linux中的换行符\n。以下为一个真实请求头的示例  GET /index.html HTTP/1.1 Host: www.example.com Connection: keep-alive   1.2 Host字段为请求的主机域名 早期没有虚拟主机的概念，一台服务器有一个主机名。因此规定在请求头的第一...</div></div></div></a><a class="pagination-related" href="/2024/03/24/default/%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D%E3%80%81%E6%8B%89%E4%B8%81%E5%AD%97%E6%AF%8D%E8%A1%A8/" title="希腊字母、拉丁字母、Markdown、拼写与读音中英对照表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-24</div><div class="info-item-2">希腊字母、拉丁字母、Markdown、拼写与读音中英对照表</div></div><div class="info-2"><div class="info-item-1">   大写 小写 中文名 英文 英语音标注音 大写Markdown 小写Markdown 意义     A\AlphaA α\alphaα 阿尔法 Alpha /'ælfə/ \Alpha \alpha 角度、系数、角加速度、第一个、电离度、转化率   B\BetaB β\betaβ 贝塔/毕塔 Beta /'bi:tə/ 或 /'beɪtə/ \Beta \beta 磁通系数、角度、系数   Γ\GammaΓ γ\gammaγ 伽玛/甘玛 Gamma /'gæmə/ \Gamma \gamma 电导系数（小写）、角度、比热容比   Δ\DeltaΔ δ\deltaδ 德尔塔/岱欧塔 Delta /'deltə/ \Delta \delta 变化量、焓变、熵变、屈光度、变动、方程判别式（大写）、允许误差（小写，统计学）   E\EpsilonE ϵ\epsilonϵ　ε\varepsilonε 伊普西隆/埃普斯棱 Epsilon /'epsɪlɒn/ \Epsilon \epsilon　\varepsilon 对数之基数、介电常数   Z\ZetaZ ζ\zetaζ 泽塔/Z塔 ...</div></div></div></a><a class="pagination-related" href="/2024/03/11/default/Generative%20Adversarial%20Nets/" title="Generative Adversarial Networks"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-11</div><div class="info-item-2">Generative Adversarial Networks</div></div><div class="info-2"><div class="info-item-1">Generative Adversarial Networks(GAN神经网络) [TOC] 摘要 本文提出了一个新的基于对抗的网络框架，主要包含两个模型。一个是生成模型G，用于获取整个数据分布；另一个是判别模型D，用于判别数据是来自真实数据还是生成数据。生成模型尽可能让判别模型犯错。判别模型试图找到一个函数，使得判别模型在真实的数据上得分较高，在生成模型的数据上得分较低。  介绍 GAN网络由两个模型组成：生成模型G和判别模型D。生成模型G的目标是生成尽可能接近真实数据的数据，判别模型D的目标是判别数据是来自真实数据还是生成数据。 生成模型G通过一个随机过程生成数据，判别模型D试图判别数据是否来自真实数据。判别模型D有一个输出值，表示数据来自真实数据的概率。判别模型D有一个目标函数，使得判别模型在真实的数据上得分较高，在生成模型的数据上得分较低。 生成模型G有一个目标函数，使得判别模型在生成模型的数据上得分较低，在真实的数据上得分较高。 生成模型G和判别模型D交替更新，生成模型G的目标函数和判别模型D的目标函数相互对抗。 方法  GAN网络可以应用在图像生成、语音生成等领域。 ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">64</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/11/Python/pytorch-%E5%B8%B8%E7%94%A8%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/" title="深度学习常用损失函数">深度学习常用损失函数</a><time datetime="2026-02-11T10:00:00.000Z" title="Created 2026-02-11 18:00:00">2026-02-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC/" title="矩阵相关">矩阵相关</a><time datetime="2026-02-10T10:00:00.000Z" title="Created 2026-02-10 18:00:00">2026-02-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/10/Python/Muon%E4%BC%98%E5%8C%96%E5%99%A8/" title="Muon优化器">Muon优化器</a><time datetime="2026-02-10T09:00:00.000Z" title="Created 2026-02-10 17:00:00">2026-02-10</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
