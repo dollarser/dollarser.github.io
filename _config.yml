@@ -5,11 +5,11 @@
 # Site
 title: 遗世独立
 subtitle: 憧憬是距离理解最遥远的感情
-description: 初次测试用博客，仅用来练习使用
+description: 日常记录学习用博客，仅用来练习使用
 keywords: learn,学习,考研,计算机,CS,ACG
 author: 神火不知灭
-language:
-timezone: ''
+language: zh
+timezone: 'Asia/Shanghai'
 
 
 # URL

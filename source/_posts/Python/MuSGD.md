@@ -22,7 +22,7 @@ MuSGD（动量自适应SGD）是YOLO26专为边缘设备和轻量化模型设计
 
 ## 一、MuSGD优化器的核心公式
 
-MuSGD优化器的核心公式包含三个关键部分：梯度范数自适应动量系数计算、动量累积和参数更新。其完整数学表达式为：
+MuSGD(Matrix Update)优化器的核心公式包含三个关键部分：梯度范数自适应动量系数计算、动量累积和参数更新。其完整数学表达式为：
 $$
 \begin{align*}
 \beta_t &= \frac{\beta_{\text{max}}}{1 + \text{adapt\_factor} \cdot \|\nabla_\theta \mathcal{J}\|^2} & \text{（动量系数动态调整）} \\
@@ -128,7 +128,7 @@ class MuSGD(nn.Module):
 #### 实现细节分析：
 
 1. **梯度范数计算**：MuSGD在每次参数更新前计算全参数的L2范数`grad_norm = grad.norm(p=2).item()`，这一全局指标用于动态调整动量系数。
-2. **动量系数动态计算**：通过公式`beta_t = self.momentum / (1 + self.adapt_factor * grad_norm**2)`计算当前迭代的动量系数，其中`adapt_factor`控制衰减强度，值越大，动量对梯度范数的敏感度越高。
+2. **动量系数动态计算**：通过公式` beta_t = self.momentum / (1 + self.adapt_factor * grad_norm**2)` 计算当前迭代的动量系数，其中`adapt_factor`控制衰减强度，值越大，动量对梯度范数的敏感度越高。
 3. **动量累积更新**：与SGDM相同，使用动量缓冲项存储累积的梯度方向，但MuSGD的$\beta_t$是动态变化的，而非固定值。
 4. **参数更新**：通过`p.data -= self.lr * self.momentum_buffer[i]`更新参数，与SGDM一致。
 

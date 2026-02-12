@@ -76,7 +76,7 @@ social:
 # Image Settings
 # --------------------------------------
 
-favicon: /img/favicon.png
+favicon: /favicon.ico
 
 avatar:
   img: /admin_head.jpg
