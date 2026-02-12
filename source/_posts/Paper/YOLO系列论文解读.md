@@ -6,6 +6,7 @@ tags:
  - Detection
  - YOLO
  - CV
+ - paper
 typora-root-url: ..\..
 typora-copy-images-to: ..\..\img\yolo
 ---

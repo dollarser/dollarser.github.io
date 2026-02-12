@@ -3,7 +3,7 @@ title: Python编程规范
 date: 2025-08-28 12:00:00
 tags:
  - CS
- - python
+ - Python
 typora-root-url: ../..
 typora-copy-images-to: ../../img/python
 ---

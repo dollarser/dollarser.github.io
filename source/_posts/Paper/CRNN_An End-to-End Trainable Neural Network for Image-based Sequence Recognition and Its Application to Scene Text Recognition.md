@@ -5,6 +5,7 @@ tags:
  - PyTorch
  - 深度学习
  - CRNN
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ../img/ocr
 ---

@@ -6,6 +6,7 @@ tags:
  - NLP
  - transformer
  - NeurIPS 2017
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\transformer
 ---

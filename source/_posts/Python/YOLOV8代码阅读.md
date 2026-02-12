@@ -2,8 +2,8 @@
 title: YOLOV8代码阅读
 date: 2024-05-22 20:00:00
 tags:
- - python
  - 深度学习
+ - Python
 typora-root-url: ..
 typora-copy-images-to: ../img/python
 ---

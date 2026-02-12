@@ -6,6 +6,7 @@ tags:
  - 论文翻译
  - GCN
  - AI
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\hgp-sl
 ---

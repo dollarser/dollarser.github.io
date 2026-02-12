@@ -3,7 +3,9 @@ title: JAVA学习路线
 date: 2022-06-27 18:00:00
 tags:
  - CS
- - JAVA
+ - Java
+categories:
+ - Java
 typora-root-url: ..
 typora-copy-images-to: ..\img\javapath
 ---

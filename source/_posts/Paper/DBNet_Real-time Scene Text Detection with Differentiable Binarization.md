@@ -6,6 +6,7 @@ tags:
  - OCR
  - AI
  - AAAI 2020
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\ocr
 ---

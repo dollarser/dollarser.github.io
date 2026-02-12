@@ -4,7 +4,9 @@ date: 2023-05-27 18:00:00
 tags:
  - CS
  - Spring
- - JAVA
+ - Java
+categories:
+ - Java
 typora-root-url: ..
 typora-copy-images-to: ..\img\spring
 ---

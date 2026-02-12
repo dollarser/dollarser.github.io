@@ -7,6 +7,7 @@ tags:
  - Mask2Former
  - AI
  - Segmentation
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\mask2former
 ---

@@ -8,6 +8,7 @@ tags:
  - SGD
  - Adam
  - AdamW
+ - Python
 typora-root-url: ..
 typora-copy-images-to: ../img/pytorch
 ---

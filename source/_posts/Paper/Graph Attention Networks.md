@@ -5,6 +5,7 @@ toc: true
 tags:
  - GAN
  - ICLR 2018
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\gan
 ---

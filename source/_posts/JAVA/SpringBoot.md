@@ -4,7 +4,9 @@ date: 2023-08-23 13:00:00
 tags:
  - CS
  - SpringBoot
- - JAVA
+ - Java
+categories:
+ - Java
 typora-root-url: ..
 typora-copy-images-to: ..\img\springboot
 ---

@@ -4,7 +4,8 @@ date: 2024-05-11 10:07:00
 tags:
  - PyTorch
  - 深度学习
- - lr_scheduler
+ - scheduler
+ - Python
 typora-root-url: ../..
 typora-copy-images-to: ../../img/pytorch
 ---

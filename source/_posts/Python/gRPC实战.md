@@ -2,7 +2,7 @@
 title: python-gRPC实战
 date: 2024-05-20 20:00:00
 tags:
- - python
+ - Python
  - 深度学习
 typora-root-url: ../..
 typora-copy-images-to: ../../img/python

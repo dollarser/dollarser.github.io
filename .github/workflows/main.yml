@@ -108,7 +108,7 @@ jobs:
         hexo clean
         hexo generate
         ls -lha public
-        cat public/index.html
+        # cat public/index.html
       # 指定命令执行的工作路径
       working-directory: ./blog
 

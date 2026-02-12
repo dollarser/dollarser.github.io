@@ -4,6 +4,7 @@ date: 2025-08-5 10:14:00
 tags:
  - PyTorch
  - 深度学习
+ - Python
 typora-root-url: ../..
 typora-copy-images-to: ../../img/pytorch
 ---

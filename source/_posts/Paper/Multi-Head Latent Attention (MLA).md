@@ -5,6 +5,7 @@ toc: true
 tags:
  - AI
  - Multi-Head Latent Attention
+ - paper
 typora-root-url: ../..
 typora-copy-images-to: ../../img/llm
 mathjax: true

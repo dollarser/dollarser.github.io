@@ -4,7 +4,9 @@ date: 2023-06-07 18:00:00
 tags:
  - CS
  - Mybatis
- - JAVA
+ - Java
+categories:
+ - Java
 typora-root-url: ..
 typora-copy-images-to: ..\img\java\mybatis
 ---

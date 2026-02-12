@@ -6,6 +6,9 @@ tags:
  - OCR
  - AI
  - CVPR 2021
+ - paper
+categories:
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\ocr
 ---

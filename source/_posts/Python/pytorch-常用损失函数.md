@@ -3,7 +3,7 @@ title: 深度学习常用损失函数
 date: 2026-02-11 18:00:00
 tags:
  - Loss
-
+ - Python
 typora-root-url: ../..
 typora-copy-images-to: ../../img/loss
 ---

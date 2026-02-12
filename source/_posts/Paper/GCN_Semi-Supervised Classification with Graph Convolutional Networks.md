@@ -5,6 +5,7 @@ toc: true
 tags:
  - GCN
  - ICLR 2017
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\gcn
 ---

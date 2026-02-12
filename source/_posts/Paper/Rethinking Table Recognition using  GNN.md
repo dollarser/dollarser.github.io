@@ -5,6 +5,7 @@ toc: true
 tags:
  - GNN
  - ICDAR 2019
+ - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\gnn
 ---
