@@ -5,6 +5,7 @@ toc: true
 tags:
  - CS
  - CVPR2020
+categories:
  - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\event-based-motion

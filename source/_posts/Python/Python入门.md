@@ -3,6 +3,7 @@ title: Python入门
 date: 2021-08-5 18:00:00
 tags:
  - CS
+categories:
  - Python
 
 typora-root-url: ../..

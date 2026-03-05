@@ -4,6 +4,7 @@ date: 2026-03-05 13:51:00
 toc: true
 tags:
  - LLM
+categories:
  - paper
 typora-root-url: ..\..
 typora-copy-images-to: ..\..\img\paper 

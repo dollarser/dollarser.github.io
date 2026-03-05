@@ -5,6 +5,7 @@ toc: true
 tags:
  - Muon
  - MuSGD
+categories:
  - Python
 typora-root-url: ../..
 typora-copy-images-to: ../../img/pytorch

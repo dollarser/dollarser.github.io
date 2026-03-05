@@ -2,9 +2,10 @@
 title: 几何图形相似性判断
 date: 2025-08-29 12:00:00
 tags:
- - work
  - 建筑
  - CAD
+categories:
+ - work
 typora-root-url: ..
 typora-copy-images-to: ..\img
 ---

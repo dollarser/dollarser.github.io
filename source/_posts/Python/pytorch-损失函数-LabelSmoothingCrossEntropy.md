@@ -5,6 +5,7 @@ tags:
  - PyTorch
  - 深度学习
  - CTCLoss
+categories:
  - Python
 typora-root-url: ..
 typora-copy-images-to: ../img/pytorch

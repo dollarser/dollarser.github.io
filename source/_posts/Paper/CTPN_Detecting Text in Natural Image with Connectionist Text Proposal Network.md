@@ -6,6 +6,7 @@ tags:
  - OCR
  - CTPN
  - ECCV 2016
+categories:
  - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\ocr

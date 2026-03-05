@@ -2,8 +2,9 @@
 title: Claude Code应用指南
 date: 2026-02-12 17:30:00
 tags:
- - Python
  - AI工具
+categories:
+ - Python
 typora-root-url: ../..
 typora-copy-images-to: ../../img/python
 ---

@@ -5,6 +5,7 @@ toc: true
 tags:
  - CS
  - CVPR 2018
+categories:
  - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img\panet

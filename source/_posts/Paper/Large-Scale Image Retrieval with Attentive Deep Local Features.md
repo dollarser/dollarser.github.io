@@ -4,6 +4,7 @@ date: 2020-07-3 15:28:12
 toc: true
 tags:
  - 论文翻译
+categories:
  - paper
 typora-root-url: ..
 typora-copy-images-to: ..\img
