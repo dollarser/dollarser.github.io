@@ -11,6 +11,9 @@ typora-copy-images-to: ../../img/python
 
 
 > 参考视频：https://www.bilibili.com/video/BV1zqeMzfEiQ
+>
+> 参考文档：https://my.feishu.cn/wiki/BxLTwlkvkiQhJkkJ7vgc95aZnMe
+
 
 ## 环境配置
 
@@ -113,3 +116,16 @@ export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-4.7"
 export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.7"
 export ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.5-air"
 ```
+
+Windows下:
+```bash
+# 智谱
+set ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/anthropic"
+set ANTHROPIC_AUTH_TOKEN="xxxx"
+
+# OPENROUTER
+set ANTHROPIC_BASE_URL="https://openrouter.ai/api"
+set ANTHROPIC_AUTH_TOKEN="xxxx"
+set ANTHROPIC_API_KEY="" # 重要：必须显式设为空字符串
+```
+
