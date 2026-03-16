@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>遗世独立 - 憧憬是距离理解最遥远的感情</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="日常记录学习用博客，仅用来练习使用">
+<meta property="og:type" content="website">
+<meta property="og:title" content="遗世独立">
+<meta property="og:url" content="http://blog.sunlingzhang.com/page/3/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="日常记录学习用博客，仅用来练习使用">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="learn,学习,考研,计算机,CS,ACG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '遗世独立',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">66</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><h1 class="title-seo">遗世独立</h1></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/04/Work/%E6%A1%A9%E8%AF%86%E5%9B%BE/" title="桩识图">桩识图</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-04T06:00:00.000Z" title="Created 2025-07-04 14:00:00">2025-07-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/work/">work</a></span></div><div class="content">一种建筑图纸中桩的识别方法和装置 技术领域 人工智能、图像处理，建筑审图 技术背景 在结构工程审图领域，桩平面图的自动识别面临以下严峻挑战：1. 图纸上桩的画法多样，2. 单张图纸中桩结构高度密集，3. 受墙体和柱子等其他建筑元素的严重干扰，这使得传统的基于规则的检测方法显得力不从心，无法满足现代建筑审图的高精度与效率需求。 解决的技术问题 本项目通过创新性地结合基于规则和深度学习的算法，实现了高效、准确的桩检测。相较于基于规则的传统方法，本方法检测效率提高3倍，召回率提高了30%，准确率达到99%，显著优化了检测效果。通过自研自动化数据生成，自监督训练方案，替代完全依赖人工标注的传统方式，降低大量标注成本。总体来看，本项目实现了从无到有的技术突破，为结构检测带来了新的赋能。 技术方案 1. 总体流程  基于规则的桩检测  采用基于规则的方法检测桩，检测时不区分桩类别。确保绝对准确率（100%），保持较高召回率（&gt;60%）。   生成桩检测数据集  利用规则检测的结果作为标注，生成桩检测数据集【pile_v0.1】。   模型训练  使用YOLO算法，在桩检测数据集上训练初...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/22/Paper/CTPN_Detecting%20Text%20in%20Natural%20Image%20with%20Connectionist%20Text%20Proposal%20Network/" title="Detecting Text in Natural Image with Connectionist Text Proposal Network">Detecting Text in Natural Image with Connectionist Text Proposal Network</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-22T11:00:00.000Z" title="Created 2025-04-22 19:00:00">2025-04-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/paper/">paper</a></span></div><div class="content">名称：Detecting Text in Natural Image with Connectionist Text Proposal Network 论文：https://arxiv.org/abs/1609.03605 会议：ECCV 2016 github: https://github.com/tianzhi0549/CTPN  CTPN（Connectionist Text Proposal Network）是一种基于深度学习的文本检测算法，擅长在自然场景图像中定位文本行。其核心思想是将文本行分解为多个小文本段（text proposals），再通过序列连接形成完整文本行 。以下从算法流程、关键技术、优缺点及改进方向展开详解：  一、算法流程  特征提取 使用预训练的CNN（如VGG16）提取图像特征，得到高维特征图（如conv5层输出）。 双向LSTM序列建模 在特征图上滑动窗口（如3×3），每个窗口生成固定高度（如11px）的锚点（anchors），覆盖不同宽度（如16px、32px等）。通过双向LSTM捕捉水平方向的文本序列上下文信息，增强对长文本的建模能力。 文...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/22/Paper/ABINet_Autonomous,%20Bidirectional%20and%20Iterative%20Language%20Modeling%20for%20Scene%20Text%20Recognition/" title="ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition">ABINet: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-22T09:00:00.000Z" title="Created 2025-04-22 17:00:00">2025-04-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/paper/">paper</a></span></div><div class="content">[TOC]  名称：Read Like Humans: Autonomous, Bidirectional and Iterative Language Modeling for Scene Text Recognition 论文：https://arxiv.org/abs/2103.06495 会议：AAAI2020 Github: https://github.com/FangShancheng/ABINet  ABINet（Attention-based Bidirectional Network）是一种用于场景文本识别（Scene Text Recognition, STR）的深度学习模型。它在处理复杂背景、噪声干扰以及弯曲或倾斜文本时表现出色。ABINet 的核心创新点是引入了 双向注意力机制 和 迭代优化策略 ，从而显著提升了文本识别的准确性和鲁棒性。 以下是 ABINet 的详细解析，包括其架构设计、工作原理、优势和实现细节。  1. ABINet 的背景 问题  自然场景中的文本通常具有复杂的形状（如弯曲、倾斜等），并且背景可能包含大量噪声。 传统的基于分类的方法...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/21/Paper/DBNet_Real-time%20Scene%20Text%20Detection%20with%20Differentiable%20Binarization/" title="DBNet: Real-time Scene Text Detection with Differentiable Binarization">DBNet: Real-time Scene Text Detection with Differentiable Binarization</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-21T07:00:00.000Z" title="Created 2025-04-21 15:00:00">2025-04-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/paper/">paper</a></span></div><div class="content">[TOC] 名称：DBNet: Real-time Scene Text Detection with Differentiable Binarization 论文：https://arxiv.org/abs/1911.08947 会议：AAAI2020 V2：Real-Time Scene Text Detection with Differentiable Binarization and Adaptive Scale Fusion V2：https://arxiv.org/abs/2202.10304 顶刊：TPAMI 2022  DBNet（Differentiable Binarization Network）是一种用于文本检测的深度学习模型，特别适用于自然场景中的文本检测任务。它在处理弯曲、倾斜或复杂背景中的文本时表现出色。DBNet 的核心创新点是引入了 可微分二值化（Differentiable Binarization, DB） 模块，使得模型能够在训练过程中直接优化分割掩码的二值化效果。 以下是 DBNet 的详细解析，包括其架构设计、工作原理、优势和实现细节...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/20/default/IntelliJ%20IDEA%20%E6%88%96%20Android%20Studio%E5%9C%A8%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%8C%87%E5%AE%9A%20Gradle%20%E4%B8%BB%E7%9B%AE%E5%BD%95/" title="Android Studio配置Gradle">Android Studio配置Gradle</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-20T15:00:00.000Z" title="Created 2025-04-20 23:00:00">2025-04-20</time></span></div><div class="content">在IntelliJ IDEA 和Android Studio 中，可以通过以下步骤指定 Gradle 主目录（Gradle Home Directory）。这个设置允许你使用手动安装的 Gradle 版本，而不是依赖 IDE 自动下载的版本。   步骤 1：打开设置窗口  启动 IntelliJ IDEA 或 Android Studio。 打开 设置/首选项 窗口：  Windows/Linux 作系统 ：File &gt; Settings。 macOS ：IntelliJ IDEA &gt; Preferences。     步骤 2：导航到 Gradle 设置  在设置窗口中，展开左侧的Build, Execution, Deployment 菜单 点击Build Tools &gt; Gradle 。   步骤 3：指定 Gradle 主目录 在右侧的 Gradle 设置面板中，找到**“Gradle JVM”** 和**“Use Gradle from”** 部分 选项 1：使用 Gradle Wrapper  默认情况下，IDE 会选择**‘gradle-wrapp...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/19/default/%E4%BD%BF%E7%94%A8%20Kivy%20%E6%88%96%E5%85%B6%E4%BB%96%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" title="Python开发安卓应用">Python开发安卓应用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-19T15:00:00.000Z" title="Created 2025-04-19 23:00:00">2025-04-19</time></span></div><div class="content">要在安卓设备上运行使用 PyQt 编写的程序，需要解决一个关键问题：PyQt 是为桌面环境设计的，而安卓是一个移动操作系统，直接在安卓上运行 PyQt 程序并不支持。不过，可以通过一些工具和框架将 PyQt 应用适配到安卓平台。以下是实现这一目标的主要方法和步骤：  1. 使用 Kivy 或其他移动开发框架 如果目标是开发跨平台的 Python 应用（包括安卓），可以考虑使用专门为移动设备设计的框架，例如 Kivy 或 BeeWare 。这些框架支持直接构建安卓应用，并且语法与 PyQt 类似。 原因：  PyQt 的 GUI 依赖于 Qt，而 Qt 在安卓上的支持有限。 Kivy 和 BeeWare 提供了更轻量级的解决方案，更适合移动设备。    2. 通过 PySide/Qt for Android Qt 官方提供了对安卓的支持（称为 “Qt for Android”），因此理论上可以通过以下方式将 PyQt 应用移植到安卓： 步骤：  安装 Qt for Android 工具链 下载并安装 Qt 官方提供的 Android 开发工具链，包括 Qt Creator 和 An...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/17/Python/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2-%E6%B8%B8%E7%A8%8B%E7%BC%96%E7%A0%81/" title="语义分割-游程编码（Run-Length Encoding, RLE）">语义分割-游程编码（Run-Length Encoding, RLE）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-17T07:00:00.000Z" title="Created 2025-04-17 15:00:00">2025-04-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content">游程编码（RLE，Run-Length Encoding）是一种简单而有效的数据压缩方法，特别适用于具有大量连续重复值的数据。它在图像处理、分割掩码表示和时间序列数据压缩等领域有着广泛的应用。 它通过记录每个值的“运行长度”（即连续出现的次数）来减少存储空间。RLE 在图像处理、文件压缩和机器学习中都有广泛应用，例如在 COCO 数据集中用于表示分割掩码。  1. RLE 的基本概念 定义：  游程 ：一段连续的相同值。 编码 ：将每个游程用一对值表示，通常是 (值, 长度) 或 (长度, 值)或(起点, 长度)。  对于二值mask编码有简化形式  交替存储连续的前景像素数和背景像素数。示例：11100111110 编码为 [3, 2, 5, 1] 存储前景像素的起点和长度。示例：11100111110 编码为 [0, 3, 5, 5]      示例： 假设有一个二值数组 [0, 0, 0, 1, 1, 1, 1, 0, 0]：  使用 RLE 编码后可以表示为 [(0, 3), (1, 4), (0, 2)]，即：  0 出现了 3 次， 1 出现了 4 次， 0 又出现了...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/16/Paper/CRNN_An%20End-to-End%20Trainable%20Neural%20Network%20for%20Image-based%20Sequence%20Recognition%20and%20Its%20Application%20to%20Scene%20Text%20Recognition/" title="CRNN: An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition">CRNN: An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-16T11:00:00.000Z" title="Created 2025-04-16 19:00:00">2025-04-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/paper/">paper</a></span></div><div class="content">CRNN详解 名称：An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition 论文：https://arxiv.org/abs/1507.05717 会议：ICDAR 2015 github: https://github.com/meijieru/crnn.pytorch 一、网络结构 CRNN整体架构包含三部分：  CNN特征提取层 输入图像通过多层卷积和池化操作提取局部特征，生成特征图（Feature Map）。例如，采用类似VGG的卷积层结构，逐步缩小空间维度并增加通道数，最终输出特征序列‌12。 RNN序列建模层 将CNN输出的特征序列转化为时序相关的序列特征。通常采用双向LSTM（BLSTM），捕捉前后文信息，解决传统RNN的梯度消失问题‌35。 CTC转录层 将RNN输出的概率序列映射为最终字符序列。CTC通过动态规划合并重复字符和空白标签，解决输入输出序列长度不一致的问题    二...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-LabelSmoothingCrossEntropy/" title="损失函数-Label Smoothing Cross Entropy">损失函数-Label Smoothing Cross Entropy</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-16T08:00:00.000Z" title="Created 2025-04-16 16:00:00">2025-04-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content">Label Smoothing Cross Entropy介绍 Label Smoothing 是一种正则化技术，用于改进分类任务中的交叉熵损失函数。传统的交叉熵损失函数假设目标标签是硬性（hard）的，即每个样本只有一个正确的类别标签，并且该类别的概率为 1，其他类别的概率为 0。然而，这种硬性标签可能会导致模型过拟合训练数据，尤其是在训练数据有限或标签可能存在噪声的情况下。 Label Smoothing 的基本思想是对目标标签进行“平滑”处理，将原本硬性的标签分布替换为一个更柔和的分布。这样可以减少模型对单一类别的过度自信，从而提高模型的泛化能力。    提出论文: Rethinking the Inception Architecture for Computer Vision 会议: CVPR 2016  Label Smoothing（标签平滑）的工作原理 1. 传统交叉熵损失 在分类问题中，交叉熵损失函数定义如下： Cross Entropy Loss=−∑i=1Cyilog(pi)Cross\ Entropy\ Loss = -\sum_{i=1}^{C} y_i...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/16/Python/pytorch-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-CTCLoss/" title="损失函数-CTCLoss">损失函数-CTCLoss</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-16T06:00:00.000Z" title="Created 2025-04-16 14:00:00">2025-04-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content">什么是CTCLoss？ CTC (Connectionist Temporal Classification) 是一种用于序列到序列学习的损失函数，特别适用于输入和输出长度不固定的场景。它在语音识别、手写体识别等任务中应用广泛。CTC 的核心思想是通过引入一个“空白”符号（blank token），允许模型对不定长的输入序列生成不定长的输出序列，同时避免了对输入和输出进行显式的对齐操作。 传统的序列标注方法通常需要将输入和输出进行严格的对齐（例如，逐帧标注），而 CTC 允许模型自动学习输入和输出之间的对齐关系，从而大大简化了训练过程。   CTCLoss 的工作原理 1. 输入与输出的关系  输入是一个不定长的序列，比如语音信号或手写笔迹的时间序列。 输出是一个较短的目标序列，比如文本转录结果。 输入和输出的长度可能不同，且没有明确的对齐关系。  2. 引入空白符号 CTC 引入了一个特殊的“空白”符号（通常记作 - 或 blank），表示某个时间步没有对应的输出。空白符号在最终的输出中会被移除。 3. 路径的概念 CTC 将输入序列到输出序列的所有可能对齐方式称为“路径”。例...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">66</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/16/LLM/DPO%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" title="DPO算法详解">DPO算法详解</a><time datetime="2026-03-16T07:40:00.000Z" title="Created 2026-03-16 15:40:00">2026-03-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/13/LLM/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" title="模型训练相关问题">模型训练相关问题</a><time datetime="2026-03-13T06:00:00.000Z" title="Created 2026-03-13 14:00:00">2026-03-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/05/Paper/Gated_DeltaNet/" title="Gated DeltaNet详解">Gated DeltaNet详解</a><time datetime="2026-03-05T05:51:00.000Z" title="Created 2026-03-05 13:51:00">2026-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/LLM/"><span class="card-category-list-name">LLM</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/paper/"><span class="card-category-list-name">paper</span><span class="card-category-list-count">23</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/work/"><span class="card-category-list-name">work</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%80%83%E7%A0%94/"><span class="card-category-list-name">考研</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/" style="font-size: 1.1em; color: #999">配置相关</a> <a href="/tags/Mask2Former/" style="font-size: 1.1em; color: #999">Mask2Former</a> <a href="/tags/Android/" style="font-size: 1.16em; color: #999b9e">Android</a> <a href="/tags/Adam/" style="font-size: 1.1em; color: #999">Adam</a> <a href="/tags/ICLR-2018/" style="font-size: 1.1em; color: #999">ICLR 2018</a> <a href="/tags/%E5%BB%BA%E7%AD%91/" style="font-size: 1.21em; color: #999ea4">建筑</a> <a href="/tags/Java/" style="font-size: 1.27em; color: #99a0a9">Java</a> <a href="/tags/scheduler/" style="font-size: 1.1em; color: #999">scheduler</a> <a href="/tags/ECCV-2016/" style="font-size: 1.1em; color: #999">ECCV 2016</a> <a href="/tags/ICLR-2017/" style="font-size: 1.1em; color: #999">ICLR 2017</a> <a href="/tags/Detection/" style="font-size: 1.33em; color: #99a2af">Detection</a> <a href="/tags/YOLO/" style="font-size: 1.33em; color: #99a2af">YOLO</a> <a href="/tags/AdamW/" style="font-size: 1.1em; color: #999">AdamW</a> <a href="/tags/NLP/" style="font-size: 1.1em; color: #999">NLP</a> <a href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" style="font-size: 1.33em; color: #99a2af">入门实践</a> <a href="/tags/AAAI-2020/" style="font-size: 1.1em; color: #999">AAAI 2020</a> <a href="/tags/Loss/" style="font-size: 1.1em; color: #999">Loss</a> <a href="/tags/CVPR-2021/" style="font-size: 1.1em; color: #999">CVPR 2021</a> <a href="/tags/LLM/" style="font-size: 1.21em; color: #999ea4">LLM</a> <a href="/tags/cv/" style="font-size: 1.1em; color: #999">cv</a> <a href="/tags/Spring/" style="font-size: 1.1em; color: #999">Spring</a> <a href="/tags/Multi-Head-Latent-Attention/" style="font-size: 1.1em; color: #999">Multi-Head Latent Attention</a> <a href="/tags/work/" style="font-size: 1.1em; color: #999">work</a> <a href="/tags/SVD/" style="font-size: 1.1em; color: #999">SVD</a> <a href="/tags/SpringBoot/" style="font-size: 1.1em; color: #999">SpringBoot</a> <a href="/tags/PyTorch/" style="font-size: 1.39em; color: #99a4b4">PyTorch</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 1.16em; color: #999b9e">学习笔记</a> <a href="/tags/MuSGD/" style="font-size: 1.1em; color: #999">MuSGD</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.44em; color: #99a7ba">深度学习</a> <a href="/tags/ICDAR-2019/" style="font-size: 1.1em; color: #999">ICDAR 2019</a> <a href="/tags/GCN/" style="font-size: 1.21em; color: #999ea4">GCN</a> <a href="/tags/CRNN/" style="font-size: 1.1em; color: #999">CRNN</a> <a href="/tags/CTPN/" style="font-size: 1.1em; color: #999">CTPN</a> <a href="/tags/Gradle/" style="font-size: 1.1em; color: #999">Gradle</a> <a href="/tags/mmWave/" style="font-size: 1.1em; color: #999">mmWave</a> <a href="/tags/CV/" style="font-size: 1.33em; color: #99a2af">CV</a> <a href="/tags/OCR/" style="font-size: 1.21em; color: #999ea4">OCR</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.5em; color: #99a9bf">随笔</a> <a href="/tags/GNN/" style="font-size: 1.1em; color: #999">GNN</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 1.1em; color: #999">面经</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/03/">
+            <span class="card-archive-list-date">
+              March 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/02/">
+            <span class="card-archive-list-date">
+              February 2026
+            </span>
+            <span class="card-archive-list-count">11</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              October 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              August 2025
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              April 2025
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/12/">
+            <span class="card-archive-list-date">
+              December 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              November 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">68</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-03-16T08:47:10.731Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

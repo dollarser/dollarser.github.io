@@ -1,0 +1,446 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python编程规范 | 遗世独立</title><meta name="author" content="神火不知灭"><meta name="copyright" content="神火不知灭"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python 作为一门强调“可读性”和“简洁性”的语言，拥有非常完善的代码规范与最佳实践体系。遵循主流规范不仅能提升代码质量，还能增强团队协作效率。 以下是目前 Python 主流的编码规范、风格指南和工程实践，涵盖语法、命名、结构、文档、测试等多个方面。  ✅ 一、PEP 8：官方代码风格指南（最核心）  📚 官方文档：PEP 8 – Style Guide for Python Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python编程规范">
+<meta property="og:url" content="http://blog.sunlingzhang.com/2025/08/28/Python/python%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="遗世独立">
+<meta property="og:description" content="Python 作为一门强调“可读性”和“简洁性”的语言，拥有非常完善的代码规范与最佳实践体系。遵循主流规范不仅能提升代码质量，还能增强团队协作效率。 以下是目前 Python 主流的编码规范、风格指南和工程实践，涵盖语法、命名、结构、文档、测试等多个方面。  ✅ 一、PEP 8：官方代码风格指南（最核心）  📚 官方文档：PEP 8 – Style Guide for Python Code">
+<meta property="og:locale">
+<meta property="og:image" content="http://blog.sunlingzhang.com/admin_head.jpg">
+<meta property="article:published_time" content="2025-08-28T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-16T08:47:05.774Z">
+<meta property="article:author" content="神火不知灭">
+<meta property="article:tag" content="CS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.sunlingzhang.com/admin_head.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Python编程规范",
+  "url": "http://blog.sunlingzhang.com/2025/08/28/Python/python%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/",
+  "image": "http://blog.sunlingzhang.com/admin_head.jpg",
+  "datePublished": "2025-08-28T04:00:00.000Z",
+  "dateModified": "2026-03-16T08:47:05.774Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "神火不知灭",
+      "url": "http://blog.sunlingzhang.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://blog.sunlingzhang.com/2025/08/28/Python/python%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python编程规范',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">66</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">遗世独立</span></a><a class="nav-page-title" href="/"><span class="site-name">Python编程规范</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/"><i class="fa-fw fas fa-keyboard"></i><span> 入门实践</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%E9%9A%8F%E7%AC%94/"><i class="fa-fw fas fa-edit"></i><span> 随笔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/paper/"><i class="fa-fw fal fa-paperclip"></i><span> 论文解读</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 计算机</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/algorithm/"><i class="fa-fw fas fa-code"></i><span> 算法</span></a></li><li><a class="site-page child" href="/data-structure/"><i class="fa-fw fas fa-terminal"></i><span> 数据结构</span></a></li><li><a class="site-page child" href="/operation-system/"><i class="fa-fw fas fa-desktop"></i><span> 操作系统</span></a></li><li><a class="site-page child" href="/computer-composition/"><i class="fa-fw fas fa-microchip"></i><span> 计算机组成原理</span></a></li><li><a class="site-page child" href="/network/"><i class="fa-fw fas fa-network-wired"></i><span> 计算机网络</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 页面</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 编程语言</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/Java/"><i class="fa-fw fas fa-music"></i><span> Java</span></a></li><li><a class="site-page child" href="/tags/Python/"><i class="fa-fw fas fa-video"></i><span> Python</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Python编程规范</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-08-28T04:00:00.000Z" title="Created 2025-08-28 12:00:00">2025-08-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-03-16T08:47:05.774Z" title="Updated 2026-03-16 16:47:05">2026-03-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><p>Python 作为一门强调“可读性”和“简洁性”的语言，拥有非常完善的<strong>代码规范与最佳实践体系</strong>。遵循主流规范不仅能提升代码质量，还能增强团队协作效率。</p>
+<p>以下是目前 Python 主流的<strong>编码规范、风格指南和工程实践</strong>，涵盖语法、命名、结构、文档、测试等多个方面。</p>
+<hr>
+<h2 id="✅-一、PEP-8：官方代码风格指南（最核心）">✅ 一、PEP 8：官方代码风格指南（最核心）</h2>
+<blockquote>
+<p>📚 官方文档：<a target="_blank" rel="noopener" href="https://pep8.org/">PEP 8 – Style Guide for Python Code</a></p>
+</blockquote>
+<p>这是 Python 官方推荐的<strong>代码风格标准</strong>，几乎所有 Python 项目都以此为基础。</p>
+<span id="more"></span>
+<h3 id="1-缩进">1. 缩进</h3>
+<ul>
+<li>使用 <strong>4 个空格</strong>缩进（不要用 Tab）</li>
+<li>不要混用空格和 Tab</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ✅ 正确</span></span><br><span class="line"><span class="keyword">if</span> x &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;positive&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ❌ 错误</span></span><br><span class="line"><span class="keyword">if</span> x &gt; <span class="number">0</span>:</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;positive&quot;</span>)  <span class="comment"># 使用了 Tab</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-行宽">2. 行宽</h3>
+<ul>
+<li>每行不超过 <strong>79 个字符</strong>（代码），注释/文档字符串不超过 72</li>
+<li>超长表达式可用括号隐式换行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ✅</span></span><br><span class="line">long_list = [</span><br><span class="line">    <span class="string">&quot;item1&quot;</span>, <span class="string">&quot;item2&quot;</span>, <span class="string">&quot;item3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;item4&quot;</span>, <span class="string">&quot;item5&quot;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h3 id="3-空行">3. 空行</h3>
+<ul>
+<li>顶层函数和类之间：<strong>2 行</strong></li>
+<li>类内方法之间：<strong>1 行</strong></li>
+<li>逻辑块之间可用空行分隔</li>
+</ul>
+<h3 id="4-导入（Imports）">4. 导入（Imports）</h3>
+<ul>
+<li>每行一个导入</li>
+<li>顺序：标准库 → 第三方库 → 本地应用</li>
+<li>用空行分隔三类</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mypackage <span class="keyword">import</span> mymodule</span><br></pre></td></tr></table></figure>
+<h3 id="5-命名规范">5. 命名规范</h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>规范</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变量、函数</td>
+<td><code>lower_case_with_underscores</code></td>
+<td><code>user_name</code>, <code>calculate_total</code></td>
+</tr>
+<tr>
+<td>类</td>
+<td><code>CapitalizedWords</code>（驼峰）</td>
+<td><code>UserProfile</code>, <code>DatabaseConnection</code></td>
+</tr>
+<tr>
+<td>常量</td>
+<td><code>UPPER_CASE</code></td>
+<td><code>MAX_RETRY</code>, <code>API_TIMEOUT</code></td>
+</tr>
+<tr>
+<td>私有成员</td>
+<td><code>_single_leading_underscore</code></td>
+<td><code>_internal_var</code></td>
+</tr>
+<tr>
+<td>强私有</td>
+<td><code>__double_leading_underscore</code></td>
+<td><code>__private_method</code>（名称改写）</td>
+</tr>
+<tr>
+<td>不要使用的变量名</td>
+<td><code>_</code>（临时变量可用）</td>
+<td><code>O</code>, <code>l</code>, <code>I</code>（易混淆）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="✅-二、PEP-257：文档字符串规范（Docstring）">✅ 二、PEP 257：文档字符串规范（Docstring）</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://peps.python.org/pep-0257/">PEP 257 – Docstring Conventions</a></p>
+</blockquote>
+<p>规定如何编写函数、类、模块的文档字符串。</p>
+<h3 id="基本格式">基本格式</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">my_function</span>(<span class="params">param: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    简要描述函数功能。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    更详细的说明可以放在这里。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">        param (str): 参数说明</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回:</span></span><br><span class="line"><span class="string">        bool: 返回值说明</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    示例:</span></span><br><span class="line"><span class="string">        &gt;&gt;&gt; my_function(&quot;hello&quot;)</span></span><br><span class="line"><span class="string">        True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h3 id="推荐格式">推荐格式</h3>
+<ul>
+<li>使用 <code>&quot;&quot;&quot;</code> 三引号</li>
+<li>首行为一句话摘要</li>
+<li>空一行后写详细说明</li>
+<li>参数、返回值、异常要明确标注</li>
+</ul>
+<blockquote>
+<p>🔧 工具支持：Sphinx、PyCharm、VS Code 可自动解析 docstring</p>
+</blockquote>
+<hr>
+<h2 id="✅-三、类型提示（Type-Hints）——-PEP-484-及后续">✅ 三、类型提示（Type Hints）—— PEP 484 及后续</h2>
+<p>Python 3.5+ 支持类型注解，极大提升可读性和工具支持。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span>, <span class="type">Dict</span>, <span class="type">Optional</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_users</span>(<span class="params">users: <span class="type">List</span>[<span class="type">Dict</span>[<span class="built_in">str</span>, <span class="built_in">str</span>]]</span>) -&gt; <span class="type">Optional</span>[<span class="built_in">str</span>]:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> users:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> users[<span class="number">0</span>].get(<span class="string">&quot;name&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="主流用法">主流用法</h3>
+<ul>
+<li>函数参数和返回值加类型</li>
+<li>使用 <code>Optional[T]</code>, <code>Union</code>, <code>Literal</code>, <code>Annotated</code> 等高级类型</li>
+<li>配合 <code>mypy</code> 进行静态类型检查</li>
+</ul>
+<blockquote>
+<p>✅ 现代 Python 项目（如 FastAPI、Django 4+）广泛使用类型提示</p>
+</blockquote>
+<hr>
+<h2 id="✅-四、代码格式化工具（自动化规范）">✅ 四、代码格式化工具（自动化规范）</h2>
+<p>手动遵守 PEP 8 很难，推荐使用自动化工具。</p>
+<h3 id="1-Black（“不妥协的代码格式化器”）">1. <strong>Black</strong>（“不妥协的代码格式化器”）</h3>
+<ul>
+<li>自动格式化代码，<strong>无需配置</strong></li>
+<li>强制统一风格</li>
+<li>命令：<code>black .</code></li>
+</ul>
+<h3 id="2-autopep8">2. <strong>autopep8</strong></h3>
+<ul>
+<li>自动修复 PEP 8 问题</li>
+<li>可配置</li>
+</ul>
+<h3 id="3-isort">3. <strong>isort</strong></h3>
+<ul>
+<li>自动排序和分组导入</li>
+</ul>
+<h3 id="4-flake8">4. <strong>flake8</strong></h3>
+<ul>
+<li>检查代码风格 + 简单错误（如未使用变量）</li>
+</ul>
+<blockquote>
+<p>✅ 推荐组合：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install black isort flake8 mypy</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="✅-五、项目结构规范">✅ 五、项目结构规范</h2>
+<p>现代 Python 项目的典型结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">myproject/</span><br><span class="line">│</span><br><span class="line">├── src/                    # 源码（可选）</span><br><span class="line">│   └── mypackage/</span><br><span class="line">│       ├── __init__.py</span><br><span class="line">│       ├── module.py</span><br><span class="line">│       └── utils.py</span><br><span class="line">│</span><br><span class="line">├── tests/                  # 测试</span><br><span class="line">│   ├── __init__.py</span><br><span class="line">│   └── test_module.py</span><br><span class="line">│</span><br><span class="line">├── pyproject.toml          # 构建配置（推荐）</span><br><span class="line">├── requirements.txt        # 依赖（传统）</span><br><span class="line">├── README.md</span><br><span class="line">├── LICENSE</span><br><span class="line">└── .gitignore</span><br></pre></td></tr></table></figure>
+<h3 id="使用-pyproject-toml-替代-setup-py">使用 <code>pyproject.toml</code> 替代 <code>setup.py</code></h3>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[build-system]</span></span><br><span class="line"><span class="attr">requires</span> = [<span class="string">&quot;setuptools&gt;=45&quot;</span>, <span class="string">&quot;wheel&quot;</span>]</span><br><span class="line"><span class="attr">build-backend</span> = <span class="string">&quot;setuptools.build_meta&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[project]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;mypackage&quot;</span></span><br><span class="line"><span class="attr">version</span> = <span class="string">&quot;0.1.0&quot;</span></span><br><span class="line"><span class="attr">dependencies</span> = [</span><br><span class="line">    <span class="string">&quot;requests&quot;</span>,</span><br><span class="line">    <span class="string">&quot;click&quot;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="✅-六、依赖管理">✅ 六、依赖管理</h2>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pip</code> + <code>requirements.txt</code></td>
+<td>传统方式</td>
+</tr>
+<tr>
+<td><code>poetry</code></td>
+<td>现代依赖与打包管理（推荐）</td>
+</tr>
+<tr>
+<td><code>pipenv</code></td>
+<td>虚拟环境 + 依赖管理</td>
+</tr>
+<tr>
+<td><code>conda</code></td>
+<td>数据科学环境管理</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>✅ 推荐：<strong>Poetry</strong> 或 <strong>PDM</strong>（新一代工具）</p>
+</blockquote>
+<hr>
+<h2 id="✅-七、测试规范">✅ 七、测试规范</h2>
+<h3 id="1-使用-unittest-或-pytest">1. 使用 <code>unittest</code> 或 <code>pytest</code></h3>
+<ul>
+<li><code>pytest</code> 更简洁，功能强大</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tests/test_math.py</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_add</span>():</span><br><span class="line">    <span class="keyword">assert</span> <span class="number">1</span> + <span class="number">1</span> == <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-测试覆盖率">2. 测试覆盖率</h3>
+<ul>
+<li>使用 <code>pytest-cov</code></li>
+<li>目标：&gt; 80% 覆盖率</li>
+</ul>
+<h3 id="3-测试目录">3. 测试目录</h3>
+<ul>
+<li><code>tests/</code> 或 <code>test/</code></li>
+<li>与源码分离</li>
+</ul>
+<hr>
+<h2 id="✅-八、日志规范">✅ 八、日志规范</h2>
+<p>避免使用 <code>print()</code>，使用 <code>logging</code> 模块：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.INFO)</span><br><span class="line">logger = logging.getLogger(__name__)</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">&quot;程序启动&quot;</span>)</span><br><span class="line">logger.error(<span class="string">&quot;出错了&quot;</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="✅-九、错误处理">✅ 九、错误处理</h2>
+<ul>
+<li>使用异常处理而非返回错误码</li>
+<li>自定义异常类</li>
+<li>不要裸 <code>except:</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    result = risky_operation()</span><br><span class="line"><span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</span><br><span class="line">    logger.error(<span class="string">f&quot;输入无效: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">raise</span>  <span class="comment"># 重新抛出或包装</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="✅-十、现代-Python-最佳实践总结">✅ 十、现代 Python 最佳实践总结</h2>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>推荐做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python 版本</td>
+<td>≥ 3.8（推荐 3.9+）</td>
+</tr>
+<tr>
+<td>类型提示</td>
+<td>全局启用 <code>-&gt;</code> 和 <code>: str</code> 等</td>
+</tr>
+<tr>
+<td>格式化</td>
+<td>使用 <code>black</code> + <code>isort</code></td>
+</tr>
+<tr>
+<td>静态检查</td>
+<td><code>mypy</code> + <code>flake8</code></td>
+</tr>
+<tr>
+<td>依赖管理</td>
+<td><code>poetry</code> 或 <code>pdm</code></td>
+</tr>
+<tr>
+<td>构建配置</td>
+<td><code>pyproject.toml</code></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><code>Google Style</code> 或 <code>NumPy Style</code> docstring</td>
+</tr>
+<tr>
+<td>测试</td>
+<td><code>pytest</code> + <code>coverage</code></td>
+</tr>
+<tr>
+<td>日志</td>
+<td><code>logging</code> 模块</td>
+</tr>
+<tr>
+<td>虚拟环境</td>
+<td><code>venv</code> 或 <code>poetry shell</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="✅-十一、常用工具链推荐">✅ 十一、常用工具链推荐</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">pip install black isort flake8 mypy pytest pytest-cov requests</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化</span></span><br><span class="line">black .</span><br><span class="line">isort .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查</span></span><br><span class="line">flake8 src/</span><br><span class="line">mypy src/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">pytest --cov=src</span><br></pre></td></tr></table></figure>
+<p>配合 <code>pre-commit</code> 钩子自动检查：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .pre-commit-config.yaml</span></span><br><span class="line"><span class="attr">repos:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">repo:</span> <span class="string">https://github.com/psf/black</span></span><br><span class="line">    <span class="attr">rev:</span> <span class="number">23.12</span><span class="number">.1</span></span><br><span class="line">    <span class="attr">hooks:</span> [<span class="bullet">-</span> <span class="attr">id:</span> <span class="string">black</span>]</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">repo:</span> <span class="string">https://github.com/pycqa/flake8</span></span><br><span class="line">    <span class="attr">rev:</span> <span class="number">6.1</span><span class="number">.0</span></span><br><span class="line">    <span class="attr">hooks:</span> [<span class="bullet">-</span> <span class="attr">id:</span> <span class="string">flake8</span>]</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="📌-总结：Python-主流规范一句话">📌 总结：Python 主流规范一句话</h2>
+<blockquote>
+<p><strong>“遵循 PEP 8，使用类型提示，用 Black 格式化，Pytest 测试，Poetry 管理依赖，pyproject.toml 配置，logging 写日志。”</strong></p>
+</blockquote>
+<hr>
+<p>📌 <strong>推荐学习资源</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://pep8.org/">PEP 8</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.python-guide.org/">The Hitchhiker’s Guide to Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://effectivepython.com/">Effective Python</a>（书籍）</li>
+<li><a target="_blank" rel="noopener" href="https://realpython.com/">Real Python</a>（网站）</li>
+</ul>
+<p>遵循这些规范，你的 Python 代码将更专业、更易维护、更适合团队协作！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com">神火不知灭</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://blog.sunlingzhang.com/2025/08/28/Python/python%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/">http://blog.sunlingzhang.com/2025/08/28/Python/python%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS/">CS</a></div><div class="post-share"><div class="social-share" data-image="/admin_head.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/08/29/Work/python%E5%87%A0%E4%BD%95%E7%9B%B8%E4%BC%BC%E6%80%A7/" title="几何图形相似性判断"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">几何图形相似性判断</div></div><div class="info-2"><div class="info-item-1">1有两个CAD矢量图形，图形相似但是绘制存在旋转和缩放，怎么判断其相似性 判断两个矢量图形的相似性是计算机图形学、CAD、BIM、图像识别等领域的重要问题。由于矢量图形由点、线、曲线、多边形等几何元素构成，不能像像素图像那样直接用像素差比较，需要从几何结构、拓扑关系、形状特征等多个维度综合判断。   ✅ 一、相似性的定义（根据场景不同）    场景 相似性含义     几何匹配 形状、尺寸、角度接近   拓扑结构 连接方式、邻接关系一致   语义结构 功能相同（如“门”、“墙”）   变换不变性 平移、旋转、缩放后仍视为相似     ✅ 二、判断矢量图形相似性的常用方法 1. 基于几何特征的比较 (1) Hausdorff 距离（推荐） 衡量两个点集之间的最大最小距离，适合比较线段、多边形轮廓。 1234567from scipy.spatial.distance import directed_hausdorff# shape1, shape2 是两组点 [(x,y), ...]dist = max(    directed_hausdorff(shape1, shape2)[...</div></div></div></a><a class="pagination-related" href="/2025/08/27/default/VSCode%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="VS Code 常用快捷键"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">VS Code 常用快捷键</div></div><div class="info-2"><div class="info-item-1">Visual Studio Code（VS Code）是开发者广泛使用的轻量级但功能强大的代码编辑器。掌握其常用快捷键可以极大提升编码效率。 以下整理了 Windows / Linux 和 macOS 两大平台的常用快捷键（括号内为 macOS 键位）：   🚀 一、通用导航与编辑    功能 Windows/Linux macOS 说明     保存文件 Ctrl + S Cmd + S 保存当前文件   撤销 Ctrl + Z Cmd + Z 撤销上一步操作   重做 Ctrl + Y 或 Ctrl + Shift + Z Cmd + Y 或 Cmd + Shift + Z 重做   复制一行 Ctrl + C（无选中） Cmd + C（无选中） 复制整行   剪切一行 Ctrl + X（无选中） Cmd + X（无选中） 剪切整行   删除一行 Ctrl + Shift + K Cmd + Shift + K 删除当前行   向上/下移动一行 Alt + ↑ / ↓ Option + ↑ / ↓ 移动当前行   复制一行到上下 Alt + Shift + ↑ / ↓ Op...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2023/08/23/JAVA/SpringBoot/" title="SpringBoot"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-08-23</div><div class="info-item-2">SpringBoot</div></div><div class="info-2"><div class="info-item-1">官方文档：https://spring.io/projects/spring-boot#learn 其他笔记： 主要参考： Spring Boot 2 学习笔记（1 / 2）_KISS-CSDN博客 SpringBootWeb模块的默认规则研究_大恐龙的小弟的博客-CSDN博客 01、基础入门-Spring生态圈 Spring官网 Spring能做什么  Spring的生态 覆盖了：  web开发 数据访问 安全控制 分布式 消息服务 移动开发 批处理 …   Spring5重大升级  响应式编程    内部源码设计  基于Java8的一些新特性，如：接口默认实现。重新设计源码架构。 接口的默认实现：即适配器模式（adapter）  由于接口的抽象方法太多，而一般情况下我们只需要使用接口的某几个方法，此时继承了接口必须实现所有方法，即便不用，也要加上空方法。 此时我们使用适配器实现接口的所有方法，通过继承适配器来重新部分方法即可，避免大量无用的方法实现  为什么用SpringBoot  Spring Boot makes it easy to create stand-alone...</div></div></div></a><a class="pagination-related" href="/2023/05/27/JAVA/Spring/" title="Spring"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-27</div><div class="info-item-2">Spring</div></div><div class="info-2"><div class="info-item-1">1. Spring 官网：https://spring.io/projects/spring-framework/ 文档：https://docs.spring.io/spring-framework/docs/current/reference/html/index.html 三大核心： ​	控制反转（ioc）-----&gt; Inversion of Control ​	依赖注入（di）---- &gt;Dependency Injection ​	面向切面编程（AOP）----&gt;Aspect Oriented Programming   测试依赖  123456&lt;dependency&gt;   &lt;groupId&gt;junit&lt;/groupId&gt;   &lt;artifactId&gt;junit&lt;/artifactId&gt;   &lt;version&gt;4.11&lt;/version&gt;   &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt;  测试代码写在/src...</div></div></div></a><a class="pagination-related" href="/2021/08/05/Python/Python%E5%85%A5%E9%97%A8/" title="Python入门"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-05</div><div class="info-item-2">Python入门</div></div><div class="info-2"><div class="info-item-1">1、环境配置 python作为脚本语言，只需要一个python解释器就可以直接编写代码和运行。 但是为了方便我们通常会使用IDE(集成开发环境)或轻量级的文本编辑器进行开发。 这里首先介绍使用最简单的python编辑器编写代码，以及使用VS Code、Jupyter开发。  1.1 安装python解释器 这里推荐安装Conda,Conda是极其方便且强大的包管理器，安装后自带python解释器，同时为以后开发带来极大的便利。如果只想安装python解释器可以从下方地址下载： 官网Windows下载：https://www.python.org/downloads/windows/ 1.2、安装Conda conda分为anaconda和miniconda。anaconda是包含一些常用包的版本，miniconda则是精简版，需要什么装什么，这里介绍miniconda的安装。 官网地址：https://docs.conda.io/en/latest/miniconda.html 1.2.1、安装 进入官网：https://docs.conda.io/en/latest/minic...</div></div></div></a><a class="pagination-related" href="/2023/06/23/JAVA/SpringMVC/" title="SpringMVC"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-23</div><div class="info-item-2">SpringMVC</div></div><div class="info-2"><div class="info-item-1">官方文档：https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web 基于Spring实现的MVC轻量级Web框架 SSM: mybatis+Spring+SpringMVC MVC三层架构 Java基础：认真学习，老师带，入门快   JavaSE   JavaWeb   框架：研究官方文档，锻炼官方文档，锻炼自学能力，锻炼笔记能力，锻炼项目能力 SpringMVC + Vue + SpringBoot + SpringCloud + Linux SSM = JavaWeb项目 Sping: IOC和AOP SpringMVC：SpringMVC的执行流程！ SpringMVC: SSM框架整合！ MVC：模型（dao, service）, 视图（jsp），控制器（Servlet）  1. 什么是SpringMVC 1、回顾MVC 1.1、什么是MVC  MVC是模型(Model)、视图(View)、控制器(Controller)的简写，是一种软件设计规范。 是将业...</div></div></div></a><a class="pagination-related" href="/2023/06/07/JAVA/Mybatis/" title="Mybatis"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-07</div><div class="info-item-2">Mybatis</div></div><div class="info-2"><div class="info-item-1">环境：   JDK1.8   Mysql 5.7   maven 3.6.1   IDEA   回顾：   JDBC   Mysql   Java基础   Maven   Junit：单元测试   1. 简介 1.1 什么是Mybatis MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。 框架：配置文件最好直接看官网 MyBatis官方文档：https://mybatis.org/mybatis-3/zh/index.html GitHub主页：https://github.com/mybatis/mybatis-3 Maven地址：https://mvnrepository.com/artifact/org.mybatis/mybatis 123456&lt;!-- https:/...</div></div></div></a><a class="pagination-related" href="/2021/04/22/Paper/Learning%20Event-Based%20Motion%20Deblurring/" title="Learning Event-Based Motion Deblurring"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-22</div><div class="info-item-2">Learning Event-Based Motion Deblurring</div></div><div class="info-2"><div class="info-item-1">学习基于事件的运动去模糊 会议：CVPR 2020 地址：https://arxiv.org/abs/2004.05794 摘要 由于模糊过程中丢失了大量的运动信息，从运动模糊图像中恢复清晰的视频序列是一个高度不适定问题。然而，对于基于事件的相机，快速运动可以在高时间率上作为事件被捕捉，从而提出了探索有效解决方案的新机遇。在本文中，我们从基于事件的运动去模糊的序列表述开始，然后说明如何使用新颖的端到端深度架构来实现其优化。所提出的架构是一个卷积循环神经网络，有原则的整合了全局和局部尺度的视觉和时间知识。为了进一步改进(图像的)重建，我们提出了一种可微的定向事件过滤模块，可以有效地从事件流中提取丰富的先验边界。我们在合成的GoPro数据集和新引入的使用DAVIS240C相机捕获的大型数据集上进行了大量的实验。我们提出的方法达到了最先进的重建质量，并更好地处理现实世界的运动模糊。  1. 概述 运动模糊通常是由于现代相机传感器需要曝光时间，在此期间，场景被记录在不同的时间戳，并累积成平均(模糊)信号。这个过程的反问题被称为“去模糊”，它揭示了运动模糊图像背后的场景动态，并生成一系列复...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/admin_head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">神火不知灭</div><div class="author-info-description">日常记录学习用博客，仅用来练习使用</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">66</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/dollarser"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">技术笔记，日常记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E4%B8%80%E3%80%81PEP-8%EF%BC%9A%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97%EF%BC%88%E6%9C%80%E6%A0%B8%E5%BF%83%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">✅ 一、PEP 8：官方代码风格指南（最核心）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BC%A9%E8%BF%9B"><span class="toc-number">1.1.</span> <span class="toc-text">1. 缩进</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%A1%8C%E5%AE%BD"><span class="toc-number">1.2.</span> <span class="toc-text">2. 行宽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%A9%BA%E8%A1%8C"><span class="toc-number">1.3.</span> <span class="toc-text">3. 空行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AF%BC%E5%85%A5%EF%BC%88Imports%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">4. 导入（Imports）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-number">1.5.</span> <span class="toc-text">5. 命名规范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E4%BA%8C%E3%80%81PEP-257%EF%BC%9A%E6%96%87%E6%A1%A3%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%84%E8%8C%83%EF%BC%88Docstring%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">✅ 二、PEP 257：文档字符串规范（Docstring）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">基本格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">推荐格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E4%B8%89%E3%80%81%E7%B1%BB%E5%9E%8B%E6%8F%90%E7%A4%BA%EF%BC%88Type-Hints%EF%BC%89%E2%80%94%E2%80%94-PEP-484-%E5%8F%8A%E5%90%8E%E7%BB%AD"><span class="toc-number">3.</span> <span class="toc-text">✅ 三、类型提示（Type Hints）—— PEP 484 及后续</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E6%B5%81%E7%94%A8%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">主流用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E5%9B%9B%E3%80%81%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%B7%A5%E5%85%B7%EF%BC%88%E8%87%AA%E5%8A%A8%E5%8C%96%E8%A7%84%E8%8C%83%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">✅ 四、代码格式化工具（自动化规范）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Black%EF%BC%88%E2%80%9C%E4%B8%8D%E5%A6%A5%E5%8D%8F%E7%9A%84%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%99%A8%E2%80%9D%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">1. Black（“不妥协的代码格式化器”）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-autopep8"><span class="toc-number">4.2.</span> <span class="toc-text">2. autopep8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-isort"><span class="toc-number">4.3.</span> <span class="toc-text">3. isort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-flake8"><span class="toc-number">4.4.</span> <span class="toc-text">4. flake8</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E4%BA%94%E3%80%81%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%A7%84%E8%8C%83"><span class="toc-number">5.</span> <span class="toc-text">✅ 五、项目结构规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pyproject-toml-%E6%9B%BF%E4%BB%A3-setup-py"><span class="toc-number">5.1.</span> <span class="toc-text">使用 pyproject.toml 替代 setup.py</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E5%85%AD%E3%80%81%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">✅ 六、依赖管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E4%B8%83%E3%80%81%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83"><span class="toc-number">7.</span> <span class="toc-text">✅ 七、测试规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8-unittest-%E6%88%96-pytest"><span class="toc-number">7.1.</span> <span class="toc-text">1. 使用 unittest 或 pytest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B5%8B%E8%AF%95%E8%A6%86%E7%9B%96%E7%8E%87"><span class="toc-number">7.2.</span> <span class="toc-text">2. 测试覆盖率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B5%8B%E8%AF%95%E7%9B%AE%E5%BD%95"><span class="toc-number">7.3.</span> <span class="toc-text">3. 测试目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E5%85%AB%E3%80%81%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83"><span class="toc-number">8.</span> <span class="toc-text">✅ 八、日志规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E4%B9%9D%E3%80%81%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-number">9.</span> <span class="toc-text">✅ 九、错误处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E5%8D%81%E3%80%81%E7%8E%B0%E4%BB%A3-Python-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">✅ 十、现代 Python 最佳实践总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E5%8D%81%E4%B8%80%E3%80%81%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E6%8E%A8%E8%8D%90"><span class="toc-number">11.</span> <span class="toc-text">✅ 十一、常用工具链推荐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E6%80%BB%E7%BB%93%EF%BC%9APython-%E4%B8%BB%E6%B5%81%E8%A7%84%E8%8C%83%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-number">12.</span> <span class="toc-text">📌 总结：Python 主流规范一句话</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/16/LLM/DPO%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/" title="DPO算法详解">DPO算法详解</a><time datetime="2026-03-16T07:40:00.000Z" title="Created 2026-03-16 15:40:00">2026-03-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/13/LLM/%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" title="模型训练相关问题">模型训练相关问题</a><time datetime="2026-03-13T06:00:00.000Z" title="Created 2026-03-13 14:00:00">2026-03-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/05/Paper/Gated_DeltaNet/" title="Gated DeltaNet详解">Gated DeltaNet详解</a><time datetime="2026-03-05T05:51:00.000Z" title="Created 2026-03-05 13:51:00">2026-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/Claude_Code/" title="Claude Code应用指南">Claude Code应用指南</a><time datetime="2026-02-12T09:30:00.000Z" title="Created 2026-02-12 17:30:00">2026-02-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/12/Python/MuSGD/" title="MuSGD优化器">MuSGD优化器</a><time datetime="2026-02-12T09:00:00.000Z" title="Created 2026-02-12 17:00:00">2026-02-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 神火不知灭</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
