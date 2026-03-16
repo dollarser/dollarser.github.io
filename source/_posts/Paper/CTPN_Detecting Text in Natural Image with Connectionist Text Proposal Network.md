@@ -8,8 +8,8 @@ tags:
  - ECCV 2016
 categories:
  - paper
-typora-root-url: ..
-typora-copy-images-to: ..\img\ocr
+typora-root-url: ../..
+typora-copy-images-to: ../../img/ocr
 ---
 
 名称：Detecting Text in Natural Image with Connectionist Text Proposal Network

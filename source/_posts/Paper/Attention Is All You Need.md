@@ -8,8 +8,8 @@ tags:
  - NeurIPS 2017
 categories:
  - paper
-typora-root-url: ..
-typora-copy-images-to: ..\img\transformer
+typora-root-url: ../..
+typora-copy-images-to: ../../img/transformer
 ---
 
   Transformer 注意力就是您所需要的
