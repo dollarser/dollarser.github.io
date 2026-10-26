@@ -31,10 +31,23 @@ on:
 env:
   TZ: Asia/Shanghai
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   blog-cicd:
     name: Hexo blog构建和部署
     runs-on: ubuntu-latest # 使用最新的 Ubuntu 系统作为编译部署的环境
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
     - name: 选择分支
@@ -103,7 +116,6 @@ jobs:
         # ls blog/themes/butterfly/layout
 
     - name: 生成文件
-      continue-on-error: true
       run: |
         hexo clean
         hexo generate
@@ -112,22 +124,14 @@ jobs:
       # 指定命令执行的工作路径
       working-directory: ./blog
 
+    - name: 配置 Pages
+      uses: actions/configure-pages@v5
+
+    - name: 上传博客
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: blog/public
+
     - name: 部署博客
-      # 设置环境变量
-      env: 
-        GITHUB_REPO: github.com/dollarser/dollarser.github.io
-        GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
-
-      # 将编译后的博客文件推送到指定仓库
-      run: |
-        cd blog/public && git init && git add .
-
-        git config --global user.email "dollarser@126.com"
-        git config --global user.name "dollarser"
-        # 默认分支名
-        git config --global init.defaultBranch "master"
-        
-        # Make changes to files
-        git commit -am "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
-        git push --force --quiet https://$GITHUB_ACTOR:${{ secrets.MY_TOKEN }}@github.com/$GITHUB_REPOSITORY master:gh-pages
-        # git push --force --quiet "https://dollarser:${{ secrets.GITEE_ACCESS_TOKEN }}@$GITEE_REPO" master:gh-pages
+      id: deployment
+      uses: actions/deploy-pages@v4
